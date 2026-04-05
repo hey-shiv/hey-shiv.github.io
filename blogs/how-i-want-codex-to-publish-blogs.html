@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A workflow for turning source documents and images into static blog posts with Codex."
+    />
+    <title>How I Want Codex to Publish Blogs | Shivashant Manohar</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/site.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../index.html">Home</a>
+          <a href="../blog.html" aria-current="page">Blogs</a>
+          <a href="../notes.html">Notes</a>
+          <a href="../Shivashant Resume copy.pdf">Resume</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="back-links">
+          <a href="../blog.html">Back to blogs</a> / <a href="../index.html">Home</a>
+        </div>
+
+        <header class="article-header">
+          <p class="eyebrow">April 6, 2026</p>
+          <h1>How I Want Codex to Publish Blogs</h1>
+          <p class="section-copy">
+            The writing should start in a document.
+            The translation to HTML should stay mechanical.
+          </p>
+        </header>
+
+        <article>
+          <p>
+            I do not want to write directly in HTML.
+            I want to think in a document, drop the supporting images into a folder, and let the
+            final publishing step be consistent.
+          </p>
+
+          <p>
+            That means the source material should stay raw.
+            The website formatting should be applied later.
+          </p>
+
+          <h2>What goes into the input folder</h2>
+          <p>
+            Each draft should begin inside a folder under <code>blogs/input/</code>.
+            A simple pattern is <code>blogs/input/blog1/</code>, <code>blogs/input/blog2/</code>,
+            and so on.
+          </p>
+
+          <ul class="dash-list">
+            <li>One main <code>.docx</code> draft with the full article.</li>
+            <li>Any images that actually support the argument.</li>
+            <li>Optional notes or references if they help clarify structure.</li>
+          </ul>
+
+          <p>
+            The document should carry the thinking.
+            The folder should carry the assets.
+            Nothing in that folder should try to look like the final site.
+          </p>
+
+          <h2>How the draft itself should be written</h2>
+          <p>
+            The draft should be strong before formatting ever starts.
+            If the document is vague, the generated post will be vague too.
+          </p>
+
+          <ul class="dash-list">
+            <li>Lead with one clear idea, not a topic cloud.</li>
+            <li>Keep paragraphs short enough to survive on a narrow reading column.</li>
+            <li>Use section breaks when the thought changes, not every time a heading sounds nice.</li>
+            <li>Only include images that add evidence, structure, or texture.</li>
+            <li>Write captions or notes in the document if the image needs context.</li>
+            <li>Prefer precise language over broad claims.</li>
+          </ul>
+
+          <p>
+            A good draft is already shaped.
+            Codex should not have to invent the argument.
+          </p>
+
+          <h2>Rules for the generated post</h2>
+          <p>
+            The output should match the site that already exists.
+            That means reuse first, and only add new styling when the article genuinely needs it.
+          </p>
+
+          <ul class="dash-list">
+            <li>Create the final post as <code>blogs/&lt;slug&gt;.html</code>.</li>
+            <li>Reuse the shared page shell: head, nav, footer, and <code>../assets/site.css</code>.</li>
+            <li>Use relative paths only.</li>
+            <li>
+              If images are needed, place published assets in
+              <code>blogs/media/&lt;slug&gt;/</code> and reference them from the post.
+            </li>
+            <li>Keep the visual style aligned with the existing notes and blog pages.</li>
+            <li>Do not create a one-off design system for a single post.</li>
+            <li>Update <code>blog.html</code> and <code>index.html</code> so the new post appears in site listings.</li>
+            <li>Keep the writing calm, spaced out, and readable on first pass.</li>
+          </ul>
+
+          <p>
+            The point is not to automate taste.
+            It is to automate the repetitive part after the taste is already present in the draft.
+          </p>
+
+          <h2>The master prompt</h2>
+          <p>
+            This is the prompt I would give Codex after opening one of those input folders.
+          </p>
+
+          <pre><code>You are inside a blog input folder for my static personal website.
+
+Your job is to convert the source material in this folder into a finished blog post that matches the existing site design.
+
+Context:
+- The website is a fully static HTML/CSS site.
+- Existing published posts live in /blogs/*.html.
+- Shared styling lives in /assets/site.css.
+- The post should visually match the current Notes and Blogs pages: minimal, typography-first, calm, no cards, no gradients, no unnecessary effects.
+- Use relative paths only.
+
+What to read from this folder:
+- The main .docx draft
+- Any images in this folder
+- Any supporting notes if present
+
+What to do:
+1. Read the .docx and extract the real structure of the piece:
+   - title
+   - subtitle or framing line if one is implied
+   - sections
+   - captions or image context if present
+2. Create a clean final slug for the post.
+3. Generate the final article as /blogs/&lt;slug&gt;.html using the same shell as the existing blog posts:
+   - same head structure
+   - same nav
+   - same footer
+   - same shared stylesheet reference
+4. If images are useful, publish them under /blogs/media/&lt;slug&gt;/ and reference them with relative paths.
+5. If the article needs any small shared styling additions, update /assets/site.css minimally instead of creating one-off inline styles.
+6. Update /blog.html and /index.html so the new article appears in the Writing / Posts lists with:
+   - title
+   - date
+   - one short description
+
+Writing rules:
+- Do not rewrite the piece into generic blog language.
+- Preserve the core voice and thinking from the draft.
+- Keep paragraphs short.
+- Prefer clear section breaks.
+- Do not add hype, filler, or marketing language.
+- Do not invent claims that are not supported by the draft.
+- If the draft is incomplete, make the lightest possible editorial decisions and keep the post honest.
+
+Design rules:
+- Match the existing site typography and spacing.
+- No frameworks.
+- No inline styles.
+- No visual clutter.
+- Keep image usage restrained and purposeful.
+
+Before finishing:
+- Verify all local links resolve.
+- Verify image paths are correct.
+- Verify the new post is reachable from both /blog.html and /index.html.
+- Keep the final output ready to commit as part of the static site.</code></pre>
+
+          <h2>Why this workflow is worth keeping</h2>
+          <p>
+            It separates thinking from formatting.
+            That is the part I care about.
+          </p>
+
+          <p>
+            The draft can stay focused on the idea.
+            Codex can handle the last mile.
+            The site stays consistent without forcing every post to begin as hand-written markup.
+          </p>
+        </article>
+      </main>
+
+      <footer>
+        <p>Bengaluru, India / shivashant.work@gmail.com</p>
+        <p>Built simply. No frameworks. Just HTML, CSS, and intent.</p>
+      </footer>
+    </div>
+  </body>
+</html>

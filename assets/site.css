@@ -381,6 +381,34 @@ article li {
   color: var(--text);
 }
 
+article ul,
+article ol {
+  margin: 1rem 0 1.4rem;
+}
+
+article pre {
+  margin: 1.4rem 0 1.8rem;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.45);
+  color: #222222;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+article code {
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.88em;
+}
+
+article pre code {
+  font-size: inherit;
+}
+
 footer {
   margin-top: 5rem;
   padding-top: 1.5rem;
