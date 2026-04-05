@@ -8,6 +8,10 @@
       content="Shivashant Manohar is an AI/ML student focused on privacy-preserving systems, cloud tooling, and practical machine learning."
     />
     <title>Shivashant Manohar</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="assets/site.css" />
   </head>
   <body>
@@ -15,82 +19,58 @@
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
           <a href="index.html" aria-current="page">Home</a>
-          <a href="blog.html">Blog</a>
+          <a href="blog.html">Blogs</a>
           <a href="notes.html">Notes</a>
-          <a href="bookmarks.html">Bookmarks</a>
+          <a href="Shivashant Resume copy.pdf">Resume</a>
         </nav>
       </header>
 
       <main>
         <section class="hero">
-          <p class="eyebrow">Bengaluru, India</p>
           <h1>Shivashant Manohar</h1>
-          <p class="identity">
-            AI/ML Student &middot; Systems Builder &middot; Privacy-focused
+          <p class="identity subtitle">
+            AI/ML Student &middot; Systems Builder &middot; Classical-Musician
           </p>
           <p class="statement">
-            I build simple, reliable machine learning systems that work under real-world
-            constraints.
+            Hi, I'm Shivashant, a Computer Science student building real-world systems that
+            actually work.
           </p>
           <p>
-            I'm a third-year Computer Science student at VIT-AP, working at the intersection of
-            machine learning, systems design, and privacy-preserving AI.
+            Right now, I'm exploring LLMs, machine learning, and system design, while also
+            working on data structures and problem-solving. I'm especially curious about how
+            machine learning connects with creative spaces like music.
           </p>
           <p>
-            My work focuses on building things that are not just correct, but usable - systems
-            that respect data, scale practically, and stay grounded in real constraints.
+            Lately, I've been working on something I call Polymind - an evolving idea around how
+            knowledge can be organized, connected, and extended. Still early, but deeply
+            intentional.
           </p>
-        </section>
-
-        <hr />
-
-        <section aria-labelledby="currently">
-          <h2 id="currently">Currently</h2>
-          <ul>
-            <li>
-              Deepening my understanding of machine learning fundamentals through hands-on work
-              with Scikit-learn, data tooling, and small end-to-end systems.
-            </li>
-            <li>
-              Exploring privacy-preserving AI approaches, especially federated learning patterns
-              for domains where data should remain distributed.
-            </li>
-            <li>
-              Building cloud and DevOps fluency through the Google Developer Groups VIT-AP Cloud
-              &amp; DevOps team.
-            </li>
-          </ul>
-        </section>
-
-        <section aria-labelledby="background">
-          <h2 id="background">Background</h2>
-          <div class="entry-list">
-            <p>
-              <strong>VIT-AP University</strong><br />
-              <span class="meta">B.Tech in Computer Science (AI &amp; ML), 2023-2027 / CGPA 8.2</span>
-            </p>
-            <p>
-              <strong>NBIPU, Bengaluru</strong><br />
-              <span class="meta">Intermediate, 2021-2023 / 94%</span>
-            </p>
-            <p>
-              <strong>Google Developer Groups VIT-AP</strong><br />
-              <span class="meta">Cloud &amp; DevOps Team, Aug 2024-Present</span><br />
-              Hands-on exposure to Google Cloud Platform and cloud-native tools.
-            </p>
-            <p>
-              <strong>Recent learning</strong><br />
-              <span class="meta">
-                Vertex AI Gemini API / Gemini and Imagen applications / Google Cloud compute and
-                storage fundamentals
-              </span>
-            </p>
+          <div class="actions">
+            <a class="btn" href="mailto:shivashant.work@gmail.com">Email</a>
+            <a class="btn" href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+            <a class="btn" href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer">
+              Medium
+            </a>
+            <a class="btn" href="https://x.com/TensorTunesAI" target="_blank" rel="noreferrer">
+              X
+            </a>
           </div>
         </section>
 
+        <section>
+          <h2 class="home-section-title">Currently Learning</h2>
+          <ul class="dash-list">
+            <li>Learning LLMs and RAG systems in a more hands-on, systems-first way.</li>
+            <li>Building Polymind as a long-term idea around connected and extensible knowledge.</li>
+            <li>Strengthening data structures, problem-solving, and internship readiness.</li>
+          </ul>
+        </section>
+
         <section aria-labelledby="skills">
-          <h2 id="skills">Selected Skills</h2>
-          <ul>
+          <h2 id="skills" class="home-section-title">Selected Skills</h2>
+          <ul class="dash-list">
             <li>
               Machine learning: linear regression, logistic regression, decision trees, and
               K-Means
@@ -102,13 +82,12 @@
         </section>
 
         <section aria-labelledby="projects">
-          <h2 id="projects">Projects</h2>
+          <p class="section-label" id="projects">Projects</p>
           <ul class="project-list">
             <li>
-              <strong>
+              <span class="project-title">
                 Context-Aware Federated Intrusion Detection for Decentralized Smart Healthcare
-              </strong>
-              <br />
+              </span>
               <span class="muted">
                 A privacy-preserving intrusion detection system for smart healthcare networks that
                 uses federated learning and lightweight aggregation instead of centralizing
@@ -119,7 +98,7 @@
         </section>
 
         <section aria-labelledby="writing">
-          <h2 id="writing">Writing</h2>
+          <p class="section-label" id="writing">Writing</p>
           <ul class="post-list">
             <li>
               <a class="post-title" href="blogs/working-on-ml-systems-under-constraint.html">
@@ -129,26 +108,6 @@
               <p class="section-copy">
                 Benchmarks matter, but constraints decide whether a machine learning system survives
                 outside a lab.
-              </p>
-            </li>
-            <li>
-              <a class="post-title" href="blogs/rag-is-an-interface-problem.html">
-                RAG Is an Interface Problem Before It Is a Model Problem
-              </a>
-              <span class="post-meta">March 18, 2026</span>
-              <p class="section-copy">
-                Retrieval quality often depends less on the model and more on the boundaries we set
-                around evidence.
-              </p>
-            </li>
-            <li>
-              <a class="post-title" href="blogs/learning-by-rebuilding-small-systems.html">
-                Learning by Rebuilding Small Systems
-              </a>
-              <span class="post-meta">February 27, 2026</span>
-              <p class="section-copy">
-                Rebuilding small pieces of infrastructure creates a kind of understanding that
-                passive reading rarely reaches.
               </p>
             </li>
           </ul>
