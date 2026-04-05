@@ -228,6 +228,11 @@ li + li {
   text-decoration: none;
 }
 
+.btn-x {
+  color: #111111;
+  font-weight: 500;
+}
+
 
 .home-section-title {
   margin-bottom: 1.25rem;
