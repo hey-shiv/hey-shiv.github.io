@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500;700&display=swap");
+
+:root {
+  --bg: #f5f5f5;
+  --text: #111111;
+  --muted: #555555;
+  --muted-soft: #666666;
+  --accent: #1d4ed8;
+  --rule: #e5e5e5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.68;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0 0;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.site-header {
+  padding-top: 0.25rem;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: "Roboto Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.94rem;
+}
+
+.site-nav a {
+  color: var(--muted);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--accent);
+}
+
+main section {
+  margin-top: 3.4rem;
+}
+
+.hero {
+  margin-top: 3rem;
+}
+
+.eyebrow,
+.identity,
+.meta,
+.post-meta,
+.section-copy,
+footer {
+  color: var(--muted);
+}
+
+.eyebrow,
+.post-meta,
+.back-links,
+.site-title,
+.statement {
+  font-family: "Roboto Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.92rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 1rem;
+  font-family: "Roboto Mono", "SFMono-Regular", Consolas, monospace;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 1.9rem;
+}
+
+h2 {
+  font-size: 1.3rem;
+}
+
+h3 {
+  font-size: 1.08rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+li + li {
+  margin-top: 0.85rem;
+}
+
+.identity {
+  margin: 0 0 1.4rem;
+  font-size: 0.98rem;
+}
+
+.statement {
+  margin-top: 1.5rem;
+  color: var(--text);
+  font-size: 0.96rem;
+}
+
+.entry-list p:last-child,
+.entry-list ul:last-child,
+.section-copy:last-child,
+article p:last-child {
+  margin-bottom: 0;
+}
+
+.entry-list p + p {
+  margin-top: 1.35rem;
+}
+
+.project-list,
+.post-list,
+.plain-list {
+  list-style: none;
+  padding: 0;
+}
+
+.project-list li,
+.post-list li,
+.plain-list li {
+  padding: 0.1rem 0;
+}
+
+.project-list strong,
+.post-list strong {
+  font-weight: 600;
+}
+
+.post-title {
+  font-weight: 600;
+}
+
+.post-meta {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.84rem;
+}
+
+.back-links {
+  margin-top: 3rem;
+  font-size: 0.92rem;
+}
+
+.article-header {
+  margin-top: 3rem;
+}
+
+.article-header p:last-child {
+  margin-bottom: 0;
+}
+
+article {
+  margin-top: 2.4rem;
+}
+
+article h2 {
+  margin-top: 2.3rem;
+}
+
+article p,
+article li {
+  color: var(--text);
+}
+
+footer {
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.95rem;
+}
+
+footer p + p {
+  margin-top: 0.4rem;
+}
+
+.muted {
+  color: var(--muted-soft);
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 1.5rem 1.2rem 3rem;
+  }
+
+  .hero {
+    margin-top: 2.4rem;
+  }
+
+  main section {
+    margin-top: 3rem;
+  }
+}

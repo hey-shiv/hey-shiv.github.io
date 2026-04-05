@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An essay by Shivashant Manohar on designing machine learning systems around real-world constraints."
+    />
+    <title>Working on ML Systems Under Constraint | Shivashant Manohar</title>
+    <link rel="stylesheet" href="../assets/site.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../index.html">Home</a>
+          <a href="../blog.html" aria-current="page">Blog</a>
+          <a href="../notes.html">Notes</a>
+          <a href="../bookmarks.html">Bookmarks</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="back-links">
+          <a href="../blog.html">Back to blog</a> / <a href="../index.html">Home</a>
+        </div>
+
+        <header class="article-header">
+          <p class="eyebrow">April 4, 2026</p>
+          <h1>Working on ML Systems Under Constraint</h1>
+          <p class="section-copy">
+            Reliable systems are usually designed by respecting limitations early rather than trying
+            to compensate for them later.
+          </p>
+        </header>
+
+        <article>
+          <p>
+            A lot of student machine learning work begins in ideal conditions. The dataset is clean,
+            the labels are trusted, the compute budget is invisible, and the model is treated as
+            the center of the entire problem. That is a useful way to learn fundamentals, but it is
+            not how most practical systems live. In the real world, the shape of the constraint
+            often matters more than the sophistication of the model.
+          </p>
+
+          <p>
+            Constraint can mean many things. Sometimes it is latency. Sometimes it is unreliable
+            data collection. Sometimes it is the fact that sensitive information should never leave
+            the environment where it was created. In those settings, the best engineering move is
+            not always to add more complexity. It is often to simplify the system until each part
+            has a clear job and failure is easy to reason about.
+          </p>
+
+          <h2>What changes when constraint is primary</h2>
+          <p>
+            The questions become different. Instead of asking which model is strongest on paper, we
+            ask what can be maintained, audited, and trusted. Instead of assuming we can centralize
+            all data, we ask whether learning can happen across distributed environments. Instead of
+            optimizing only for final accuracy, we start caring about degradation, observability,
+            and whether the system behaves sensibly when inputs drift.
+          </p>
+
+          <p>
+            I find this framing especially useful in privacy-sensitive domains. Healthcare is a good
+            example. It is one thing to propose a capable model for anomaly detection. It is another
+            thing to acknowledge that the data might be fragmented, regulated, and too sensitive to
+            move casually. Once that reality is accepted, techniques like federated learning become
+            less like fashionable topics and more like practical responses to a real systems
+            constraint.
+          </p>
+
+          <h2>Why simplification matters</h2>
+          <p>
+            There is a quiet discipline in building smaller, clearer systems. It forces each choice
+            to justify itself. If a pipeline requires too many assumptions to stay stable, that is
+            usually a design signal rather than a temporary inconvenience. Good ML engineering is
+            often the work of removing fragility: reducing unnecessary state, clarifying data
+            boundaries, and choosing the least surprising path that still solves the problem.
+          </p>
+
+          <p>
+            This is also why lightweight baselines deserve more respect than they often receive. A
+            simple system with understandable behavior is easier to improve than a complicated system
+            with unclear failure modes. That does not mean ambition is bad. It means ambition should
+            arrive with discipline.
+          </p>
+
+          <h2>What I want to keep learning</h2>
+          <p>
+            The more I study machine learning, the more I think the systems view matters. Models are
+            important, but they only become useful when they are part of a pipeline that can be
+            reasoned about end to end. I want to keep building in that direction: privacy-aware
+            systems, careful data flows, and tools that remain useful even when the environment is
+            noisy or imperfect.
+          </p>
+
+          <p>
+            Constraint is not the enemy of good engineering. In many cases, it is what gives the
+            engineering its shape.
+          </p>
+        </article>
+      </main>
+
+      <footer>
+        <p>Bengaluru, India / shivashant.work@gmail.com</p>
+        <p>Built simply. No frameworks. Just HTML, CSS, and intent.</p>
+      </footer>
+    </div>
+  </body>
+</html>

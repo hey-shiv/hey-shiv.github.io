@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An essay by Shivashant Manohar on retrieval-augmented generation as an interface and evidence design problem."
+    />
+    <title>RAG Is an Interface Problem Before It Is a Model Problem | Shivashant Manohar</title>
+    <link rel="stylesheet" href="../assets/site.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../index.html">Home</a>
+          <a href="../blog.html" aria-current="page">Blog</a>
+          <a href="../notes.html">Notes</a>
+          <a href="../bookmarks.html">Bookmarks</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="back-links">
+          <a href="../blog.html">Back to blog</a> / <a href="../index.html">Home</a>
+        </div>
+
+        <header class="article-header">
+          <p class="eyebrow">March 18, 2026</p>
+          <h1>RAG Is an Interface Problem Before It Is a Model Problem</h1>
+          <p class="section-copy">
+            Retrieval quality depends on how we structure evidence, boundaries, and user trust as
+            much as it depends on the underlying model.
+          </p>
+        </header>
+
+        <article>
+          <p>
+            Retrieval-augmented generation is often discussed as if the core challenge is model
+            choice. Which embedding model should be used? Which generator is stronger? How much
+            context can fit into the window? Those are important questions, but I think they sit
+            slightly downstream from the more useful one: what exactly is the interface between the
+            model and the knowledge we are letting it touch?
+          </p>
+
+          <p>
+            A RAG system is not only a pipeline. It is a boundary-setting device. It decides which
+            documents are eligible, how they are chunked, how provenance is preserved, and what the
+            model should do when the evidence is weak. If those decisions are vague, a stronger
+            model does not really fix the system. It only makes the confusion more fluent.
+          </p>
+
+          <h2>Retrieval is where product behavior begins</h2>
+          <p>
+            When I think about retrieval, I try to think in terms of contracts. What kind of answer
+            is the user expecting? What sources are allowed to support that answer? How should the
+            system behave if it finds something related but not sufficient? These are not just
+            backend questions. They shape the experience the user will trust or distrust.
+          </p>
+
+          <p>
+            Good retrieval systems often feel modest. They narrow the search space with care. They
+            return evidence that is recent enough, local enough, or authoritative enough for the
+            task. They make it possible to inspect where an answer came from. In that sense, the
+            retrieval layer acts like an interface for truth conditions. It tells the model what
+            kind of grounding is acceptable.
+          </p>
+
+          <h2>Chunking and metadata are not housekeeping</h2>
+          <p>
+            There is a temptation to treat chunking, document cleaning, and metadata as setup work
+            that can be solved quickly. In practice, these choices often determine the ceiling of
+            the system. If chunks are too broad, the model receives diluted context. If they are too
+            narrow, relevant ideas get separated. If metadata is missing, the retriever cannot make
+            distinctions the user cares about, such as version, source type, or domain relevance.
+          </p>
+
+          <p>
+            The same is true for failure behavior. A useful RAG system should have a graceful way to
+            say, in effect, "I do not have enough evidence." That requires the interface to support
+            abstention, uncertainty, or source-first answers. Without that discipline, the system
+            drifts toward plausible synthesis even when the retrieval step did not really earn it.
+          </p>
+
+          <h2>Better systems feel grounded</h2>
+          <p>
+            The RAG systems I admire are usually not the ones with the most complicated diagrams.
+            They are the ones that make knowledge legible. They show the user where the answer comes
+            from, keep the evidence path short, and avoid pretending the model knows more than the
+            retrieved material can support. That is a design achievement as much as a machine
+            learning one.
+          </p>
+
+          <p>
+            Thinking this way helps me stay focused on the system rather than the hype cycle. A good
+            RAG pipeline is a disciplined way of connecting questions to evidence. If that interface
+            is solid, the model has a chance to be genuinely useful. If it is weak, no prompt can
+            compensate for the missing structure.
+          </p>
+        </article>
+      </main>
+
+      <footer>
+        <p>Bengaluru, India / shivashant.work@gmail.com</p>
+        <p>Built simply. No frameworks. Just HTML, CSS, and intent.</p>
+      </footer>
+    </div>
+  </body>
+</html>
