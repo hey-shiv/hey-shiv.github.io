@@ -243,6 +243,28 @@ li + li {
   padding: 0;
 }
 
+.arrow-list {
+  list-style: none;
+  padding: 0;
+}
+
+.arrow-list li {
+  position: relative;
+  margin-bottom: 0.8rem;
+  padding-left: 1.4rem;
+  color: #444444;
+}
+
+.arrow-list li::before {
+  content: "\2192";
+  position: absolute;
+  left: 0;
+  top: 0.02rem;
+  color: #9a9a9a;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.92rem;
+}
+
 .dash-list li {
   position: relative;
   margin-bottom: 0.6rem;
