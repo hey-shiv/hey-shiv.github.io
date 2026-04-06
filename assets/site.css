@@ -1,18 +1,73 @@
 :root {
   --bg: #f5f5f5;
+  --surface: #ffffff;
   --text: #111111;
+  --heading: #111111;
+  --heading-soft: #1c1c1c;
+  --statement-text: #1a1a1a;
+  --subtitle-text: #555555;
+  --body: #444444;
   --muted: #555555;
   --muted-soft: #666666;
+  --nav: #666666;
+  --label: #8a8a8a;
   --accent: #1d4ed8;
   --rule: #e5e5e5;
-}
-
-* {
-  box-sizing: border-box;
+  --button-border: #dddddd;
+  --button-border-strong: #d4d4d4;
+  --button-hover: #999999;
+  --button-hover-strong: #8f8f8f;
+  --button-text: #444444;
+  --button-text-strong: #000000;
+  --marker: #aaaaaa;
+  --arrow: #9a9a9a;
+  --code-bg: rgba(255, 255, 255, 0.45);
+  --code-text: #222222;
+  --dot: #34d399;
+  --dot-rgb: 52, 211, 153;
+  --toggle-bg: rgba(255, 255, 255, 0.88);
+  --toggle-border: #dddddd;
+  --toggle-border-strong: #d4d4d4;
+  --toggle-text: #111111;
 }
 
 html {
   font-size: 16px;
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #101214;
+  --surface: #16191d;
+  --text: #f1f2ee;
+  --heading: #eef0ea;
+  --heading-soft: #d8ddd3;
+  --statement-text: #d2d7ce;
+  --subtitle-text: #bcc3b7;
+  --body: #c4cbc0;
+  --muted: #a7aea4;
+  --muted-soft: #8e948d;
+  --nav: #9aa197;
+  --label: #878d86;
+  --accent: #a8c2b0;
+  --rule: #252a28;
+  --button-border: #343936;
+  --button-border-strong: #444a46;
+  --button-hover: #666d69;
+  --button-hover-strong: #7d8580;
+  --button-text: #d4dbd1;
+  --button-text-strong: #f5f6f3;
+  --marker: #6f766f;
+  --arrow: #91998f;
+  --code-bg: rgba(19, 22, 21, 0.92);
+  --code-text: #e7ece4;
+  --dot: #6fd39a;
+  --dot-rgb: 111, 211, 154;
+  --toggle-bg: rgba(16, 19, 26, 0.92);
+  --toggle-border: #353c49;
+  --toggle-border-strong: #444c5b;
+  --toggle-text: #f3f5f8;
 }
 
 body {
@@ -24,6 +79,38 @@ body {
   font-weight: 400;
   line-height: 1.75;
   text-rendering: optimizeLegibility;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted-soft);
+  font-family: "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2", sans-serif;
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--text);
+  opacity: 1;
+  outline: none;
 }
 
 a {
@@ -57,15 +144,20 @@ hr {
 }
 
 .site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   padding: 0.3rem 0 0.55rem;
   border-bottom: 1px solid var(--rule);
 }
 
 .site-nav {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
   align-items: center;
+  gap: 2.75rem;
+  flex-wrap: wrap;
+  width: auto;
   font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.8rem;
   letter-spacing: 0.08em;
@@ -73,7 +165,7 @@ hr {
 
 .site-nav a {
   display: inline-block;
-  color: #666666;
+  color: var(--nav);
   font-weight: 500;
   text-align: left;
 }
@@ -111,7 +203,7 @@ main section {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  color: #8a8a8a;
+  color: var(--label);
   font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.75rem;
   font-weight: 500;
@@ -123,8 +215,8 @@ main section {
   width: 7px;
   height: 7px;
   border-radius: 999px;
-  background: #34d399;
-  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5);
+  background: var(--dot);
+  box-shadow: 0 0 0 0 rgba(var(--dot-rgb), 0.5);
   animation: availabilityPulse 1.8s ease-in-out infinite;
 }
 
@@ -134,7 +226,7 @@ main section {
   padding: 0;
   border: 0;
   border-radius: 999px;
-  color: #8a8a8a;
+  color: var(--label);
   font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.75rem;
   font-weight: 500;
@@ -170,7 +262,7 @@ footer {
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #8a8a8a;
+  color: var(--label);
 }
 
 h1,
@@ -178,6 +270,7 @@ h2,
 h3 {
   margin: 0 0 1rem;
   font-family: "Space Grotesk", "Inter", sans-serif;
+  color: var(--heading);
   line-height: 1.25;
 }
 
@@ -204,7 +297,7 @@ h3 {
 
 p {
   margin: 0 0 1.2rem;
-  color: #444444;
+  color: var(--body);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 1.05rem;
   font-weight: 400;
@@ -225,7 +318,7 @@ li + li {
 .identity,
 .subtitle {
   margin: 0 0 1.4rem;
-  color: #555555;
+  color: var(--subtitle-text);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 1.03rem;
   font-weight: 500;
@@ -235,7 +328,7 @@ li + li {
 
 .statement {
   margin-top: 0;
-  color: var(--text);
+  color: var(--statement-text);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 1.02rem;
   font-weight: 500;
@@ -263,10 +356,10 @@ li + li {
   align-items: center;
   gap: 0.5rem;
   padding: 8px 14px;
-  border: 1px solid #dddddd;
-  border-bottom: 3px double #d4d4d4;
+  border: 1px solid var(--button-border);
+  border-bottom: 3px double var(--button-border-strong);
   border-radius: 3px;
-  color: #444444;
+  color: var(--button-text);
   font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.8rem;
   text-decoration: none;
@@ -275,21 +368,21 @@ li + li {
 
 .btn:hover,
 .btn:focus-visible {
-  border-color: #999999;
-  border-bottom-color: #8f8f8f;
-  color: #000000;
+  border-color: var(--button-hover);
+  border-bottom-color: var(--button-hover-strong);
+  color: var(--button-text-strong);
   opacity: 1;
   text-decoration: none;
 }
 
 .btn-x {
-  color: #111111;
+  color: var(--heading-soft);
   font-weight: 500;
 }
 
 .btn-arrow {
   font-size: 0.88rem;
-  color: #777777;
+  color: var(--muted-soft);
   line-height: 1;
 }
 
@@ -317,7 +410,7 @@ li + li {
   position: relative;
   margin-bottom: 0.8rem;
   padding-left: 1.4rem;
-  color: #444444;
+  color: var(--body);
 }
 
 .arrow-list li::before {
@@ -325,7 +418,7 @@ li + li {
   position: absolute;
   left: 0;
   top: 0.02rem;
-  color: #9a9a9a;
+  color: var(--arrow);
   font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.92rem;
 }
@@ -334,14 +427,14 @@ li + li {
   position: relative;
   margin-bottom: 0.6rem;
   padding-left: 1.1rem;
-  color: #444444;
+  color: var(--body);
 }
 
 .dash-list li::before {
   content: "\2014";
   position: absolute;
   left: 0;
-  color: #aaaaaa;
+  color: var(--marker);
 }
 
 .entry-list p:last-child,
@@ -374,7 +467,7 @@ article p:last-child {
 }
 
 .post-title {
-  color: var(--text);
+  color: var(--heading-soft);
   font-family: "Space Grotesk", "Inter", sans-serif;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -382,7 +475,7 @@ article p:last-child {
 
 .post-title:hover,
 .post-title:focus-visible {
-  color: var(--text);
+  color: var(--heading);
 }
 
 .project-list li {
@@ -393,7 +486,7 @@ article p:last-child {
 .project-title {
   display: block;
   margin-bottom: 0.55rem;
-  color: var(--text);
+  color: var(--heading-soft);
   font-family: "Space Grotesk", "Inter", sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
@@ -417,7 +510,7 @@ strong {
 }
 
 .back-links a {
-  color: var(--muted);
+  color: var(--muted-soft);
 }
 
 .back-links a:hover,
@@ -443,7 +536,7 @@ article h2 {
 
 article p,
 article li {
-  color: var(--text);
+  color: var(--body);
 }
 
 article ul,
@@ -457,8 +550,8 @@ article pre {
   overflow-x: auto;
   border: 1px solid var(--rule);
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.45);
-  color: #222222;
+  background: var(--code-bg);
+  color: var(--code-text);
   font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.82rem;
   line-height: 1.65;
@@ -493,12 +586,12 @@ footer p + p {
   0%,
   100% {
     opacity: 1;
-    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.45);
+    box-shadow: 0 0 0 0 rgba(var(--dot-rgb), 0.45);
   }
 
   50% {
     opacity: 0.72;
-    box-shadow: 0 0 0 6px rgba(52, 211, 153, 0);
+    box-shadow: 0 0 0 6px rgba(var(--dot-rgb), 0);
   }
 }
 
@@ -508,11 +601,18 @@ footer p + p {
   }
 
   .site-header {
+    gap: 0.75rem;
     padding-bottom: 0.55rem;
   }
 
+  .theme-toggle {
+    width: 1.9rem;
+    height: 1.9rem;
+    font-size: 1.35rem;
+  }
+
   .site-nav {
-    column-gap: 0.5rem;
+    gap: 1.4rem;
   }
 
   .hero {

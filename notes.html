@@ -8,6 +8,20 @@
       content="Notes by Shivashant Manohar on machine learning, systems, and study in progress."
     />
     <title>Notes | Shivashant Manohar</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("site-theme");
+          var theme =
+            saved ||
+            (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {}
+      })();
+    </script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
@@ -45,5 +59,6 @@
         <p>Built simply. No frameworks. Just HTML, CSS, and intent.</p>
       </footer>
     </div>
+    <script src="assets/site.js" defer></script>
   </body>
 </html>
