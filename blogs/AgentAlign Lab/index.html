@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AgentAlign Lab by Shivashant Manohar."
+    />
+    <title>AgentAlign Lab | Shivashant Manohar</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("site-theme");
+          var theme =
+            saved ||
+            (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {}
+      })();
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/site.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../../index.html">Home</a>
+          <a href="../../blog.html" aria-current="page">Blogs</a>
+          <a href="../../notes.html">Notes</a>
+          <a href="../../Shivashant Resume copy.pdf">Resume</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="back-links">
+          <a href="../../blog.html">Back to blogs</a> / <a href="../../index.html">Home</a>
+        </div>
+
+        <header class="article-header">
+          <p class="eyebrow">AgentAlign Lab</p>
+          <h1>AgentAlign Lab</h1>
+          <p class="section-copy">
+            A working space for experiments, notes, and systems thinking around agent alignment.
+          </p>
+        </header>
+      </main>
+
+      <footer>
+        <p>Bengaluru, India / shivashant.work@gmail.com</p>
+        <p>Built simply. No frameworks. Just HTML, CSS, and intent.</p>
+      </footer>
+    </div>
+    <script src="../../assets/site.js" defer></script>
+  </body>
+</html>
