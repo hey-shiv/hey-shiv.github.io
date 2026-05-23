@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Day 1 of AgentAlign Lab: building the core execution pipeline behind reliable AI coding agents with Pydantic, sandboxed workspaces, pytest, and structured verification."
+    />
+    <meta
+      name="keywords"
+      content="AI Systems, Agent Engineering, Pydantic, AI Infrastructure, Coding Agents"
+    />
+    <meta name="author" content="Shivashant Manohar" />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Day 1 - I Built the Core Execution Pipeline Behind AI Coding Agents"
+    />
+    <meta
+      property="og:description"
+      content="A systems engineering devlog on task schemas, sandboxed workspaces, pytest execution, and deterministic verification."
+    />
+    <title>Day 1 - I Built the Core Execution Pipeline Behind AI Coding Agents | Shivashant Manohar</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("site-theme");
+          var theme =
+            saved ||
+            (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {}
+      })();
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Day 1 - I Built the Core Execution Pipeline Behind AI Coding Agents",
+        "description": "Day 1 of AgentAlign Lab: building the core execution pipeline behind reliable AI coding agents.",
+        "datePublished": "2026-05-23",
+        "author": {
+          "@type": "Person",
+          "name": "Shivashant Manohar"
+        },
+        "keywords": [
+          "AI Systems",
+          "Agent Engineering",
+          "Pydantic",
+          "AI Infrastructure",
+          "Coding Agents"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../../index.html">Home</a>
+          <a href="../../blog.html" aria-current="page">Blogs</a>
+          <a href="../../notes.html">Notes</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="back-links">
+          <a href="./">AgentAlign Lab</a> / <a href="../../blog.html">Back to blogs</a>
+        </div>
+
+        <header class="article-header">
+          <p class="eyebrow">AgentAlign Lab / Day 1</p>
+          <h1>Day 1 &mdash; I Built the Core Execution Pipeline Behind AI Coding Agents</h1>
+          <p class="section-copy">
+            A systems notebook entry on task schemas, sandboxed filesystems, pytest execution, and
+            deterministic verifier results.
+          </p>
+          <ul class="article-meta-row" aria-label="Article metadata">
+            <li>May 23, 2026</li>
+            <li>5 min read</li>
+            <li>Engineering Devlog</li>
+          </ul>
+          <ul class="tag-list" aria-label="Tags">
+            <li>AI Systems</li>
+            <li>Agent Engineering</li>
+            <li>Pydantic</li>
+            <li>AI Infrastructure</li>
+            <li>Coding Agents</li>
+          </ul>
+        </header>
+
+        <section class="pipeline-visual" aria-label="Core execution pipeline">
+          <ol>
+            <li>Task JSON</li>
+            <li>Schema Validation</li>
+            <li>Workspace Creation</li>
+            <li>File Generation</li>
+            <li>Pytest Execution</li>
+            <li>Verifier Result</li>
+          </ol>
+        </section>
+
+        <article>
+          <h2>Day 1 &mdash; What I Actually Built</h2>
+          <p>Today I learned how reliable AI coding agents work internally.</p>
+
+          <p>
+            Instead of building a chatbot, I built the core execution pipeline behind coding-agent
+            systems.
+          </p>
+
+          <p>The system flow is:</p>
+
+          <pre><code>Task JSON
+down
+Schema Validation
+down
+Temporary Workspace Creation
+down
+File Materialization
+down
+Pytest Execution
+down
+Structured Verifier Result</code></pre>
+
+          <hr class="lab-divider" />
+
+          <h2>What This Means in Simple Words</h2>
+          <p>I created a system where:</p>
+
+          <ul class="dash-list">
+            <li>a coding task is stored as structured JSON</li>
+            <li>Python loads and validates the task using Pydantic</li>
+            <li>the system creates an isolated temporary folder (sandbox)</li>
+            <li>task files are automatically generated there</li>
+            <li>pytest runs automatically inside that workspace</li>
+            <li>the system captures pass/fail results and logs</li>
+          </ul>
+
+          <p>The verifier successfully detected an intentionally broken bug:</p>
+
+          <div class="terminal-card" aria-label="pytest failure output">
+            <div class="terminal-topbar">
+              <span class="terminal-dot" aria-hidden="true"></span>
+              <span class="terminal-dot" aria-hidden="true"></span>
+              <span class="terminal-dot" aria-hidden="true"></span>
+              <span class="terminal-title">pytest -q</span>
+            </div>
+            <pre><code>FAILED test_task.py::test_expected_output
+
+    def test_expected_output():
+&gt;       assert 3.0 == 2
+<span class="terminal-fail">E       assert 3.0 == 2</span>
+
+1 failed in 0.04s</code></pre>
+          </div>
+
+          <p>which proved the full pipeline works correctly.</p>
+
+          <div class="lab-note">
+            <p>
+              The important part was not that the test failed. The important part was that the
+              system created, ran, captured, and returned the failure in a structured way.
+            </p>
+          </div>
+
+          <h2>System Architecture Built Today</h2>
+          <p>
+            The pipeline is small, but every box has a job. The task starts as data, becomes a typed
+            object, gets materialized into an isolated workspace, and then gets judged by a verifier.
+          </p>
+
+          <figure class="architecture-sketch" aria-label="System architecture diagram">
+            <svg viewBox="0 0 820 440" role="img" aria-labelledby="arch-title arch-desc">
+              <title id="arch-title">AgentAlign Day 1 system architecture</title>
+              <desc id="arch-desc">
+                A sketch showing Task JSON flowing into a Pydantic loader, validated task object,
+                temporary workspace, generated files, pytest, and structured evaluation result.
+              </desc>
+              <defs>
+                <marker
+                  id="arrow"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
+                </marker>
+              </defs>
+
+              <rect class="sketch-node" x="24" y="64" width="140" height="72" rx="10"></rect>
+              <text class="sketch-label" x="94" y="96" text-anchor="middle">Task JSON</text>
+              <text class="sketch-small" x="94" y="117" text-anchor="middle">structured input</text>
+
+              <rect class="sketch-node" x="228" y="64" width="154" height="72" rx="10"></rect>
+              <text class="sketch-label" x="305" y="95" text-anchor="middle">Pydantic Loader</text>
+              <text class="sketch-small" x="305" y="117" text-anchor="middle">schema validation</text>
+
+              <rect class="sketch-node" x="450" y="64" width="170" height="72" rx="10"></rect>
+              <text class="sketch-label" x="535" y="95" text-anchor="middle">Validated Task</text>
+              <text class="sketch-small" x="535" y="117" text-anchor="middle">typed object</text>
+
+              <rect class="sketch-node-soft" x="178" y="206" width="330" height="160" rx="16"></rect>
+              <text class="sketch-small" x="343" y="232" text-anchor="middle">temporary workspace</text>
+              <rect class="sketch-node" x="216" y="264" width="116" height="58" rx="8"></rect>
+              <text class="sketch-label" x="274" y="298" text-anchor="middle">Files</text>
+              <rect class="sketch-node" x="356" y="264" width="116" height="58" rx="8"></rect>
+              <text class="sketch-label" x="414" y="298" text-anchor="middle">Tests</text>
+
+              <rect class="sketch-node" x="582" y="250" width="112" height="72" rx="10"></rect>
+              <text class="sketch-label" x="638" y="282" text-anchor="middle">pytest</text>
+              <text class="sketch-small" x="638" y="303" text-anchor="middle">run verifier</text>
+
+              <rect class="sketch-node" x="600" y="64" width="190" height="72" rx="10"></rect>
+              <text class="sketch-label" x="695" y="94" text-anchor="middle">Evaluation Result</text>
+              <text class="sketch-small" x="695" y="116" text-anchor="middle">pass/fail + logs</text>
+
+              <path class="sketch-line" d="M 164 100 C 184 100, 203 100, 228 100"></path>
+              <path class="sketch-line" d="M 382 100 C 404 100, 426 100, 450 100"></path>
+              <path class="sketch-line" d="M 535 136 C 535 172, 414 178, 414 264"></path>
+              <path class="sketch-line" d="M 535 136 C 535 190, 274 192, 274 264"></path>
+              <path class="sketch-line" d="M 472 293 C 512 293, 548 286, 582 286"></path>
+              <path class="sketch-line" d="M 638 250 C 638 196, 695 174, 695 136"></path>
+            </svg>
+          </figure>
+
+          <h2>Biggest Concepts Learned</h2>
+
+          <div class="concept-grid" aria-label="Mini concept visuals">
+            <div class="concept-card">
+              <strong>Pydantic validation</strong>
+              <div class="concept-flow">
+                <span class="concept-bad">Raw Dict</span>
+                <span aria-hidden="true">-&gt;</span>
+                <span class="concept-good">Validated Schema</span>
+              </div>
+            </div>
+            <div class="concept-card">
+              <strong>Sandbox isolation</strong>
+              <div class="concept-flow">
+                <span class="concept-bad">Filesystem</span>
+                <span aria-hidden="true">vs</span>
+                <span class="concept-good">Sandbox</span>
+              </div>
+            </div>
+            <div class="concept-card">
+              <strong>Deterministic verification</strong>
+              <div class="concept-flow">
+                <span class="concept-bad">LLM Opinion</span>
+                <span aria-hidden="true">-&gt;</span>
+                <span class="concept-good">pytest pass/fail</span>
+              </div>
+            </div>
+          </div>
+
+          <h3>1. Pydantic</h3>
+          <p>Used to create structured validated schemas.</p>
+
+          <p>Instead of random dictionaries, the system uses proper typed objects.</p>
+
+          <p>Example:</p>
+
+          <pre><code>class Task(BaseModel):</code></pre>
+
+          <p>This keeps the system reliable and organized.</p>
+
+          <h3>2. Nested Models</h3>
+          <p>A Task contains:</p>
+
+          <ul class="dash-list">
+            <li>files</li>
+            <li>verifier configuration</li>
+          </ul>
+
+          <p>This creates clean hierarchical system design.</p>
+
+          <h3>3. Sandboxed Execution</h3>
+          <p>Tasks run inside temporary isolated workspaces:</p>
+
+          <pre><code>/tmp/random_workspace/</code></pre>
+
+          <p>This prevents agents from touching the real filesystem.</p>
+
+          <h3>4. subprocess</h3>
+          <p>Python can execute terminal commands programmatically.</p>
+
+          <p>Example:</p>
+
+          <pre><code>subprocess.run(["pytest", "-q"])</code></pre>
+
+          <p>This is how coding agents run tools automatically.</p>
+
+          <h3>5. Deterministic Verification</h3>
+          <p>The system does not rely on subjective judging.</p>
+
+          <p>Instead:</p>
+
+          <pre><code>pytest pass = success
+pytest fail = failure</code></pre>
+
+          <p>This makes evaluation measurable and reliable.</p>
+
+          <h2>Biggest Realization</h2>
+          <p>Reliable AI systems are built more on:</p>
+
+          <ul class="dash-list">
+            <li>execution</li>
+            <li>verification</li>
+            <li>structure</li>
+            <li>evaluation</li>
+          </ul>
+
+          <p>than on prompting itself.</p>
+
+          <h2>Final Architecture Built Today</h2>
+
+          <pre><code>Task JSON
+down
+Loader
+down
+Validated Task Object
+down
+Workspace Creator
+down
+Sandboxed Filesystem
+down
+Verifier
+down
+Structured Evaluation Result</code></pre>
+
+          <p>
+            Day 1 successfully established the core foundation for the AgentAlign Lab project.
+          </p>
+        </article>
+      </main>
+
+      <footer>
+        <p>Bengaluru, India / shivashant.work@gmail.com</p>
+        <p>Built simply. No frameworks. Just HTML, CSS, and intent.</p>
+      </footer>
+    </div>
+    <script src="../../assets/site.js" defer></script>
+  </body>
+</html>
