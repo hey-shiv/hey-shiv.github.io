@@ -99,13 +99,38 @@
         </header>
 
         <section class="pipeline-visual" aria-label="Core execution pipeline">
+          <p class="diagram-kicker">Core execution pipeline</p>
           <ol>
-            <li>Task JSON</li>
-            <li>Schema Validation</li>
-            <li>Workspace Creation</li>
-            <li>File Generation</li>
-            <li>Pytest Execution</li>
-            <li>Verifier Result</li>
+            <li>
+              <span>01</span>
+              <strong>Task JSON</strong>
+              <small>structured task package</small>
+            </li>
+            <li>
+              <span>02</span>
+              <strong>Schema Validation</strong>
+              <small>Pydantic checks shape and types</small>
+            </li>
+            <li>
+              <span>03</span>
+              <strong>Workspace Creation</strong>
+              <small>isolated temporary sandbox</small>
+            </li>
+            <li>
+              <span>04</span>
+              <strong>File Generation</strong>
+              <small>task files materialized locally</small>
+            </li>
+            <li>
+              <span>05</span>
+              <strong>Pytest Execution</strong>
+              <small>verifier runs inside workspace</small>
+            </li>
+            <li>
+              <span>06</span>
+              <strong>Verifier Result</strong>
+              <small>structured pass/fail output</small>
+            </li>
           </ol>
         </section>
 
@@ -120,17 +145,14 @@
 
           <p>The system flow is:</p>
 
-          <pre><code>Task JSON
-down
-Schema Validation
-down
-Temporary Workspace Creation
-down
-File Materialization
-down
-Pytest Execution
-down
-Structured Verifier Result</code></pre>
+          <ol class="flow-stack" aria-label="System flow">
+            <li data-step="01">Task JSON</li>
+            <li data-step="02">Schema Validation</li>
+            <li data-step="03">Temporary Workspace Creation</li>
+            <li data-step="04">File Materialization</li>
+            <li data-step="05">Pytest Execution</li>
+            <li data-step="06">Structured Verifier Result</li>
+          </ol>
 
           <hr class="lab-divider" />
 
@@ -180,7 +202,7 @@ Structured Verifier Result</code></pre>
           </p>
 
           <figure class="architecture-sketch" aria-label="System architecture diagram">
-            <svg viewBox="0 0 820 440" role="img" aria-labelledby="arch-title arch-desc">
+            <svg viewBox="0 0 760 500" role="img" aria-labelledby="arch-title arch-desc">
               <title id="arch-title">AgentAlign Day 1 system architecture</title>
               <desc id="arch-desc">
                 A sketch showing Task JSON flowing into a Pydantic loader, validated task object,
@@ -196,43 +218,52 @@ Structured Verifier Result</code></pre>
                   markerHeight="6"
                   orient="auto-start-reverse"
                 >
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#8e948d"></path>
                 </marker>
               </defs>
 
-              <rect class="sketch-node" x="24" y="64" width="140" height="72" rx="10"></rect>
-              <text class="sketch-label" x="94" y="96" text-anchor="middle">Task JSON</text>
-              <text class="sketch-small" x="94" y="117" text-anchor="middle">structured input</text>
+              <text class="sketch-small" x="32" y="35">input</text>
+              <text class="sketch-small" x="260" y="35">validation</text>
+              <text class="sketch-small" x="482" y="35">execution</text>
+              <text class="sketch-small" x="625" y="35">result</text>
 
-              <rect class="sketch-node" x="228" y="64" width="154" height="72" rx="10"></rect>
-              <text class="sketch-label" x="305" y="95" text-anchor="middle">Pydantic Loader</text>
-              <text class="sketch-small" x="305" y="117" text-anchor="middle">schema validation</text>
+              <rect class="sketch-node" x="28" y="60" width="146" height="70" rx="8"></rect>
+              <text class="sketch-label" x="101" y="92" text-anchor="middle">Task JSON</text>
+              <text class="sketch-small" x="101" y="113" text-anchor="middle">task + tests</text>
 
-              <rect class="sketch-node" x="450" y="64" width="170" height="72" rx="10"></rect>
-              <text class="sketch-label" x="535" y="95" text-anchor="middle">Validated Task</text>
-              <text class="sketch-small" x="535" y="117" text-anchor="middle">typed object</text>
+              <rect class="sketch-node" x="236" y="60" width="150" height="70" rx="8"></rect>
+              <text class="sketch-label" x="311" y="92" text-anchor="middle">Pydantic Loader</text>
+              <text class="sketch-small" x="311" y="113" text-anchor="middle">schema check</text>
 
-              <rect class="sketch-node-soft" x="178" y="206" width="330" height="160" rx="16"></rect>
-              <text class="sketch-small" x="343" y="232" text-anchor="middle">temporary workspace</text>
-              <rect class="sketch-node" x="216" y="264" width="116" height="58" rx="8"></rect>
-              <text class="sketch-label" x="274" y="298" text-anchor="middle">Files</text>
-              <rect class="sketch-node" x="356" y="264" width="116" height="58" rx="8"></rect>
-              <text class="sketch-label" x="414" y="298" text-anchor="middle">Tests</text>
+              <rect class="sketch-node" x="236" y="190" width="150" height="70" rx="8"></rect>
+              <text class="sketch-label" x="311" y="222" text-anchor="middle">Validated Task</text>
+              <text class="sketch-small" x="311" y="243" text-anchor="middle">typed object</text>
 
-              <rect class="sketch-node" x="582" y="250" width="112" height="72" rx="10"></rect>
-              <text class="sketch-label" x="638" y="282" text-anchor="middle">pytest</text>
-              <text class="sketch-small" x="638" y="303" text-anchor="middle">run verifier</text>
+              <rect class="sketch-node" x="462" y="190" width="154" height="70" rx="8"></rect>
+              <text class="sketch-label" x="539" y="222" text-anchor="middle">Workspace Creator</text>
+              <text class="sketch-small" x="539" y="243" text-anchor="middle">temp sandbox</text>
 
-              <rect class="sketch-node" x="600" y="64" width="190" height="72" rx="10"></rect>
-              <text class="sketch-label" x="695" y="94" text-anchor="middle">Evaluation Result</text>
-              <text class="sketch-small" x="695" y="116" text-anchor="middle">pass/fail + logs</text>
+              <rect class="sketch-node-soft" x="406" y="315" width="254" height="118" rx="12"></rect>
+              <text class="sketch-small" x="533" y="341" text-anchor="middle">temporary workspace</text>
+              <rect class="sketch-node" x="432" y="365" width="92" height="42" rx="6"></rect>
+              <text class="sketch-label" x="478" y="391" text-anchor="middle">Files</text>
+              <rect class="sketch-node" x="542" y="365" width="92" height="42" rx="6"></rect>
+              <text class="sketch-label" x="588" y="391" text-anchor="middle">Tests</text>
 
-              <path class="sketch-line" d="M 164 100 C 184 100, 203 100, 228 100"></path>
-              <path class="sketch-line" d="M 382 100 C 404 100, 426 100, 450 100"></path>
-              <path class="sketch-line" d="M 535 136 C 535 172, 414 178, 414 264"></path>
-              <path class="sketch-line" d="M 535 136 C 535 190, 274 192, 274 264"></path>
-              <path class="sketch-line" d="M 472 293 C 512 293, 548 286, 582 286"></path>
-              <path class="sketch-line" d="M 638 250 C 638 196, 695 174, 695 136"></path>
+              <rect class="sketch-node" x="28" y="315" width="146" height="70" rx="8"></rect>
+              <text class="sketch-label" x="101" y="347" text-anchor="middle">pytest</text>
+              <text class="sketch-small" x="101" y="368" text-anchor="middle">run verifier</text>
+
+              <rect class="sketch-node" x="586" y="60" width="146" height="70" rx="8"></rect>
+              <text class="sketch-label" x="659" y="92" text-anchor="middle">Evaluation</text>
+              <text class="sketch-small" x="659" y="113" text-anchor="middle">pass/fail + logs</text>
+
+              <path class="sketch-line" d="M 174 95 H 236"></path>
+              <path class="sketch-line" d="M 311 130 V 190"></path>
+              <path class="sketch-line" d="M 386 225 H 462"></path>
+              <path class="sketch-line" d="M 539 260 V 315"></path>
+              <path class="sketch-line" d="M 406 386 H 174 V 350"></path>
+              <path class="sketch-line" d="M 174 350 H 698 V 130"></path>
             </svg>
           </figure>
 
@@ -326,19 +357,15 @@ pytest fail = failure</code></pre>
 
           <h2>Final Architecture Built Today</h2>
 
-          <pre><code>Task JSON
-down
-Loader
-down
-Validated Task Object
-down
-Workspace Creator
-down
-Sandboxed Filesystem
-down
-Verifier
-down
-Structured Evaluation Result</code></pre>
+          <ol class="flow-stack" aria-label="Final architecture flow">
+            <li data-step="01">Task JSON</li>
+            <li data-step="02">Loader</li>
+            <li data-step="03">Validated Task Object</li>
+            <li data-step="04">Workspace Creator</li>
+            <li data-step="05">Sandboxed Filesystem</li>
+            <li data-step="06">Verifier</li>
+            <li data-step="07">Structured Evaluation Result</li>
+          </ol>
 
           <p>
             Day 1 successfully established the core foundation for the AgentAlign Lab project.
