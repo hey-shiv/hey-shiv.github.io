@@ -12,7 +12,7 @@
   --nav: #666666;
   --label: #8a8a8a;
   --accent: #1d4ed8;
-  --rule: rgba(0, 0, 0, 0.08);
+  --rule: #e5e5e5;
   --button-border: #dddddd;
   --button-border-strong: #d4d4d4;
   --button-hover: #999999;
@@ -51,7 +51,7 @@ html[data-theme="dark"] {
   --nav: #9aa197;
   --label: #878d86;
   --accent: #a8c2b0;
-  --rule: rgba(255, 255, 255, 0.08);
+  --rule: #252a28;
   --button-border: #343936;
   --button-border-strong: #444a46;
   --button-hover: #666d69;
@@ -149,7 +149,7 @@ hr {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.3rem 0 0.55rem;
-  border-bottom: 1px dashed var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
 
 .site-nav {
@@ -168,8 +168,6 @@ hr {
   color: var(--nav);
   font-weight: 500;
   text-align: left;
-  position: relative;
-  transition: all 0.2s ease;
 }
 
 .site-nav a[aria-current="page"] {
@@ -177,33 +175,11 @@ hr {
   text-decoration: none;
 }
 
-.site-nav a[aria-current="page"]::before {
-  content: "█";
-  position: absolute;
-  left: -14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text);
-  font-size: 0.8em;
-  opacity: 0.8;
-}
-
 .site-nav a:hover,
 .site-nav a:focus-visible {
   color: var(--text);
   opacity: 1;
   text-decoration: none;
-}
-
-.site-nav a:hover::before {
-  content: "█";
-  position: absolute;
-  left: -14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--nav);
-  font-size: 0.8em;
-  opacity: 0.5;
 }
 
 main section {
@@ -380,9 +356,9 @@ li + li {
   align-items: center;
   gap: 0.5rem;
   padding: 8px 14px;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  background: transparent;
+  border: 1px solid var(--button-border);
+  border-bottom: 3px double var(--button-border-strong);
+  border-radius: 3px;
   color: var(--button-text);
   font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.8rem;
@@ -392,7 +368,8 @@ li + li {
 
 .btn:hover,
 .btn:focus-visible {
-  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border-color: var(--button-hover);
+  border-bottom-color: var(--button-hover-strong);
   color: var(--button-text-strong);
   opacity: 1;
   text-decoration: none;
@@ -412,14 +389,7 @@ li + li {
 
 .home-section-title {
   margin-bottom: 1.25rem;
-  color: var(--muted);
-  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-bottom: 1px dashed var(--rule);
-  padding-bottom: 0.5rem;
+  font-size: 1.6rem;
 }
 
 .section-label {
@@ -1087,7 +1057,7 @@ footer p + p {
   }
 
   .home-section-title {
-    font-size: 0.75rem;
+    font-size: 1.45rem;
   }
 
   h1 {
