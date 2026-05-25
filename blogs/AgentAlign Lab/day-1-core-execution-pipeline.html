@@ -26,11 +26,7 @@
       (function () {
         try {
           var saved = localStorage.getItem("site-theme");
-          var theme =
-            saved ||
-            (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light");
+          var theme = saved || "light";
           document.documentElement.dataset.theme = theme;
           document.documentElement.style.colorScheme = theme;
         } catch (error) {}
