@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="SvaraAlign Lab is a verifier-guided alignment framework for raga-faithful AI music generation, focused on symbolic verification, preference learning, reward modeling, and reranking."
+    />
+    <title>SvaraAlign Lab | Shivashant Manohar</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("site-theme");
+          var theme =
+            saved ||
+            (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {}
+      })();
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/site.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../../index.html">Lab</a>
+          <a href="../../blog.html">Blogs</a>
+          <a href="../../now.html">Now</a>
+          <a href="../../notes.html">Notes</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="back-links">
+          <a href="../../index.html">Lab</a> / <a href="../../now.html">Now</a>
+        </div>
+
+        <section class="hero detail-hero">
+          <p class="eyebrow">Flagship project / SvaraAlign Lab</p>
+          <h1>Verifier-guided alignment system for raga-faithful AI music generation.</h1>
+          <p class="statement">
+            SvaraAlign Lab explores how symbolic music verification, expert preference learning,
+            reward modeling, and reranking can make generative music systems more faithful to raga
+            structure.
+          </p>
+          <ul class="detail-meta" aria-label="Project metadata">
+            <li>Alignment</li>
+            <li>Reward modeling</li>
+            <li>Raga verification</li>
+            <li>Generative music</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="overview">
+          <p class="section-label" id="overview">Overview</p>
+          <p>
+            The project treats raga-faithfulness as an evaluation and alignment problem. A model can
+            generate plausible notes while still violating tonic context, phrase grammar, ascent and
+            descent constraints, or aesthetic expectations that matter to listeners with domain
+            knowledge.
+          </p>
+          <div class="summary-grid">
+            <div class="summary-block">
+              <h3>Core question</h3>
+              <p>Can expert feedback and deterministic raga verifiers outperform prompting alone?</p>
+            </div>
+            <div class="summary-block">
+              <h3>MVP target</h3>
+              <p>One raga end to end, 20 clips scored, 50 preferences, reward reranking demo.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="architecture-panel" aria-labelledby="architecture">
+          <p class="section-label" id="architecture">Architecture</p>
+          <p>
+            SvaraAlign separates musical constraints from learned preferences.
+            <span class="inline-code">SvaraJudge</span> provides deterministic raga checks,
+            <span class="inline-code">SvaraTrace</span> stores evidence,
+            <span class="inline-code">SvaraPrefs</span> captures expert A/B labels, and
+            <span class="inline-code">SvaraReward</span> learns the reranking signal.
+          </p>
+
+          <figure class="system-map" aria-label="SvaraAlign architecture diagram">
+            <div class="system-map-title">
+              <strong>SvaraAlign Architecture</strong>
+              <span>raga spec -> verifier -> preference loop</span>
+            </div>
+            <div class="diagram-lanes">
+              <div class="diagram-lane">
+                <p class="diagram-lane-label">Generation</p>
+                <ol class="diagram-flow">
+                  <li>
+                    <strong>Raga Task</strong>
+                    <small>target raga, tonic, prompt, duration</small>
+                  </li>
+                  <li>
+                    <strong>Candidate Loop</strong>
+                    <small>generate or load 4 clips</small>
+                  </li>
+                  <li>
+                    <strong>Run Artifact</strong>
+                    <small>audio paths, config, timestamp</small>
+                  </li>
+                </ol>
+              </div>
+              <div class="diagram-lane">
+                <p class="diagram-lane-label">Verification</p>
+                <ol class="diagram-flow">
+                  <li>
+                    <strong>SvaraJudge</strong>
+                    <small>f0, tonic, svara mapping, violations</small>
+                  </li>
+                  <li>
+                    <strong>SvaraTrace</strong>
+                    <small>scores, plots, errors, evidence</small>
+                  </li>
+                  <li>
+                    <strong>Failure Gallery</strong>
+                    <small>tonic drift, forbidden svara, weak pitch</small>
+                  </li>
+                </ol>
+              </div>
+              <div class="diagram-lane">
+                <p class="diagram-lane-label">Alignment</p>
+                <ol class="diagram-flow">
+                  <li>
+                    <strong>SvaraPrefs</strong>
+                    <small>expert chosen/rejected pairs</small>
+                  </li>
+                  <li>
+                    <strong>SvaraReward</strong>
+                    <small>feature baseline, held-out accuracy</small>
+                  </li>
+                  <li>
+                    <strong>Reranker</strong>
+                    <small>prompt-only vs rule vs reward</small>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </figure>
+        </section>
+
+        <section aria-labelledby="pipeline">
+          <p class="section-label" id="pipeline">Pipeline</p>
+          <ul class="pipeline-grid">
+            <li>
+              <span>01</span>
+              <strong>Raga specification</strong>
+              <small>Encode tonic, permitted swaras, phrase grammar, ascent/descent, and constraints.</small>
+            </li>
+            <li>
+              <span>02</span>
+              <strong>Candidate generation</strong>
+              <small>Generate or load four candidate clips from one model before expanding scope.</small>
+            </li>
+            <li>
+              <span>03</span>
+              <strong>SvaraJudge report</strong>
+              <small>Load audio, use known tonic, extract f0, map svaras, and save verifier JSON.</small>
+            </li>
+            <li>
+              <span>04</span>
+              <strong>Expert preference</strong>
+              <small>Collect comparisons where musical judgment goes beyond deterministic rules.</small>
+            </li>
+            <li>
+              <span>05</span>
+              <strong>Reward modeling</strong>
+              <small>Learn a quality signal from expert preferences and verifier evidence.</small>
+            </li>
+            <li>
+              <span>06</span>
+              <strong>Reranking</strong>
+              <small>Select outputs that satisfy constraints and score well under learned preference.</small>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="decisions">
+          <p class="section-label" id="decisions">Design Decisions</p>
+          <ul class="detail-list">
+            <li>Keep symbolic checks explicit so cultural constraints are inspectable.</li>
+            <li>Use expert preference learning only where rule-based verification is insufficient.</li>
+            <li>Represent tonic and phrase context as first-class trace fields.</li>
+            <li>Favor reranking before direct fine-tuning while verifier quality is still improving.</li>
+            <li>Start with one raga, one model, and one metric before broadening the benchmark.</li>
+            <li>Defer DPO until verifier quality, preference pairs, and reward baselines exist.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="failures">
+          <p class="section-label" id="failures">Failures</p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>Tonic mismatch</strong>
+              <span>Generated phrases can look valid symbolically while drifting from the tonal center.</span>
+            </li>
+            <li>
+              <strong>Rule brittleness</strong>
+              <span>Hard constraints catch obvious violations but miss expressive context and intent.</span>
+            </li>
+            <li>
+              <strong>Pitch extraction noise</strong>
+              <span>All-NaN f0, percussion-heavy clips, or bad sample rates can corrupt verifier evidence.</span>
+            </li>
+            <li>
+              <strong>Preference ambiguity</strong>
+              <span>Two expert judgments may disagree unless the comparison task is tightly specified.</span>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="screenshots">
+          <p class="section-label" id="screenshots">Screenshots / System Surfaces</p>
+          <div class="artifact-grid">
+            <div class="artifact-panel">
+              <h3>Verifier trace</h3>
+              <p>Symbolic evidence attached to a generated phrase.</p>
+              <pre><code>{
+  "clip_id": "demo_001",
+  "target_raga": "Yaman",
+  "pitch_confidence": 0.74,
+  "score": 0.68,
+  "violations": [{"type": "forbidden_svara", "value": "M1"}]
+}</code></pre>
+            </div>
+            <div class="artifact-panel">
+              <h3>Preference pair</h3>
+              <p>Expert comparison data for reward modeling.</p>
+              <pre><code>{
+  "prompt": "Generate Yaman phrase",
+  "chosen": "candidate_a.wav",
+  "rejected": "candidate_b.wav",
+  "critique": "A has clearer Yaman chalan."
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="lessons">
+          <p class="section-label" id="lessons">Lessons Learned</p>
+          <p>
+            Generative music alignment is not only a modeling problem. It needs careful
+            representation, culturally grounded evaluation, interpretable verifier evidence, and
+            honest handling of the gap between rule validity and musical quality.
+          </p>
+        </section>
+
+        <section aria-labelledby="eval-philosophy">
+          <p class="section-label" id="eval-philosophy">Evaluation Philosophy</p>
+          <p>
+            Evaluation should respect both structure and taste. Symbolic verifiers can protect
+            against clear raga violations, while human preference data should capture phrasing,
+            restraint, and musical judgment that rules alone cannot express.
+          </p>
+          <p>
+            The first metrics stay intentionally narrow: pitch confidence and forbidden-svara
+            violations. Broader phrase scoring, held-out prompts, reward reranking, and symbolic
+            DPO come only after the verifier produces stable JSON evidence.
+          </p>
+        </section>
+
+        <section aria-labelledby="roadmap">
+          <p class="section-label" id="roadmap">Roadmap / Future Work</p>
+          <ul class="roadmap-list">
+            <li>
+              <span>Next</span>
+              <strong>SvaraJudge v0</strong>
+              <small>One command loads one clip and returns pitch confidence, score, and violations.</small>
+            </li>
+            <li>
+              <span>Next</span>
+              <strong>One-raga loop</strong>
+              <small>Generate four clips, score them, pick the best, and save run JSON.</small>
+            </li>
+            <li>
+              <span>MVP</span>
+              <strong>50 preference pairs</strong>
+              <small>Train a small reward model and show improvement or an honest failure.</small>
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p>Bengaluru, India / shivashant.work@gmail.com</p>
+      </footer>
+    </div>
+    <script src="../../assets/site.js" defer></script>
+  </body>
+</html>

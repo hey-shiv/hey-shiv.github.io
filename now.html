@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Now page for Shivashant Manohar's public AI systems lab: current focus, experiments, bottlenecks, reading, and milestones."
+    />
+    <title>Now | Shivashant Manohar</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("site-theme");
+          var theme =
+            saved ||
+            (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {}
+      })();
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/site.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html">Lab</a>
+          <a href="blog.html">Blogs</a>
+          <a href="now.html" aria-current="page">Now</a>
+          <a href="notes.html">Notes</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <p class="eyebrow">Now / Updated May 25, 2026</p>
+          <h1>Live research notebook.</h1>
+          <p class="statement">
+            A compact view of what I am actively building, where the systems are fragile, and what
+            I am trying to make measurable next.
+          </p>
+        </section>
+
+        <section aria-labelledby="now-focus">
+          <p class="section-label" id="now-focus">Currently Focused On</p>
+          <ul class="focus-grid">
+            <li>Verifier-guided AI systems</li>
+            <li>Post-training infrastructure</li>
+            <li>Reward modeling and preference data</li>
+            <li>Evaluation systems and held-out checks</li>
+            <li>Structured traces for terminal agents</li>
+            <li>Symbolic verification for raga-faithful generation</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="active-projects">
+          <p class="section-label" id="active-projects">Active Projects</p>
+          <div class="now-grid">
+            <div class="now-block">
+              <h3>AgentAlign Lab</h3>
+              <p>
+                Building the execution, verification, trace, and preference-data path for reliable
+                terminal-agent evaluation.
+              </p>
+            </div>
+            <div class="now-block">
+              <h3>SvaraAlign Lab</h3>
+              <p>
+                Designing verifier-guided alignment loops for raga-faithful AI music generation.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="bottlenecks">
+          <p class="section-label" id="bottlenecks">Current Bottlenecks</p>
+          <ul class="now-list">
+            <li>Verifier quality: making pass/fail signals stable enough to trust.</li>
+            <li>Evaluation integrity: keeping training, development, and held-out tasks separate.</li>
+            <li>Trajectory observability: capturing enough execution context without bloating traces.</li>
+            <li>Symbolic music verification: representing raga grammar without flattening musical nuance.</li>
+            <li>Reward leakage: detecting when models optimize the verifier instead of the objective.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="experiments">
+          <p class="section-label" id="experiments">Current Experiments</p>
+          <ul class="pipeline-grid">
+            <li>
+              <span>01</span>
+              <strong>Trace schema v2</strong>
+              <small>Separate action, observation, verifier output, and recovery attempts.</small>
+            </li>
+            <li>
+              <span>02</span>
+              <strong>DPO pair generation</strong>
+              <small>Convert verifier outcomes into useful preference pairs without shortcut bias.</small>
+            </li>
+            <li>
+              <span>03</span>
+              <strong>Raga constraint checks</strong>
+              <small>Track tonic, permitted swaras, phrase movement, and forbidden transitions.</small>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="reading">
+          <p class="section-label" id="reading">Current Reading</p>
+          <ul class="now-list">
+            <li>Preference optimization, DPO, and reward model failure modes.</li>
+            <li>Agent evaluation, tool-use traces, and execution-based verification.</li>
+            <li>Observability patterns for systems that produce structured artifacts.</li>
+            <li>Computational music representation and symbolic constraints for Indian classical music.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="milestones">
+          <p class="section-label" id="milestones">Active Milestones</p>
+          <ul class="roadmap-list">
+            <li>
+              <span>AgentAlign</span>
+              <strong>60+ verified tasks</strong>
+              <small>Task split, deterministic checks, reference solutions, and broken templates.</small>
+            </li>
+            <li>
+              <span>AgentAlign</span>
+              <strong>300+ trajectories</strong>
+              <small>Chosen/rejected DPO pairs with verifier evidence and failure tags attached.</small>
+            </li>
+            <li>
+              <span>SvaraAlign</span>
+              <strong>SvaraJudge v0</strong>
+              <small>One-raga verifier JSON with pitch confidence, score, and violations.</small>
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p>Bengaluru, India / shivashant.work@gmail.com</p>
+      </footer>
+    </div>
+    <script src="assets/site.js" defer></script>
+  </body>
+</html>

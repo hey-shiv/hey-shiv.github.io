@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AgentAlign Lab is a verifier-guided preference learning pipeline for reliable terminal agents, focused on structured traces, deterministic verifiers, DPO, and observability."
+    />
+    <title>AgentAlign Lab | Shivashant Manohar</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("site-theme");
+          var theme =
+            saved ||
+            (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {}
+      })();
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/site.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../../index.html">Lab</a>
+          <a href="../../blog.html">Blogs</a>
+          <a href="../../now.html">Now</a>
+          <a href="../../notes.html">Notes</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="back-links">
+          <a href="../../index.html">Lab</a> / <a href="../../blogs/AgentAlign%20Lab/">Blogs</a>
+        </div>
+
+        <section class="hero detail-hero">
+          <p class="eyebrow">Flagship project / AgentAlign Lab</p>
+          <h1>Verifier-guided preference learning pipeline for reliable terminal agents.</h1>
+          <p class="statement">
+            AgentAlign Lab studies how terminal-agent behavior can be improved by turning
+            execution traces and deterministic verifier outcomes into inspectable preference data.
+          </p>
+          <ul class="detail-meta" aria-label="Project metadata">
+            <li>AI reliability</li>
+            <li>Terminal agents</li>
+            <li>DPO</li>
+            <li>Observability</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="overview">
+          <p class="section-label" id="overview">Overview</p>
+          <p>
+            The system treats agent work as an auditable trajectory rather than a chat transcript.
+            A task is specified as structured input, executed in an isolated workspace, judged by
+            deterministic verifiers, and stored with enough evidence to support preference learning
+            and failure analysis.
+          </p>
+          <div class="summary-grid">
+            <div class="summary-block">
+              <h3>Core question</h3>
+              <p>Can deterministic verifier feedback improve terminal-agent reliability through DPO?</p>
+            </div>
+            <div class="summary-block">
+              <h3>MVP target</h3>
+              <p>60+ verified tasks, 300+ trajectories, DPO/LoRA training, held-out eval, dashboard.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="architecture-panel" aria-labelledby="architecture">
+          <p class="section-label" id="architecture">Architecture</p>
+          <p>
+            AgentAlign separates execution, verification, preference construction, and evaluation so
+            each layer can be debugged independently.
+          </p>
+
+          <figure class="system-map" aria-label="AgentAlign architecture diagram">
+            <div class="system-map-title">
+              <strong>AgentAlign Architecture</strong>
+              <span>execution -> feedback -> evaluation</span>
+            </div>
+            <div class="diagram-lanes">
+              <div class="diagram-lane">
+                <p class="diagram-lane-label">Execution</p>
+                <ol class="diagram-flow">
+                  <li>
+                    <strong>Task Schema</strong>
+                    <small>files, instruction, verifier config</small>
+                  </li>
+                  <li>
+                    <strong>Sandbox Runner</strong>
+                    <small>isolated cwd, timeout, captured output</small>
+                  </li>
+                  <li>
+                    <strong>Trajectory</strong>
+                    <small>actions, observations, file diffs</small>
+                  </li>
+                </ol>
+              </div>
+              <div class="diagram-lane">
+                <p class="diagram-lane-label">Feedback</p>
+                <ol class="diagram-flow">
+                  <li>
+                    <strong>Verifier Suite</strong>
+                    <small>pytest, hidden checks, return codes</small>
+                  </li>
+                  <li>
+                    <strong>Preference Builder</strong>
+                    <small>chosen/rejected trajectory pairs</small>
+                  </li>
+                  <li>
+                    <strong>DPO/LoRA</strong>
+                    <small>post-training from verifier evidence</small>
+                  </li>
+                </ol>
+              </div>
+              <div class="diagram-lane">
+                <p class="diagram-lane-label">Evaluation</p>
+                <ol class="diagram-flow">
+                  <li>
+                    <strong>Held-out Split</strong>
+                    <small>fixed task IDs, no preference leakage</small>
+                  </li>
+                  <li>
+                    <strong>Trace Store</strong>
+                    <small>replay, audit, failure tags</small>
+                  </li>
+                  <li>
+                    <strong>Dashboard</strong>
+                    <small>baseline vs tuned metrics</small>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </figure>
+        </section>
+
+        <section aria-labelledby="pipeline">
+          <p class="section-label" id="pipeline">Pipeline</p>
+          <ul class="pipeline-grid">
+            <li>
+              <span>01</span>
+              <strong>Task package</strong>
+              <small>Typed task input with files, constraints, verifier config, and expected behavior.</small>
+            </li>
+            <li>
+              <span>02</span>
+              <strong>Sandbox execution</strong>
+              <small>Agent actions run inside an isolated workspace with captured stdout and file diffs.</small>
+            </li>
+            <li>
+              <span>03</span>
+              <strong>Structured trajectory</strong>
+              <small>Every action, observation, failure, and recovery attempt becomes trace data.</small>
+            </li>
+            <li>
+              <span>04</span>
+              <strong>Verifier pass</strong>
+              <small>Deterministic checks produce pass/fail signals and evidence for audit.</small>
+            </li>
+            <li>
+              <span>05</span>
+              <strong>Preference pair</strong>
+              <small>Better and worse trajectories become chosen/rejected DPO examples.</small>
+            </li>
+            <li>
+              <span>06</span>
+              <strong>DPO + held-out eval</strong>
+              <small>LoRA-tuned behavior is compared against baseline on fixed held-out tasks.</small>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="decisions">
+          <p class="section-label" id="decisions">Design Decisions</p>
+          <ul class="detail-list">
+            <li>Use deterministic verifiers before model-graded evaluation wherever possible.</li>
+            <li>Store complete trajectories because preference labels without evidence are hard to trust.</li>
+            <li>Separate task schema validation from execution so bad tasks fail early.</li>
+            <li>Keep held-out evaluations isolated from preference-pair generation.</li>
+            <li>Split tasks before trajectory generation so train and final evaluation cannot contaminate each other.</li>
+            <li>Report multiple metrics, not only pass rate: invalid actions, unsafe actions, timeouts, steps, and failure tags.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="failures">
+          <p class="section-label" id="failures">Failures</p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>Thin traces</strong>
+              <span>Early traces captured the final verifier result but not enough intermediate context.</span>
+            </li>
+            <li>
+              <strong>Schema churn</strong>
+              <span>Adding preference data later forced a cleaner separation between task, run, and result.</span>
+            </li>
+            <li>
+              <strong>Verifier overfitting risk</strong>
+              <span>Agents can optimize visible tests unless hidden or held-out checks are part of the loop.</span>
+            </li>
+            <li>
+              <strong>Format gains vs task gains</strong>
+              <span>DPO may improve structured action reliability before it improves final task success.</span>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="screenshots">
+          <p class="section-label" id="screenshots">Screenshots / System Surfaces</p>
+          <div class="artifact-grid">
+            <div class="artifact-panel">
+              <h3>Verifier output</h3>
+              <p>Terminal-first evidence for a failed run.</p>
+              <pre><code>status: failed
+verifier: pytest
+task_id: terminal.edit.001
+signal:
+  tests_failed: 1
+  hidden_checks: pending</code></pre>
+            </div>
+            <div class="artifact-panel">
+              <h3>Trace record</h3>
+              <p>Compact trajectory fields for preference inspection.</p>
+              <pre><code>trajectory:
+  actions: 7
+  file_diffs: 2
+  verifier_pass: false
+  recovery_attempts: 1
+  failure_tag: assertion_mismatch</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="lessons">
+          <p class="section-label" id="lessons">Lessons Learned</p>
+          <p>
+            Reliable terminal agents need more than prompting. The system around the model needs
+            schemas, sandboxes, verifiers, traces, and evaluation discipline so behavior can be
+            measured, compared, and improved without relying on anecdotal demos.
+          </p>
+        </section>
+
+        <section aria-labelledby="eval-philosophy">
+          <p class="section-label" id="eval-philosophy">Evaluation Philosophy</p>
+          <p>
+            Evaluation should be treated as infrastructure. Verifier design, trace fidelity,
+            hidden tests, and failure analysis are part of the product surface because they decide
+            what behavior the system learns to prefer.
+          </p>
+          <p>
+            The minimum credible claim is local: a compact feedback loop, a reproducible held-out
+            split, and at least one measured improvement after tuning. If DPO does not improve pass
+            rate, the fallback signal is still valuable: evaluation infrastructure, trace analysis,
+            verifier quality, and preference dataset audits.
+          </p>
+        </section>
+
+        <section aria-labelledby="roadmap">
+          <p class="section-label" id="roadmap">Roadmap / Future Work</p>
+          <ul class="roadmap-list">
+            <li>
+              <span>Next</span>
+              <strong>60+ task suite</strong>
+              <small>Small terminal tasks with reference checks, broken templates, and verifier configs.</small>
+            </li>
+            <li>
+              <span>Next</span>
+              <strong>300+ trajectories</strong>
+              <small>Trace action, observation, error, verifier result, and failure taxonomy.</small>
+            </li>
+            <li>
+              <span>MVP</span>
+              <strong>DPO + dashboard</strong>
+              <small>Train one LoRA adapter and show baseline vs tuned results in a Gradio dashboard.</small>
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p>Bengaluru, India / shivashant.work@gmail.com</p>
+      </footer>
+    </div>
+    <script src="../../assets/site.js" defer></script>
+  </body>
+</html>

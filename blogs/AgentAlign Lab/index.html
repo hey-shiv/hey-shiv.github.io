@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AgentAlign Lab by Shivashant Manohar." />
-    <title>AgentAlign Lab | Shivashant Manohar</title>
+    <meta
+      name="description"
+      content="AgentAlign Lab blog posts on verifier-guided terminal agents, structured trajectories, DPO preference optimization, and evaluation infrastructure."
+    />
+    <title>AgentAlign Lab Blogs | Shivashant Manohar</title>
     <script>
       (function () {
         try {
@@ -20,7 +23,7 @@
       })();
     </script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../assets/site.css" />
@@ -29,31 +32,34 @@
     <div class="container">
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
-          <a href="../../index.html">Home</a>
+          <a href="../../index.html">Lab</a>
           <a href="../../blog.html" aria-current="page">Blogs</a>
+          <a href="../../now.html">Now</a>
           <a href="../../notes.html">Notes</a>
         </nav>
       </header>
 
       <main>
         <div class="back-links">
-          <a href="../../blog.html">Back to blogs</a> / <a href="../../index.html">Home</a>
+          <a href="../../blog.html">Blogs</a> / <a href="../../projects/agentalign-lab/">Project detail</a>
         </div>
 
-        <header class="article-header">
-          <p class="eyebrow">AgentAlign Lab</p>
-          <h1>AgentAlign Lab</h1>
-          <p class="section-copy">
-            Experiments, notes, and systems thinking around reliable AI coding agents.
+        <section class="hero">
+          <p class="eyebrow">AgentAlign Lab / Blogs</p>
+          <h1>Terminal-agent reliability, written as the system forms.</h1>
+          <p class="statement">
+            Blog posts for a verifier-guided preference learning pipeline: task schemas,
+            sandboxed execution, structured trajectories, deterministic verifiers, DPO data, and
+            held-out evaluation.
           </p>
-        </header>
+        </section>
 
         <section aria-labelledby="agentalign-posts">
-          <h2 id="agentalign-posts">Research Logs</h2>
+          <p class="section-label" id="agentalign-posts">Published Posts</p>
           <ul class="post-list">
             <li>
               <a class="post-title" href="day-1-core-execution-pipeline.html">
-                Day 1 &mdash; I Built the Core Execution Pipeline Behind AI Coding Agents
+                Day 1 - Core Execution Pipeline for Verifier-Guided Terminal Agents
               </a>
               <span class="post-meta">May 23, 2026</span>
               <p class="section-copy">
@@ -63,11 +69,19 @@
             </li>
           </ul>
         </section>
+
+        <section aria-labelledby="upcoming">
+          <p class="section-label" id="upcoming">Upcoming</p>
+          <ul class="now-list">
+            <li>Trace schema redesign for action, observation, verifier, and recovery fields.</li>
+            <li>DPO preference-pair generation from audited successful and failed trajectories.</li>
+            <li>Verifier drift and evaluation integrity notes from held-out task design.</li>
+          </ul>
+        </section>
       </main>
 
       <footer>
         <p>Bengaluru, India / shivashant.work@gmail.com</p>
-
       </footer>
     </div>
     <script src="../../assets/site.js" defer></script>

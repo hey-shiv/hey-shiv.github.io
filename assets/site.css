@@ -216,8 +216,7 @@ main section {
   height: 7px;
   border-radius: 999px;
   background: var(--dot);
-  box-shadow: 0 0 0 0 rgba(var(--dot-rgb), 0.5);
-  animation: availabilityPulse 1.8s ease-in-out infinite;
+  box-shadow: 0 0 0 2px rgba(var(--dot-rgb), 0.08);
 }
 
 .availability-pill {
@@ -277,7 +276,7 @@ h3 {
 h1 {
   font-size: 3.2rem;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   line-height: 1.1;
   margin-bottom: 0.6rem;
 }
@@ -285,14 +284,14 @@ h1 {
 h2 {
   font-size: 1.6rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   margin-top: 3.5rem;
 }
 
 h3 {
   font-size: 1.2rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 p {
@@ -322,7 +321,7 @@ li + li {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 1.03rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   line-height: 1.55;
 }
 
@@ -339,7 +338,7 @@ li + li {
   max-width: 39rem;
 }
 
-.hero p:not(.identity):not(.statement) {
+.hero p:not(.identity):not(.statement):not(.hero-name) {
   font-size: 1rem;
   line-height: 1.7;
 }
@@ -349,6 +348,72 @@ li + li {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 1.5rem;
+}
+
+.lab-hero h1 {
+  max-width: 780px;
+}
+
+.hero .hero-name {
+  margin: 0 0 1rem;
+  color: var(--heading-soft);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: 1.28rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.current-projects {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 1.4rem;
+  max-width: 39rem;
+  border-top: 1px solid var(--rule);
+}
+
+.project-chip {
+  display: flex;
+  min-height: 0;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.78rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  background: transparent;
+  color: var(--heading-soft);
+  text-decoration: none;
+}
+
+.project-chip:hover,
+.project-chip:focus-visible {
+  color: var(--heading);
+  opacity: 1;
+  text-decoration: none;
+}
+
+.project-chip span {
+  display: block;
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.project-chip small {
+  display: block;
+  margin-top: 0;
+  color: var(--muted);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+  text-align: right;
+  text-transform: uppercase;
 }
 
 .btn {
@@ -394,6 +459,10 @@ li + li {
 
 .section-label {
   margin: 0 0 1rem;
+}
+
+.section-label + h2 {
+  margin-top: 0;
 }
 
 .dash-list {
@@ -471,7 +540,7 @@ article p:last-child {
   color: var(--heading-soft);
   font-family: "Space Grotesk", "Inter", sans-serif;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .post-title:hover,
@@ -544,7 +613,7 @@ article p:last-child {
   font-family: "Space Grotesk", "Inter", sans-serif;
   font-size: 1.15rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   line-height: 1.3;
 }
 
@@ -570,8 +639,577 @@ article p:last-child {
   font-family: "Space Grotesk", "Inter", sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1.45;
+}
+
+.focus-grid,
+.featured-projects,
+.signal-list,
+.philosophy-list,
+.lab-note-list,
+.project-links,
+.detail-list,
+.pipeline-grid,
+.artifact-grid,
+.roadmap-list,
+.now-list {
+  list-style: none;
+  padding: 0;
+}
+
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 1.4rem;
+}
+
+.focus-grid li,
+.signal-list li,
+.philosophy-list li,
+.detail-list li,
+.now-list li {
+  position: relative;
+  margin-top: 0;
+  padding: 0.75rem 0 0.75rem 1.35rem;
+  border-top: 1px solid var(--rule);
+  color: var(--body);
+}
+
+.focus-grid li::before,
+.signal-list li::before,
+.detail-list li::before,
+.now-list li::before {
+  content: "->";
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  color: var(--arrow);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.78rem;
+}
+
+.featured-projects {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.current-projects > *,
+.focus-grid > *,
+.signal-list > *,
+.featured-projects > *,
+.project-spec > *,
+.summary-grid > *,
+.now-grid > *,
+.pipeline-grid > *,
+.artifact-grid > *,
+.roadmap-list > * {
+  min-width: 0;
+}
+
+.featured-projects > li + li,
+.focus-grid li + li,
+.signal-list li + li,
+.philosophy-list li + li,
+.lab-note-list li + li,
+.detail-list li + li,
+.pipeline-grid li + li,
+.artifact-grid li + li,
+.roadmap-list li + li,
+.now-list li + li {
+  margin-top: 0;
+}
+
+.project-card {
+  min-width: 0;
+  padding: 1.2rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+}
+
+.project-card p:last-child {
+  margin-bottom: 0;
+}
+
+.project-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-card-header h3 {
+  margin-bottom: 0;
+}
+
+.status-token {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--muted);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.architecture-mini {
+  max-width: 100%;
+  margin: 1.1rem 0 1.15rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  overflow-x: auto;
+}
+
+.architecture-mini svg {
+  display: block;
+  width: 100%;
+  min-width: 520px;
+  height: auto;
+}
+
+.mini-map {
+  margin: 1.1rem 0 1.15rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.mini-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mini-flow li {
+  position: relative;
+  min-width: 0;
+  margin-top: 0;
+  padding: 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bg) 72%, var(--surface));
+}
+
+.mini-flow li + li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -0.55rem;
+  width: 0.55rem;
+  height: 1px;
+  background: var(--rule);
+}
+
+.mini-flow span {
+  display: block;
+  color: var(--heading-soft);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.mini-flow small {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.system-map {
+  margin: 1.5rem 0 0;
+  padding: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px),
+    color-mix(in srgb, var(--surface) 78%, transparent);
+  background-size: 28px 28px;
+  background-position: -1px -1px;
+  overflow: hidden;
+}
+
+.system-map-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.system-map-title strong {
+  color: var(--heading-soft);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.system-map-title span {
+  color: var(--label);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.diagram-lanes {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.diagram-lane {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: stretch;
+}
+
+.diagram-lane-label {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0.65rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bg) 74%, transparent);
+  color: var(--label);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.diagram-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.diagram-flow li {
+  position: relative;
+  min-width: 0;
+  margin-top: 0;
+  padding: 0.72rem;
+  border: 1px solid var(--button-border);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--surface) 84%, var(--bg));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 68%, transparent);
+}
+
+.diagram-flow li + li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -0.65rem;
+  width: 0.65rem;
+  height: 1px;
+  background: var(--muted-soft);
+  opacity: 0.45;
+}
+
+.diagram-flow strong {
+  display: block;
+  color: var(--heading-soft);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.diagram-flow small {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.architecture-mini marker path,
+.architecture-sketch marker path {
+  fill: var(--muted-soft);
+}
+
+.sketch-loop {
+  marker-end: none;
+  stroke-dasharray: 5 6;
+  opacity: 0.72;
+}
+
+.project-spec {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 1.1rem;
+}
+
+.project-spec div {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+
+.project-spec dt {
+  margin-bottom: 0.35rem;
+  color: var(--label);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.project-spec dd {
+  margin: 0;
+  color: var(--body);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.15rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--button-border);
+  border-radius: 4px;
+  color: var(--button-text);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.76rem;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.project-links a:hover,
+.project-links a:focus-visible {
+  border-color: var(--button-border-strong);
+  color: var(--button-text-strong);
+  opacity: 1;
+  text-decoration: none;
+}
+
+.signal-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 1.1rem;
+}
+
+.philosophy-list li {
+  padding-left: 0;
+}
+
+.philosophy-list li::before {
+  content: none;
+}
+
+.lab-note-list li {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.8fr) minmax(0, 1.5fr);
+  gap: 1rem;
+  margin-top: 0;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.lab-note-list strong {
+  color: var(--heading-soft);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-weight: 600;
+}
+
+.lab-note-list span {
+  color: var(--body);
+}
+
+.previous-work {
+  margin-top: 3.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.previous-work summary {
+  color: var(--heading-soft);
+  cursor: pointer;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.previous-work .project-list {
+  margin-top: 1.2rem;
+}
+
+.detail-hero h1 {
+  max-width: 760px;
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.detail-meta li {
+  margin-top: 0;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--muted);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.summary-grid,
+.now-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.summary-block,
+.now-block,
+.artifact-panel {
+  padding: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+}
+
+.summary-block h3,
+.now-block h3,
+.artifact-panel h3 {
+  margin-bottom: 0.6rem;
+  font-size: 1.05rem;
+}
+
+.summary-block p,
+.now-block p,
+.artifact-panel p {
+  margin-bottom: 0;
+  font-size: 0.98rem;
+}
+
+.architecture-panel {
+  margin: 1.5rem 0 0;
+}
+
+.architecture-panel .architecture-sketch {
+  margin-top: 1rem;
+}
+
+.pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.pipeline-grid li,
+.roadmap-list li {
+  margin-top: 0;
+  padding: 0.85rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+}
+
+.pipeline-grid span,
+.roadmap-list span {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--label);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pipeline-grid strong,
+.roadmap-list strong {
+  display: block;
+  color: var(--heading-soft);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-weight: 600;
+}
+
+.pipeline-grid small,
+.roadmap-list small {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.artifact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.1rem;
+}
+
+.artifact-panel pre {
+  margin: 0.8rem 0 0;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.artifact-panel code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.roadmap-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.1rem;
+}
+
+.inline-code {
+  padding: 0.12rem 0.28rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--code-bg);
+  color: var(--code-text);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.86em;
 }
 
 strong {
@@ -1045,7 +1683,8 @@ footer p + p {
   }
 
   .site-nav {
-    gap: 1.4rem;
+    gap: 1.1rem;
+    font-size: 0.76rem;
   }
 
   .hero {
@@ -1061,11 +1700,116 @@ footer p + p {
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.15rem;
+    line-height: 1.14;
   }
 
   h2 {
     font-size: 1.4rem;
+  }
+
+  .availability-row {
+    gap: 0.45rem 0.6rem;
+  }
+
+  .availability-main,
+  .availability-pill {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero .hero-name {
+    font-size: 1.02rem;
+    letter-spacing: 0.035em;
+  }
+
+  .current-projects,
+  .focus-grid,
+  .signal-list,
+  .project-spec,
+  .summary-grid,
+  .now-grid,
+  .pipeline-grid,
+  .artifact-grid,
+  .roadmap-list {
+    grid-template-columns: 1fr;
+  }
+
+  .project-chip {
+    display: block;
+  }
+
+  .project-chip small {
+    margin-top: 0.25rem;
+    text-align: left;
+  }
+
+  .mini-flow {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .mini-flow li + li::before {
+    top: -0.65rem;
+    left: 1rem;
+    width: 1px;
+    height: 0.65rem;
+  }
+
+  .system-map {
+    padding: 0.85rem;
+  }
+
+  .system-map-title {
+    display: block;
+  }
+
+  .system-map-title span {
+    display: block;
+    margin-top: 0.35rem;
+  }
+
+  .diagram-lane {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .diagram-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .diagram-flow li + li::before {
+    top: -0.65rem;
+    left: 1rem;
+    width: 1px;
+    height: 0.65rem;
+  }
+
+  .project-card {
+    padding: 1rem;
+  }
+
+  .project-card-header {
+    display: block;
+  }
+
+  .status-token {
+    margin-top: 0.65rem;
+  }
+
+  .lab-note-list li {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .actions {
+    gap: 0.65rem;
+  }
+
+  .btn {
+    min-height: 2.45rem;
+    padding: 7px 12px;
+    font-size: 0.76rem;
   }
 
   .pipeline-visual {

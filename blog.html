@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Blogs by Shivashant Manohar on machine learning systems and engineering thinking."
+      content="Blogs by Shivashant Manohar on verifier-guided AI systems, eval design, observability, reward modeling, and alignment infrastructure."
     />
     <title>Blogs | Shivashant Manohar</title>
     <script>
@@ -23,7 +23,7 @@
       })();
     </script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/site.css" />
@@ -32,8 +32,9 @@
     <div class="container">
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
-          <a href="index.html">Home</a>
+          <a href="index.html">Lab</a>
           <a href="blog.html" aria-current="page">Blogs</a>
+          <a href="now.html">Now</a>
           <a href="notes.html">Notes</a>
         </nav>
       </header>
@@ -41,54 +42,65 @@
       <main>
         <section class="hero">
           <p class="eyebrow">Blogs</p>
-          <h1>Notes in public, written slowly.</h1>
+          <h1>Public notes on AI systems, evals, and alignment infrastructure.</h1>
+          <p class="statement">
+            This is the lab notebook side of the site: architecture decisions, verifier loops,
+            structured traces, reward-model failures, DPO lessons, and observability work.
+          </p>
           <p>
-            A small blog about machine learning systems, engineering constraints, and practical
-            thinking.
+            The goal is not generic AI blogging. The goal is to make the engineering path behind
+            reliable AI systems visible enough to inspect.
           </p>
         </section>
 
-        <section aria-labelledby="blog-folders">
-          <h2 id="blog-folders">Folders</h2>
+        <section aria-labelledby="log-folders">
+          <p class="section-label" id="log-folders">Blog Folders</p>
           <ul class="folder-list">
             <li>
               <a class="folder-link" href="blogs/all/">
-                <span class="folder-label">All</span>
-                <span class="folder-meta">1 post</span>
+                <span class="folder-label">All Blogs</span>
+                <span class="folder-meta">1 published</span>
               </a>
             </li>
             <li>
               <a class="folder-link" href="blogs/AgentAlign%20Lab/">
                 <span class="folder-label">AgentAlign Lab</span>
-                <span class="folder-meta">1 post</span>
+                <span class="folder-meta">terminal-agent evals</span>
               </a>
             </li>
           </ul>
         </section>
 
-        <section aria-labelledby="recent-posts">
-          <h2 id="recent-posts">Recent Posts</h2>
+        <section aria-labelledby="recent-logs">
+          <p class="section-label" id="recent-logs">Recent Posts</p>
           <ul class="post-list">
             <li>
               <a
                 class="post-title"
                 href="blogs/AgentAlign%20Lab/day-1-core-execution-pipeline.html"
               >
-                Day 1 &mdash; I Built the Core Execution Pipeline Behind AI Coding Agents
+                Day 1 - Core Execution Pipeline for Verifier-Guided Terminal Agents
               </a>
               <span class="post-meta">May 23, 2026 / AgentAlign Lab</span>
               <p class="section-copy">
-                Day 1: building the core execution pipeline behind reliable AI coding agents.
+                Task schemas, isolated workspaces, pytest verification, and structured evaluation
+                results.
               </p>
             </li>
-
+            <li>
+              <span class="post-title">Planned - Verifier drift, trace schema v2, and reward leakage</span>
+              <span class="post-meta">Upcoming / Lab notes</span>
+              <p class="section-copy">
+                Short systems essays on eval design, observability, DPO data construction, and
+                failure analysis.
+              </p>
+            </li>
           </ul>
         </section>
       </main>
 
       <footer>
         <p>Bengaluru, India / shivashant.work@gmail.com</p>
-
       </footer>
     </div>
     <script src="assets/site.js" defer></script>
