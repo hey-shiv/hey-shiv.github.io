@@ -211,12 +211,18 @@ main section {
   text-transform: uppercase;
 }
 
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
 .availability-dot {
   width: 7px;
   height: 7px;
   border-radius: 999px;
   background: var(--dot);
   box-shadow: 0 0 0 2px rgba(var(--dot-rgb), 0.08);
+  animation: blink-dot 2s ease-in-out infinite;
 }
 
 .availability-pill {
