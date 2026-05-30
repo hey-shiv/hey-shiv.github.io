@@ -422,6 +422,48 @@ li + li {
   text-transform: uppercase;
 }
 
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 1.1rem 0 1rem;
+}
+
+.metric-strip span {
+  display: flex;
+  min-height: 4rem;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.35rem;
+  padding: 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--surface) 74%, transparent);
+  color: var(--muted);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.metric-strip strong {
+  display: block;
+  color: var(--heading-soft);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.05;
+  text-transform: none;
+}
+
+.metric-strip-large {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.2rem;
+  margin-bottom: 1.25rem;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -1730,6 +1772,7 @@ footer p + p {
   }
 
   .current-projects,
+  .metric-strip,
   .focus-grid,
   .signal-list,
   .project-spec,

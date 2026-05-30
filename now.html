@@ -39,7 +39,7 @@
 
       <main>
         <section class="hero">
-          <p class="eyebrow">Now / Updated May 25, 2026</p>
+          <p class="eyebrow">Now / Updated May 29, 2026</p>
           <h1>Live research notebook.</h1>
           <p class="statement">
             A compact view of what I am actively building, where the systems are fragile, and what
@@ -65,8 +65,8 @@
             <div class="now-block">
               <h3>AgentAlign Lab</h3>
               <p>
-                Building the execution, verification, trace, and preference-data path for reliable
-                terminal-agent evaluation.
+                The local MVP loop is implemented: 60 deterministic tasks, 757 scored
+                trajectories, 345 preference pairs, split-aware evaluation, and a Gradio dashboard.
               </p>
             </div>
             <div class="now-block">
@@ -81,9 +81,9 @@
         <section aria-labelledby="bottlenecks">
           <p class="section-label" id="bottlenecks">Current Bottlenecks</p>
           <ul class="now-list">
-            <li>Verifier quality: making pass/fail signals stable enough to trust.</li>
-            <li>Evaluation integrity: keeping training, development, and held-out tasks separate.</li>
-            <li>Trajectory observability: capturing enough execution context without bloating traces.</li>
+            <li>GPU DPO validation: training the Qwen LoRA adapter and measuring held-out deltas.</li>
+            <li>Verifier gaming: checking whether visible deterministic tests create shortcut behavior.</li>
+            <li>Trajectory observability: keeping traces inspectable while preserving enough execution evidence.</li>
             <li>Symbolic music verification: representing raga grammar without flattening musical nuance.</li>
             <li>Reward leakage: detecting when models optimize the verifier instead of the objective.</li>
           </ul>
@@ -94,13 +94,13 @@
           <ul class="pipeline-grid">
             <li>
               <span>01</span>
-              <strong>Trace schema v2</strong>
-              <small>Separate action, observation, verifier output, and recovery attempts.</small>
+              <strong>GPU handoff</strong>
+              <small>Run the prepared Qwen2.5-Coder DPO bundle and audit adapter outputs.</small>
             </li>
             <li>
               <span>02</span>
-              <strong>DPO pair generation</strong>
-              <small>Convert verifier outcomes into useful preference pairs without shortcut bias.</small>
+              <strong>Held-out eval</strong>
+              <small>Compare qwen_base and qwen_dpo on the same test split after adapter training.</small>
             </li>
             <li>
               <span>03</span>
@@ -125,13 +125,13 @@
           <ul class="roadmap-list">
             <li>
               <span>AgentAlign</span>
-              <strong>60+ verified tasks</strong>
-              <small>Task split, deterministic checks, reference solutions, and broken templates.</small>
+              <strong>60 verified tasks</strong>
+              <small>Done: split-aware task suite across five verifier families.</small>
             </li>
             <li>
               <span>AgentAlign</span>
-              <strong>300+ trajectories</strong>
-              <small>Chosen/rejected DPO pairs with verifier evidence and failure tags attached.</small>
+              <strong>757 scored trajectories</strong>
+              <small>Done: clean train, validation, and held-out test artifacts with DPO pairs.</small>
             </li>
             <li>
               <span><span style="filter: blur(4px); user-select: none;" title="Project name pending">SvaraAlign</span></span>

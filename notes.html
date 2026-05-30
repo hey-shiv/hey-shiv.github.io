@@ -43,7 +43,7 @@
           <h1>Short fragments from the systems bench.</h1>
           <p class="statement">
             Smaller notes for ideas that are not full systems essays yet: verifier instability,
-            trace schemas, eval hygiene, reward leakage, and debugging lessons.
+            trace schemas, eval hygiene, GPU handoff notes, reward leakage, and debugging lessons.
           </p>
           <p>
             These notes are intentionally close to the work. Some will be rough, but they should
@@ -58,7 +58,7 @@
             <li>Evaluation integrity</li>
             <li>Trace schema redesigns</li>
             <li>Reward leakage</li>
-            <li>DPO pair construction</li>
+            <li>DPO pair audits</li>
             <li>Raga verifier drift</li>
             <li>Sandbox execution failures</li>
             <li>Observability surfaces</li>
@@ -69,8 +69,8 @@
         <section aria-labelledby="open-questions">
           <p class="section-label" id="open-questions">Open Questions</p>
           <ul class="now-list">
-            <li>What does a useful terminal-agent trajectory need to include by default?</li>
-            <li>How should verifier evidence be attached to preference pairs?</li>
+            <li>Does the Qwen LoRA adapter improve held-out behavior after GPU DPO training?</li>
+            <li>Which verifier signals survive beyond the scripted baseline/bad-model contrast?</li>
             <li>Where does symbolic music verification stop and expert judgment begin?</li>
             <li>How can held-out evaluations stay meaningful as the system gets optimized?</li>
           </ul>
