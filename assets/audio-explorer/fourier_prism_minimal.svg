@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">Fourier transform as frequency decomposition</title>
+  <desc id="desc">A mixed waveform enters a simple prism-like transform and separates into low, mid, and high frequency sine components.</desc>
+  <rect width="1440" height="760" fill="#f7f4ee"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M96 382 C128 322 160 442 192 382 C224 322 256 442 288 382 C320 322 352 442 384 382 C416 322 448 442 480 382" stroke="#111111" stroke-width="7"/>
+    <path d="M578 250 L770 380 L578 510 Z" fill="#ffffff" stroke="#d8d1c3" stroke-width="3"/>
+    <path d="M500 382 H578" stroke="#111111" stroke-width="5"/>
+    <path d="M770 380 C900 240 1030 240 1190 210" stroke="#b45309" stroke-width="6"/>
+    <path d="M770 380 C900 380 1030 380 1190 380" stroke="#4c7a67" stroke-width="6"/>
+    <path d="M770 380 C900 520 1030 520 1190 550" stroke="#4f648f" stroke-width="6"/>
+    <path d="M1210 210 C1228 180 1246 240 1264 210 C1282 180 1300 240 1318 210" stroke="#b45309" stroke-width="4"/>
+    <path d="M1210 380 C1240 330 1270 430 1300 380 C1330 330 1360 430 1390 380" stroke="#4c7a67" stroke-width="4"/>
+    <path d="M1210 550 C1218 520 1226 580 1234 550 C1242 520 1250 580 1258 550 C1266 520 1274 580 1282 550 C1290 520 1298 580 1306 550" stroke="#4f648f" stroke-width="4"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="96" y="112" fill="#8a8174" font-size="16" letter-spacing="3">FOURIER TRANSFORM</text>
+    <text x="96" y="154" fill="#111111" font-size="42" font-weight="700">A waveform is a mixture of simpler waves</text>
+    <text x="102" y="475" fill="#69635a" font-size="19">mixed signal</text>
+    <text x="590" y="390" fill="#69635a" font-size="20">transform</text>
+    <text x="1208" y="172" fill="#6f3b08" font-size="19">low component</text>
+    <text x="1208" y="342" fill="#345b49" font-size="19">mid component</text>
+    <text x="1208" y="628" fill="#34476f" font-size="19">high component</text>
+  </g>
+</svg>

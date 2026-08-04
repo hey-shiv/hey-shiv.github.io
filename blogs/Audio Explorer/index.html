@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="How Audio Explorer builds the audio-AI preprocessing pipeline from raw audio to spectrograms, Mel features, MFCCs, and beat tracking." />
+    <title>Audio Explorer: Building the Audio AI Pipeline from First Principles | Shivashant Manohar</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("site-theme");
+          var theme = saved || "light";
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {}
+      })();
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="../../assets/favicon.png" />
+    <link rel="stylesheet" href="../../assets/site.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../../index.html" class="nav-logo" aria-label="Home" style="display: flex; align-items: center;"><img src="../../assets/favicon.png" alt="Logo" width="28" height="28" style="border-radius: 4px;" /></a>
+          <a href="../../index.html">Lab</a>
+          <a href="../../blog.html" aria-current="page">Blogs</a>
+          <a href="../../now.html">Now</a>
+          <a href="../../notes.html">Notes</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="back-links"><a href="../../blog.html">Blogs</a> / <a href="../../blogs/all/">All posts</a></div>
+        <header class="article-header">
+          <p class="eyebrow">Audio Explorer / August 2026</p>
+          <h1>Audio Explorer: building the audio-AI pipeline from first principles.</h1>
+          <p class="statement">A personal build log and practical guide to the hidden preprocessing pipeline behind modern audio AI: waveform analysis, Fourier transforms, spectrograms, Mel features, MFCCs, and rhythm tracking.</p>
+        </header>
+
+        <article>
+          <figure class="article-figure">
+            <img src="../../assets/audio-explorer/hero_waveform_to_spectrogram.jpg" alt="A waveform transforming into a colourful spectrogram" />
+            <figcaption>Sound begins as a one-dimensional signal; useful audio features reveal its time-frequency structure.</figcaption>
+          </figure>
+
+          <p>The first time I tried to understand audio AI seriously, I kept running into the same problem: the exciting part was always the model, but the thing that actually touched the sound first was hidden in a footnote. Whisper uses log-Mel spectrograms. Music models often begin from encoded time-frequency representations. Recommendation systems extract descriptors before they compare, cluster, or rank anything. Everyone talked about intelligence, but the front door to that intelligence was signal processing.</p>
+
+          <p>So I built <a href="https://github.com/hey-shiv/Audio-Explorer" target="_blank" rel="noreferrer">Audio Explorer</a> as a way to slow the whole thing down. The goal was not to make another black-box analyzer. I wanted a small local app where I could drop in an audio file and watch it become the kinds of representations that modern audio systems actually use: a waveform, a spectrogram, a Mel spectrogram, MFCCs, and a rhythm map.</p>
+
+          <p>This article is the journey behind that build. It is also the guide I wish I had when I started: less "here is a formula, good luck" and more "here is why this step exists, what it throws away, what it preserves, and why a model might care."</p>
+
+          <h2>The question that started it</h2>
+          <p>Audio feels continuous. You press play and sound simply happens. A voice arrives as a living thing. A drum hit has weight. A note has texture. But a computer never receives "texture" or "groove" or "voice." It receives numbers.</p>
+
+          <p>That gap is the whole story. Audio AI is not magic layered on top of music. It is a long chain of careful translations. First, a compressed file becomes samples. Then samples become frequency information. Then frequency information is arranged across time. Then that image-like surface is warped to match human hearing. Then it may be compressed into coefficients, or fed into a neural network, or used to detect tempo and beats.</p>
+
+          <p>Once I saw that, the build became clearer. Audio Explorer needed to make each translation visible.</p>
+
+          <figure class="article-figure">
+            <img src="../../assets/audio-explorer/pipeline_minimal.svg" alt="Minimal diagram of the Audio Explorer processing pipeline" />
+            <figcaption>The core idea of Audio Explorer: one audio file can be unfolded into several representations, each useful for a different kind of listening by machine.</figcaption>
+          </figure>
+
+          <h2>What Audio Explorer does</h2>
+          <p>Audio Explorer is a local Streamlit app for WAV, MP3, and FLAC files. You upload a file, and the app builds six inspectable views of the same signal. I made the views interactive with Plotly because static plots are fine for reports, but learning signal processing becomes much more alive when you can zoom into one transient, hover over one frequency bin, and connect the math to something you can see.</p>
+
+          <ul class="dash-list">
+            <li><strong>Waveform:</strong> the raw amplitude of the signal over time. This answers the simplest question: when is the audio loud, quiet, clipped, or silent?</li>
+            <li><strong>Signal statistics:</strong> RMS loudness, peak amplitude, clipping detection, DC offset, sample count, duration, and dynamic range. These are boring in the best way: they catch problems early.</li>
+            <li><strong>Spectrogram:</strong> a time-frequency map created with the short-time Fourier transform. This shows what frequencies are active at each moment.</li>
+            <li><strong>Mel spectrogram:</strong> a perceptually warped spectrogram that spends more representational detail where human hearing is more sensitive.</li>
+            <li><strong>MFCCs and deltas:</strong> a compressed summary of spectral shape and how that shape changes over time.</li>
+            <li><strong>Beat tracking:</strong> tempo estimation, beat timestamps, waveform overlays, and beat-interval consistency.</li>
+          </ul>
+
+          <p>The app is not trying to hide the machinery. It is trying to make the machinery calm enough to inspect.</p>
+
+          <h2>Stage 1: the file is not the sound</h2>
+          <p>The most important conceptual reset is this: an MP3 is not the signal. It is a compressed container that must be decoded before most analysis can happen. The thing we analyze is a one-dimensional array of samples, usually floating-point values between -1 and 1.</p>
+
+          <pre><code>y, sr = librosa.load("song.mp3", sr=22050, mono=True)</code></pre>
+
+          <p>In that line, <code>y</code> is the waveform array and <code>sr</code> is the sample rate. If the sample rate is 22,050 Hz, the array stores 22,050 measurements for every second of sound. A three-and-a-half-minute track becomes roughly 4.6 million numbers.</p>
+
+          <p>That sounds like a lot, but it is also beautifully simple. Every later representation in the app starts from that one array. The spectrogram is computed from it. The Mel spectrogram is computed from spectral energy derived from it. MFCCs are computed from the Mel spectrum. Beat tracking begins from it too, but follows a different branch.</p>
+
+          <p>I also made the loader collect metadata: file type, size, duration, number of samples, sample rate, channels, and bit depth where available. That metadata matters because audio problems often start before the exciting part. If a file is clipped, offset, strangely short, or unexpectedly resampled, you want to know before you build features on top of it.</p>
+
+          <h2>Stage 2: the waveform is honest but limited</h2>
+          <p>The waveform is the first thing people usually imagine when they think of audio visualization: a line moving above and below zero. It is honest because it shows the signal directly. Tall peaks mean large amplitude. Flat sections may indicate silence. Abrupt squared-off peaks may indicate clipping. A waveform that sits above or below zero may have DC offset.</p>
+
+          <pre><code>time = np.arange(len(y)) / sr
+peak = np.max(np.abs(y))
+rms = np.sqrt(np.mean(y ** 2))
+dc_offset = np.mean(y)</code></pre>
+
+          <p>But the waveform has a blind spot: it does not explain frequency content well. A flute and a violin playing the same pitch can have waveforms that look confusingly similar at a glance. A cymbal crash, a consonant, and a noisy synth texture can all look like bursts of activity. The waveform says "something happened here." It does not clearly say what kind of sound happened.</p>
+
+          <p>That is why the next step exists.</p>
+
+          <h2>Stage 3: Fourier is the moment the signal opens up</h2>
+          <p>The Fourier transform is one of those ideas that feels more dramatic the longer you sit with it. It says that a complicated signal can be understood as a combination of simple waves. Not metaphorically. Mathematically.</p>
+
+          <figure class="article-figure">
+            <img src="../../assets/audio-explorer/fourier_prism_minimal.svg" alt="A minimal Fourier transform diagram showing a mixed waveform separated into frequency components" />
+            <figcaption>The Fourier transform answers the question the waveform cannot: which frequencies are inside this sound?</figcaption>
+          </figure>
+
+          <p>If the waveform is the surface of the sound, the Fourier transform shows the ingredients. A bass note has energy at a fundamental frequency and its harmonics. A vocal vowel has a particular spectral envelope shaped by the vocal tract. A hi-hat has wide high-frequency energy. These differences can be hard to read in the time domain, but they become visible in the frequency domain.</p>
+
+          <p>The discrete Fourier transform tests the signal against many candidate frequencies. If the signal contains a candidate frequency, the comparison accumulates strongly. If it does not, the positive and negative parts mostly cancel. The result is a spectrum: frequency on one axis, magnitude on the other.</p>
+
+          <pre><code>X = np.fft.rfft(y)
+magnitude = np.abs(X)</code></pre>
+
+          <p>The catch is that a single Fourier transform over a whole track gives one global answer. It can tell you what frequencies appear somewhere in the song, but not when they appear. Music and speech are not static. A snare hit lasts a moment. A vowel changes. A melody moves. A single spectrum averages all of that into one summary.</p>
+
+          <p>That limitation leads directly to the spectrogram.</p>
+
+          <h2>Stage 4: the spectrogram adds time back in</h2>
+          <p>The short-time Fourier transform, or STFT, is a practical compromise. Instead of taking one Fourier transform across the entire signal, it slices the waveform into overlapping windows and computes a Fourier transform for each slice. Then it stacks those spectra side by side.</p>
+
+          <figure class="article-figure">
+            <img src="../../assets/audio-explorer/stft_windows_minimal.svg" alt="A minimal STFT diagram showing overlapping windows over a waveform becoming spectrogram columns" />
+            <figcaption>The STFT turns one long waveform into many local frequency snapshots.</figcaption>
+          </figure>
+
+          <pre><code>S = librosa.stft(y, n_fft=2048, hop_length=512)
+S_db = librosa.amplitude_to_db(np.abs(S), ref=np.max)</code></pre>
+
+          <p>With a 2,048-sample FFT at 22,050 Hz, each analysis window covers about 93 milliseconds. With a 512-sample hop, the window advances about every 23 milliseconds. The resulting matrix has frequency bins as rows and time frames as columns. The value inside each cell is the amount of energy at that frequency during that time frame.</p>
+
+          <p>This is where audio starts to become visually legible. Harmonics appear as horizontal bands. Percussive hits appear as vertical bursts. Silence becomes empty space. A rising pitch becomes a rising line. The spectrogram is not just a plot; it is the first representation in the pipeline that begins to look like a machine-readable picture of sound.</p>
+
+          <p>There is a tradeoff hiding inside the parameters. Larger windows give better frequency resolution, because they observe more cycles of low frequencies. But they blur fast events in time. Smaller windows react quickly, but they make frequency estimates less precise. This is why feature extraction is not mechanical. Even before the model, we are making choices about what kind of detail matters.</p>
+
+          <h2>Stage 5: the Mel scale makes the representation more human</h2>
+          <p>A normal spectrogram uses a linear frequency axis. Every hertz gets equal spacing. Human hearing is not arranged like that. We are much more sensitive to small differences in low frequencies than equal-sized differences in high frequencies. The difference between 100 Hz and 200 Hz is enormous perceptually. The difference between 8,000 Hz and 8,100 Hz is not.</p>
+
+          <figure class="article-figure">
+            <img src="../../assets/audio-explorer/mel_scale_minimal.svg" alt="A minimal comparison of linear frequency bins and Mel-spaced frequency bands" />
+            <figcaption>Mel scaling compresses high frequencies and keeps more detail in the lower ranges where human pitch perception is finer.</figcaption>
+          </figure>
+
+          <p>The Mel scale bends frequency into a more perceptual shape:</p>
+
+          <pre><code>mel = 2595 * np.log10(1 + frequency_hz / 700)</code></pre>
+
+          <p>Audio Explorer applies a bank of 128 triangular Mel filters to the power spectrum. Each filter gathers energy from a region of the frequency axis. Low-frequency filters are packed more tightly. High-frequency filters are spread farther apart. The result is smaller than the linear spectrogram, but often more useful for tasks that care about what humans hear.</p>
+
+          <pre><code>mel_power = librosa.feature.melspectrogram(
+    y=y,
+    sr=sr,
+    n_fft=2048,
+    hop_length=512,
+    n_mels=128
+)
+mel_db = librosa.power_to_db(mel_power, ref=np.max)</code></pre>
+
+          <p>This is the point where the pipeline starts to look very familiar if you read audio AI papers. Many systems do not begin from raw waveform samples. They begin from Mel spectrograms or closely related representations because the Mel view is compact, stable, and aligned with perception. It removes detail the model probably does not need and emphasizes structure that often matters.</p>
+
+          <p>That realization changed how I thought about preprocessing. It is not a boring setup step. It is already a theory of the signal.</p>
+
+          <h2>Stage 6: MFCCs turn texture into a fingerprint</h2>
+          <p>Mel-frequency cepstral coefficients, or MFCCs, compress the Mel spectrogram even further. They start with the log-Mel spectrum, apply a discrete cosine transform, and keep only a small number of coefficients. Audio Explorer keeps 13, which is a classic choice.</p>
+
+          <figure class="article-figure">
+            <img src="../../assets/audio-explorer/mfcc_compression_minimal.svg" alt="A minimal MFCC diagram showing a dense Mel texture compressed into thirteen coefficients" />
+            <figcaption>MFCCs summarize the broad spectral envelope instead of preserving every Mel band.</figcaption>
+          </figure>
+
+          <pre><code>mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
+delta_mfcc = librosa.feature.delta(mfcc)</code></pre>
+
+          <p>The useful phrase here is spectral envelope. Imagine ignoring the tiny wiggles in a spectrum and looking instead at its broad shape. That shape carries information about timbre and, in speech, about the resonances created by the vocal tract. The first coefficient often tracks overall energy. The later coefficients describe progressively finer shape details.</p>
+
+          <p>MFCCs were central to speech recognition for decades because they are a clever compression. They do not try to preserve every detail. They preserve a carefully chosen summary. That makes them less flashy than modern deep learning features, but still deeply educational. They show how much intelligence can begin with the right representation.</p>
+
+          <p>The delta MFCCs add motion. Instead of only asking "what is the spectral shape at this frame?", they ask "how is that shape changing?" For speech, music, and rhythm-heavy sounds, change over time is often as important as the snapshot itself.</p>
+
+          <h2>Stage 7: rhythm follows a different branch</h2>
+          <p>Rhythm is not just another frequency representation. Beat tracking begins by looking for onsets: moments where spectral energy rises sharply. Drum hits, plucked notes, and strong attacks tend to create these spikes.</p>
+
+          <figure class="article-figure">
+            <img src="../../assets/audio-explorer/beat_tracking_minimal.svg" alt="A minimal beat tracking diagram showing onset peaks aligned to beat markers" />
+            <figcaption>Beat tracking searches for strong repeated attacks and turns them into a tempo estimate and beat timeline.</figcaption>
+          </figure>
+
+          <pre><code>tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
+beat_times = librosa.frames_to_time(beat_frames, sr=sr)</code></pre>
+
+          <p>From the onset envelope, the app estimates tempo and places beat markers. Then it overlays those beats on the waveform and plots beat intervals. The interval view is small but revealing. Electronic music with a tight grid often produces extremely consistent spacing. Live performance can breathe. Some tracks drift. Some sections change tempo. The beat plot makes those differences visible.</p>
+
+          <p>I liked this part because it reminded me that audio analysis is not only about pitch and timbre. Time has its own structure. A song is not just frequencies stacked vertically; it is expectation, repetition, and pulse moving forward.</p>
+
+          <h2>How I structured the project</h2>
+          <p>I kept the architecture intentionally plain. The point was to learn the pipeline, not bury it in framework cleverness. There is one Streamlit entry point, one loader, and separate visualization modules for waveform, spectrogram, Mel spectrogram, MFCCs, rhythm, and audio physics helpers.</p>
+
+          <figure class="article-figure">
+            <img src="../../assets/audio-explorer/app_architecture_minimal.svg" alt="A minimal architecture diagram for the Audio Explorer Streamlit app" />
+            <figcaption>The architecture stays readable by separating loading, computation, and plotting.</figcaption>
+          </figure>
+
+          <p>Each module follows the same basic pattern: compute first, render second. The compute functions return arrays and metadata. The plot functions turn those outputs into Plotly figures. This separation matters because it keeps the math reusable. If I later want to feed the same features into a classifier, notebook, or training pipeline, I do not have to extract them from UI code.</p>
+
+          <pre><code>features = compute_mel_spectrogram(audio)
+figure = plot_mel_spectrogram(features)</code></pre>
+
+          <p>The other practical design choice was downsampling for display. Audio arrays and spectrogram matrices can be large. Rendering every sample in the browser is not always useful. The app can preserve the full-resolution analysis while showing a lighter interactive view, which keeps exploration smooth without changing the underlying computation.</p>
+
+          <h2>What building it taught me</h2>
+          <p>The main lesson is that representation is not a prelude to the model. Representation is part of the model's intelligence. Before any neural network sees the data, the pipeline has already decided what the data should look like. It has decided whether time resolution matters more than frequency resolution. It has decided whether human perception should shape the frequency axis. It has decided whether to keep fine detail or compress the broad envelope.</p>
+
+          <p>That is humbling, because it makes audio AI feel less like a single magical object and more like a lineage of good ideas. Fourier gives us frequency. The FFT makes it practical. The STFT gives frequency a timeline. The Mel scale brings in perception. MFCCs compress spectral shape. Beat tracking extracts pulse. Modern systems build on top of these ideas, but the foundation is older, sturdy, and still beautiful.</p>
+
+          <p>The second lesson is that interactivity changes understanding. Reading that a spectrogram shows energy over time is useful. Dragging across a spectrogram and seeing exactly where a cymbal throws energy into the high end is different. Hovering over a harmonic band and connecting it to the sound you hear is different. The app made the math less abstract because every formula had somewhere to appear.</p>
+
+          <p>The third lesson is more personal: building the pipeline made audio feel less intimidating. DSP can look like a wall of equations from the outside. But when you implement it stage by stage, it becomes a series of reasonable questions. What is the signal? What frequencies are inside it? When do they happen? Which of those frequencies matter to people? How can we summarize the shape? Where is the pulse?</p>
+
+          <h2>Where this goes next</h2>
+          <p>Audio Explorer is the foundation for the next layer of work: audio classification, representation learning, and generative audio architecture studies. A classifier can consume spectrograms. A contrastive system can compare learned audio embeddings. A generative model can be studied through the representations it encodes and reconstructs.</p>
+
+          <p>But I wanted to earn the right to move there. Before training a model, I wanted to understand what it would eat. This project is that first meal, laid out carefully.</p>
+
+          <div class="lab-note">
+            <p><strong>Project:</strong> Source and setup instructions are available in the <a href="https://github.com/hey-shiv/Audio-Explorer" target="_blank" rel="noreferrer">Audio Explorer repository</a>. Clone it, install the requirements, and run <code>streamlit run app.py</code>.</p>
+          </div>
+        </article>
+      </main>
+      <footer><p>Bengaluru, India / shivashant.work@gmail.com</p></footer>
+    </div>
+    <script src="../../assets/site.js" defer></script>
+  </body>
+</html>

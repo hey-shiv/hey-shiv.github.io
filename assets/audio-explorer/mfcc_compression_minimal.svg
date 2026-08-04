@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">MFCC compression from Mel spectrum</title>
+  <desc id="desc">A dense Mel spectrogram is compressed into thirteen cepstral coefficients that summarize spectral shape.</desc>
+  <rect width="1440" height="760" fill="#f7f4ee"/>
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="92" y="104" fill="#8a8174" font-size="16" letter-spacing="3">MFCCS</text>
+    <text x="92" y="146" fill="#111111" font-size="42" font-weight="700">A large texture becomes a small fingerprint</text>
+  </g>
+  <g transform="translate(110 250)">
+    <rect width="470" height="300" rx="20" fill="#ffffff" stroke="#d8d1c3"/>
+    <g transform="translate(42 42)">
+      <rect width="386" height="216" fill="#f4e8d6"/>
+      <g opacity=".9">
+        <rect x="0" y="0" width="386" height="18" fill="#f7dfb1"/>
+        <rect x="0" y="18" width="386" height="18" fill="#e5bd83"/>
+        <rect x="0" y="36" width="386" height="18" fill="#c9865d"/>
+        <rect x="0" y="54" width="386" height="18" fill="#8c684f"/>
+        <rect x="0" y="72" width="386" height="18" fill="#536d75"/>
+        <rect x="0" y="90" width="386" height="18" fill="#3f5d72"/>
+        <rect x="0" y="108" width="386" height="18" fill="#51698e"/>
+        <rect x="0" y="126" width="386" height="18" fill="#6f8b77"/>
+        <rect x="0" y="144" width="386" height="18" fill="#b45309"/>
+        <rect x="0" y="162" width="386" height="18" fill="#d99a66"/>
+        <rect x="0" y="180" width="386" height="18" fill="#f1c27a"/>
+        <rect x="0" y="198" width="386" height="18" fill="#fff3dc"/>
+      </g>
+    </g>
+    <text x="42" y="348" fill="#69635a" font-family="Inter, Arial, sans-serif" font-size="19">128 Mel values per frame</text>
+  </g>
+  <g transform="translate(690 395)" stroke="#111111" stroke-width="4" stroke-linecap="round">
+    <path d="M0 0 H128"/>
+    <path d="M112 -12 l18 12 l-18 12"/>
+  </g>
+  <g transform="translate(890 250)">
+    <rect width="440" height="300" rx="20" fill="#111111"/>
+    <g transform="translate(50 42)" fill="#f7f4ee">
+      <rect x="0" y="170" width="16" height="46" rx="8"/>
+      <rect x="28" y="104" width="16" height="112" rx="8"/>
+      <rect x="56" y="70" width="16" height="146" rx="8"/>
+      <rect x="84" y="126" width="16" height="90" rx="8"/>
+      <rect x="112" y="88" width="16" height="128" rx="8"/>
+      <rect x="140" y="154" width="16" height="62" rx="8"/>
+      <rect x="168" y="134" width="16" height="82" rx="8"/>
+      <rect x="196" y="178" width="16" height="38" rx="8"/>
+      <rect x="224" y="150" width="16" height="66" rx="8"/>
+      <rect x="252" y="188" width="16" height="28" rx="8"/>
+      <rect x="280" y="176" width="16" height="40" rx="8"/>
+      <rect x="308" y="198" width="16" height="18" rx="8"/>
+      <rect x="336" y="190" width="16" height="26" rx="8"/>
+    </g>
+    <text x="50" y="348" fill="#cfc8bc" font-family="Inter, Arial, sans-serif" font-size="19">13 coefficients summarize the envelope</text>
+  </g>
+</svg>
