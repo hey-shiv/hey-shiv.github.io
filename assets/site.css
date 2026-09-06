@@ -372,14 +372,31 @@ li + li {
 }
 
 .hero .hero-name {
-  margin: 0 0 1rem;
-  color: var(--heading-soft);
+  margin: 0 0 0.7rem;
+  max-width: 18ch;
+  color: var(--heading);
   font-family: "Space Grotesk", "Inter", sans-serif;
-  font-size: 1.28rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  line-height: 1.25;
-  text-transform: uppercase;
+  font-size: 3.2rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  text-transform: none;
+}
+
+/* The thesis line is now a subhead under the name, not the headline. */
+.lab-hero .statement {
+  font-size: 1.32rem;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+}
+
+/* Supporting prose sits below the buttons; a rule marks where the
+   introduction ends. */
+.actions + p {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
 }
 
 .current-projects {
@@ -1793,8 +1810,12 @@ footer p + p {
   }
 
   .hero .hero-name {
-    font-size: 1.02rem;
-    letter-spacing: 0.035em;
+    font-size: 2.15rem;
+    letter-spacing: -0.03em;
+  }
+
+  .lab-hero .statement {
+    font-size: 1.15rem;
   }
 
   .current-projects,
