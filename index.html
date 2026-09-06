@@ -63,6 +63,11 @@
             same evaluation protocol. Audio Explorer, the project before it, makes the signal
             representations that all of this rests on visible and inspectable.
           </p>
+          <p>
+            Outside audio, the VCP Screener is where I learned most of what I know about
+            evaluation: a stock screener built alongside the ten-year control study that tried to
+            falsify it, and reported that the pattern has no demonstrable edge.
+          </p>
           <p class="section-copy">
             Music shaped how I think long before machine learning did. I am a final-year CS
             (AI &amp; ML) student at VIT-AP, and I am looking for research engineering work in
@@ -77,6 +82,10 @@
             <a class="project-chip" href="blogs/Audio%20Explorer/">
               <span>Audio Explorer</span>
               <small>DSP + audio-AI foundations</small>
+            </a>
+            <a class="project-chip" href="projects/vcp-screener/">
+              <span>VCP Screener</span>
+              <small>backtesting + a negative result</small>
             </a>
           </div>
 
@@ -225,6 +234,66 @@
                 <a href="blogs/Audio%20Explorer/">Build notes</a>
               </div>
             </li>
+
+            <li class="project-card">
+              <div class="project-card-header">
+                <div>
+                  <p class="eyebrow">Built / Quantitative research</p>
+                  <h3>VCP Screener</h3>
+                </div>
+                <span class="status-token">negative result</span>
+              </div>
+              <p>
+                A screener that scans roughly 2,300 NSE equities for Minervini's volatility
+                contraction pattern, combining technical, fundamental, and ownership evidence
+                behind a FastAPI service and a dependency-free frontend. It ships with the
+                ten-year control study that tried to falsify it: point-in-time signal replay,
+                real transaction costs, a portfolio-level simulator, and matched random entries.
+                The study found no demonstrable edge, and says so.
+              </p>
+
+              <div class="metric-strip" aria-label="VCP screener build metrics">
+                <span><strong>2300</strong> equities scanned</span>
+                <span><strong>2657</strong> replayed signals</span>
+                <span><strong>227</strong> tests</span>
+                <span><strong>10</strong> years of bars</span>
+              </div>
+
+              <figure class="mini-map" aria-label="VCP screener pipeline preview">
+                <ol class="mini-flow">
+                  <li>
+                    <span>Universe</span>
+                    <small>~2,300 NSE names</small>
+                  </li>
+                  <li>
+                    <span>Pattern engine</span>
+                    <small>contractions + squeeze</small>
+                  </li>
+                  <li>
+                    <span>Point-in-time replay</span>
+                    <small>past bars only</small>
+                  </li>
+                  <li>
+                    <span>Matched control</span>
+                    <small>random-date entries</small>
+                  </li>
+                </ol>
+              </figure>
+
+              <dl class="project-spec">
+                <div>
+                  <dt>Architecture keywords</dt>
+                  <dd>FastAPI, pandas, point-in-time replay, cost model, portfolio simulator, lightweight-charts</dd>
+                </div>
+                <div>
+                  <dt>Research focus</dt>
+                  <dd>control design, survivorship bias, transaction costs, and reporting a negative result honestly</dd>
+                </div>
+              </dl>
+              <div class="project-links">
+                <a href="projects/vcp-screener/">Project detail</a>
+              </div>
+            </li>
           </ul>
         </section>
 
@@ -354,6 +423,10 @@
             <li>
               <strong>Noise mistaken for progress</strong>
               <span>Retrieval deltas need work-level bootstrap intervals before they mean anything.</span>
+            </li>
+            <li>
+              <strong>A control you forgot to match</strong>
+              <span>In the VCP study, controls drawn from the wrong window measured market regime rather than the pattern.</span>
             </li>
           </ul>
         </section>

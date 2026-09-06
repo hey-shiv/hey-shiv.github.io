@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="VCP Screener: an NSE volatility-contraction pattern screener built alongside the backtest that tested whether the pattern has an edge, and honestly reported that it does not."
+    />
+    <title>VCP Screener | Shivashant Manohar</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("site-theme");
+          var theme = saved || "light";
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {}
+      })();
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../../assets/favicon.png" />
+    <link rel="stylesheet" href="../../assets/site.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../../index.html" class="nav-logo" aria-label="Home"><img src="../../assets/favicon.png" alt="Logo" width="28" height="28" /></a>
+          <a href="../../index.html">Lab</a>
+          <a href="../../blog.html">Blogs</a>
+          <a href="../../now.html">Now</a>
+          <a href="../../notes.html">Notes</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="back-links">
+          <a href="../../index.html">Lab</a> / <a href="../../projects/cover-song-retrieval/">Cover Song Retrieval</a>
+        </div>
+
+        <section class="hero detail-hero">
+          <p class="eyebrow">Project / VCP Screener</p>
+          <h1>A screener that scans 2,300 stocks, and a study that says its pattern does not work.</h1>
+          <p class="statement">
+            The VCP Screener finds NSE equities building a volatility contraction pattern. It is
+            paired with a ten-year control study that asked whether the pattern's timing beats
+            arbitrary timing—and the answer, reported in full, is no.
+          </p>
+          <ul class="detail-meta" aria-label="Project metadata">
+            <li>Quantitative research</li>
+            <li>Backtesting</li>
+            <li>FastAPI</li>
+            <li>Negative result</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="overview">
+          <p class="section-label" id="overview">Overview</p>
+          <p>
+            A volatility contraction pattern is Mark Minervini's setup: each pullback inside a
+            base gets shallower while volume dries up, coiling ahead of a breakout through the
+            pivot. The screener detects it across roughly 2,300 listed NSE equities and combines
+            three layers of evidence—technical (trend template, ATR squeeze, contraction
+            detection), fundamental (market cap, quarterly profit and sales growth, result dates),
+            and ownership (quarterly FII, DII, and promoter holdings parsed from NSE filings).
+          </p>
+          <p>
+            The screener is the smaller half of the project. The larger half is the research that
+            tried to falsify it, and the engineering discipline needed to make that research
+            trustworthy: point-in-time signal replay, a single shared trade simulator, real
+            transaction costs, and a portfolio-level constraint.
+          </p>
+          <div class="summary-grid">
+            <div class="summary-block">
+              <h3>Core question</h3>
+              <p>Does VCP timing beat arbitrary timing in the same stocks at the same risk?</p>
+            </div>
+            <div class="summary-block">
+              <h3>Answer</h3>
+              <p>No demonstrable edge. Under a realistic capital constraint the signals do worse than random entries.</p>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="build">
+          <p class="section-label" id="build">Build</p>
+          <div class="metric-strip metric-strip-large" aria-label="VCP screener build metrics">
+            <span><strong>2300</strong> NSE equities scanned</span>
+            <span><strong>~8900</strong> lines of Python</span>
+            <span><strong>227</strong> tests</span>
+            <span><strong>10</strong> years of daily bars</span>
+            <span><strong>2657</strong> replayed signals</span>
+          </div>
+          <p>
+            A flat <code>vcp/</code> package holds detection, indicators, fundamentals, sector
+            flow, backtesting, and the portfolio simulator. A FastAPI layer serves it, and a
+            dependency-free vanilla JavaScript frontend renders the screener, the detail drawer,
+            and the sector views. TradingView's lightweight-charts is vendored locally rather
+            than pulled from a CDN, with the VCP structure drawn as an overlay: each contraction
+            shaded, measured, and numbered, with converging lines through the swing highs and
+            lows so the coil is actually visible.
+          </p>
+        </section>
+
+        <section class="architecture-panel" aria-labelledby="architecture">
+          <p class="section-label" id="architecture">Architecture</p>
+          <p>
+            The organising constraint is that what gets backtested has to be literally what gets
+            traded. Detection, simulation, and evaluation are kept as three lanes so a change to
+            the strategy cannot silently mean one thing in the live screen and another in the
+            research sweep.
+          </p>
+
+          <figure class="system-map" aria-label="VCP screener architecture diagram">
+            <div class="system-map-title">
+              <strong>Screener Architecture</strong>
+              <span>detection -&gt; simulation -&gt; evaluation</span>
+            </div>
+            <div class="diagram-lanes">
+              <div class="diagram-lane">
+                <p class="diagram-lane-label">Detection</p>
+                <ol class="diagram-flow">
+                  <li>
+                    <strong>Universe + prices</strong>
+                    <small>~2,300 NSE names, cached daily bars</small>
+                  </li>
+                  <li>
+                    <strong>Pattern engine</strong>
+                    <small>trend template, ATR squeeze, contractions</small>
+                  </li>
+                  <li>
+                    <strong>Evidence layers</strong>
+                    <small>fundamentals, ownership, sector flow</small>
+                  </li>
+                </ol>
+              </div>
+              <div class="diagram-lane">
+                <p class="diagram-lane-label">Simulation</p>
+                <ol class="diagram-flow">
+                  <li>
+                    <strong>Point-in-time replay</strong>
+                    <small>every metric from past bars only</small>
+                  </li>
+                  <li>
+                    <strong>Trade simulator</strong>
+                    <small>pivot entry, stop, target, horizon</small>
+                  </li>
+                  <li>
+                    <strong>Cost model</strong>
+                    <small>brokerage, STT, GST, ATR slippage</small>
+                  </li>
+                </ol>
+              </div>
+              <div class="diagram-lane">
+                <p class="diagram-lane-label">Evaluation</p>
+                <ol class="diagram-flow">
+                  <li>
+                    <strong>Matched control</strong>
+                    <small>same stock, same risk, random date</small>
+                  </li>
+                  <li>
+                    <strong>Portfolio simulator</strong>
+                    <small>8 concurrent slots, event driven</small>
+                  </li>
+                  <li>
+                    <strong>Robustness sweeps</strong>
+                    <small>sub-universes, year by year, survivorship</small>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </figure>
+        </section>
+
+        <section aria-labelledby="control">
+          <p class="section-label" id="control">The Control</p>
+          <p>
+            A long-hold rule scored over a bull decade looks profitable whether or not the
+            pattern contributed anything. So every result is compared against matched random
+            entries: same symbol, same stop distance as a percentage of entry, same holding
+            rule—only the date is randomised, and only inside the same window as the signals it
+            is being compared against. That isolates exactly one variable.
+          </p>
+          <p>
+            Getting this wrong is easy, and I did at first. Controls drawn from the whole decade
+            compared against real signals from one sub-period measure the difference between two
+            market regimes, not the pattern. Every number below uses period-matched controls.
+          </p>
+        </section>
+
+        <section aria-labelledby="results">
+          <p class="section-label" id="results">Results</p>
+          <p>
+            Portfolio level, eight concurrent slots, real charges deducted at exit, VCP signals
+            ranked by relative strength whenever slots ran short—an advantage the random control
+            does not get:
+          </p>
+          <div class="artifact-grid">
+            <div class="artifact-panel">
+              <h3>VCP signals</h3>
+              <p>Ranked by RS rating when slots were scarce.</p>
+              <pre><code>CAGR:          +11.0%
+Sharpe:         0.50
+Max drawdown:  -74.3%
+Trades:           97
+Final equity:  Rs 12.65L</code></pre>
+            </div>
+            <div class="artifact-panel">
+              <h3>Random matched control</h3>
+              <p>Same stocks, same risk, arbitrary dates.</p>
+              <pre><code>CAGR:          +23.8%
+Sharpe:         1.03
+Max drawdown:  -44.3%
+Trades:           58
+Final equity:  Rs 33.60L</code></pre>
+            </div>
+          </div>
+          <p>
+            Fewer trades, worse timing, twice the drawdown, and less than half the return. The
+            per-trade numbers are closer to breakeven and noisy, but under a realistic capital
+            constraint the pattern-selected portfolio loses on every axis. Whatever value the
+            screener has, it is not this backtest's mechanical execution of it.
+          </p>
+        </section>
+
+        <section aria-labelledby="subuniverse">
+          <p class="section-label" id="subuniverse">Where the Filters Fail</p>
+          <p>
+            Slicing the signal set by sub-universe was meant to find the conditions under which
+            the pattern works. It found the opposite: the three conditions the screen relies on
+            most are the worst performers in the set.
+          </p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>RS &ge; 90</strong>
+              <span>
+                The single most heavily weighted filter in the config. Mean yearly edge
+                &minus;1.94 over matched random entries, positive in one year out of eight.
+              </span>
+            </li>
+            <li>
+              <strong>Tight final base (&le; 5%)</strong>
+              <span>The defining feature of the pattern itself. Mean yearly edge &minus;0.64 across 2,031 signals.</span>
+            </li>
+            <li>
+              <strong>Index above its 200 DMA</strong>
+              <span>
+                Mean yearly edge &minus;0.71, independently reproducing the regime-filter result
+                found earlier in the study.
+              </span>
+            </li>
+            <li>
+              <strong>The apparent inversions</strong>
+              <span>
+                RS &lt; 70 and thin names score positive, but these are small unstable samples
+                over fewer years—the kind of result that appears when you slice a noisy dataset
+                eleven ways. The honest reading is that the filters carry no reliable directional
+                information at all.
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="engineering">
+          <p class="section-label" id="engineering">Engineering Problems Found</p>
+          <p>
+            The architecture review that followed the research is written against the system's
+            own weaknesses rather than its features.
+          </p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>Two trade simulators</strong>
+              <span>
+                The backtest and the research sweep simulated entry, stops, and exits separately.
+                Their logic was character-for-character identical, which is exactly the risk: the
+                next edit makes them disagree silently, and two backtests quietly modelling
+                different things is how a strategy result stops meaning anything. A third copy
+                lived in the live UI's trailing-stop code.
+              </span>
+            </li>
+            <li>
+              <strong>The strategy was not one object</strong>
+              <span>
+                Entry filters in YAML, exit rules in a research dataclass, trailing stop in the
+                watchlist module, sizing partly in JavaScript, costs nowhere. Nothing forced them
+                to agree—and they did not. The live app trailed on a 20-EMA after 1R while the
+                research sweep had found trailing actively hurts.
+              </span>
+            </li>
+            <li>
+              <strong>Five different caches</strong>
+              <span>Different eviction, different invalidation, no shared contract between them.</span>
+            </li>
+            <li>
+              <strong>An unreproducible number</strong>
+              <span>
+                Several figures from the first pass did not reproduce exactly, because the script
+                that produced them was never saved. Every follow-up now ships as a named script
+                with its command line recorded.
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="lessons">
+          <p class="section-label" id="lessons">Lessons Learned</p>
+          <p>
+            This project is the reason I care as much about evaluation protocol as about models.
+            A screener that produces confident-looking candidates is easy. A control that proves
+            those candidates are no better than arbitrary ones is harder, and far more useful.
+            The costs analysis made the point sharply: transaction costs tax the real signals and
+            the random control almost identically, so they wash out of the edge metric entirely
+            while mattering enormously to absolute returns. Anyone reading only the edge number
+            would have missed it.
+          </p>
+          <p>
+            Reporting a negative result about your own system is the whole point. The document
+            records what was tested and how, so the conclusion can be re-run and checked rather
+            than taken on faith.
+          </p>
+        </section>
+
+        <section aria-labelledby="limits">
+          <p class="section-label" id="limits">Stated Limits</p>
+          <ul class="detail-list">
+            <li>This tests one mechanical implementation, not the idea; a discretionary trader reads base quality, sector context, earnings, and news.</li>
+            <li>Delisted companies are still absent, since the price frames only cover symbols listed today.</li>
+            <li>No position-level management: real trading scales in and out, sizes by conviction, and abandons setups that stop acting right.</li>
+            <li>Year buckets hold 150 to 440 trades each&mdash;enough to be suggestive, not enough to be conclusive per year.</li>
+            <li>The generic-breakout control is the one finding pointing the pattern's way, and it has not yet been run at the portfolio level.</li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p>Bengaluru, India / shivashant.work@gmail.com</p>
+      </footer>
+    </div>
+    <script src="../../assets/site.js" defer></script>
+  </body>
+</html>
