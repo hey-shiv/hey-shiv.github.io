@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Bookmarks and references by Shivashant Manohar for AI systems, evaluation, alignment, observability, and generative music research."
+      content="References by Shivashant Manohar for music information retrieval: cover song identification, chroma features, sequence alignment, metric learning, and retrieval evaluation."
     />
     <title>References | Shivashant Manohar</title>
     <script>
@@ -29,7 +29,7 @@
     <div class="container">
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
-          <a href="index.html" class="nav-logo" aria-label="Home" style="display: flex; align-items: center;"><img src="assets/favicon.png" alt="Logo" width="28" height="28" style="border-radius: 4px;" /></a>
+          <a href="index.html" class="nav-logo" aria-label="Home"><img src="assets/favicon.png" alt="Logo" width="28" height="28" /></a>
           <a href="index.html">Lab</a>
           <a href="blog.html">Blogs</a>
           <a href="now.html">Now</a>
@@ -42,11 +42,120 @@
           <p class="eyebrow">References</p>
           <h1>A quiet shelf for papers, tools, and essays worth re-reading.</h1>
           <p class="statement">
-            This page is reserved for references that shape the lab: verifier systems, evaluation
-            design, reward modeling, observability, post-training, and culturally grounded
-            generative AI.
+            The sources this lab is actually built on: cover song identification, tonal
+            representations, sequence alignment, metric learning, retrieval indexing, and the
+            evaluation discipline that keeps a result honest.
           </p>
         </section>
+
+        <section aria-labelledby="ref-core">
+          <p class="section-label" id="ref-core">Cover Song Identification</p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>Serr&agrave;, G&oacute;mez, Herrera &amp; Serra &mdash; 2008</strong>
+              <span>
+                <em>Chroma Binary Similarity and Local Alignment Applied to Cover Song
+                Identification.</em> The classical problem formulation: chroma features,
+                transposition handling, cross-similarity, and local alignment. This is the
+                baseline everything else is measured against.
+              </span>
+            </li>
+            <li>
+              <strong>Yesiler, Serr&agrave;, G&oacute;mez et al. &mdash; ISMIR 2019</strong>
+              <span>
+                <em>Da-TACOS: A Dataset for Cover Song Identification and Understanding.</em>
+                Defines the dataset, the WID/PID clique structure, the distractors, and the
+                metrics table. The protocol I follow rather than inventing my own.
+              </span>
+            </li>
+            <li>
+              <strong>Doras &amp; Peeters &mdash; 2020</strong>
+              <span>
+                <em>A Prototypical Triplet Loss for Cover Detection.</em> Makes the case that
+                cover detection is open-world retrieval, not large multiclass classification.
+              </span>
+            </li>
+            <li>
+              <strong>Doras, Yesiler, Serr&agrave; et al. &mdash; ISMIR 2020</strong>
+              <span>
+                <em>Combining Musical Features for Cover Detection.</em> Melody, harmony, timbre,
+                and rhythm carry different cover evidence; the motivation for a hybrid system.
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="ref-repr">
+          <p class="section-label" id="ref-repr">Representations &amp; Sequence Models</p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>M&uuml;ller &mdash; Fundamentals of Music Processing, 2nd ed. (2021)</strong>
+              <span>
+                Chapter 3 on audio features, music synchronisation, and DTW, with the FMP
+                notebooks as the executable companion. The best single source for the classical
+                chain.
+              </span>
+            </li>
+            <li>
+              <strong>Bai, Kolter &amp; Koltun &mdash; 2018</strong>
+              <span>
+                <em>An Empirical Evaluation of Generic Convolutional and Recurrent Networks for
+                Sequence Modeling.</em> Why a dilated temporal convolution is a stronger first
+                sequence encoder than jumping straight to a Transformer.
+              </span>
+            </li>
+            <li>
+              <strong>Khosla et al. &mdash; NeurIPS 2020</strong>
+              <span>
+                <em>Supervised Contrastive Learning.</em> A batch objective that uses every
+                positive in the batch, kept as a fair ablation against a plain triplet loss.
+              </span>
+            </li>
+            <li>
+              <strong>Hermans, Beyer &amp; Leibe &mdash; 2017</strong>
+              <span>
+                <em>In Defense of the Triplet Loss for Person Re-Identification.</em> The
+                reference for batch-hard negative mining, which matters more than the loss itself.
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="ref-eval">
+          <p class="section-label" id="ref-eval">Evaluation &amp; Retrieval Infrastructure</p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>MIREX Cover Song Identification task</strong>
+              <span>The community protocol for data, evaluation, and runtime constraints in CSI.</span>
+            </li>
+            <li>
+              <strong>Smucker, Allan &amp; Carterette &mdash; 2007</strong>
+              <span>
+                <em>A Comparison of Statistical Significance Tests for Information Retrieval
+                Evaluation.</em> The paper that stops you reporting noise as an improvement.
+              </span>
+            </li>
+            <li>
+              <strong>Manning, Raghavan &amp; Sch&uuml;tze &mdash; Introduction to Information Retrieval</strong>
+              <span>Chapter 8 on evaluation: precision, recall, MAP, and what each one hides.</span>
+            </li>
+            <li>
+              <strong>FAISS &mdash; Meta AI Research</strong>
+              <span>
+                Index selection and similarity search. Exact inner product first; approximate
+                search is an optimisation, not a result.
+              </span>
+            </li>
+            <li>
+              <strong>Essentia &amp; librosa</strong>
+              <span>
+                HPCP, chroma, DTW, and beat tracking implementations, used as a reference to check
+                my own code against rather than as a substitute for writing it.
+              </span>
+            </li>
+          </ul>
+        </section>
+
       </main>
 
       <footer>

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Shivashant Manohar explores reliable machine learning systems and the foundations of music intelligence."
+      content="Shivashant Manohar builds music information retrieval and audio AI systems: cover song identification, retrieval evaluation, and the signal representations underneath modern audio models."
     />
-    <title>Shivashant Manohar | Research Portfolio</title>
+    <title>Shivashant Manohar | Music Information Retrieval &amp; Audio AI</title>
     <script>
       (function () {
         try {
@@ -29,7 +29,7 @@
     <div class="container">
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
-          <a href="index.html" class="nav-logo" aria-label="Home" style="display: flex; align-items: center;"><img src="assets/favicon.png" alt="Logo" width="28" height="28" style="border-radius: 4px;" /></a>
+          <a href="index.html" class="nav-logo" aria-label="Home"><img src="assets/favicon.png" alt="Logo" width="28" height="28" /></a>
           <a href="index.html" aria-current="page">Lab</a>
           <a href="blog.html">Blogs</a>
           <a href="now.html">Now</a>
@@ -42,36 +42,37 @@
           <div class="availability-row" aria-label="Current positioning">
             <span class="availability-main">
               <span class="availability-dot" aria-hidden="true"></span>
-              Research portfolio
+              Open to 2027 research roles
             </span>
-            <span class="availability-pill">AI systems</span>
-            <span class="availability-pill">Music intelligence</span>
+            <span class="availability-pill">Music information retrieval</span>
+            <span class="availability-pill">Audio AI</span>
           </div>
 
           <p class="hero-name">Shivashant Manohar</p>
-          <h1>Reliable AI systems today. Music intelligence tomorrow.</h1>
+          <h1>Teaching machines to recognise a song they have never heard before.</h1>
           <p class="identity subtitle">
-            AI Systems &middot; Evaluation &middot; Post-Training &middot; Audio Intelligence
+            Music Information Retrieval &middot; Audio Representations &middot; Metric Learning &middot; Retrieval Evaluation
           </p>
           <p class="statement">
-            I’m exploring reliable machine learning systems—and the path toward machines that
-            understand music.
+            I build systems that listen to music and find structure in it—the parts that survive a
+            change of key, tempo, arrangement, and singer.
           </p>
           <p>
-            My current work sits between AI systems and audio: AgentAlign Lab studies how
-            evaluation and post-training can make agents more reliable; Audio Explorer makes the
-            representations behind audio models visible and inspectable.
+            My main work is cover song identification on Da-TACOS: a classical chroma-and-alignment
+            retrieval baseline first, then a learned sequence encoder measured against it under the
+            same evaluation protocol. Audio Explorer, the project before it, makes the signal
+            representations that all of this rests on visible and inspectable.
           </p>
           <p class="section-copy">
-            Music shaped how I think long before machine learning did. I’m currently exploring
-            research engineering opportunities in AI systems, machine learning, and audio
-            intelligence.
+            Music shaped how I think long before machine learning did. I am a final-year CS
+            (AI &amp; ML) student at VIT-AP, and I am looking for research engineering work in
+            music AI, audio understanding, and retrieval systems.
           </p>
 
           <div class="current-projects" aria-label="Current projects">
-            <a class="project-chip" href="projects/agentalign-lab/">
-              <span>AgentAlign Lab</span>
-              <small>60 tasks + 757 scored traces</small>
+            <a class="project-chip" href="projects/cover-song-retrieval/">
+              <span>Cover Song Retrieval</span>
+              <small>Da-TACOS &middot; chroma, OTI, DTW</small>
             </a>
             <a class="project-chip" href="blogs/Audio%20Explorer/">
               <span>Audio Explorer</span>
@@ -82,6 +83,9 @@
           <div class="actions">
             <a class="btn" href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">
               GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="btn" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">
+              Resume <span class="btn-arrow" aria-hidden="true">&#8599;</span>
             </a>
             <a class="btn" href="mailto:shivashant.work@gmail.com">
               Email <span class="btn-arrow" aria-hidden="true">&#8599;</span>
@@ -111,43 +115,44 @@
             <li class="project-card">
               <div class="project-card-header">
                 <div>
-                  <p class="eyebrow">Active / Post-training systems</p>
-                  <h3>AgentAlign Lab</h3>
+                  <p class="eyebrow">Active / Music information retrieval</p>
+                  <h3>Structure-Aware Hybrid Retrieval for Cover Song Identification</h3>
                 </div>
-                <span class="status-token">terminal agents</span>
+                <span class="status-token">Da-TACOS</span>
               </div>
               <p>
-                Verifier-guided preference learning pipeline for reliable terminal agents, built
-                around structured trajectories, deterministic verifiers, DPO preference data,
-                held-out evaluations, and failure analysis. The local MVP now includes 60
-                deterministic tasks, 757 scored trajectories, 345 preference pairs, split-aware
-                metrics, and a Gradio observability dashboard.
+                A cover-song retrieval pipeline built on the Da-TACOS benchmark. The classical
+                half is working: chroma/HPCP features, key invariance through the Optimal
+                Transposition Index, cosine cross-similarity, and subsequence DTW as the
+                alignment score that ranks candidates. Retrieval quality is measured with MAP,
+                MRR, and Recall@{1,10,100} under WID/PID-aware splits, all unit tested against
+                hand-worked examples.
               </p>
 
-              <div class="metric-strip" aria-label="AgentAlign Lab build metrics">
-                <span><strong>60</strong> tasks</span>
-                <span><strong>757</strong> scored trajectories</span>
-                <span><strong>345</strong> DPO pairs</span>
-                <span><strong>6</strong> dashboard tabs</span>
+              <div class="metric-strip" aria-label="Cover song retrieval build metrics">
+                <span><strong>12</strong> transposition hypotheses</span>
+                <span><strong>4</strong> retrieval metrics</span>
+                <span><strong>3</strong> tested modules</span>
+                <span><strong>1000</strong> Da-TACOS cliques</span>
               </div>
 
-              <figure class="mini-map" aria-label="AgentAlign architecture preview">
+              <figure class="mini-map" aria-label="Cover song retrieval pipeline preview">
                 <ol class="mini-flow">
                   <li>
-                    <span>Task Suite</span>
-                    <small>schemas + verifiers</small>
+                    <span>Chroma / HPCP</span>
+                    <small>tonal content only</small>
                   </li>
                   <li>
-                    <span>Trajectories</span>
-                    <small>actions + evidence</small>
+                    <span>Key alignment</span>
+                    <small>OTI over 12 shifts</small>
                   </li>
                   <li>
-                    <span>Preference Pairs</span>
-                    <small>chosen / rejected</small>
+                    <span>Subsequence DTW</span>
+                    <small>tempo-elastic match</small>
                   </li>
                   <li>
-                    <span>GPU Handoff</span>
-                    <small>Qwen DPO path</small>
+                    <span>Ranked list</span>
+                    <small>MAP / MRR / Recall@K</small>
                   </li>
                 </ol>
               </figure>
@@ -155,16 +160,16 @@
               <dl class="project-spec">
                 <div>
                   <dt>Architecture keywords</dt>
-                  <dd>task suite, trajectory logs, verifier-ranked pairs, TRL/QLoRA path, held-out evals</dd>
+                  <dd>chroma/HPCP, OTI transposition, cross-similarity, subsequence DTW, TCN encoder, triplet loss, FAISS</dd>
                 </div>
                 <div>
-                  <dt>Systems focus</dt>
-                  <dd>AI reliability, agent tooling, post-training infrastructure, evaluation integrity</dd>
+                  <dt>Research focus</dt>
+                  <dd>retrieval evaluation discipline, key and tempo invariance, learned versus classical similarity</dd>
                 </div>
               </dl>
               <div class="project-links">
-                <a href="projects/agentalign-lab/">Project detail</a>
-                <a href="blogs/AgentAlign%20Lab/">Research posts</a>
+                <a href="projects/cover-song-retrieval/">Project detail</a>
+                <a href="blogs/Cover%20Song%20Retrieval/">Research posts</a>
               </div>
             </li>
 
@@ -177,20 +182,22 @@
                 <span class="status-token">DSP toolkit</span>
               </div>
               <p>
-                An interactive, research-grade audio analysis toolkit that makes the standard
-                audio-AI front end inspectable: waveform and signal health, STFT spectrograms,
-                Mel-scale features, MFCCs, tempo, and beat tracking for WAV, MP3, and FLAC files.
+                An interactive Streamlit toolkit that makes the standard audio-AI front end
+                inspectable: waveform and signal health, STFT spectrograms, 128-band Mel
+                spectrograms, MFCCs with delta features, and beat tracking with tempo and beat
+                timestamps, for WAV, MP3, and FLAC files. Feature computation is kept separate
+                from visualization so each stage can be read on its own.
               </p>
 
               <figure class="mini-map" aria-label="Audio Explorer pipeline preview">
                 <ol class="mini-flow">
                   <li>
                     <span>Raw audio</span>
-                    <small>decode + metadata</small>
+                    <small>decode + signal health</small>
                   </li>
                   <li>
                     <span>STFT</span>
-                    <small>time-frequency view</small>
+                    <small>1025 bins per 23 ms</small>
                   </li>
                   <li>
                     <span>Mel + MFCC</span>
@@ -206,10 +213,10 @@
               <dl class="project-spec">
                 <div>
                   <dt>Architecture keywords</dt>
-                  <dd>Librosa, NumPy, STFT, Mel filterbank, MFCCs, Plotly, Streamlit</dd>
+                  <dd>Librosa, NumPy, SciPy, STFT, Mel filterbank, MFCCs, Plotly, Streamlit</dd>
                 </div>
                 <div>
-                  <dt>Systems focus</dt>
+                  <dt>Research focus</dt>
                   <dd>interactive DSP education, feature extraction, and audio-AI representations</dd>
                 </div>
               </dl>
@@ -225,59 +232,93 @@
           <p class="section-label" id="lab-premise">Research direction / The through-line</p>
           <h2>Building toward machines that understand music.</h2>
           <p>
-            I’m interested in systems that do more than generate convincing outputs. They should
-            build useful internal representations, reason about what they produce, and remain
-            reliable when the world is messy.
+            Two recordings of the same song can share almost no samples, no key, no tempo, no
+            instruments, and no voice—and a person still recognises them as the same piece in a
+            few seconds. Whatever survives all that transformation is the part of music worth
+            representing.
           </p>
           <p>
-            AgentAlign is teaching me to build reliable AI systems. Audio Explorer is teaching me
-            to understand sound. Over time, those two lines of work converge on one question:
-            how can intelligent systems learn the structure, meaning, and feeling in music?
+            Audio Explorer taught me how sound becomes numbers. Cover song identification is
+            where that stops being a visualisation exercise: the model has to hold onto musical
+            identity while everything around it changes. It is a small, well-posed version of the
+            question I actually care about—how can a system learn the structure, meaning, and
+            feeling in music?
           </p>
         </section>
 
         <section aria-labelledby="current-focus">
           <p class="section-label" id="current-focus">Current Focus</p>
           <ul class="focus-grid">
-            <li>Verifier-guided AI systems</li>
-            <li>Preference learning and DPO pipelines</li>
-            <li>Evaluation and observability systems</li>
-            <li>Reward modeling and structured traces</li>
-            <li>AI systems architecture and reliability engineering</li>
-            <li>Audio AI and signal representations</li>
+            <li>Cover song identification and version retrieval</li>
+            <li>Chroma, HPCP, and tonal representations</li>
+            <li>Sequence alignment and DTW</li>
+            <li>Metric learning and triplet embeddings</li>
+            <li>Retrieval evaluation and benchmark protocol</li>
+            <li>Audio AI preprocessing and DSP foundations</li>
           </ul>
         </section>
 
-        <section aria-labelledby="systems-interests">
-          <p class="section-label" id="systems-interests">Systems Interests</p>
+        <section aria-labelledby="skills">
+          <p class="section-label" id="skills">Technical Skills</p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>Languages</strong>
+              <span>Python, C++, SQL</span>
+            </li>
+            <li>
+              <strong>ML / deep learning</strong>
+              <span>PyTorch, Scikit-learn, Transformers, Hugging Face, NumPy, Pandas</span>
+            </li>
+            <li>
+              <strong>Audio and retrieval</strong>
+              <span>Music information retrieval, librosa, Essentia, FAISS, metric learning, sequence modeling</span>
+            </li>
+            <li>
+              <strong>Engineering and tools</strong>
+              <span>Git, Linux/Unix, Streamlit, Gradio, Matplotlib, Plotly, Google Cloud Platform</span>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="research-interests">
+          <p class="section-label" id="research-interests">Research Interests</p>
           <ul class="signal-list">
-            <li>AI reliability engineering</li>
-            <li>Evaluation infrastructure</li>
-            <li>Post-training systems</li>
-            <li>Reward modeling</li>
-            <li>Preference optimization</li>
-            <li>Structured traces and observability</li>
-            <li>Verifier systems</li>
+            <li>Version identification</li>
+            <li>Music representation learning</li>
+            <li>Tonal and harmonic features</li>
+            <li>Sequence encoders</li>
+            <li>Contrastive objectives</li>
+            <li>Approximate nearest-neighbour search</li>
+            <li>Evaluation protocol design</li>
             <li>Interactive scientific tools</li>
-            <li>Human feedback systems</li>
+            <li>Generative music systems</li>
           </ul>
         </section>
 
         <section aria-labelledby="writing">
           <p class="section-label" id="writing">Writing / Systems Essays</p>
-          <h2>Systems notes written close to the work.</h2>
+          <h2>Notes written close to the work.</h2>
           <p>
-            The writing here is meant to function as a public lab notebook: architecture decisions,
-            verifier design notes, DPO lessons, observability traces, reward-model failures, and
-            honest postmortems.
+            The writing here is meant to function as a public lab notebook: what a representation
+            throws away and why, where a baseline breaks, which evaluation choices quietly decide
+            the result, and honest accounts of the experiments that did not work.
           </p>
           <ul class="post-list">
             <li>
-              <span class="post-title">Next: GPU DPO run, verifier leakage, and held-out adapter evaluation</span>
-              <span class="post-meta">Working notes / AgentAlign Lab</span>
+              <a class="post-title" href="blogs/Audio%20Explorer/">Audio Explorer: Building the Audio AI Pipeline from First Principles</a>
+              <span class="post-meta">August 2026 / audio AI + DSP</span>
               <p class="section-copy">
-                Current notes are moving from MVP planning into evidence: task-family verifiers,
-                preference-pair audits, dashboard surfaces, and base-vs-adapter evaluation.
+                A visual, first-principles tour from decoded waveform to STFT, Mel spectrograms,
+                MFCCs, and beat tracking—the feature pipeline behind modern audio AI.
+              </p>
+            </li>
+            <li>
+              <span class="post-title">Next: why chroma is the right representation for cover detection</span>
+              <span class="post-meta">Working notes / Cover Song Retrieval</span>
+              <p class="section-copy">
+                Working notes on the classical baseline: what the Optimal Transposition Index
+                actually assumes, why subsequence DTW handles tempo drift, and how easy it is to
+                overstate a retrieval result.
               </p>
             </li>
           </ul>
@@ -286,10 +327,10 @@
         <section aria-labelledby="philosophy">
           <p class="section-label" id="philosophy">Engineering Philosophy</p>
           <ul class="philosophy-list">
-            <li>Evaluation integrity matters more than benchmark theater.</li>
-            <li>Reproducibility matters more than a flashy demo.</li>
-            <li>Verifier quality sets the ceiling for alignment quality.</li>
-            <li>Observable systems scale better than black-box pipelines.</li>
+            <li>Build the classical baseline before the neural one, or you will never know what the network bought you.</li>
+            <li>Evaluation protocol is part of the result; a split that leaks makes every number meaningless.</li>
+            <li>Write the metric yourself and unit test it against examples worked out by hand.</li>
+            <li>A representation is defined by what it discards, so be explicit about what you threw away.</li>
             <li>Honest failure analysis is more useful than cherry-picked results.</li>
           </ul>
         </section>
@@ -299,20 +340,48 @@
           <h2>Problems worth making visible.</h2>
           <ul class="lab-note-list">
             <li>
-              <strong>Verifier instability</strong>
-              <span>When the judge changes under identical inputs, training data becomes noisy.</span>
+              <strong>Key invariance is an assumption</strong>
+              <span>A single global transposition index fails on covers that modulate partway through.</span>
             </li>
             <li>
-              <strong>Trajectory schema redesigns</strong>
-              <span>Missing trace fields make downstream preference comparisons hard to audit.</span>
+              <strong>Clique leakage</strong>
+              <span>Splitting by track instead of by work puts the same composition on both sides of the wall.</span>
             </li>
             <li>
-              <strong>Reward leakage</strong>
-              <span>Models can learn the verifier shortcut instead of the intended behavior.</span>
+              <strong>Alignment cost is length-biased</strong>
+              <span>Unnormalised DTW scores quietly reward short candidates over musically better matches.</span>
             </li>
             <li>
-              <strong>Evaluation integrity</strong>
-              <span>Held-out tasks and blind checks matter when the system starts optimizing.</span>
+              <strong>Noise mistaken for progress</strong>
+              <span>Retrieval deltas need work-level bootstrap intervals before they mean anything.</span>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="education">
+          <p class="section-label" id="education">Education</p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>B.Tech, Computer Science &mdash; AI &amp; ML, 2023&ndash;2027</strong>
+              <span>VIT-AP University, Amaravati, Andhra Pradesh &middot; CGPA 8.05 / 10</span>
+            </li>
+          </ul>
+          <p class="section-copy">
+            Relevant coursework: Data Structures &amp; Algorithms, Machine Learning, Deep
+            Learning, Artificial Intelligence, Database Management Systems, Probability &amp;
+            Statistics, Computer Networks.
+          </p>
+        </section>
+
+        <section aria-labelledby="community">
+          <p class="section-label" id="community">Leadership &amp; Community</p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>Google Developer Groups VIT-AP &mdash; Cloud &amp; DevOps team</strong>
+              <span>
+                August 2024 to present. Working with GCP and cloud-native tooling, and
+                contributing to developer workshops and community sessions.
+              </span>
             </li>
           </ul>
         </section>
@@ -321,20 +390,24 @@
           <summary>Previous Work</summary>
           <ul class="project-list">
             <li>
-              <span class="project-title">Modern Mini LLM</span>
+              <span class="project-title">Modern Mini LLM &mdash; decoder-only Transformer from scratch (2024)</span>
               <span class="muted">
-                Decoder-only Transformer built from scratch with byte-level BPE tokenization,
-                memmap data loading, RoPE, GQA, RMSNorm, SwiGLU, CLI inference, and a Gradio
-                interface.
+                A complete PyTorch LLM training pipeline with a byte-level BPE tokenizer, offline
+                token caching, memmap-based TinyStories loading, and custom RMSNorm, RoPE,
+                Grouped-Query Attention, and SwiGLU components. Each component was built and
+                tested from first principles before consulting reference implementations, then
+                wired to CLI inference and a Gradio interface.
               </span>
             </li>
             <li>
               <span class="project-title">
-                Context-Aware Federated Intrusion Detection for Decentralized Smart Healthcare
+                Federated Intrusion Detection System &mdash; privacy-preserving ML (2024)
               </span>
               <span class="muted">
-                Privacy-preserving intrusion detection system using federated learning and
-                lightweight aggregation for decentralized healthcare networks.
+                A federated anomaly-detection pipeline for decentralized healthcare networks that
+                trains without centralizing sensitive client data, using lightweight secure
+                aggregation across distributed clients, with a study of the tradeoff between
+                aggregation efficiency and accuracy under non-IID client distributions.
               </span>
             </li>
           </ul>

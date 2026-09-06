@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Now page for Shivashant Manohar's public AI systems lab: current focus, experiments, bottlenecks, reading, and milestones."
+      content="Now page for Shivashant Manohar's music information retrieval lab: current focus, experiments, bottlenecks, reading, and milestones."
     />
     <title>Now | Shivashant Manohar</title>
     <script>
@@ -29,7 +29,7 @@
     <div class="container">
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
-          <a href="index.html" class="nav-logo" aria-label="Home" style="display: flex; align-items: center;"><img src="assets/favicon.png" alt="Logo" width="28" height="28" style="border-radius: 4px;" /></a>
+          <a href="index.html" class="nav-logo" aria-label="Home"><img src="assets/favicon.png" alt="Logo" width="28" height="28" /></a>
           <a href="index.html">Lab</a>
           <a href="blog.html">Blogs</a>
           <a href="now.html" aria-current="page">Now</a>
@@ -39,10 +39,10 @@
 
       <main>
         <section class="hero">
-          <p class="eyebrow">Now / Updated May 29, 2026</p>
+          <p class="eyebrow">Now / Updated September 2026</p>
           <h1>Live research notebook.</h1>
           <p class="statement">
-            A compact view of what I am actively building, where the systems are fragile, and what
+            A compact view of what I am actively building, where the system is fragile, and what
             I am trying to make measurable next.
           </p>
         </section>
@@ -50,11 +50,11 @@
         <section aria-labelledby="now-focus">
           <p class="section-label" id="now-focus">Currently Focused On</p>
           <ul class="focus-grid">
-            <li>Verifier-guided AI systems</li>
-            <li>Post-training infrastructure</li>
-            <li>Reward modeling and preference data</li>
-            <li>Evaluation systems and held-out checks</li>
-            <li>Structured traces for terminal agents</li>
+            <li>Cover song identification on Da-TACOS</li>
+            <li>Chroma features and key invariance</li>
+            <li>Subsequence DTW and sequence alignment</li>
+            <li>Retrieval metrics and split hygiene</li>
+            <li>Metric learning with triplet objectives</li>
             <li>Audio AI preprocessing and DSP foundations</li>
           </ul>
         </section>
@@ -63,16 +63,19 @@
           <p class="section-label" id="active-projects">Active Projects</p>
           <div class="now-grid">
             <div class="now-block">
-              <h3>AgentAlign Lab</h3>
+              <h3>Cover Song Retrieval</h3>
               <p>
-                The local MVP loop is implemented: 60 deterministic tasks, 757 scored
-                trajectories, 345 preference pairs, split-aware evaluation, and a Gradio dashboard.
+                The classical half of the pipeline is implemented and tested: Da-TACOS metadata
+                loading, Optimal Transposition Index key alignment, subsequence DTW scoring,
+                candidate ranking, and MAP/MRR/Recall@K written from scratch. The learned encoder
+                is next.
               </p>
             </div>
             <div class="now-block">
               <h3>Audio Explorer</h3>
               <p>
-                A completed interactive toolkit for inspecting the transformations that prepare audio for AI systems.
+                A completed interactive toolkit for inspecting the transformations that prepare
+                audio for AI systems—waveform, STFT, Mel, MFCC, and beat tracking.
               </p>
             </div>
           </div>
@@ -81,11 +84,11 @@
         <section aria-labelledby="bottlenecks">
           <p class="section-label" id="bottlenecks">Current Bottlenecks</p>
           <ul class="now-list">
-            <li>GPU DPO validation: training the Qwen LoRA adapter and measuring held-out deltas.</li>
-            <li>Verifier gaming: checking whether visible deterministic tests create shortcut behavior.</li>
-            <li>Trajectory observability: keeping traces inspectable while preserving enough execution evidence.</li>
-            <li>Audio representation tradeoffs: making time-frequency features understandable and inspectable.</li>
-            <li>Reward leakage: detecting when models optimize the verifier instead of the objective.</li>
+            <li>Full benchmark run: scoring the baseline across Da-TACOS instead of a handful of hand-picked cliques.</li>
+            <li>Score normalisation: raw accumulated DTW cost still favours short candidates over musically better matches.</li>
+            <li>Modulating covers: a single global transposition index breaks when the key changes mid-song.</li>
+            <li>Pairwise cost: DTW against every candidate is quadratic, which is what the embedding index is meant to fix.</li>
+            <li>Statistical honesty: no retrieval delta means anything until it clears a work-level bootstrap interval.</li>
           </ul>
         </section>
 
@@ -94,18 +97,18 @@
           <ul class="pipeline-grid">
             <li>
               <span>01</span>
-              <strong>GPU handoff</strong>
-              <small>Run the prepared Qwen2.5-Coder DPO bundle and audit adapter outputs.</small>
+              <strong>Baseline numbers</strong>
+              <small>Run the classical chroma + OTI + DTW chain over the benchmark subset and record MAP, MRR, and Recall@K.</small>
             </li>
             <li>
               <span>02</span>
-              <strong>Held-out eval</strong>
-              <small>Compare qwen_base and qwen_dpo on the same test split after adapter training.</small>
+              <strong>TCN encoder</strong>
+              <small>Train a small dilated temporal convolution with triplet loss on WID-disjoint splits.</small>
             </li>
             <li>
               <span>03</span>
-              <strong>Audio Explorer write-up</strong>
-              <small>Document the waveform-to-feature pipeline and its role in modern audio AI.</small>
+              <strong>FAISS retrieval</strong>
+              <small>Index track-level embeddings with exact inner product and compare recall against the DTW baseline.</small>
             </li>
           </ul>
         </section>
@@ -113,10 +116,11 @@
         <section aria-labelledby="reading">
           <p class="section-label" id="reading">Current Reading</p>
           <ul class="now-list">
-            <li>Preference optimization, DPO, and reward model failure modes.</li>
-            <li>Agent evaluation, tool-use traces, and execution-based verification.</li>
-            <li>Observability patterns for systems that produce structured artifacts.</li>
-            <li>Audio signal processing, representation learning, and perceptual feature design.</li>
+            <li>Serr&agrave; et al. 2008 on chroma binary similarity and local alignment for cover detection.</li>
+            <li>Da-TACOS (Yesiler et al. 2019) for dataset structure, cliques, distractors, and benchmark discipline.</li>
+            <li>Doras &amp; Peeters 2020 on prototypical triplet loss and cover detection as retrieval.</li>
+            <li>M&uuml;ller, <em>Fundamentals of Music Processing</em>, Ch. 3 on audio features and DTW.</li>
+            <li>Smucker et al. 2007 on significance testing, so I stop mistaking noise for progress.</li>
           </ul>
         </section>
 
@@ -124,14 +128,14 @@
           <p class="section-label" id="milestones">Active Milestones</p>
           <ul class="roadmap-list">
             <li>
-              <span>AgentAlign</span>
-              <strong>60 verified tasks</strong>
-              <small>Done: split-aware task suite across five verifier families.</small>
+              <span>Cover Song Retrieval</span>
+              <strong>Classical baseline implemented</strong>
+              <small>Done: transposition, subsequence DTW, ranking, and retrieval metrics, each with unit tests.</small>
             </li>
             <li>
-              <span>AgentAlign</span>
-              <strong>757 scored trajectories</strong>
-              <small>Done: clean train, validation, and held-out test artifacts with DPO pairs.</small>
+              <span>Cover Song Retrieval</span>
+              <strong>Learned sequence encoder</strong>
+              <small>Next: TCN embeddings with triplet loss, indexed with FAISS and compared on the same split.</small>
             </li>
             <li>
               <span>Audio Explorer</span>

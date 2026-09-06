@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="AgentAlign Lab blog posts on verifier-guided terminal agents, structured trajectories, DPO preference optimization, and evaluation infrastructure."
+      content="Cover Song Retrieval blog posts on chroma features, transposition handling, subsequence DTW, metric learning, and retrieval evaluation on Da-TACOS."
     />
-    <title>AgentAlign Lab Blogs | Shivashant Manohar</title>
+    <title>Cover Song Retrieval Blogs | Shivashant Manohar</title>
     <script>
       (function () {
         try {
@@ -29,7 +29,7 @@
     <div class="container">
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
-          <a href="../../index.html" class="nav-logo" aria-label="Home" style="display: flex; align-items: center;"><img src="../../assets/favicon.png" alt="Logo" width="28" height="28" style="border-radius: 4px;" /></a>
+          <a href="../../index.html" class="nav-logo" aria-label="Home"><img src="../../assets/favicon.png" alt="Logo" width="28" height="28" /></a>
           <a href="../../index.html">Lab</a>
           <a href="../../blog.html" aria-current="page">Blogs</a>
           <a href="../../now.html">Now</a>
@@ -39,21 +39,21 @@
 
       <main>
         <div class="back-links">
-          <a href="../../blog.html">Blogs</a> / <a href="../../projects/agentalign-lab/">Project detail</a>
+          <a href="../../blog.html">Blogs</a> / <a href="../../projects/cover-song-retrieval/">Project detail</a>
         </div>
 
         <section class="hero">
-          <p class="eyebrow">AgentAlign Lab / Blogs</p>
-          <h1>Terminal-agent reliability, written from real build artifacts.</h1>
+          <p class="eyebrow">Cover Song Retrieval / Blogs</p>
+          <h1>Version identification, written from the code that runs.</h1>
           <p class="statement">
-            Blog posts for a verifier-guided preference learning pipeline now backed by 60
-            deterministic tasks, 757 scored trajectories, DPO preference data, held-out
-            evaluation, and a Gradio dashboard.
+            Posts from a cover-song retrieval pipeline on Da-TACOS: what chroma keeps and what it
+            throws away, how key and tempo invariance are actually handled, and why the
+            evaluation protocol decides more of the result than the model does.
           </p>
         </section>
 
-        <section aria-labelledby="agentalign-posts">
-          <p class="section-label" id="agentalign-posts">Published Posts</p>
+        <section aria-labelledby="csi-posts">
+          <p class="section-label" id="csi-posts">Published Posts</p>
           <ul class="post-list">
           </ul>
         </section>
@@ -61,9 +61,11 @@
         <section aria-labelledby="upcoming">
           <p class="section-label" id="upcoming">Upcoming</p>
           <ul class="now-list">
-            <li>How the five task families turn terminal work into deterministic verifier signals.</li>
-            <li>Preference-pair audits from 336 train pairs and 9 validation pairs.</li>
-            <li>GPU DPO handoff notes for Qwen2.5-Coder base-vs-adapter held-out evaluation.</li>
+            <li>Why chroma is the right representation for cover detection, and what it costs you.</li>
+            <li>The Optimal Transposition Index: a twelve-line idea that does most of the key-invariance work.</li>
+            <li>Subsequence DTW from scratch, and the length normalisation nobody mentions.</li>
+            <li>Writing MAP, MRR, and Recall@K by hand, and testing them against a ranking worked out on paper.</li>
+            <li>WID versus PID: how a split at the wrong granularity quietly invalidates a benchmark.</li>
           </ul>
         </section>
       </main>

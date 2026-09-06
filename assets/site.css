@@ -170,6 +170,15 @@ hr {
   text-align: left;
 }
 
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo img {
+  border-radius: 4px;
+}
+
 .site-nav a[aria-current="page"] {
   color: var(--text);
   text-decoration: none;

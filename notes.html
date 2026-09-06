@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Short lab notes by Shivashant Manohar on verifier systems, evaluation integrity, structured traces, post-training, and AI systems engineering."
+      content="Short lab notes by Shivashant Manohar on chroma features, key invariance, sequence alignment, retrieval evaluation, and audio representations."
     />
     <title>Lab Notes | Shivashant Manohar</title>
     <script>
@@ -29,7 +29,7 @@
     <div class="container">
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
-          <a href="index.html" class="nav-logo" aria-label="Home" style="display: flex; align-items: center;"><img src="assets/favicon.png" alt="Logo" width="28" height="28" style="border-radius: 4px;" /></a>
+          <a href="index.html" class="nav-logo" aria-label="Home"><img src="assets/favicon.png" alt="Logo" width="28" height="28" /></a>
           <a href="index.html">Lab</a>
           <a href="blog.html">Blogs</a>
           <a href="now.html">Now</a>
@@ -40,41 +40,45 @@
       <main>
         <section class="hero">
           <p class="eyebrow">Lab Notes</p>
-          <h1>Short fragments from the systems bench.</h1>
+          <h1>Short fragments from the listening bench.</h1>
           <p class="statement">
-            Smaller notes for ideas that are not full systems essays yet: verifier instability,
-            trace schemas, eval hygiene, GPU handoff notes, reward leakage, and debugging lessons.
+            Smaller notes for ideas that are not full essays yet: what a chroma bin actually
+            contains, where an alignment score misleads you, split hygiene, indexing tradeoffs,
+            and the debugging lessons that only show up once the code runs.
           </p>
           <p>
             These notes are intentionally close to the work. Some will be rough, but they should
-            make the research-engineering process more inspectable.
+            make the research-engineering process more inspectable. Longer references live on the
+            <a href="bookmarks.html">references shelf</a>.
           </p>
         </section>
 
         <section aria-labelledby="note-topics">
           <p class="section-label" id="note-topics">Working Note Topics</p>
           <ul class="signal-list">
-            <li>Verifier instability</li>
-            <li>Evaluation integrity</li>
-            <li>Trace schema redesigns</li>
-            <li>Reward leakage</li>
-            <li>DPO pair audits</li>
+            <li>Chroma and HPCP</li>
+            <li>Key invariance</li>
+            <li>Subsequence DTW</li>
+            <li>Score normalisation</li>
+            <li>Clique leakage</li>
+            <li>Triplet mining</li>
+            <li>FAISS index choice</li>
+            <li>Bootstrap intervals</li>
             <li>Audio-feature tradeoffs</li>
-            <li>Sandbox execution failures</li>
-            <li>Observability surfaces</li>
-            <li>Human preference ambiguity</li>
           </ul>
         </section>
 
         <section aria-labelledby="open-questions">
           <p class="section-label" id="open-questions">Open Questions</p>
           <ul class="now-list">
-            <li>Does the Qwen LoRA adapter improve held-out behavior after GPU DPO training?</li>
-            <li>Which verifier signals survive beyond the scripted baseline/bad-model contrast?</li>
-            <li>Which representations retain the most useful musical and speech information?</li>
-            <li>How can held-out evaluations stay meaningful as the system gets optimized?</li>
+            <li>Does a learned TCN embedding beat key-aligned subsequence DTW once both are measured on the same work-level split?</li>
+            <li>How much retrieval quality does a single global transposition index cost on covers that modulate?</li>
+            <li>What is the right way to normalise an alignment score so it stops rewarding short candidates?</li>
+            <li>Which representations retain the most useful musical information once timbre and octave are gone?</li>
+            <li>At what candidate-pool size does exact FAISS stop being enough and approximate search become necessary?</li>
           </ul>
         </section>
+
       </main>
 
       <footer>
