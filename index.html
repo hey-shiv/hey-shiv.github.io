@@ -72,7 +72,9 @@
       <li data-signal="protocol"><a href="#protocol" data-label="07 — Protocol"></a></li>
       <li data-signal="archive"><a href="#archive" data-label="08 — Archive"></a></li>
       <li data-signal="notes"><a href="#notes" data-label="09 — Field notes"></a></li>
-      <li data-signal="end"><a href="#end" data-label="10 — End"></a></li>
+      <li data-signal="state"><a href="#state" data-label="10 — Current state"></a></li>
+      <li data-signal="about"><a href="#about" data-label="11 — About"></a></li>
+      <li data-signal="end"><a href="#end" data-label="12 — End"></a></li>
     </ul>
 
     <div class="container">
@@ -95,24 +97,25 @@
             <span class="signal-live">Open to AI/ML internships &middot; 2026</span>
           </div>
 
-          <p class="hero-role rise" style="--i:1">
-            Shivashant Manohar <b>&middot;</b> AI / ML Engineering <b>&middot;</b> Audio <b>&middot;</b> Retrieval <b>&middot;</b> Evaluation
+          <p class="entry-identity rise" style="--i:1">Shivashant Manohar</p>
+          <p class="hero-role rise" style="--i:2">
+            AI / ML Engineering <b>&middot;</b> Audio <b>&middot;</b> Retrieval <b>&middot;</b> Evaluation
           </p>
 
-          <h1 class="entry-headline rise" id="who" style="--i:2">I build machines that listen.</h1>
+          <h1 class="entry-headline rise" id="who" style="--i:3">I build machines that listen.</h1>
 
-          <p class="statement rise" style="--i:3; max-width: 34rem;">
+          <p class="statement rise" style="--i:4; max-width: 34rem;">
             Then I try hard to prove they don&rsquo;t work.
           </p>
 
-          <p class="rise" style="--i:4; max-width: 34rem;">
+          <p class="rise" style="--i:5; max-width: 34rem;">
             Final-year CS (AI &amp; ML) at VIT-AP. Most of what I know came from implementing
             things rather than reading about them: a transformer written from scratch before I
             read a reference implementation, an audio pipeline built one transform at a time, a
             trading screener shipped alongside the study that tried to falsify it.
           </p>
 
-          <div class="actions rise" style="--i:5">
+          <div class="actions rise" style="--i:6">
             <a class="btn btn-primary" href="#cover">
               Strongest work <span class="btn-arrow" aria-hidden="true">&darr;</span>
             </a>
@@ -124,7 +127,7 @@
             </a>
           </div>
 
-          <p class="actions-quiet rise" style="--i:6">
+          <p class="actions-quiet rise" style="--i:7">
             <a href="mailto:shivashant.work@gmail.com">Email</a>
             <a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer">LinkedIn</a>
             <a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer">X</a>
@@ -265,9 +268,8 @@
             <p class="step-label"><span>Stage 01</span> &mdash; <span>Signal</span></p>
             <h3>One recording, as numbers.</h3>
             <p>
-              A track arrives as a one-dimensional array of samples. Nothing about it says
-              which composition it is, what key it is in, or how fast it is played. Two
-              recordings of the same piece may share no surface audio properties at all.
+              Nothing in the samples says which composition this is. Two recordings of the
+              same piece may share no surface audio properties at all.
             </p>
           </li>
 
@@ -275,10 +277,8 @@
             <p class="step-label"><span>Stage 02</span> &mdash; <span>Representation</span></p>
             <h3>Twelve pitch classes per frame.</h3>
             <p>
-              Chroma features fold the spectrum onto twelve pitch classes. Timbre is discarded
-              on purpose: a piano and a voice singing the same harmony should look alike. A
-              representation is defined by what it throws away, and this one throws away almost
-              everything except harmonic movement.
+              Chroma folds the spectrum onto twelve pitch classes. Timbre goes, on purpose:
+              a piano and a voice singing the same harmony should look alike.
             </p>
           </li>
 
@@ -286,10 +286,8 @@
             <p class="step-label"><span>Stage 03</span> &mdash; <span>Key invariance</span></p>
             <h3>Twelve possible keys, one chosen.</h3>
             <p>
-              A cover can be in any key, so the twelve possible transpositions are scored and
-              the Optimal Transposition Index picks the alignment. It is also an assumption:
-              one global shift cannot describe a cover that modulates halfway through, which is
-              a failure I have not solved yet.
+              The Optimal Transposition Index scores all twelve shifts and picks one. It also
+              assumes the key never changes mid-song &mdash; a failure I have not solved.
             </p>
           </li>
 
@@ -297,9 +295,8 @@
             <p class="step-label"><span>Stage 04</span> &mdash; <span>Alignment</span></p>
             <h3>Two performances, warped onto each other.</h3>
             <p>
-              Covers stretch and compress time. Subsequence DTW finds an elastic path between
-              the two chroma sequences and scores how well one can be laid over the other,
-              without requiring the versions to be the same length or start in the same place.
+              Covers stretch and compress time, so subsequence DTW finds an elastic path
+              between the two sequences instead of demanding they line up.
             </p>
           </li>
 
@@ -307,10 +304,10 @@
             <p class="step-label"><span>Stage 05</span> &mdash; <span>Retrieval</span></p>
             <h3>A ranked list, and a metric that can be trusted.</h3>
             <p>
-              Every candidate is scored against the query and sorted. MAP, MRR and Recall@K are
-              written from scratch and unit tested against rankings I worked out by hand &mdash;
+              MAP, MRR and Recall@K are written from scratch and unit tested by hand &mdash;
               so when a learned encoder arrives, it has something real to beat.
             </p>
+            <p class="step-more"><a href="projects/cover-song-retrieval/">The full seven-stage system &rarr;</a></p>
           </li>
         </ol>
       </div>
@@ -345,7 +342,7 @@
     </section>
 
     <!-- ===================== 04 — AUDIO EXPLORER ===================== -->
-    <section class="world" id="explorer" data-signal="explorer" aria-labelledby="explorer-h">
+    <section class="world world--flat" id="explorer" data-signal="explorer" aria-labelledby="explorer-h">
       <div class="world-head">
         <p class="signal-marker">04 &mdash; Audio explorer <span class="state-glyph" data-state="built" style="margin-left:auto">Shipped</span></p>
         <h2 id="explorer-h" class="world-title">Audio Explorer</h2>
@@ -716,7 +713,7 @@
         </section>
 
         <!-- ===================== CURRENT STATE ===================== -->
-        <section id="state" aria-labelledby="skills-h">
+        <section id="state" data-signal="state" aria-labelledby="skills-h">
           <div class="section-head">
             <div>
               <p class="signal-marker">Current state</p>
@@ -761,7 +758,7 @@
         </section>
 
         <!-- ===================== ABOUT ===================== -->
-        <section id="about" aria-labelledby="about-h">
+        <section id="about" data-signal="about" aria-labelledby="about-h">
           <div class="section-head">
             <div>
               <p class="signal-marker">About</p>

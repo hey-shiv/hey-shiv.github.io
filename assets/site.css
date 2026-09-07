@@ -26,7 +26,7 @@
 
   --text: #eef0f2;
   --text-secondary: #aeb3ba;
-  --text-muted: #74797f;
+  --text-muted: #8a8f97;
   --heading: #ffffff;
   --heading-soft: #dfe2e6;
 
@@ -101,15 +101,17 @@ html[data-theme="light"] {
 
   --text: #17160f;
   --text-secondary: #4b4839;
-  --text-muted: #756f5c;
+  --text-muted: #635e4d;
   --heading: #0e0d08;
   --heading-soft: #211f15;
 
   --border: #e0dac9;
   --border-strong: #cac1a8;
 
-  --signal: #75840f;
-  --signal-dim: #9aa46a;
+  /* On paper the accent also carries small text (active step labels, HUD,
+     open-status), so it is darkened to clear AA rather than staying acid. */
+  --signal: #56640b;
+  --signal-dim: #7d8a3f;
   --signal-wash: rgba(117, 132, 15, 0.08);
   --on-signal: #f5f2ea;
 
@@ -2070,13 +2072,16 @@ main section { margin-bottom: var(--s12); padding-top: var(--s12); }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 56vh;
+  min-height: 46vh;
   margin: 0;
   padding: var(--s5) 0;
 }
 
+/* Inactive steps recede but stay readable: dimming body copy to a whisper
+   makes the active state obvious and the rest of the content inaccessible.
+   The colour shift on the label carries the state instead. */
 @media (prefers-reduced-motion: no-preference) {
-  .world-step { opacity: 0.32; transition: opacity 0.45s var(--ease); }
+  .world-step { opacity: 0.72; transition: opacity 0.45s var(--ease); }
   .world-step.is-active { opacity: 1; }
 }
 
@@ -2500,3 +2505,57 @@ main section > p,
 .now-block p { max-width: 37rem; }
 
 article p, article ul, article ol, .article-figure figcaption { max-width: 40rem; }
+
+/* ==========================================================================
+   28. Touch targets
+   --------------------------------------------------------------------------
+   Text-scale links are fine with a mouse but tight under a thumb. On touch
+   layouts the interactive rows grow to a comfortable target without changing
+   how the type sits.
+   ========================================================================== */
+
+@media (max-width: 820px) {
+  .site-nav a { padding: var(--s3) 0; }
+  .rep-switch button { min-height: 2.75rem; padding: 0.6rem 0.9rem; }
+  .project-links a { min-height: 2.75rem; padding: var(--s3) 0.8rem; }
+  .actions-quiet a, .fastpath a { display: inline-block; padding: var(--s2) 0; }
+  .cnode-list a { padding: var(--s6) 0; }
+}
+
+/* The name is the anchor: clearly legible, but not the hero statement. */
+.entry-identity {
+  margin: 0 0 var(--s2);
+  max-width: none;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+/* The pipeline render inside an article figure. */
+.article-figure video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-sunk);
+}
+
+/* A world on the page ground rather than the sunk ground, so consecutive
+   environments alternate instead of merging into one long dark block. */
+.world--flat { background: var(--bg); }
+.world--flat .world-visual { background: var(--bg); }
+
+/* Homepage steps are captions, not case study: they hand off to the project. */
+.step-more { margin-top: var(--s5) !important; }
+.step-more a {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--signal);
+  padding-bottom: 2px;
+}
