@@ -64,14 +64,15 @@
 
     <ul class="signal-rail" aria-hidden="true">
       <li data-signal="entry"><a href="#main" data-label="01 — Entry"></a></li>
-      <li data-signal="work"><a href="#work" data-label="02 — Work"></a></li>
-      <li data-signal="broke"><a href="#broke" data-label="03 — Failure"></a></li>
-      <li data-signal="protocol"><a href="#protocol" data-label="04 — Protocol"></a></li>
-      <li data-signal="archive"><a href="#archive" data-label="05 — Archive"></a></li>
-      <li data-signal="notes"><a href="#notes" data-label="06 — Field notes"></a></li>
-      <li data-signal="state"><a href="#state" data-label="07 — State"></a></li>
-      <li data-signal="about"><a href="#about" data-label="08 — About"></a></li>
-      <li data-signal="end"><a href="#end" data-label="09 — End"></a></li>
+      <li data-signal="explore"><a href="#explore" data-label="02 — Explore"></a></li>
+      <li data-signal="cover"><a href="#cover" data-label="03 — Cover song retrieval"></a></li>
+      <li data-signal="explorer"><a href="#explorer" data-label="04 — Audio explorer"></a></li>
+      <li data-signal="vcp"><a href="#vcp" data-label="05 — VCP screener"></a></li>
+      <li data-signal="failure"><a href="#failure" data-label="06 — Failure"></a></li>
+      <li data-signal="protocol"><a href="#protocol" data-label="07 — Protocol"></a></li>
+      <li data-signal="archive"><a href="#archive" data-label="08 — Archive"></a></li>
+      <li data-signal="notes"><a href="#notes" data-label="09 — Field notes"></a></li>
+      <li data-signal="end"><a href="#end" data-label="10 — End"></a></li>
     </ul>
 
     <div class="container">
@@ -82,11 +83,12 @@
           <a href="blog.html">Field notes</a>
           <a href="notes.html">Notes</a>
           <a href="now.html">Now</a>
+          <a href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">R&eacute;sum&eacute;</a>
         </nav>
       </header>
 
       <main id="main">
-        <!-- ============================= ENTRY / SIGNAL ============================= -->
+        <!-- ===================== 01 — ENTRY ===================== -->
         <section class="hero" data-signal="entry" aria-labelledby="who">
           <div class="entry-tag rise" style="--i:0">
             <span>SIGNAL / 001</span>
@@ -99,17 +101,20 @@
 
           <h1 class="entry-headline rise" id="who" style="--i:2">I build machines that listen.</h1>
 
-          <p class="statement rise" style="--i:3; max-width: 36rem;">
-            Then I try hard to prove they don&rsquo;t work. Final-year CS (AI &amp; ML) at VIT-AP &mdash;
-            most of what I know came from implementing things rather than reading about them: a
-            transformer written from scratch before I read a reference implementation, an audio
-            pipeline built one transform at a time, a trading screener shipped alongside the study
-            that tried to falsify it.
+          <p class="statement rise" style="--i:3; max-width: 34rem;">
+            Then I try hard to prove they don&rsquo;t work.
           </p>
 
-          <div class="actions rise" style="--i:4">
-            <a class="btn btn-primary" href="#work">
-              View work <span class="btn-arrow" aria-hidden="true">&darr;</span>
+          <p class="rise" style="--i:4; max-width: 34rem;">
+            Final-year CS (AI &amp; ML) at VIT-AP. Most of what I know came from implementing
+            things rather than reading about them: a transformer written from scratch before I
+            read a reference implementation, an audio pipeline built one transform at a time, a
+            trading screener shipped alongside the study that tried to falsify it.
+          </p>
+
+          <div class="actions rise" style="--i:5">
+            <a class="btn btn-primary" href="#cover">
+              Strongest work <span class="btn-arrow" aria-hidden="true">&darr;</span>
             </a>
             <a class="btn" href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">
               GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span>
@@ -119,7 +124,7 @@
             </a>
           </div>
 
-          <p class="actions-quiet rise" style="--i:5">
+          <p class="actions-quiet rise" style="--i:6">
             <a href="mailto:shivashant.work@gmail.com">Email</a>
             <a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer">LinkedIn</a>
             <a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer">X</a>
@@ -127,206 +132,367 @@
           </p>
         </section>
 
-        <figure class="live-signal rise" style="--i:6">
-          <div class="live-signal-head">
-            <span class="signal-marker">Live signal</span>
-            <span>Illustrative &mdash; generated in-browser, not model output</span>
-          </div>
-          <canvas
-            id="live-signal"
-            role="img"
-            aria-label="An animated waveform that leans toward the pointer's horizontal position and gradually resolves into three clustered scatters of points as the page is scrolled — a small illustration of signal becoming representation."
-          ></canvas>
-          <p class="live-signal-foot">
-            A waveform, breathing. It leans toward the pointer, and dissolves into clustered
-            points as you scroll past &mdash; signal becoming representation. The real pipeline,
-            built from actual chroma features and DTW alignment, is below.
-          </p>
-        </figure>
+        <!-- ===================== LIVE SIGNAL ===================== -->
+    <figure class="live-signal" data-field>
+      <div class="live-signal-head">
+        <span class="signal-marker">Live signal</span>
+        <span>Illustrative &mdash; generated in-browser, not model output</span>
+      </div>
+      <canvas
+        id="live-signal"
+        data-states="wave,embed,retrieve"
+        role="img"
+        aria-label="An animated waveform that leans toward the pointer and, as the page scrolls, resolves into clustered points with one query point linked to its nearest neighbours."
+      ></canvas>
+      <p class="live-signal-foot">
+        A waveform, breathing. It leans toward the pointer, and as you scroll it resolves into
+        points, then clusters, then a query finding its neighbours. Signal becoming
+        representation becoming retrieval &mdash; which is the shape of everything below.
+      </p>
+    </figure>
 
-        <!-- ============================= WORK ============================= -->
-        <section id="work" data-signal="work" aria-labelledby="work-h">
+    <!-- ===================== 02 — EXPLORE ===================== -->
+    <section class="constellation-wrap" id="explore" data-signal="explore" aria-labelledby="explore-h">
+      <div class="constellation-inner">
+        <p class="signal-marker">02 &mdash; The system</p>
+        <h2 id="explore-h" style="max-width: 20ch">Everything here is one system, seen from different angles.</h2>
+
+        <svg class="constellation" viewBox="0 0 1000 420" role="group" aria-label="Map of this site: seven destinations arranged around a central node">
+          <g aria-hidden="true">
+            <line class="cedge" x1="500" y1="210" x2="215" y2="95" />
+            <line class="cedge" x1="500" y1="210" x2="760" y2="105" />
+            <line class="cedge" x1="500" y1="210" x2="880" y2="265" />
+            <line class="cedge" x1="500" y1="210" x2="620" y2="355" />
+            <line class="cedge" x1="500" y1="210" x2="330" y2="335" />
+            <line class="cedge" x1="500" y1="210" x2="110" y2="250" />
+            <line class="cedge" x1="500" y1="210" x2="500" y2="58" />
+          </g>
+
+          <g class="cnode cnode-core" aria-hidden="true">
+            <circle cx="500" cy="210" r="8" />
+            <text class="cnode-label" x="500" y="240" text-anchor="middle">SHIVASHANT</text>
+          </g>
+
+          <a class="cnode" href="#cover">
+            <circle cx="215" cy="95" r="6" />
+            <text class="cnode-label" x="215" y="70" text-anchor="middle">
+              <tspan x="215">COVER SONG</tspan><tspan x="215" dy="14">RETRIEVAL</tspan>
+            </text>
+            <text class="cnode-meta" x="215" y="118" text-anchor="middle">01 &middot; BUILDING</text>
+          </a>
+
+          <a class="cnode" href="#explorer">
+            <circle cx="760" cy="105" r="6" />
+            <text class="cnode-label" x="760" y="80" text-anchor="middle">AUDIO EXPLORER</text>
+            <text class="cnode-meta" x="760" y="128" text-anchor="middle">02 &middot; SHIPPED</text>
+          </a>
+
+          <a class="cnode" href="#vcp">
+            <circle cx="880" cy="265" r="6" />
+            <text class="cnode-label" x="880" y="292" text-anchor="middle">VCP SCREENER</text>
+            <text class="cnode-meta" x="880" y="308" text-anchor="middle">03 &middot; NEGATIVE RESULT</text>
+          </a>
+
+          <a class="cnode" href="#failure">
+            <circle cx="620" cy="355" r="6" />
+            <text class="cnode-label" x="620" y="382" text-anchor="middle">FAILURE GRAPH</text>
+            <text class="cnode-meta" x="620" y="398" text-anchor="middle">5 CASES &middot; 2 OPEN</text>
+          </a>
+
+          <a class="cnode" href="#protocol">
+            <circle cx="330" cy="335" r="6" />
+            <text class="cnode-label" x="330" y="362" text-anchor="middle">BUILD PROTOCOL</text>
+            <text class="cnode-meta" x="330" y="378" text-anchor="middle">05 RULES</text>
+          </a>
+
+          <a class="cnode" href="#archive">
+            <circle cx="110" cy="250" r="6" />
+            <text class="cnode-label" x="110" y="277" text-anchor="middle">ARCHIVE</text>
+            <text class="cnode-meta" x="110" y="293" text-anchor="middle">2024</text>
+          </a>
+
+          <a class="cnode" href="#notes">
+            <circle cx="500" cy="58" r="6" />
+            <text class="cnode-label" x="500" y="36" text-anchor="middle">FIELD NOTES</text>
+            <text class="cnode-meta" x="500" y="80" text-anchor="middle">001 &mdash; 002</text>
+          </a>
+        </svg>
+
+        <ul class="cnode-list">
+          <li><a href="#cover">Cover Song Retrieval <span>01 &middot; Building</span></a></li>
+          <li><a href="#explorer">Audio Explorer <span>02 &middot; Shipped</span></a></li>
+          <li><a href="#vcp">VCP Screener <span>03 &middot; Negative result</span></a></li>
+          <li><a href="#failure">Failure graph <span>5 cases &middot; 2 open</span></a></li>
+          <li><a href="#protocol">Build protocol <span>05 rules</span></a></li>
+          <li><a href="#archive">Archive <span>2024</span></a></li>
+          <li><a href="#notes">Field notes <span>001 &mdash; 002</span></a></li>
+        </ul>
+
+        <p class="fastpath">
+          <span>Fast path</span>
+          <a href="#cover">Strongest work</a>
+          <a href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">R&eacute;sum&eacute; &#8599;</a>
+          <a href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">GitHub &#8599;</a>
+          <a href="mailto:shivashant.work@gmail.com">Email</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== 03 — COVER SONG RETRIEVAL ===================== -->
+    <section class="world" id="cover" data-signal="cover" data-world aria-labelledby="cover-h">
+      <div class="world-head">
+        <p class="signal-marker">03 &mdash; Cover song retrieval <span class="state-glyph" data-state="progress" style="margin-left:auto">Building</span></p>
+        <h2 id="cover-h" class="world-title">Cover Song Retrieval</h2>
+        <p class="world-question">Can a machine recognise a song it has never heard?</p>
+      </div>
+
+      <div class="world-inner">
+        <div class="world-visual">
+          <canvas
+            data-states="wave,chroma,oti,dtw,retrieve"
+            role="img"
+            aria-label="One field of points changing representation as you scroll: a waveform, then a twelve-row chroma grid, then a circular transposition ring, then two sequences joined by an alignment path, then a scatter in which a query point links to its nearest neighbours. Each stage is described in the text beside it."
+          ></canvas>
+          <p class="world-hud">
+            <span class="hud-stage">01 / 05</span>
+            <span class="hud-label">Input / audio</span>
+            <span>Illustrative</span>
+          </p>
+        </div>
+
+        <ol class="world-steps">
+          <li class="world-step" data-stage="Input / audio">
+            <p class="step-label"><span>Stage 01</span> &mdash; <span>Signal</span></p>
+            <h3>One recording, as numbers.</h3>
+            <p>
+              A track arrives as a one-dimensional array of samples. Nothing about it says
+              which composition it is, what key it is in, or how fast it is played. Two
+              recordings of the same piece may share no surface audio properties at all.
+            </p>
+          </li>
+
+          <li class="world-step" data-stage="Representation / 12 pitch classes">
+            <p class="step-label"><span>Stage 02</span> &mdash; <span>Representation</span></p>
+            <h3>Twelve pitch classes per frame.</h3>
+            <p>
+              Chroma features fold the spectrum onto twelve pitch classes. Timbre is discarded
+              on purpose: a piano and a voice singing the same harmony should look alike. A
+              representation is defined by what it throws away, and this one throws away almost
+              everything except harmonic movement.
+            </p>
+          </li>
+
+          <li class="world-step" data-stage="Alignment / OTI">
+            <p class="step-label"><span>Stage 03</span> &mdash; <span>Key invariance</span></p>
+            <h3>Twelve possible keys, one chosen.</h3>
+            <p>
+              A cover can be in any key, so the twelve possible transpositions are scored and
+              the Optimal Transposition Index picks the alignment. It is also an assumption:
+              one global shift cannot describe a cover that modulates halfway through, which is
+              a failure I have not solved yet.
+            </p>
+          </li>
+
+          <li class="world-step" data-stage="Sequence alignment / DTW">
+            <p class="step-label"><span>Stage 04</span> &mdash; <span>Alignment</span></p>
+            <h3>Two performances, warped onto each other.</h3>
+            <p>
+              Covers stretch and compress time. Subsequence DTW finds an elastic path between
+              the two chroma sequences and scores how well one can be laid over the other,
+              without requiring the versions to be the same length or start in the same place.
+            </p>
+          </li>
+
+          <li class="world-step" data-stage="Retrieval / ranking">
+            <p class="step-label"><span>Stage 05</span> &mdash; <span>Retrieval</span></p>
+            <h3>A ranked list, and a metric that can be trusted.</h3>
+            <p>
+              Every candidate is scored against the query and sorted. MAP, MRR and Recall@K are
+              written from scratch and unit tested against rankings I worked out by hand &mdash;
+              so when a learned encoder arrives, it has something real to beat.
+            </p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="world-foot">
+        <ul class="readouts" aria-label="Dataset and build figures">
+          <li><b>1,000</b><span>Cover cliques</span></li>
+          <li><b>13,000</b><span>Cover tracks</span></li>
+          <li><b>2,000</b><span>Distractors</span></li>
+          <li><b>12</b><span>Transposition shifts</span></li>
+        </ul>
+
+        <div class="learned" style="margin-top: var(--s10)">
+          <p class="meta-label">What I learned</p>
+          <p>
+            The evaluation protocol decides more of the result than the model does. Splitting by
+            track instead of by work puts the same composition on both sides of the wall, and
+            every number after that is meaningless.
+          </p>
+        </div>
+
+        <ul class="stack" aria-label="Stack">
+          <li>Python</li><li>NumPy</li><li>librosa</li><li>Essentia</li>
+          <li>PyTorch</li><li>FAISS</li>
+        </ul>
+
+        <div class="project-links">
+          <a href="projects/cover-song-retrieval/">Full case study <span aria-hidden="true">&rarr;</span></a>
+          <a href="blogs/Cover%20Song%20Retrieval/">Build notes</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 04 — AUDIO EXPLORER ===================== -->
+    <section class="world" id="explorer" data-signal="explorer" aria-labelledby="explorer-h">
+      <div class="world-head">
+        <p class="signal-marker">04 &mdash; Audio explorer <span class="state-glyph" data-state="built" style="margin-left:auto">Shipped</span></p>
+        <h2 id="explorer-h" class="world-title">Audio Explorer</h2>
+        <p class="world-question">What does a model actually see when it hears a song?</p>
+      </div>
+
+      <div class="world-foot" data-rep>
+        <p style="max-width: 38rem">
+          An interactive toolkit that makes the standard audio-AI front end inspectable:
+          waveform and signal health, STFT spectrograms, 128-band Mel spectrograms, MFCCs with
+          delta features, and beat tracking. Feature computation is kept separate from
+          visualisation so each stage can be read on its own.
+        </p>
+
+        <div class="rep">
+          <ul class="rep-switch" aria-label="Choose a representation">
+            <li><button type="button" aria-pressed="true" data-note="Amplitude over time. Loudness, silence, clipping — the questions you ask before anything else.">Waveform</button></li>
+            <li><button type="button" aria-pressed="false" data-note="Short-time Fourier transform: which frequencies are active, moment by moment.">STFT</button></li>
+            <li><button type="button" aria-pressed="false" data-note="The same spectrum warped to human hearing — resolution spent low, compressed high.">Mel</button></li>
+            <li><button type="button" aria-pressed="false" data-note="Thirteen coefficients summarising spectral shape, plus how that shape changes.">MFCC</button></li>
+            <li><button type="button" aria-pressed="false" data-note="Onsets and beats — a separate branch of the pipeline, on the time axis rather than the frequency axis.">Rhythm</button></li>
+          </ul>
+
+          <div class="rep-stage">
+            <canvas
+              data-states="wave,stft,mel,mfcc,rhythm"
+              role="img"
+              aria-label="A field of points that rearranges between five representations of the same audio: waveform, STFT grid, Mel-warped grid, MFCC coefficient bands, and rhythmic pulses. Each is described by the caption below."
+            ></canvas>
+          </div>
+
+          <p class="rep-caption">
+            <b>Representation</b>
+            <span data-rep-note>Amplitude over time. Loudness, silence, clipping — the questions you ask before anything else.</span>
+          </p>
+        </div>
+
+        <div class="learned" style="margin-top: var(--s9)">
+          <p class="meta-label">What I learned</p>
+          <p>
+            A representation is defined by what it throws away. Building each transform by hand
+            made it obvious how much of the signal is gone by the time a model sees an MFCC
+            &mdash; and why that is usually the point.
+          </p>
+        </div>
+
+        <ul class="stack" aria-label="Stack">
+          <li>Python</li><li>librosa</li><li>NumPy</li><li>SciPy</li>
+          <li>Plotly</li><li>Streamlit</li>
+        </ul>
+
+        <div class="project-links">
+          <a href="https://github.com/hey-shiv/Audio-Explorer" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">&#8599;</span></a>
+          <a href="blogs/Audio%20Explorer/">Write-up</a>
+        </div>
+      </div>
+    </section>
+
+        <!-- ===================== 05 — VCP SCREENER ===================== -->
+        <section id="vcp" data-signal="vcp" aria-labelledby="vcp-h">
           <div class="section-head">
             <div>
-              <p class="signal-marker">02 &mdash; Current work</p>
-              <h2 id="work-h">Three things I built, and what each one taught me.</h2>
+              <p class="signal-marker">05 &mdash; VCP screener <span class="state-glyph" data-state="planned" style="margin-left:auto">Negative result</span></p>
+              <h2 id="vcp-h">VCP Screener</h2>
             </div>
           </div>
 
-          <ul class="featured-projects">
-            <!-- 01 — the flagship -->
-            <li class="project-card">
-              <div class="project-card-header">
-                <div>
-                  <span class="project-index">01</span>
-                  <p class="eyebrow">Audio &middot; Retrieval</p>
-                  <h3>Cover Song Retrieval</h3>
-                </div>
-                <span class="status-token" data-state="building">Building</span>
-              </div>
+          <p style="max-width: 36rem">
+            A screener that scans roughly 2,300 NSE equities for a volatility contraction
+            pattern, combining technical, fundamental and ownership evidence behind a FastAPI
+            service and a dependency-free frontend.
+          </p>
+          <p style="max-width: 36rem">
+            The screener is the smaller half. The larger half is the ten-year study that tried
+            to falsify it: point-in-time signal replay, one shared trade simulator, real
+            transaction costs, a portfolio-level constraint, and matched random entries as a
+            control.
+          </p>
 
-              <p class="flagship-question">Can a machine recognise a song it has never heard?</p>
+          <div class="graph-surface eval-room">
+            <p class="signal-marker">Study design</p>
+            <ul class="eval-bands">
+              <li>
+                <b>Strategy</b>
+                <svg viewBox="0 0 600 34" role="img" aria-label="A band of signal entries spread across the test window.">
+                  <line class="eval-axis" x1="0" y1="17" x2="600" y2="17" />
+                  <g class="eval-tick eval-tick-signal">
+                    <line x1="18" y1="6" x2="18" y2="28" /><line x1="62" y1="6" x2="62" y2="28" />
+                    <line x1="96" y1="6" x2="96" y2="28" /><line x1="147" y1="6" x2="147" y2="28" />
+                    <line x1="188" y1="6" x2="188" y2="28" /><line x1="223" y1="6" x2="223" y2="28" />
+                    <line x1="271" y1="6" x2="271" y2="28" /><line x1="309" y1="6" x2="309" y2="28" />
+                    <line x1="352" y1="6" x2="352" y2="28" /><line x1="398" y1="6" x2="398" y2="28" />
+                    <line x1="431" y1="6" x2="431" y2="28" /><line x1="478" y1="6" x2="478" y2="28" />
+                    <line x1="516" y1="6" x2="516" y2="28" /><line x1="563" y1="6" x2="563" y2="28" />
+                  </g>
+                </svg>
+              </li>
+              <li>
+                <b>Control</b>
+                <svg viewBox="0 0 600 34" role="img" aria-label="A band of matched random entries, aligned to the same symbols, risk and windows.">
+                  <line class="eval-axis" x1="0" y1="17" x2="600" y2="17" />
+                  <g class="eval-tick">
+                    <line x1="24" y1="8" x2="24" y2="26" /><line x1="58" y1="8" x2="58" y2="26" />
+                    <line x1="103" y1="8" x2="103" y2="26" /><line x1="141" y1="8" x2="141" y2="26" />
+                    <line x1="194" y1="8" x2="194" y2="26" /><line x1="229" y1="8" x2="229" y2="26" />
+                    <line x1="265" y1="8" x2="265" y2="26" /><line x1="315" y1="8" x2="315" y2="26" />
+                    <line x1="346" y1="8" x2="346" y2="26" /><line x1="392" y1="8" x2="392" y2="26" />
+                    <line x1="437" y1="8" x2="437" y2="26" /><line x1="472" y1="8" x2="472" y2="26" />
+                    <line x1="522" y1="8" x2="522" y2="26" /><line x1="557" y1="8" x2="557" y2="26" />
+                  </g>
+                </svg>
+              </li>
+            </ul>
+            <p class="live-signal-foot" style="padding: var(--s5) 0 0">
+              Schematic of the comparison, not a results chart. Controls are matched on symbol,
+              risk and window &mdash; the fix that made the apparent edge disappear.
+            </p>
 
-              <figure class="mini-map" aria-label="Retrieval pipeline">
-                <p class="signal-marker" style="margin-bottom: var(--s4)">Pipeline</p>
-                <ol class="mini-flow">
-                  <li><span>Chroma / HPCP</span><small>timbre discarded</small></li>
-                  <li><span>Key alignment</span><small>OTI over 12 shifts</small></li>
-                  <li><span>Subsequence DTW</span><small>tempo-elastic path</small></li>
-                  <li><span>Ranked list</span><small>MAP / MRR / R@K</small></li>
-                </ol>
-              </figure>
+            <div class="graph-result">
+              <p class="signal-marker">Result</p>
+              <strong>No demonstrable edge.</strong>
+            </div>
+          </div>
 
-              <p>
-                Given one recording, find every other recording of the same composition &mdash;
-                across changes of key, tempo, arrangement, language, and voice. It is a ranking
-                problem, not a classification one: the set of works is open, and two versions of
-                the same piece may share no surface audio properties at all.
-              </p>
-              <p>
-                I built the classical baseline first, deliberately. Chroma features, key
-                invariance through the Optimal Transposition Index, cosine cross-similarity, and
-                subsequence DTW as the alignment score. MAP, MRR and Recall@K are written from
-                scratch and unit tested against rankings I worked out by hand, so a neural
-                result later has something real to beat.
-              </p>
-
-              <div class="metric-strip" aria-label="Dataset and build figures">
-                <span><strong>1,000</strong> cover cliques</span>
-                <span><strong>13,000</strong> cover tracks</span>
-                <span><strong>2,000</strong> distractors</span>
-                <span><strong>12</strong> transposition shifts</span>
-              </div>
-
-              <div class="learned">
-                <p class="meta-label">What I learned</p>
-                <p>
-                  The evaluation protocol decides more of the result than the model does.
-                  Splitting by track instead of by work puts the same composition on both sides
-                  of the wall, and every number after that is meaningless.
-                </p>
-              </div>
-
-              <ul class="stack" aria-label="Stack">
-                <li>Python</li><li>NumPy</li><li>librosa</li><li>Essentia</li>
-                <li>PyTorch</li><li>FAISS</li>
-              </ul>
-
-              <div class="project-links">
-                <a href="projects/cover-song-retrieval/">Case study <span aria-hidden="true">&rarr;</span></a>
-                <a href="blogs/Cover%20Song%20Retrieval/">Build notes</a>
-              </div>
-            </li>
-
-            <!-- 02 -->
-            <li class="project-card">
-              <div class="project-card-header">
-                <div>
-                  <span class="project-index">02</span>
-                  <p class="eyebrow">Audio &middot; DSP</p>
-                  <h3>Audio Explorer</h3>
-                </div>
-                <span class="status-token" data-state="done">Shipped</span>
-              </div>
-
-              <p>
-                An interactive toolkit that makes the standard audio-AI front end inspectable:
-                waveform and signal health, STFT spectrograms, 128-band Mel spectrograms, MFCCs
-                with delta features, and beat tracking. Feature computation is kept separate
-                from visualisation so each stage can be read on its own.
-              </p>
-
-              <p class="signal-marker" style="margin: var(--s6) 0 0">Representations</p>
-              <ul class="stage-row" aria-label="Representations covered">
-                <li>Input</li><li>Waveform</li><li>STFT</li><li>Mel</li><li>MFCC</li><li>Rhythm</li>
-              </ul>
-
-              <figure class="project-figure project-figure-video">
-                <video
-                  src="assets/audio-explorer/pipeline-4k.mp4"
-                  poster="assets/audio-explorer/pipeline_minimal.svg"
-                  width="3840" height="2160"
-                  muted loop playsinline preload="none"
-                  data-autoplay
-                  aria-label="Animation of the Audio Explorer pipeline: one audio file unfolding into waveform, spectrogram, Mel bands, MFCCs and a rhythm branch."
-                ></video>
-                <figcaption>One file, unfolded into the representations a model actually consumes.</figcaption>
-              </figure>
-
-              <div class="learned">
-                <p class="meta-label">What I learned</p>
-                <p>
-                  A representation is defined by what it throws away. Building each transform
-                  by hand made it obvious how much of the signal is gone by the time a model
-                  sees an MFCC &mdash; and why that is usually the point.
-                </p>
-              </div>
-
-              <ul class="stack" aria-label="Stack">
-                <li>Python</li><li>librosa</li><li>NumPy</li><li>SciPy</li>
-                <li>Plotly</li><li>Streamlit</li>
-              </ul>
-
-              <div class="project-links">
-                <a href="https://github.com/hey-shiv/Audio-Explorer" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">&#8599;</span></a>
-                <a href="blogs/Audio%20Explorer/">Write-up</a>
-              </div>
-            </li>
-
-            <!-- 03 -->
-            <li class="project-card">
-              <div class="project-card-header">
-                <div>
-                  <span class="project-index">03</span>
-                  <p class="eyebrow">Quantitative &middot; Backtesting</p>
-                  <h3>VCP Screener</h3>
-                </div>
-                <span class="status-token" data-state="negative">Negative result</span>
-              </div>
-
-              <p>
-                A screener that scans roughly 2,300 NSE equities for a volatility contraction
-                pattern, combining technical, fundamental and ownership evidence behind a
-                FastAPI service and a dependency-free frontend.
-              </p>
-              <p>
-                The screener is the smaller half. The larger half is the ten-year study that
-                tried to falsify it: point-in-time signal replay, one shared trade simulator,
-                real transaction costs, a portfolio-level constraint, and matched random
-                entries as a control.
-              </p>
-
-              <div class="graph-surface">
-                <div class="metric-strip" aria-label="Build figures">
-                  <span><strong>2,300</strong> equities scanned</span>
-                  <span><strong>2,657</strong> replayed signals</span>
-                  <span><strong>227</strong> tests</span>
-                  <span><strong>10</strong> years of bars</span>
-                </div>
-                <div class="graph-result">
-                  <p class="signal-marker">Result</p>
-                  <strong>No demonstrable edge.</strong>
-                </div>
-              </div>
-
-              <div class="learned">
-                <p class="meta-label">What I learned</p>
-                <p>
-                  A control you forgot to match measures something else. Drawn from the wrong
-                  window, my random entries were reporting the market regime rather than the
-                  pattern &mdash; which is exactly how a result that looks good gets published.
-                </p>
-              </div>
-
-              <ul class="stack" aria-label="Stack">
-                <li>Python</li><li>pandas</li><li>FastAPI</li><li>JavaScript</li>
-              </ul>
-
-              <div class="project-links">
-                <a href="projects/vcp-screener/">Case study <span aria-hidden="true">&rarr;</span></a>
-              </div>
-            </li>
+          <ul class="readouts" style="margin-top: var(--s9)" aria-label="Build figures">
+            <li><b>2,300</b><span>Equities scanned</span></li>
+            <li><b>2,657</b><span>Replayed signals</span></li>
+            <li><b>227</b><span>Tests</span></li>
+            <li><b>10</b><span>Years of bars</span></li>
           </ul>
+
+          <div class="learned" style="margin-top: var(--s9)">
+            <p class="meta-label">What I learned</p>
+            <p>
+              A control you forgot to match measures something else. Drawn from the wrong window,
+              my random entries were reporting the market regime rather than the pattern &mdash;
+              which is exactly how a result that looks good gets published.
+            </p>
+          </div>
+
+          <ul class="stack" aria-label="Stack">
+            <li>Python</li><li>pandas</li><li>FastAPI</li><li>JavaScript</li>
+          </ul>
+
+          <div class="project-links">
+            <a href="projects/vcp-screener/">Full case study <span aria-hidden="true">&rarr;</span></a>
+          </div>
         </section>
 
         <section class="anchor-statement rise" aria-label="Working principle">
@@ -334,71 +500,131 @@
           <footer>A split that leaks makes every number after it meaningless</footer>
         </section>
 
-        <!-- ============================= WHAT BROKE / FAILURE GRAPH ============================= -->
-        <section id="broke" data-signal="broke" aria-labelledby="broke-h" class="failure-graph">
+        <!-- ===================== 06 — FAILURE GRAPH ===================== -->
+        <section id="failure" data-signal="failure" aria-labelledby="failure-h">
           <div class="section-head">
             <div>
-              <p class="signal-marker">03 &mdash; Failure graph</p>
-              <h2 id="broke-h">Things I got wrong, and what changed after.</h2>
+              <p class="signal-marker">06 &mdash; Failure graph</p>
+              <h2 id="failure-h">Five things I got wrong. Two are still open.</h2>
             </div>
           </div>
-          <ol class="timeline">
-            <li>
-              <span class="tl-num">01</span>
-              <div class="tl-body">
+
+          <div class="fgraph-layout">
+            <div>
+              <svg class="fgraph" viewBox="0 0 520 420" data-fgraph role="group" aria-label="A network of five failure cases around a central evaluation node. Select a node to read that case; every case is also listed beside the graph.">
+                <g aria-hidden="true">
+                  <line class="fedge" data-case="leakage" x1="260" y1="210" x2="95" y2="85" />
+                  <line class="fedge" data-case="key" x1="260" y1="210" x2="405" y2="90" />
+                  <line class="fedge" data-case="length" x1="260" y1="210" x2="455" y2="245" />
+                  <line class="fedge" data-case="noise" x1="260" y1="210" x2="300" y2="355" />
+                  <line class="fedge" data-case="control" x1="260" y1="210" x2="105" y2="300" />
+                </g>
+
+                <g aria-hidden="true">
+                  <circle cx="260" cy="210" r="7" fill="var(--signal)" />
+                  <text class="fgraph-spine" x="260" y="236" text-anchor="middle">EVALUATION</text>
+                </g>
+
+                <g class="fnode" data-case="leakage" data-status="fixed" tabindex="0" role="button" aria-pressed="false">
+                  <circle cx="95" cy="85" r="9" />
+                  <text x="95" y="62" text-anchor="middle">Leakage</text>
+                </g>
+                <g class="fnode" data-case="key" data-status="open" tabindex="0" role="button" aria-pressed="false">
+                  <circle cx="405" cy="90" r="9" />
+                  <text x="405" y="67" text-anchor="middle">Key shift</text>
+                </g>
+                <g class="fnode" data-case="length" data-status="open" tabindex="0" role="button" aria-pressed="false">
+                  <circle cx="455" cy="245" r="9" />
+                  <text x="455" y="272" text-anchor="middle">Length bias</text>
+                </g>
+                <g class="fnode" data-case="noise" data-status="fixed" tabindex="0" role="button" aria-pressed="false">
+                  <circle cx="300" cy="355" r="9" />
+                  <text x="300" y="382" text-anchor="middle">Noise</text>
+                </g>
+                <g class="fnode" data-case="control" data-status="fixed" tabindex="0" role="button" aria-pressed="false">
+                  <circle cx="105" cy="300" r="9" />
+                  <text x="105" y="327" text-anchor="middle">Control</text>
+                </g>
+              </svg>
+
+              <p class="rep-caption" style="margin-top: var(--s5)">
+                <b>Legend</b>
+                <span>Solid ring &mdash; corrected &nbsp;&middot;&nbsp; Dashed ring &mdash; still open</span>
+              </p>
+            </div>
+
+            <div class="fdetail">
+              <div class="fcase" data-case="leakage">
                 <h3>Clique leakage</h3>
-                <ol class="tl-steps">
-                  <li><b>Assumption</b><span>Splitting the dataset by track would keep train and test properly separate.</span></li>
-                  <li><b>Failure</b><span>The same composition sat on both sides of the boundary, so the metric was partly measuring memorisation.</span></li>
-                  <li><b>Correction</b><span>Splits are made at the work level, before anything else runs.</span></li>
-                </ol>
+                <dl>
+                  <dt>Assumption</dt>
+                  <dd>Splitting the dataset by track would keep train and test properly separate.</dd>
+                  <dt>What broke</dt>
+                  <dd>The same composition sat on both sides of the boundary, so the metric was partly measuring memorisation.</dd>
+                  <dt>What changed</dt>
+                  <dd>Splits are made at the work level, before anything else runs.</dd>
+                  <dt>Status</dt>
+                  <dd>Corrected.</dd>
+                </dl>
               </div>
-            </li>
-            <li>
-              <span class="tl-num">02</span>
-              <div class="tl-body">
+
+              <div class="fcase" data-case="key">
                 <h3>Key invariance is an assumption</h3>
-                <ol class="tl-steps">
-                  <li><b>Assumption</b><span>One global transposition index per pair is enough to handle a change of key.</span></li>
-                  <li><b>Failure</b><span>Covers that modulate partway through fall out of alignment; a single shift cannot describe them.</span></li>
-                  <li><b>Current status</b><span>Open. Handling it properly means scoring more than one hypothesis per pair.</span></li>
-                </ol>
+                <dl>
+                  <dt>Assumption</dt>
+                  <dd>One global transposition index per pair is enough to handle a change of key.</dd>
+                  <dt>What broke</dt>
+                  <dd>Covers that modulate partway through fall out of alignment; a single shift cannot describe them.</dd>
+                  <dt>What changed</dt>
+                  <dd>Nothing yet. Handling it properly means scoring more than one hypothesis per pair.</dd>
+                  <dt>Status</dt>
+                  <dd class="status-open">Open.</dd>
+                </dl>
               </div>
-            </li>
-            <li>
-              <span class="tl-num">03</span>
-              <div class="tl-body">
+
+              <div class="fcase" data-case="length">
                 <h3>Alignment cost is length-biased</h3>
-                <ol class="tl-steps">
-                  <li><b>Assumption</b><span>Accumulated DTW cost is a fair similarity score between two tracks.</span></li>
-                  <li><b>Failure</b><span>Unnormalised cost quietly rewards short candidates over musically better matches.</span></li>
-                  <li><b>Current status</b><span>Open. Score normalisation is the current problem in the pipeline.</span></li>
-                </ol>
+                <dl>
+                  <dt>Assumption</dt>
+                  <dd>Accumulated DTW cost is a fair similarity score between two tracks.</dd>
+                  <dt>What broke</dt>
+                  <dd>Unnormalised cost quietly rewards short candidates over musically better matches.</dd>
+                  <dt>What changed</dt>
+                  <dd>Score normalisation is the current problem in the pipeline.</dd>
+                  <dt>Status</dt>
+                  <dd class="status-open">Open.</dd>
+                </dl>
               </div>
-            </li>
-            <li>
-              <span class="tl-num">04</span>
-              <div class="tl-body">
+
+              <div class="fcase" data-case="noise">
                 <h3>Noise mistaken for progress</h3>
-                <ol class="tl-steps">
-                  <li><b>Assumption</b><span>A higher average retrieval metric means a better system.</span></li>
-                  <li><b>Failure</b><span>Deltas moved around inside the noise, so the ranking of two methods was not stable.</span></li>
-                  <li><b>Correction</b><span>Work-level bootstrap intervals became part of the loop rather than an afterthought.</span></li>
-                </ol>
+                <dl>
+                  <dt>Assumption</dt>
+                  <dd>A higher average retrieval metric means a better system.</dd>
+                  <dt>What broke</dt>
+                  <dd>Deltas moved around inside the noise, so the ranking of two methods was not stable.</dd>
+                  <dt>What changed</dt>
+                  <dd>Work-level bootstrap intervals became part of the loop rather than an afterthought.</dd>
+                  <dt>Status</dt>
+                  <dd>Corrected.</dd>
+                </dl>
               </div>
-            </li>
-            <li>
-              <span class="tl-num">05</span>
-              <div class="tl-body">
+
+              <div class="fcase" data-case="control">
                 <h3>A control I forgot to match</h3>
-                <ol class="tl-steps">
-                  <li><b>Assumption</b><span>Comparing the screener&rsquo;s signals against random entries is a fair control.</span></li>
-                  <li><b>Failure</b><span>Controls drawn from the wrong window measured the market regime rather than the pattern.</span></li>
-                  <li><b>Correction</b><span>Matched on symbol, risk and window &mdash; and the apparent edge disappeared.</span></li>
-                </ol>
+                <dl>
+                  <dt>Assumption</dt>
+                  <dd>Comparing the screener&rsquo;s signals against random entries is a fair control.</dd>
+                  <dt>What broke</dt>
+                  <dd>Controls drawn from the wrong window measured the market regime rather than the pattern.</dd>
+                  <dt>What changed</dt>
+                  <dd>Matched on symbol, risk and window &mdash; and the apparent edge disappeared.</dd>
+                  <dt>Status</dt>
+                  <dd>Corrected.</dd>
+                </dl>
               </div>
-            </li>
-          </ol>
+            </div>
+          </div>
         </section>
 
         <section class="anchor-statement rise" aria-label="Working principle">
@@ -406,11 +632,11 @@
           <footer>From building the audio pipeline one transform at a time</footer>
         </section>
 
-        <!-- ============================= PROTOCOL ============================= -->
+        <!-- ===================== 07 — PROTOCOL ===================== -->
         <section id="protocol" data-signal="protocol" aria-labelledby="how-h">
           <div class="section-head">
             <div>
-              <p class="signal-marker">04 &mdash; Build protocol</p>
+              <p class="signal-marker">07 &mdash; Build protocol</p>
               <h2 id="how-h">Rules I earned the slow way.</h2>
             </div>
           </div>
@@ -423,11 +649,11 @@
           </ol>
         </section>
 
-        <!-- ============================= ARCHIVE ============================= -->
+        <!-- ===================== 08 — ARCHIVE ===================== -->
         <section id="archive" data-signal="archive" aria-labelledby="archive-h">
           <div class="section-head">
             <div>
-              <p class="signal-marker">05 &mdash; Archive</p>
+              <p class="signal-marker">08 &mdash; Archive</p>
               <h2 id="archive-h">Earlier builds.</h2>
             </div>
           </div>
@@ -461,11 +687,11 @@
           </ul>
         </section>
 
-        <!-- ============================= FIELD NOTES ============================= -->
+        <!-- ===================== 09 — FIELD NOTES ===================== -->
         <section id="notes" data-signal="notes" aria-labelledby="writing-h">
           <div class="section-head">
             <div>
-              <p class="signal-marker">06 &mdash; Field notes</p>
+              <p class="signal-marker">09 &mdash; Field notes</p>
               <h2 id="writing-h">Notes written close to the work.</h2>
             </div>
             <a class="section-link" href="blog.html">All field notes &rarr;</a>
@@ -489,11 +715,11 @@
           </ol>
         </section>
 
-        <!-- ============================= CURRENT STATE ============================= -->
-        <section id="state" data-signal="state" aria-labelledby="skills-h">
+        <!-- ===================== CURRENT STATE ===================== -->
+        <section id="state" aria-labelledby="skills-h">
           <div class="section-head">
             <div>
-              <p class="signal-marker">07 &mdash; Current state</p>
+              <p class="signal-marker">Current state</p>
               <h2 id="skills-h">Honest about the gradient.</h2>
             </div>
             <a class="section-link" href="now.html">Full status board &rarr;</a>
@@ -534,12 +760,12 @@
           </dl>
         </section>
 
-        <!-- ============================= ABOUT ============================= -->
-        <section id="about" data-signal="about" aria-labelledby="about-h">
+        <!-- ===================== ABOUT ===================== -->
+        <section id="about" aria-labelledby="about-h">
           <div class="section-head">
             <div>
-              <p class="signal-marker">08 &mdash; About</p>
-              <h2 id="about-h">Where I am, and where this is going.</h2>
+              <p class="signal-marker">About</p>
+              <h2 id="about-h">I care about what survives the transformation.</h2>
             </div>
           </div>
 
@@ -574,9 +800,9 @@
           </dl>
         </section>
 
-        <!-- ============================= END OF SIGNAL ============================= -->
+        <!-- ===================== 10 — END OF SIGNAL ===================== -->
         <section class="contact end-signal" id="end" data-signal="end" aria-labelledby="contact-h">
-          <p class="signal-marker">09 &mdash; End of signal</p>
+          <p class="signal-marker">10 &mdash; End of signal</p>
           <h2 id="contact-h">Building something difficult?</h2>
           <p>
             I&rsquo;m looking for internships and early engineering roles where I can build
@@ -607,7 +833,8 @@
         </div>
       </footer>
     </div>
+
+    <script src="assets/instrument.js" defer></script>
     <script src="assets/site.js" defer></script>
-    <script src="assets/signal.js" defer></script>
   </body>
 </html>

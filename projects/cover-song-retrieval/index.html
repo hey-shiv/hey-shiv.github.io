@@ -58,6 +58,115 @@
           </ul>
         </section>
 
+        <!-- ============ The system, one stage at a time ============ -->
+        <section class="world" data-world aria-labelledby="system-h">
+          <div class="world-head">
+            <p class="signal-marker">The system</p>
+            <h2 id="system-h" class="world-title">One track, seven representations.</h2>
+            <p class="world-question">
+              The same information, rewritten at every stage &mdash; until two recordings of one
+              composition can be scored against each other.
+            </p>
+          </div>
+
+          <div class="world-inner">
+            <div class="world-visual">
+              <canvas
+                data-states="wave,chroma,oti,dtw,embed,retrieve,rank"
+                role="img"
+                aria-label="One field of points changing representation: a waveform, a twelve-row chroma grid, a circular transposition ring, two sequences under an alignment path, an embedding scatter, a retrieval result with a query linked to its neighbours, and a ranked list. Every stage is described in the text beside it."
+              ></canvas>
+              <p class="world-hud">
+                <span class="hud-stage">01 / 07</span>
+                <span class="hud-label">Input / audio</span>
+                <span>Illustrative</span>
+              </p>
+            </div>
+
+            <ol class="world-steps">
+              <li class="world-step" data-stage="Input / audio">
+                <p class="step-label"><span>Stage 01</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
+                <h3>Input / audio</h3>
+                <p>
+                  Da-TACOS ships precomputed MIR features rather than raw audio, which keeps the
+                  work on retrieval instead of hundreds of gigabytes of downloads. Every track
+                  carries a work ID and a performance ID; two tracks are a cover pair when they
+                  share a work ID.
+                </p>
+              </li>
+
+              <li class="world-step" data-stage="Representation / HPCP">
+                <p class="step-label"><span>Stage 02</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
+                <h3>Representation / 12 pitch classes</h3>
+                <p>
+                  Chroma / HPCP reduces each frame to twelve pitch classes. Timbre and octave are
+                  discarded on purpose, because they are exactly what a cover changes. What is
+                  left is harmonic movement over time &mdash; the thing that tends to survive
+                  re-recording.
+                </p>
+              </li>
+
+              <li class="world-step" data-stage="Alignment / OTI">
+                <p class="step-label"><span>Stage 03</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
+                <h3>Alignment / OTI</h3>
+                <p>
+                  The Optimal Transposition Index is estimated from global mean chroma vectors and
+                  the candidate is rotated onto the query&rsquo;s key, across twelve circular
+                  shifts. It buys key invariance and quietly assumes the key never changes
+                  mid-song &mdash; an assumption that does break.
+                </p>
+              </li>
+
+              <li class="world-step" data-stage="Sequence alignment / DTW">
+                <p class="step-label"><span>Stage 04</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
+                <h3>Sequence alignment / DTW</h3>
+                <p>
+                  A cosine cost matrix is built between the two chroma sequences, and subsequence
+                  DTW finds a tempo-elastic path through it, so a short query can match anywhere
+                  inside a longer candidate. The accumulated cost becomes the similarity score.
+                </p>
+              </li>
+
+              <li class="world-step" data-stage="Learned representation">
+                <p class="step-label"><span>Stage 05</span> &mdash; <span class="state-glyph" data-state="planned">Planned</span></p>
+                <h3>Learned representation</h3>
+                <p>
+                  A dilated temporal convolution trained with a triplet objective, producing one
+                  track-level vector per recording. This is designed but not built: it is the
+                  current work, and nothing on this page reports a number from it.
+                </p>
+              </li>
+
+              <li class="world-step" data-stage="Vector search / FAISS">
+                <p class="step-label"><span>Stage 06</span> &mdash; <span class="state-glyph" data-state="planned">Planned</span></p>
+                <h3>Vector search / FAISS</h3>
+                <p>
+                  Exact inner product first, because approximate search is an optimisation rather
+                  than a result. The point of the index is to replace pairwise DTW, which is
+                  quadratic in the number of candidates.
+                </p>
+              </li>
+
+              <li class="world-step" data-stage="Evaluation / MAP · MRR · R@K">
+                <p class="step-label"><span>Stage 07</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
+                <h3>Evaluation / MAP &middot; MRR &middot; Recall@K</h3>
+                <p>
+                  Candidates are sorted, the self-match dropped, and the ranking scored with MAP,
+                  MRR and Recall@K &mdash; written from scratch and unit tested against rankings
+                  worked out by hand, on work-disjoint splits. The metrics exist before the model
+                  does, which is the only order that keeps them honest.
+                </p>
+              </li>
+            </ol>
+          </div>
+
+          <p class="world-foot live-signal-foot">
+            Illustrative visualisation, generated in-browser from deterministic functions. It
+            shows the shape of each representation, not measured output. No retrieval scores are
+            published on this page because the benchmark run has not been completed.
+          </p>
+        </section>
+
         <section aria-labelledby="overview">
           <p class="section-label" id="overview">Overview</p>
           <p>
