@@ -81,6 +81,44 @@
   });
 })();
 
+/* -------------------------------------------------------- system film --- */
+/* This is deliberately a single scroll field, not a navigation diagram. The
+   same typographic material moves out of register as each question takes over. */
+(function () {
+  var section = document.querySelector(".system-transform");
+  if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var stages = [0, 0.21, 0.42, 0.62, 0.8, 1];
+
+  function triangle(progress, centre, width) {
+    return Math.max(0, 1 - Math.abs(progress - centre) / width);
+  }
+
+  function update() {
+    var rect = section.getBoundingClientRect();
+    var distance = Math.max(1, section.offsetHeight - window.innerHeight);
+    var progress = Math.max(0, Math.min(1, -rect.top / distance));
+    section.style.setProperty("--system-progress", progress.toFixed(4));
+    section.style.setProperty("--system-audio", triangle(progress, stages[0], 0.26).toFixed(3));
+    section.style.setProperty("--system-representation", triangle(progress, stages[1], 0.22).toFixed(3));
+    section.style.setProperty("--system-retrieval", triangle(progress, stages[2], 0.22).toFixed(3));
+    section.style.setProperty("--system-evaluation", triangle(progress, stages[3], 0.2).toFixed(3));
+    section.style.setProperty("--system-failure", triangle(progress, stages[4], 0.16).toFixed(3));
+    section.style.setProperty("--system-resolution", Math.max(0, (progress - 0.84) / 0.16).toFixed(3));
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; update(); });
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+})();
+
 /* ---------------------------------------------------------- signal rail --- */
 (function () {
   var rail = document.querySelector(".signal-rail");
