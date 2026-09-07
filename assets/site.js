@@ -8,7 +8,7 @@
 
 /* ---------------------------------------------------------------- theme --- */
 (function () {
-  var storageKey = "site-theme";
+  var storageKey = "site-theme-v2";
   var root = document.documentElement;
 
   function getTheme() {
@@ -16,7 +16,7 @@
       var saved = localStorage.getItem(storageKey);
       if (saved === "light" || saved === "dark") return saved;
     } catch (error) {}
-    return "light";
+    return "dark";
   }
 
   var toggle = document.createElement("button");
@@ -27,9 +27,9 @@
   function applyTheme(theme) {
     root.dataset.theme = theme;
     root.style.colorScheme = theme;
-    toggle.textContent = theme === "dark" ? "☼" : "☾";
-    toggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
-    var label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+    toggle.textContent = theme === "light" ? "◐" : "◑";
+    toggle.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
+    var label = theme === "light" ? "Switch to instrument mode" : "Switch to paper mode";
     toggle.setAttribute("aria-label", label);
     toggle.setAttribute("title", label);
   }
@@ -38,7 +38,7 @@
   applyTheme(root.dataset.theme || getTheme());
 
   toggle.addEventListener("click", function () {
-    var next = root.dataset.theme === "dark" ? "light" : "dark";
+    var next = root.dataset.theme === "light" ? "dark" : "light";
     try {
       localStorage.setItem(storageKey, next);
     } catch (error) {}
@@ -79,6 +79,30 @@
       });
     }, 400);
   });
+})();
+
+/* ---------------------------------------------------------- signal rail --- */
+(function () {
+  var rail = document.querySelector(".signal-rail");
+  var nodes = document.querySelectorAll("[data-signal]");
+  if (!rail || !nodes.length || !("IntersectionObserver" in window)) return;
+
+  var io = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        var id = entry.target.getAttribute("data-signal");
+        var tick = rail.querySelector('li[data-signal="' + id + '"]');
+        if (!tick) return;
+        if (entry.isIntersecting) {
+          rail.querySelectorAll("li.is-active").forEach(function (li) { li.classList.remove("is-active"); });
+          tick.classList.add("is-active");
+        }
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+  );
+
+  nodes.forEach(function (el) { io.observe(el); });
 })();
 
 /* ---------------------------------------------------------------- media --- */

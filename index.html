@@ -26,8 +26,8 @@
     <script>
       (function () {
         try {
-          var saved = localStorage.getItem("site-theme");
-          var theme = saved || "light";
+          var saved = localStorage.getItem("site-theme-v2");
+          var theme = saved || "dark";
           document.documentElement.dataset.theme = theme;
           document.documentElement.style.colorScheme = theme;
         } catch (error) {}
@@ -61,92 +61,94 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+
+    <ul class="signal-rail" aria-hidden="true">
+      <li data-signal="entry"><a href="#main" data-label="01 — Entry"></a></li>
+      <li data-signal="work"><a href="#work" data-label="02 — Work"></a></li>
+      <li data-signal="broke"><a href="#broke" data-label="03 — Failure"></a></li>
+      <li data-signal="protocol"><a href="#protocol" data-label="04 — Protocol"></a></li>
+      <li data-signal="archive"><a href="#archive" data-label="05 — Archive"></a></li>
+      <li data-signal="notes"><a href="#notes" data-label="06 — Field notes"></a></li>
+      <li data-signal="state"><a href="#state" data-label="07 — State"></a></li>
+      <li data-signal="about"><a href="#about" data-label="08 — About"></a></li>
+      <li data-signal="end"><a href="#end" data-label="09 — End"></a></li>
+    </ul>
+
     <div class="container">
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
           <a href="index.html" class="nav-logo" aria-label="Home">Shivashant</a>
           <a href="index.html" aria-current="page">Work</a>
-          <a href="blog.html">Writing</a>
+          <a href="blog.html">Field notes</a>
           <a href="notes.html">Notes</a>
           <a href="now.html">Now</a>
         </nav>
       </header>
 
       <main id="main">
-        <!-- ============================= IDENTITY ============================= -->
-        <section class="hero" aria-labelledby="who">
-          <div class="hero-grid">
-            <div class="hero-lede">
-              <p class="availability-row rise" style="--i:0">
-                <span class="availability-main">
-                  <span class="availability-dot" aria-hidden="true"></span>
-                  Open to AI/ML internships
-                </span>
-                <span class="availability-pill">2026</span>
-              </p>
-
-              <h1 class="hero-name rise" id="who" style="--i:1">Shivashant Manohar</h1>
-              <p class="hero-role rise" style="--i:2">AI / ML Engineering <b>&middot;</b> Audio <b>&middot;</b> Retrieval <b>&middot;</b> Evaluation</p>
-
-              <div class="hero-split">
-                <p class="statement rise" style="--i:3">
-                  I build machines that listen &mdash; then try hard to prove they don&rsquo;t work.
-                </p>
-
-                <div>
-                  <p class="rise" style="--i:4">
-                    Final-year CS (AI &amp; ML) at VIT-AP. Most of what I know came from
-                    implementing things rather than reading about them &mdash; a transformer
-                    written from scratch before I read a reference implementation, an audio
-                    pipeline built one transform at a time, a trading screener shipped alongside
-                    the study that tried to falsify it.
-                  </p>
-
-                  <div class="actions rise" style="--i:5">
-                    <a class="btn btn-primary" href="#work">
-                      View work <span class="btn-arrow" aria-hidden="true">&darr;</span>
-                    </a>
-                    <a class="btn" href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">
-                      GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                    <a class="btn" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">
-                      R&eacute;sum&eacute; <span class="btn-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                  </div>
-
-                  <p class="actions-quiet rise" style="--i:6">
-                    <a href="mailto:shivashant.work@gmail.com">Email</a>
-                    <a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer">LinkedIn</a>
-                    <a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer">X</a>
-                    <a href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer">Medium</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <figure class="hero-viz rise" style="--i:7">
-              <canvas id="hero-viz" role="img"
-                aria-label="Illustration of the retrieval pipeline: an audio waveform, a twelve-row chroma field, and an embedding scatter in which a query point is linked to its three nearest neighbours."></canvas>
-              <div class="hero-viz-inner">
-                <ol class="viz-legend">
-                  <li><b>01 &nbsp;Signal</b><span>Audio arrives as a one-dimensional array of samples.</span></li>
-                  <li><b>02 &nbsp;Representation</b><span>Twelve pitch classes per frame. Timbre is discarded on purpose.</span></li>
-                  <li><b>03 &nbsp;Retrieval</b><span>Tracks become points; the query finds its nearest neighbours.</span></li>
-                </ol>
-                <figcaption class="viz-note">
-                  Illustrative animation drawn from generated data, not model output. The real
-                  pipeline is described in the case study below.
-                </figcaption>
-              </div>
-            </figure>
+        <!-- ============================= ENTRY / SIGNAL ============================= -->
+        <section class="hero" data-signal="entry" aria-labelledby="who">
+          <div class="entry-tag rise" style="--i:0">
+            <span>SIGNAL / 001</span>
+            <span class="signal-live">Open to AI/ML internships &middot; 2026</span>
           </div>
+
+          <p class="hero-role rise" style="--i:1">
+            Shivashant Manohar <b>&middot;</b> AI / ML Engineering <b>&middot;</b> Audio <b>&middot;</b> Retrieval <b>&middot;</b> Evaluation
+          </p>
+
+          <h1 class="entry-headline rise" id="who" style="--i:2">I build machines that listen.</h1>
+
+          <p class="statement rise" style="--i:3; max-width: 36rem;">
+            Then I try hard to prove they don&rsquo;t work. Final-year CS (AI &amp; ML) at VIT-AP &mdash;
+            most of what I know came from implementing things rather than reading about them: a
+            transformer written from scratch before I read a reference implementation, an audio
+            pipeline built one transform at a time, a trading screener shipped alongside the study
+            that tried to falsify it.
+          </p>
+
+          <div class="actions rise" style="--i:4">
+            <a class="btn btn-primary" href="#work">
+              View work <span class="btn-arrow" aria-hidden="true">&darr;</span>
+            </a>
+            <a class="btn" href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">
+              GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="btn" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">
+              R&eacute;sum&eacute; <span class="btn-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+          </div>
+
+          <p class="actions-quiet rise" style="--i:5">
+            <a href="mailto:shivashant.work@gmail.com">Email</a>
+            <a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer">X</a>
+            <a href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer">Medium</a>
+          </p>
         </section>
 
+        <figure class="live-signal rise" style="--i:6">
+          <div class="live-signal-head">
+            <span class="signal-marker">Live signal</span>
+            <span>Illustrative &mdash; generated in-browser, not model output</span>
+          </div>
+          <canvas
+            id="live-signal"
+            role="img"
+            aria-label="An animated waveform that leans toward the pointer's horizontal position and gradually resolves into three clustered scatters of points as the page is scrolled — a small illustration of signal becoming representation."
+          ></canvas>
+          <p class="live-signal-foot">
+            A waveform, breathing. It leans toward the pointer, and dissolves into clustered
+            points as you scroll past &mdash; signal becoming representation. The real pipeline,
+            built from actual chroma features and DTW alignment, is below.
+          </p>
+        </figure>
+
         <!-- ============================= WORK ============================= -->
-        <section id="work" aria-labelledby="work-h">
+        <section id="work" data-signal="work" aria-labelledby="work-h">
           <div class="section-head">
             <div>
-              <p class="section-label">Selected work</p>
+              <p class="signal-marker">02 &mdash; Current work</p>
               <h2 id="work-h">Three things I built, and what each one taught me.</h2>
             </div>
           </div>
@@ -162,6 +164,18 @@
                 </div>
                 <span class="status-token" data-state="building">Building</span>
               </div>
+
+              <p class="flagship-question">Can a machine recognise a song it has never heard?</p>
+
+              <figure class="mini-map" aria-label="Retrieval pipeline">
+                <p class="signal-marker" style="margin-bottom: var(--s4)">Pipeline</p>
+                <ol class="mini-flow">
+                  <li><span>Chroma / HPCP</span><small>timbre discarded</small></li>
+                  <li><span>Key alignment</span><small>OTI over 12 shifts</small></li>
+                  <li><span>Subsequence DTW</span><small>tempo-elastic path</small></li>
+                  <li><span>Ranked list</span><small>MAP / MRR / R@K</small></li>
+                </ol>
+              </figure>
 
               <p>
                 Given one recording, find every other recording of the same composition &mdash;
@@ -183,15 +197,6 @@
                 <span><strong>2,000</strong> distractors</span>
                 <span><strong>12</strong> transposition shifts</span>
               </div>
-
-              <figure class="mini-map" aria-label="Retrieval pipeline">
-                <ol class="mini-flow">
-                  <li><span>Chroma / HPCP</span><small>timbre discarded</small></li>
-                  <li><span>Key alignment</span><small>OTI over 12 shifts</small></li>
-                  <li><span>Subsequence DTW</span><small>tempo-elastic path</small></li>
-                  <li><span>Ranked list</span><small>MAP / MRR / R@K</small></li>
-                </ol>
-              </figure>
 
               <div class="learned">
                 <p class="meta-label">What I learned</p>
@@ -230,6 +235,11 @@
                 with delta features, and beat tracking. Feature computation is kept separate
                 from visualisation so each stage can be read on its own.
               </p>
+
+              <p class="signal-marker" style="margin: var(--s6) 0 0">Representations</p>
+              <ul class="stage-row" aria-label="Representations covered">
+                <li>Input</li><li>Waveform</li><li>STFT</li><li>Mel</li><li>MFCC</li><li>Rhythm</li>
+              </ul>
 
               <figure class="project-figure project-figure-video">
                 <video
@@ -283,14 +293,20 @@
                 The screener is the smaller half. The larger half is the ten-year study that
                 tried to falsify it: point-in-time signal replay, one shared trade simulator,
                 real transaction costs, a portfolio-level constraint, and matched random
-                entries as a control. The study found no demonstrable edge, and the site says so.
+                entries as a control.
               </p>
 
-              <div class="metric-strip" aria-label="Build figures">
-                <span><strong>2,300</strong> equities scanned</span>
-                <span><strong>2,657</strong> replayed signals</span>
-                <span><strong>227</strong> tests</span>
-                <span><strong>10</strong> years of bars</span>
+              <div class="graph-surface">
+                <div class="metric-strip" aria-label="Build figures">
+                  <span><strong>2,300</strong> equities scanned</span>
+                  <span><strong>2,657</strong> replayed signals</span>
+                  <span><strong>227</strong> tests</span>
+                  <span><strong>10</strong> years of bars</span>
+                </div>
+                <div class="graph-result">
+                  <p class="signal-marker">Result</p>
+                  <strong>No demonstrable edge.</strong>
+                </div>
               </div>
 
               <div class="learned">
@@ -311,31 +327,6 @@
               </div>
             </li>
           </ul>
-
-          <details class="previous-work">
-            <summary>Earlier builds</summary>
-            <ul class="project-list">
-              <li>
-                <span class="project-title">Modern Mini LLM &mdash; decoder-only transformer from scratch, 2024</span>
-                <span class="muted">
-                  A complete PyTorch training pipeline: byte-level BPE tokenizer, offline token
-                  caching, memmap TinyStories loading, and custom RMSNorm, RoPE, Grouped-Query
-                  Attention and SwiGLU. Each component was built and tested from first
-                  principles before I looked at a reference implementation, then wired to CLI
-                  inference and a Gradio interface.
-                </span>
-              </li>
-              <li>
-                <span class="project-title">Federated Intrusion Detection &mdash; privacy-preserving ML, 2024</span>
-                <span class="muted">
-                  A federated anomaly-detection pipeline for decentralised healthcare networks
-                  that trains without centralising client data, using lightweight secure
-                  aggregation, with a study of the tradeoff between aggregation efficiency and
-                  accuracy under non-IID client distributions.
-                </span>
-              </li>
-            </ul>
-          </details>
         </section>
 
         <section class="anchor-statement rise" aria-label="Working principle">
@@ -343,11 +334,83 @@
           <footer>A split that leaks makes every number after it meaningless</footer>
         </section>
 
-        <!-- ============================= HOW I BUILD ============================= -->
-        <section aria-labelledby="how-h">
+        <!-- ============================= WHAT BROKE / FAILURE GRAPH ============================= -->
+        <section id="broke" data-signal="broke" aria-labelledby="broke-h" class="failure-graph">
           <div class="section-head">
             <div>
-              <p class="section-label">How I build</p>
+              <p class="signal-marker">03 &mdash; Failure graph</p>
+              <h2 id="broke-h">Things I got wrong, and what changed after.</h2>
+            </div>
+          </div>
+          <ol class="timeline">
+            <li>
+              <span class="tl-num">01</span>
+              <div class="tl-body">
+                <h3>Clique leakage</h3>
+                <ol class="tl-steps">
+                  <li><b>Assumption</b><span>Splitting the dataset by track would keep train and test properly separate.</span></li>
+                  <li><b>Failure</b><span>The same composition sat on both sides of the boundary, so the metric was partly measuring memorisation.</span></li>
+                  <li><b>Correction</b><span>Splits are made at the work level, before anything else runs.</span></li>
+                </ol>
+              </div>
+            </li>
+            <li>
+              <span class="tl-num">02</span>
+              <div class="tl-body">
+                <h3>Key invariance is an assumption</h3>
+                <ol class="tl-steps">
+                  <li><b>Assumption</b><span>One global transposition index per pair is enough to handle a change of key.</span></li>
+                  <li><b>Failure</b><span>Covers that modulate partway through fall out of alignment; a single shift cannot describe them.</span></li>
+                  <li><b>Current status</b><span>Open. Handling it properly means scoring more than one hypothesis per pair.</span></li>
+                </ol>
+              </div>
+            </li>
+            <li>
+              <span class="tl-num">03</span>
+              <div class="tl-body">
+                <h3>Alignment cost is length-biased</h3>
+                <ol class="tl-steps">
+                  <li><b>Assumption</b><span>Accumulated DTW cost is a fair similarity score between two tracks.</span></li>
+                  <li><b>Failure</b><span>Unnormalised cost quietly rewards short candidates over musically better matches.</span></li>
+                  <li><b>Current status</b><span>Open. Score normalisation is the current problem in the pipeline.</span></li>
+                </ol>
+              </div>
+            </li>
+            <li>
+              <span class="tl-num">04</span>
+              <div class="tl-body">
+                <h3>Noise mistaken for progress</h3>
+                <ol class="tl-steps">
+                  <li><b>Assumption</b><span>A higher average retrieval metric means a better system.</span></li>
+                  <li><b>Failure</b><span>Deltas moved around inside the noise, so the ranking of two methods was not stable.</span></li>
+                  <li><b>Correction</b><span>Work-level bootstrap intervals became part of the loop rather than an afterthought.</span></li>
+                </ol>
+              </div>
+            </li>
+            <li>
+              <span class="tl-num">05</span>
+              <div class="tl-body">
+                <h3>A control I forgot to match</h3>
+                <ol class="tl-steps">
+                  <li><b>Assumption</b><span>Comparing the screener&rsquo;s signals against random entries is a fair control.</span></li>
+                  <li><b>Failure</b><span>Controls drawn from the wrong window measured the market regime rather than the pattern.</span></li>
+                  <li><b>Correction</b><span>Matched on symbol, risk and window &mdash; and the apparent edge disappeared.</span></li>
+                </ol>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="anchor-statement rise" aria-label="Working principle">
+          <blockquote>A representation is defined by what it throws away.</blockquote>
+          <footer>From building the audio pipeline one transform at a time</footer>
+        </section>
+
+        <!-- ============================= PROTOCOL ============================= -->
+        <section id="protocol" data-signal="protocol" aria-labelledby="how-h">
+          <div class="section-head">
+            <div>
+              <p class="signal-marker">04 &mdash; Build protocol</p>
               <h2 id="how-h">Rules I earned the slow way.</h2>
             </div>
           </div>
@@ -360,86 +423,80 @@
           </ol>
         </section>
 
-        <!-- ============================= WHAT BROKE ============================= -->
-        <section aria-labelledby="broke-h">
+        <!-- ============================= ARCHIVE ============================= -->
+        <section id="archive" data-signal="archive" aria-labelledby="archive-h">
           <div class="section-head">
             <div>
-              <p class="section-label">What broke</p>
-              <h2 id="broke-h">Things I got wrong, and what changed after.</h2>
+              <p class="signal-marker">05 &mdash; Archive</p>
+              <h2 id="archive-h">Earlier builds.</h2>
             </div>
           </div>
-          <ol class="timeline">
+          <ul class="archive-list">
             <li>
-              <span class="tl-num">01</span>
-              <div class="tl-body">
-                <h3>Clique leakage</h3>
-                <ol class="tl-steps">
-                  <li><b>Assumption</b><span>Splitting the dataset by track would keep train and test properly separate.</span></li>
-                  <li><b>What happened</b><span>The same composition sat on both sides of the boundary, so the metric was partly measuring memorisation.</span></li>
-                  <li><b>What changed</b><span>Splits are made at the work level, before anything else runs.</span></li>
-                </ol>
+              <div>
+                <p class="archive-year" style="margin: 0 0 var(--s2)">2024</p>
+                <h3>Modern Mini LLM</h3>
+                <span class="archive-stack">Decoder-only transformer &middot; PyTorch</span>
               </div>
+              <p>
+                A complete training pipeline: byte-level BPE tokenizer, offline token caching,
+                memmap TinyStories loading, and custom RMSNorm, RoPE, Grouped-Query Attention and
+                SwiGLU. Each component was built and tested from first principles before I looked
+                at a reference implementation, then wired to CLI inference and a Gradio interface.
+              </p>
             </li>
             <li>
-              <span class="tl-num">02</span>
-              <div class="tl-body">
-                <h3>Key invariance is an assumption</h3>
-                <ol class="tl-steps">
-                  <li><b>Assumption</b><span>One global transposition index per pair is enough to handle a change of key.</span></li>
-                  <li><b>What happened</b><span>Covers that modulate partway through fall out of alignment; a single shift cannot describe them.</span></li>
-                  <li><b>Where it stands</b><span>Open. Handling it properly means scoring more than one hypothesis per pair.</span></li>
-                </ol>
+              <div>
+                <p class="archive-year" style="margin: 0 0 var(--s2)">2024</p>
+                <h3>Federated Intrusion Detection</h3>
+                <span class="archive-stack">Privacy-preserving ML</span>
               </div>
+              <p>
+                A federated anomaly-detection pipeline for decentralised healthcare networks that
+                trains without centralising client data, using lightweight secure aggregation,
+                with a study of the tradeoff between aggregation efficiency and accuracy under
+                non-IID client distributions.
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        <!-- ============================= FIELD NOTES ============================= -->
+        <section id="notes" data-signal="notes" aria-labelledby="writing-h">
+          <div class="section-head">
+            <div>
+              <p class="signal-marker">06 &mdash; Field notes</p>
+              <h2 id="writing-h">Notes written close to the work.</h2>
+            </div>
+            <a class="section-link" href="blog.html">All field notes &rarr;</a>
+          </div>
+
+          <ol class="writing-list">
+            <li>
+              <a class="w-row" href="blogs/Audio%20Explorer/">
+                <span class="w-num">001</span>
+                <span class="w-title">Building the audio-AI pipeline from first principles</span>
+                <span class="w-meta">Build log &middot; Aug 2026</span>
+              </a>
             </li>
             <li>
-              <span class="tl-num">03</span>
-              <div class="tl-body">
-                <h3>Alignment cost is length-biased</h3>
-                <ol class="tl-steps">
-                  <li><b>Assumption</b><span>Accumulated DTW cost is a fair similarity score between two tracks.</span></li>
-                  <li><b>What happened</b><span>Unnormalised cost quietly rewards short candidates over musically better matches.</span></li>
-                  <li><b>Where it stands</b><span>Open. Score normalisation is the current problem in the pipeline.</span></li>
-                </ol>
-              </div>
-            </li>
-            <li>
-              <span class="tl-num">04</span>
-              <div class="tl-body">
-                <h3>Noise mistaken for progress</h3>
-                <ol class="tl-steps">
-                  <li><b>Assumption</b><span>A higher average retrieval metric means a better system.</span></li>
-                  <li><b>What happened</b><span>Deltas moved around inside the noise, so the ranking of two methods was not stable.</span></li>
-                  <li><b>What changed</b><span>Work-level bootstrap intervals became part of the loop rather than an afterthought.</span></li>
-                </ol>
-              </div>
-            </li>
-            <li>
-              <span class="tl-num">05</span>
-              <div class="tl-body">
-                <h3>A control I forgot to match</h3>
-                <ol class="tl-steps">
-                  <li><b>Assumption</b><span>Comparing the screener&rsquo;s signals against random entries is a fair control.</span></li>
-                  <li><b>What happened</b><span>Controls drawn from the wrong window measured the market regime rather than the pattern.</span></li>
-                  <li><b>What changed</b><span>Matched on symbol, risk and window &mdash; and the apparent edge disappeared.</span></li>
-                </ol>
-              </div>
+              <span class="w-row" aria-disabled="true">
+                <span class="w-num">002</span>
+                <span class="w-title">Why chroma is the right representation for cover detection</span>
+                <span class="w-meta">In progress</span>
+              </span>
             </li>
           </ol>
         </section>
 
-        <section class="anchor-statement rise" aria-label="Working principle">
-          <blockquote>A representation is defined by what it throws away.</blockquote>
-          <footer>From building the audio pipeline one transform at a time</footer>
-        </section>
-
-        <!-- ============================= TRAJECTORY ============================= -->
-        <section aria-labelledby="skills-h">
+        <!-- ============================= CURRENT STATE ============================= -->
+        <section id="state" data-signal="state" aria-labelledby="skills-h">
           <div class="section-head">
             <div>
-              <p class="section-label">Where I am</p>
+              <p class="signal-marker">07 &mdash; Current state</p>
               <h2 id="skills-h">Honest about the gradient.</h2>
             </div>
-            <a class="section-link" href="now.html">What I&rsquo;m doing now &rarr;</a>
+            <a class="section-link" href="now.html">Full status board &rarr;</a>
           </div>
 
           <ul class="trajectory">
@@ -477,39 +534,11 @@
           </dl>
         </section>
 
-        <!-- ============================= WRITING ============================= -->
-        <section aria-labelledby="writing-h">
-          <div class="section-head">
-            <div>
-              <p class="section-label">Writing</p>
-              <h2 id="writing-h">Notes written close to the work.</h2>
-            </div>
-            <a class="section-link" href="blog.html">All writing &rarr;</a>
-          </div>
-
-          <ol class="writing-list">
-            <li>
-              <a class="w-row" href="blogs/Audio%20Explorer/">
-                <span class="w-num">01</span>
-                <span class="w-title">Building the audio-AI pipeline from first principles</span>
-                <span class="w-meta">Build log &middot; Aug 2026</span>
-              </a>
-            </li>
-            <li>
-              <span class="w-row" aria-disabled="true">
-                <span class="w-num">02</span>
-                <span class="w-title">Why chroma is the right representation for cover detection</span>
-                <span class="w-meta">In progress</span>
-              </span>
-            </li>
-          </ol>
-        </section>
-
         <!-- ============================= ABOUT ============================= -->
-        <section aria-labelledby="about-h">
+        <section id="about" data-signal="about" aria-labelledby="about-h">
           <div class="section-head">
             <div>
-              <p class="section-label">About</p>
+              <p class="signal-marker">08 &mdash; About</p>
               <h2 id="about-h">Where I am, and where this is going.</h2>
             </div>
           </div>
@@ -545,9 +574,10 @@
           </dl>
         </section>
 
-        <!-- ============================= CONTACT ============================= -->
-        <section class="contact" aria-labelledby="contact-h">
-          <h2 id="contact-h">If you&rsquo;re hiring for AI/ML, I&rsquo;d like to talk.</h2>
+        <!-- ============================= END OF SIGNAL ============================= -->
+        <section class="contact end-signal" id="end" data-signal="end" aria-labelledby="contact-h">
+          <p class="signal-marker">09 &mdash; End of signal</p>
+          <h2 id="contact-h">Building something difficult?</h2>
           <p>
             I&rsquo;m looking for internships and early engineering roles where I can build
             systems end to end and be held to a real bar. The fastest way to reach me is email.
@@ -560,6 +590,7 @@
               R&eacute;sum&eacute; <span class="btn-arrow" aria-hidden="true">&#8599;</span>
             </a>
           </div>
+          <div class="signal-fade" aria-hidden="true"></div>
         </section>
       </main>
 
@@ -577,6 +608,6 @@
       </footer>
     </div>
     <script src="assets/site.js" defer></script>
-    <script src="assets/hero-viz.js" defer></script>
+    <script src="assets/signal.js" defer></script>
   </body>
 </html>
