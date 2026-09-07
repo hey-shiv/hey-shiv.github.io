@@ -88,72 +88,56 @@
               <h1 class="hero-name rise" id="who" style="--i:1">Shivashant Manohar</h1>
               <p class="hero-role rise" style="--i:2">AI / ML Engineering <b>&middot;</b> Audio <b>&middot;</b> Retrieval <b>&middot;</b> Evaluation</p>
 
-              <p class="statement rise" style="--i:3">
-                I build machines that listen &mdash; then try hard to prove they don&rsquo;t work.
-              </p>
-              <p class="rise" style="--i:4">
-                Final-year CS (AI &amp; ML) at VIT-AP. Most of what I know came from implementing
-                things rather than reading about them &mdash; a transformer written from scratch
-                before I read a reference implementation, an audio pipeline built one transform at
-                a time, a trading screener shipped alongside the study that tried to falsify it.
-              </p>
+              <div class="hero-split">
+                <p class="statement rise" style="--i:3">
+                  I build machines that listen &mdash; then try hard to prove they don&rsquo;t work.
+                </p>
 
-              <div class="actions rise" style="--i:5">
-                <a class="btn btn-primary" href="#work">
-                  View work <span class="btn-arrow" aria-hidden="true">&darr;</span>
-                </a>
-                <a class="btn" href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">
-                  GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span>
-                </a>
-                <a class="btn" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">
-                  R&eacute;sum&eacute; <span class="btn-arrow" aria-hidden="true">&#8599;</span>
-                </a>
+                <div>
+                  <p class="rise" style="--i:4">
+                    Final-year CS (AI &amp; ML) at VIT-AP. Most of what I know came from
+                    implementing things rather than reading about them &mdash; a transformer
+                    written from scratch before I read a reference implementation, an audio
+                    pipeline built one transform at a time, a trading screener shipped alongside
+                    the study that tried to falsify it.
+                  </p>
+
+                  <div class="actions rise" style="--i:5">
+                    <a class="btn btn-primary" href="#work">
+                      View work <span class="btn-arrow" aria-hidden="true">&darr;</span>
+                    </a>
+                    <a class="btn" href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">
+                      GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span>
+                    </a>
+                    <a class="btn" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">
+                      R&eacute;sum&eacute; <span class="btn-arrow" aria-hidden="true">&#8599;</span>
+                    </a>
+                  </div>
+
+                  <p class="actions-quiet rise" style="--i:6">
+                    <a href="mailto:shivashant.work@gmail.com">Email</a>
+                    <a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer">LinkedIn</a>
+                    <a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer">X</a>
+                    <a href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer">Medium</a>
+                  </p>
+                </div>
               </div>
-
-              <p class="actions-quiet rise" style="--i:6">
-                <a href="mailto:shivashant.work@gmail.com">Email</a>
-                <a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer">LinkedIn</a>
-                <a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer">X</a>
-                <a href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer">Medium</a>
-              </p>
             </div>
 
-            <aside class="hero-aside rise" style="--i:7" aria-label="Selected work index">
-              <p class="meta-label">Selected work</p>
-              <ul class="hero-index">
-                <li>
-                  <a href="projects/cover-song-retrieval/">
-                    <b>Cover Song Retrieval</b>
-                    <em data-state="building">Building</em>
-                  </a>
-                </li>
-                <li>
-                  <a href="blogs/Audio%20Explorer/">
-                    <b>Audio Explorer</b>
-                    <em data-state="done">Shipped</em>
-                  </a>
-                </li>
-                <li>
-                  <a href="projects/vcp-screener/">
-                    <b>VCP Screener</b>
-                    <em data-state="negative">Negative result</em>
-                  </a>
-                </li>
-              </ul>
-            </aside>
-
-            <figure class="hero-viz rise" style="--i:8">
+            <figure class="hero-viz rise" style="--i:7">
               <canvas id="hero-viz" role="img"
                 aria-label="Illustration of the retrieval pipeline: an audio waveform, a twelve-row chroma field, and an embedding scatter in which a query point is linked to its three nearest neighbours."></canvas>
-              <ol class="viz-legend">
-                <li><b>01 &nbsp;Signal</b><span>Audio arrives as a one-dimensional array of samples.</span></li>
-                <li><b>02 &nbsp;Representation</b><span>Twelve pitch classes per frame. Timbre is discarded on purpose.</span></li>
-                <li><b>03 &nbsp;Retrieval</b><span>Tracks become points; the query finds its nearest neighbours.</span></li>
-              </ol>
-              <figcaption class="viz-note">
-                Illustrative animation drawn from generated data, not model output. The real
-                pipeline is described in the case study below.
-              </figcaption>
+              <div class="hero-viz-inner">
+                <ol class="viz-legend">
+                  <li><b>01 &nbsp;Signal</b><span>Audio arrives as a one-dimensional array of samples.</span></li>
+                  <li><b>02 &nbsp;Representation</b><span>Twelve pitch classes per frame. Timbre is discarded on purpose.</span></li>
+                  <li><b>03 &nbsp;Retrieval</b><span>Tracks become points; the query finds its nearest neighbours.</span></li>
+                </ol>
+                <figcaption class="viz-note">
+                  Illustrative animation drawn from generated data, not model output. The real
+                  pipeline is described in the case study below.
+                </figcaption>
+              </div>
             </figure>
           </div>
         </section>
