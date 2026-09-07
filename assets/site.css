@@ -1429,3 +1429,168 @@ a.w-row:hover, a.w-row:focus-visible { padding-left: var(--s4); color: var(--acc
 
 .pipeline-v > li[data-built="yes"] .pv-tag { color: var(--done); border-color: color-mix(in srgb, var(--done) 40%, var(--border)); }
 .pipeline-v > li[data-built="next"] .pv-tag { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, var(--border)); }
+
+/* ==========================================================================
+   24. Art direction pass
+   --------------------------------------------------------------------------
+   Less formatting, more composition. Three moves:
+     – projects stop being cards and become editorial blocks
+     – numbers become objects, not table cells
+     – large statements break the page and give the eye somewhere to rest
+   Later in the cascade than the base rules, so these win by order.
+   ========================================================================== */
+
+/* ---- Projects: editorial blocks, not cards ---------------------------- */
+
+.featured-projects { gap: 0; }
+
+.project-card {
+  padding: var(--s12) 0 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.project-card:hover { border-color: var(--border); box-shadow: none; }
+
+.featured-projects > li:first-child .project-card,
+.featured-projects > .project-card:first-child { border-top: 0; padding-top: var(--s9); }
+
+.project-card-header { display: block; margin-bottom: var(--s7); }
+
+.project-index {
+  display: block;
+  margin-bottom: var(--s5);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+}
+
+.project-card-header .eyebrow { margin-bottom: var(--s4); }
+
+.project-card-header h3 {
+  max-width: 14ch;
+  font-size: clamp(1.9rem, 1.1rem + 3.1vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.project-card-header .status-token { margin-top: var(--s5); }
+
+/* The lead paragraph of a project reads like a standfirst. */
+.project-card > p:first-of-type {
+  max-width: 30rem;
+  font-size: clamp(1.05rem, 0.96rem + 0.42vw, 1.24rem);
+  font-weight: 450;
+  line-height: 1.5;
+  letter-spacing: -0.014em;
+  color: var(--text);
+}
+
+.project-card > p { max-width: 34rem; }
+
+/* ---- Numbers as objects ---------------------------------------------- */
+
+.metric-strip {
+  gap: var(--s8) var(--s7);
+  margin: var(--s9) 0;
+  padding: 0;
+  border: 0;
+}
+
+.metric-strip span { gap: var(--s2); }
+
+.metric-strip strong {
+  font-size: clamp(2.4rem, 1.3rem + 3.4vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+}
+
+.metric-strip span {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+}
+
+/* ---- Large statements: the page breathing ----------------------------- */
+
+.anchor-statement {
+  margin: 0;
+  padding: var(--s12) 0;
+  border-top: 1px solid var(--border);
+}
+
+.anchor-statement blockquote {
+  margin: 0;
+  max-width: 18ch;
+  color: var(--heading);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 0.8rem + 4.6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.anchor-statement footer {
+  margin: var(--s7) 0 0;
+  padding: 0;
+  border: 0;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+/* ---- Fewer boxes ------------------------------------------------------ */
+
+.trajectory li,
+.pipeline-grid li,
+.roadmap-list li {
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 0;
+  background: none;
+  padding: var(--s5) 0 0;
+}
+
+.trajectory { gap: var(--s7); }
+
+.trajectory li { border-top: 2px solid var(--border-strong); }
+.trajectory li:nth-child(1) { border-top-color: var(--done); }
+.trajectory li:nth-child(2) { border-top-color: var(--accent); }
+.trajectory li:nth-child(3) { border-top-color: var(--border-strong); }
+
+.mini-flow li { border: 0; border-left: 1px solid var(--border); border-radius: 0; background: none; padding: 0 0 0 var(--s4); }
+.mini-flow li + li::before { display: none; }
+.mini-map { border-bottom: 0; padding-bottom: 0; }
+
+.project-figure { padding: 0; border: 0; border-radius: 0; background: none; }
+.project-figure figcaption { padding: 0; margin-top: var(--s4); }
+
+.learned { background: none; border-left: 2px solid var(--accent); border-radius: 0; padding: var(--s2) 0 var(--s2) var(--s6); }
+.learned p { font-size: 1.02rem; line-height: 1.6; }
+
+/* ---- Earlier builds: visually subordinate ----------------------------- */
+
+.previous-work { margin-top: var(--s10); }
+.previous-work .project-title { font-size: 0.95rem; }
+.previous-work .muted { font-size: 0.88rem; }
+
+/* ---- Rhythm ----------------------------------------------------------- */
+
+main section { margin-bottom: var(--s12); padding-top: var(--s12); }
+.hero { margin-bottom: 0; }
+
+@media (max-width: 640px) {
+  main section { margin-bottom: var(--s10); padding-top: var(--s10); }
+  .project-card { padding-top: var(--s10); }
+  .anchor-statement { padding: var(--s10) 0; }
+  .metric-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s7) var(--s5); }
+}
