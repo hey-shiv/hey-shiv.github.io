@@ -359,12 +359,9 @@ main section:first-of-type { padding-top: 0; border-top: 0; }
 
 .hero { margin: 0 0 var(--s11); padding-top: 0; border-top: 0; }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: var(--s9);
-  align-items: center;
-}
+.hero-grid { display: block; }
+
+.hero-lede { max-width: 46rem; }
 
 .availability-row {
   display: inline-flex;
@@ -403,18 +400,19 @@ main section:first-of-type { padding-top: 0; border-top: 0; }
 
 .availability-pill::before { content: "/"; margin-right: var(--s2); color: var(--border-strong); }
 
+/* The name carries the page. Fluid from phone to wide desktop. */
 .hero-name {
-  margin: 0 0 var(--s3);
+  margin: 0 0 var(--s4);
   color: var(--heading);
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 1.7rem + 2.5vw, 3.15rem);
+  font-size: clamp(2.6rem, 1.4rem + 6.4vw, 5.6rem);
   font-weight: 700;
-  letter-spacing: -0.042em;
-  line-height: 1.02;
+  letter-spacing: -0.05em;
+  line-height: 0.94;
 }
 
 .hero-role {
-  margin: 0 0 var(--s6);
+  margin: 0 0 var(--s7);
   color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: 0.74rem;
@@ -425,8 +423,15 @@ main section:first-of-type { padding-top: 0; border-top: 0; }
 
 .hero-role b { color: var(--accent); font-weight: 500; }
 
-.hero .statement { max-width: 26ch; font-size: clamp(1.18rem, 1.02rem + 0.6vw, 1.44rem); }
-.hero p:not(.statement):not(.hero-role) { max-width: 34rem; font-size: 0.98rem; }
+.hero .statement {
+  max-width: 24ch;
+  font-size: clamp(1.35rem, 1rem + 1.6vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.032em;
+}
+
+.hero p:not(.statement):not(.hero-role) { max-width: 36rem; font-size: 0.98rem; }
 
 /* --------------------------------------------------------------------------
    7. Actions — a real CTA hierarchy
@@ -921,13 +926,14 @@ a.post-title:hover, a.post-title:focus-visible { color: var(--accent); }
    -------------------------------------------------------------------------- */
 
 .article-header { margin-top: var(--s8); }
+.article-header .statement, .article-header p { max-width: 42rem; }
 .article-header p:last-child { margin-bottom: 0; }
 
 article { margin-top: var(--s8); }
 article h2 { margin-top: var(--s9); margin-bottom: var(--s5); padding-top: var(--s5); border-top: 1px solid var(--border); }
 article p, article li { color: var(--text-secondary); }
-article p { font-size: 1.02rem; line-height: 1.78; max-width: var(--measure); }
-article ul, article ol { margin: var(--s5) 0 var(--s7); max-width: var(--measure); }
+article p { font-size: 1.06rem; line-height: 1.8; max-width: 42rem; }
+article ul, article ol { margin: var(--s5) 0 var(--s7); max-width: 42rem; }
 
 article pre {
   margin: var(--s6) 0 var(--s7);
@@ -950,7 +956,7 @@ article :not(pre) > code { padding: 0.08rem 0.3rem; border: 1px solid var(--bord
 
 .article-figure { margin: var(--s8) 0; }
 .article-figure img { width: 100%; border: 1px solid var(--border); border-radius: var(--radius); }
-.article-figure figcaption { margin-top: var(--s3); max-width: var(--measure); color: var(--text-muted); font-size: 0.8rem; line-height: 1.55; }
+.article-figure figcaption { margin-top: var(--s3); max-width: 42rem; color: var(--text-muted); font-size: 0.8rem; line-height: 1.55; }
 
 .lab-note { margin: var(--s7) 0; padding: var(--s5); border: 1px solid var(--border); border-left: 2px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; background: var(--accent-wash); }
 .lab-note p { margin: 0; max-width: none; color: var(--text); font-size: 0.95rem; }
@@ -1041,3 +1047,334 @@ footer p { margin: 0; color: var(--text-muted); font-family: var(--font-mono); f
 }
 
 .skill-cols-spaced { margin-top: var(--s9); }
+
+/* --------------------------------------------------------------------------
+   18. Hero visualisation
+   --------------------------------------------------------------------------
+   Signal, representation, retrieval — the shape of the pipeline, drawn from
+   generated data and labelled as such.
+   -------------------------------------------------------------------------- */
+
+.hero-viz {
+  margin-top: var(--s10);
+  padding-top: var(--s6);
+  border-top: 1px solid var(--border);
+}
+
+.hero-viz canvas {
+  display: block;
+  width: 100%;
+  height: 190px;
+}
+
+.viz-legend {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s7);
+  margin: var(--s5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.viz-legend li {
+  margin: 0;
+  padding-top: var(--s3);
+  border-top: 1px solid var(--border);
+}
+
+.viz-legend b {
+  display: block;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.viz-legend span {
+  display: block;
+  margin-top: var(--s1);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.viz-note {
+  margin: var(--s5) 0 0;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   19. Failure timeline
+   -------------------------------------------------------------------------- */
+
+.timeline { margin: 0; padding: 0; list-style: none; }
+
+.timeline > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: var(--s6);
+  margin: 0;
+  padding: var(--s8) 0;
+  border-top: 1px solid var(--border);
+}
+
+.timeline > li:first-child { border-top: 0; padding-top: 0; }
+
+.tl-num {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.tl-body h3 { margin: 0 0 var(--s5); font-size: 1.1rem; }
+
+.tl-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-left: 1px solid var(--border);
+}
+
+.tl-steps li {
+  position: relative;
+  margin: 0;
+  padding: 0 var(--s5) 0 var(--s5);
+  border-right: 1px solid var(--border);
+}
+
+.tl-steps li:last-child { border-right: 0; }
+
+/* The marker that walks the timeline. The last step is the resolution. */
+.tl-steps li::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 0.42em;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--border-strong);
+}
+
+.tl-steps li:last-child::before { background: var(--done); }
+
+.tl-steps b {
+  display: block;
+  margin-bottom: var(--s2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.tl-steps span { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+
+/* --------------------------------------------------------------------------
+   20. Writing index — publication style
+   -------------------------------------------------------------------------- */
+
+.writing-list { margin: 0; padding: 0; list-style: none; counter-reset: w; }
+
+.writing-list > li { margin: 0; border-top: 1px solid var(--border); }
+.writing-list > li:last-child { border-bottom: 1px solid var(--border); }
+
+.w-row {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr) auto;
+  gap: var(--s6);
+  align-items: baseline;
+  padding: var(--s7) 0;
+  color: var(--heading);
+  transition: padding-left 0.25s var(--ease), color 0.2s var(--ease);
+}
+
+a.w-row:hover, a.w-row:focus-visible { padding-left: var(--s4); color: var(--accent); }
+
+.w-num { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; }
+
+.w-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 0.94rem + 0.55vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: -0.024em;
+  line-height: 1.25;
+}
+
+.w-meta {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.w-row[aria-disabled="true"] { color: var(--text-secondary); }
+.w-row[aria-disabled="true"] .w-title { color: var(--text-secondary); }
+
+/* --------------------------------------------------------------------------
+   21. Motion — only when JS is present, so nothing is ever stranded hidden
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js-motion .rise {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+
+  html.js-motion .rise.in { opacity: 1; transform: none; }
+}
+
+@media (max-width: 900px) {
+  .viz-legend { grid-template-columns: 1fr; gap: var(--s4); }
+  .tl-steps { grid-template-columns: 1fr; border-left: 1px solid var(--border); }
+  .tl-steps li { padding: var(--s4) 0 var(--s4) var(--s5); border-right: 0; }
+  .tl-steps li + li { border-top: 1px solid var(--border); }
+}
+
+@media (max-width: 640px) {
+  .hero-viz canvas { height: 150px; }
+  .timeline > li { grid-template-columns: 1fr; gap: var(--s4); }
+  .w-row { grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--s4); padding: var(--s6) 0; }
+  .w-meta { grid-column: 2; }
+}
+
+/* Video figure — the 4K pipeline render. */
+.project-figure-video { padding: 0; overflow: hidden; }
+
+.project-figure-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-sunk);
+}
+
+.project-figure-video figcaption { padding: var(--s4) var(--s5) var(--s5); margin-top: 0; }
+
+/* --------------------------------------------------------------------------
+   22. Now — a status board, not a resume
+   -------------------------------------------------------------------------- */
+
+.status-list { margin: 0; padding: 0; list-style: none; counter-reset: st; }
+
+.status-list > li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: var(--s6);
+  margin: 0;
+  padding: var(--s6) 0;
+  border-top: 1px solid var(--border);
+}
+
+.status-list > li:last-child { border-bottom: 1px solid var(--border); }
+
+.status-list .st-num { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; }
+.status-list h3 { margin: 0 0 var(--s2); font-size: 1.02rem; }
+.status-list p { margin: 0; max-width: none; font-size: 0.93rem; line-height: 1.62; }
+
+.status-state {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: var(--s3);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.status-state::before { content: ""; width: 5px; height: 5px; border-radius: 999px; background: currentColor; }
+.status-state[data-state="done"] { color: var(--done); }
+.status-state[data-state="active"] { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .status-list > li { grid-template-columns: 1fr; gap: var(--s2); }
+}
+
+/* --------------------------------------------------------------------------
+   23. Vertical pipeline — flagship project page
+   -------------------------------------------------------------------------- */
+
+.pipeline-v { margin: var(--s7) 0 0; padding: 0; list-style: none; counter-reset: pv; }
+
+.pipeline-v > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--s5);
+  margin: 0;
+  padding: 0 0 var(--s7);
+}
+
+.pipeline-v > li:last-child { padding-bottom: 0; }
+
+/* The connecting rail. */
+.pipeline-v > li:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 0.62rem;
+  top: 1.5rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.pv-dot {
+  position: relative;
+  z-index: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.15rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.pipeline-v > li[data-built="yes"] .pv-dot { border-color: var(--done); background: var(--done); }
+.pipeline-v > li[data-built="next"] .pv-dot { border-color: var(--accent); border-style: dashed; }
+
+.pv-body strong {
+  display: block;
+  color: var(--heading);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+
+.pv-body small { display: block; margin-top: var(--s1); color: var(--text-muted); font-size: 0.82rem; line-height: 1.55; }
+
+.pv-tag {
+  display: inline-block;
+  margin-top: var(--s3);
+  padding: 0.1rem 0.42rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.pipeline-v > li[data-built="yes"] .pv-tag { color: var(--done); border-color: color-mix(in srgb, var(--done) 40%, var(--border)); }
+.pipeline-v > li[data-built="next"] .pv-tag { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, var(--border)); }

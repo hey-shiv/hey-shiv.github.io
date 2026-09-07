@@ -48,15 +48,49 @@
         </section>
 
         <section aria-labelledby="now-focus">
-          <p class="section-label" id="now-focus">Currently Focused On</p>
-          <ul class="focus-grid">
-            <li>Cover song identification on Da-TACOS</li>
-            <li>Chroma features and key invariance</li>
-            <li>Subsequence DTW and sequence alignment</li>
-            <li>Retrieval metrics and split hygiene</li>
-            <li>Metric learning with triplet objectives</li>
-            <li>Audio AI preprocessing and DSP foundations</li>
-          </ul>
+          <p class="section-label" id="now-focus">Currently</p>
+          <ol class="status-list">
+            <li>
+              <span class="st-num">01</span>
+              <div>
+                <h3>Cover song identification on Da-TACOS</h3>
+                <p>The classical chroma, transposition and alignment chain is implemented and unit tested. Next is scoring it across the benchmark subset rather than a handful of hand-picked cliques.</p>
+                <span class="status-state" data-state="active">In progress</span>
+              </div>
+            </li>
+            <li>
+              <span class="st-num">02</span>
+              <div>
+                <h3>Sequence encoders and metric learning</h3>
+                <p>Training a small dilated temporal convolution with a triplet objective on work-disjoint splits, to see whether a learned embedding beats key-aligned subsequence DTW.</p>
+                <span class="status-state" data-state="active">Next up</span>
+              </div>
+            </li>
+            <li>
+              <span class="st-num">03</span>
+              <div>
+                <h3>Retrieval evaluation I can trust</h3>
+                <p>Split hygiene, score normalisation, and work-level bootstrap intervals — so a difference between two methods means something before I report it.</p>
+                <span class="status-state" data-state="active">Ongoing</span>
+              </div>
+            </li>
+            <li>
+              <span class="st-num">04</span>
+              <div>
+                <h3>Vector search at a useful scale</h3>
+                <p>Indexing track-level embeddings with exact inner product in FAISS, and finding the candidate-pool size where approximate search starts to be necessary.</p>
+                <span class="status-state">Planned</span>
+              </div>
+            </li>
+            <li>
+              <span class="st-num">05</span>
+              <div>
+                <h3>Audio AI foundations</h3>
+                <p>Preprocessing and DSP — the waveform, STFT, Mel and MFCC chain that everything above sits on. Documented in Audio Explorer.</p>
+                <span class="status-state" data-state="done">Shipped</span>
+              </div>
+            </li>
+          </ol>
         </section>
 
         <section aria-labelledby="active-projects">

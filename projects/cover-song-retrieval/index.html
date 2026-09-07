@@ -39,7 +39,7 @@
 
       <main>
         <div class="back-links">
-          <a href="../../index.html">Work</a> / <a href="../../blogs/Cover%20Song%20Retrieval/">Blogs</a>
+          <a href="../../index.html">Work</a> / <a href="../../blogs/Cover%20Song%20Retrieval/">Writing</a>
         </div>
 
         <section class="hero detail-hero">
@@ -111,6 +111,57 @@
 
         <section class="architecture-panel" aria-labelledby="architecture">
           <p class="section-label" id="architecture">Architecture</p>
+          <h2>Audio to a ranked list, one stage at a time.</h2>
+          <ol class="pipeline-v">
+            <li data-built="yes">
+              <span class="pv-dot" aria-hidden="true"></span>
+              <div class="pv-body">
+                <strong>Audio</strong>
+                <small>Da-TACOS ships precomputed MIR features rather than raw audio, which keeps the work on retrieval instead of hundreds of gigabytes of downloads.</small>
+                <span class="pv-tag">Built</span>
+              </div>
+            </li>
+            <li data-built="yes">
+              <span class="pv-dot" aria-hidden="true"></span>
+              <div class="pv-body">
+                <strong>Representation</strong>
+                <small>Chroma / HPCP: twelve pitch classes per frame. Timbre and octave are discarded on purpose, because they are exactly what a cover changes.</small>
+                <span class="pv-tag">Built</span>
+              </div>
+            </li>
+            <li data-built="yes">
+              <span class="pv-dot" aria-hidden="true"></span>
+              <div class="pv-body">
+                <strong>Alignment</strong>
+                <small>Key invariance through the Optimal Transposition Index over twelve circular shifts, then subsequence DTW over a cosine cost, so tempo drift does not break the match.</small>
+                <span class="pv-tag">Built</span>
+              </div>
+            </li>
+            <li data-built="next">
+              <span class="pv-dot" aria-hidden="true"></span>
+              <div class="pv-body">
+                <strong>Embedding</strong>
+                <small>A dilated temporal convolution trained with a triplet objective, producing one track-level vector. This replaces the pairwise alignment cost, which is quadratic.</small>
+                <span class="pv-tag">Next</span>
+              </div>
+            </li>
+            <li data-built="next">
+              <span class="pv-dot" aria-hidden="true"></span>
+              <div class="pv-body">
+                <strong>Vector search</strong>
+                <small>FAISS with exact inner product first. Approximate search is an optimisation, not a result.</small>
+                <span class="pv-tag">Next</span>
+              </div>
+            </li>
+            <li data-built="yes">
+              <span class="pv-dot" aria-hidden="true"></span>
+              <div class="pv-body">
+                <strong>Retrieval</strong>
+                <small>A ranked candidate list scored with MAP, MRR and Recall@{1,10,100} on WID-disjoint splits — written from scratch and tested against rankings worked out by hand.</small>
+                <span class="pv-tag">Built</span>
+              </div>
+            </li>
+          </ol>
           <p>
             The pipeline separates representation, similarity, and evaluation so that each can be
             swapped or debugged without disturbing the others. The classical and learned branches

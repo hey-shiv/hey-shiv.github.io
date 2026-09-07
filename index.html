@@ -74,10 +74,10 @@
 
       <main id="main">
         <!-- ============================= IDENTITY ============================= -->
-        <section class="hero reveal" aria-labelledby="who">
+        <section class="hero" aria-labelledby="who">
           <div class="hero-grid">
-            <div>
-              <p class="availability-row">
+            <div class="hero-lede">
+              <p class="availability-row rise" style="--i:0">
                 <span class="availability-main">
                   <span class="availability-dot" aria-hidden="true"></span>
                   Open to AI/ML internships
@@ -85,22 +85,20 @@
                 <span class="availability-pill">2026</span>
               </p>
 
-              <h1 class="hero-name" id="who">Shivashant Manohar</h1>
-              <p class="hero-role">AI / ML Engineering <b>&middot;</b> Systems <b>&middot;</b> Models <b>&middot;</b> Evaluation</p>
+              <h1 class="hero-name rise" id="who" style="--i:1">Shivashant Manohar</h1>
+              <p class="hero-role rise" style="--i:2">AI / ML Engineering <b>&middot;</b> Audio <b>&middot;</b> Retrieval <b>&middot;</b> Evaluation</p>
 
-              <p class="statement">
-                I build machine learning systems end to end, then try hard to prove they
-                don&rsquo;t work.
+              <p class="statement rise" style="--i:3">
+                I build machines that listen &mdash; then try hard to prove they don&rsquo;t work.
               </p>
-              <p>
-                Final-year CS (AI &amp; ML) at VIT-AP. Most of what I know came from
-                implementing things rather than reading about them &mdash; a transformer written
-                from scratch before I read a reference implementation, an audio pipeline built
-                one transform at a time, a trading screener shipped alongside the study that
-                tried to falsify it.
+              <p class="rise" style="--i:4">
+                Final-year CS (AI &amp; ML) at VIT-AP. Most of what I know came from implementing
+                things rather than reading about them &mdash; a transformer written from scratch
+                before I read a reference implementation, an audio pipeline built one transform at
+                a time, a trading screener shipped alongside the study that tried to falsify it.
               </p>
 
-              <div class="actions">
+              <div class="actions rise" style="--i:5">
                 <a class="btn btn-primary" href="#work">
                   View work <span class="btn-arrow" aria-hidden="true">&darr;</span>
                 </a>
@@ -112,7 +110,7 @@
                 </a>
               </div>
 
-              <p class="actions-quiet">
+              <p class="actions-quiet rise" style="--i:6">
                 <a href="mailto:shivashant.work@gmail.com">Email</a>
                 <a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer">LinkedIn</a>
                 <a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer">X</a>
@@ -120,26 +118,18 @@
               </p>
             </div>
 
-            <!-- A trace from the retrieval pipeline currently being built. -->
-            <figure class="artifact" aria-labelledby="artifact-cap">
-              <figcaption class="artifact-bar">
-                <span>cover-song-retrieval</span>
-                <span><b>query trace</b></span>
+            <figure class="hero-viz rise" style="--i:7">
+              <canvas id="hero-viz" role="img"
+                aria-label="Illustration of the retrieval pipeline: an audio waveform, a twelve-row chroma field, and an embedding scatter in which a query point is linked to its three nearest neighbours."></canvas>
+              <ol class="viz-legend">
+                <li><b>01 &nbsp;Signal</b><span>Audio arrives as a one-dimensional array of samples.</span></li>
+                <li><b>02 &nbsp;Representation</b><span>Twelve pitch classes per frame. Timbre is discarded on purpose.</span></li>
+                <li><b>03 &nbsp;Retrieval</b><span>Tracks become points; the query finds its nearest neighbours.</span></li>
+              </ol>
+              <figcaption class="viz-note">
+                Illustrative animation drawn from generated data, not model output. The real
+                pipeline is described in the case study below.
               </figcaption>
-              <div class="artifact-body">
-                <ol class="trace">
-                  <li><span class="t-step">01</span><span class="t-name">load track</span><span class="t-val">Da-TACOS</span></li>
-                  <li><span class="t-step">02</span><span class="t-name">chroma / HPCP</span><span class="t-val">12 bins</span></li>
-                  <li><span class="t-step">03</span><span class="t-name">transpose (OTI)</span><span class="t-val">12 shifts</span></li>
-                  <li><span class="t-step">04</span><span class="t-name">subsequence DTW</span><span class="t-val">cosine cost</span></li>
-                  <li><span class="t-step">05</span><span class="t-name">rank candidates</span><span class="t-val">1,000 cliques</span></li>
-                  <li><span class="t-step">06</span><span class="t-name">score</span><span class="t-val">MAP &middot; MRR &middot; R@K</span></li>
-                </ol>
-              </div>
-              <p class="artifact-foot" id="artifact-cap">
-                The classical half of the pipeline, implemented and unit tested. The learned
-                encoder replaces steps 02&ndash;04 and gets measured on the same split.
-              </p>
             </figure>
           </div>
         </section>
@@ -233,14 +223,15 @@
                 from visualisation so each stage can be read on its own.
               </p>
 
-              <figure class="project-figure">
-                <img
-                  src="assets/audio-explorer/pipeline_minimal.svg"
-                  alt="Diagram of the Audio Explorer pipeline, showing one audio file unfolding into waveform, spectrogram, Mel, MFCC and rhythm representations"
-                  loading="lazy"
-                  width="960"
-                  height="420"
-                />
+              <figure class="project-figure project-figure-video">
+                <video
+                  src="assets/audio-explorer/pipeline-4k.mp4"
+                  poster="assets/audio-explorer/pipeline_minimal.svg"
+                  width="3840" height="2160"
+                  muted loop playsinline preload="none"
+                  data-autoplay
+                  aria-label="Animation of the Audio Explorer pipeline: one audio file unfolding into waveform, spectrogram, Mel bands, MFCCs and a rhythm branch."
+                ></video>
                 <figcaption>One file, unfolded into the representations a model actually consumes.</figcaption>
               </figure>
 
@@ -364,28 +355,63 @@
               <h2 id="broke-h">Things I got wrong, and what changed after.</h2>
             </div>
           </div>
-          <ul class="lab-note-list">
+          <ol class="timeline">
             <li>
-              <strong>Key invariance is an assumption</strong>
-              <span>A single global transposition index fails on covers that modulate partway through. Handling it properly means scoring more than one hypothesis per pair.</span>
+              <span class="tl-num">01</span>
+              <div class="tl-body">
+                <h3>Clique leakage</h3>
+                <ol class="tl-steps">
+                  <li><b>Assumption</b><span>Splitting the dataset by track would keep train and test properly separate.</span></li>
+                  <li><b>What happened</b><span>The same composition sat on both sides of the boundary, so the metric was partly measuring memorisation.</span></li>
+                  <li><b>What changed</b><span>Splits are made at the work level, before anything else runs.</span></li>
+                </ol>
+              </div>
             </li>
             <li>
-              <strong>Clique leakage</strong>
-              <span>Splitting by track instead of by work put the same composition on both sides of the boundary. Splits are now made at the work level, before anything else runs.</span>
+              <span class="tl-num">02</span>
+              <div class="tl-body">
+                <h3>Key invariance is an assumption</h3>
+                <ol class="tl-steps">
+                  <li><b>Assumption</b><span>One global transposition index per pair is enough to handle a change of key.</span></li>
+                  <li><b>What happened</b><span>Covers that modulate partway through fall out of alignment; a single shift cannot describe them.</span></li>
+                  <li><b>Where it stands</b><span>Open. Handling it properly means scoring more than one hypothesis per pair.</span></li>
+                </ol>
+              </div>
             </li>
             <li>
-              <strong>Alignment cost is length-biased</strong>
-              <span>Unnormalised DTW quietly rewards short candidates over musically better matches. Score normalisation is still an open problem in the pipeline.</span>
+              <span class="tl-num">03</span>
+              <div class="tl-body">
+                <h3>Alignment cost is length-biased</h3>
+                <ol class="tl-steps">
+                  <li><b>Assumption</b><span>Accumulated DTW cost is a fair similarity score between two tracks.</span></li>
+                  <li><b>What happened</b><span>Unnormalised cost quietly rewards short candidates over musically better matches.</span></li>
+                  <li><b>Where it stands</b><span>Open. Score normalisation is the current problem in the pipeline.</span></li>
+                </ol>
+              </div>
             </li>
             <li>
-              <strong>Noise mistaken for progress</strong>
-              <span>A retrieval delta means nothing until it clears a work-level bootstrap interval, so significance testing became part of the loop rather than an afterthought.</span>
+              <span class="tl-num">04</span>
+              <div class="tl-body">
+                <h3>Noise mistaken for progress</h3>
+                <ol class="tl-steps">
+                  <li><b>Assumption</b><span>A higher average retrieval metric means a better system.</span></li>
+                  <li><b>What happened</b><span>Deltas moved around inside the noise, so the ranking of two methods was not stable.</span></li>
+                  <li><b>What changed</b><span>Work-level bootstrap intervals became part of the loop rather than an afterthought.</span></li>
+                </ol>
+              </div>
             </li>
             <li>
-              <strong>A control I forgot to match</strong>
-              <span>In the VCP study, controls drawn from the wrong window measured the market regime rather than the pattern. Matching on symbol, risk and window fixed it &mdash; and killed the result.</span>
+              <span class="tl-num">05</span>
+              <div class="tl-body">
+                <h3>A control I forgot to match</h3>
+                <ol class="tl-steps">
+                  <li><b>Assumption</b><span>Comparing the screener&rsquo;s signals against random entries is a fair control.</span></li>
+                  <li><b>What happened</b><span>Controls drawn from the wrong window measured the market regime rather than the pattern.</span></li>
+                  <li><b>What changed</b><span>Matched on symbol, risk and window &mdash; and the apparent edge disappeared.</span></li>
+                </ol>
+              </div>
             </li>
-          </ul>
+          </ol>
         </section>
 
         <!-- ============================= TRAJECTORY ============================= -->
@@ -443,24 +469,22 @@
             <a class="section-link" href="blog.html">All writing &rarr;</a>
           </div>
 
-          <ul class="post-list">
+          <ol class="writing-list">
             <li>
-              <a class="post-title" href="blogs/Audio%20Explorer/">Building the audio-AI pipeline from first principles</a>
-              <span class="post-meta"><span class="post-kind">Build log</span> August 2026</span>
-              <p class="section-copy">
-                A visual tour from decoded waveform to STFT, Mel spectrograms, MFCCs and beat
-                tracking &mdash; what each transform keeps, and what it quietly throws away.
-              </p>
+              <a class="w-row" href="blogs/Audio%20Explorer/">
+                <span class="w-num">01</span>
+                <span class="w-title">Building the audio-AI pipeline from first principles</span>
+                <span class="w-meta">Build log &middot; Aug 2026</span>
+              </a>
             </li>
             <li>
-              <span class="post-title">Why chroma is the right representation for cover detection</span>
-              <span class="post-meta"><span class="post-kind">In progress</span> Cover Song Retrieval</span>
-              <p class="section-copy">
-                What the Optimal Transposition Index actually assumes, why subsequence DTW
-                absorbs tempo drift, and how easy it is to overstate a retrieval result.
-              </p>
+              <span class="w-row" aria-disabled="true">
+                <span class="w-num">02</span>
+                <span class="w-title">Why chroma is the right representation for cover detection</span>
+                <span class="w-meta">In progress</span>
+              </span>
             </li>
-          </ul>
+          </ol>
         </section>
 
         <!-- ============================= ABOUT ============================= -->
@@ -535,5 +559,6 @@
       </footer>
     </div>
     <script src="assets/site.js" defer></script>
+    <script src="assets/hero-viz.js" defer></script>
   </body>
 </html>
