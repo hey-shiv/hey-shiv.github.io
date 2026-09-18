@@ -3064,3 +3064,28 @@ main > article { max-width: 48rem; margin-left: auto; margin-right: auto; }
   box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--bg) 94%, transparent);
   clip-path: inset(0 -100vmax);
 }
+
+/* Header: a touch larger and darker, same width as the content. */
+:root { --nav-h: 4.25rem; }
+
+.site-nav { font-size: 0.86rem; }
+.site-nav a { color: var(--text-secondary); }
+.site-nav .nav-logo { color: var(--heading); font-size: 1.02rem; }
+.nav-social a { width: 2.35rem; height: 2.35rem; color: var(--text-secondary); }
+.nav-social svg { width: 1.2rem; height: 1.2rem; }
+.theme-toggle { width: 2.2rem; height: 2.2rem; color: var(--text-secondary); font-size: 1.3rem; }
+
+@media (max-width: 640px) {
+  .site-nav { font-size: 0.8rem; }
+}
+
+@media (max-width: 560px) {
+  :root { --nav-h: 3.75rem; }
+  .site-nav .nav-logo { font-size: 0.95rem; }
+  .nav-social a { width: 1.85rem; height: 1.85rem; }
+  .nav-social svg { width: 1.05rem; height: 1.05rem; }
+  .theme-toggle { width: 1.9rem; height: 1.9rem; font-size: 1.15rem; }
+}
+
+/* The name, a step larger on the homepage. */
+body.home .hero p.entry-identity { font-size: clamp(1.3rem, 1.05rem + 0.7vw, 1.8rem); letter-spacing: -0.015em; }

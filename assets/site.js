@@ -355,11 +355,18 @@
     var last = names.length - 1;
     var ticking = false;
 
+    /* Play the whole transformation while the band is on screen: it starts
+       as the band rises into view and finishes while the band is still fully
+       visible, rather than after it has scrolled away under the header. */
     function update() {
       ticking = false;
       var rect = wrap.getBoundingClientRect();
-      var progress = -rect.top / Math.max(1, rect.height);
-      field.setStage(Math.max(0, Math.min(1, progress)) * last);
+      var vh = window.innerHeight;
+      var start = vh * 0.75;
+      var end = Math.min(start - 1, Math.max(vh * 0.2, 110));
+      var progress = (start - rect.top) / (start - end);
+      progress = Math.max(0, Math.min(1, (progress - 0.08) / 0.84));
+      field.setStage(progress * last);
     }
 
     function onScroll() {
