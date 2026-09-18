@@ -2873,19 +2873,6 @@ article .flagship-figures {
 a.also-row:hover .also-title, a.also-row:focus-visible .also-title { color: var(--signal); }
 a.also-row:hover, a.also-row:focus-visible { color: inherit; }
 
-/* ---- About --------------------------------------------------------------- */
-
-body.home .about-lede {
-  max-width: 32ch;
-  margin: 0 0 var(--s6);
-  color: var(--heading);
-  font-family: var(--font-display);
-  font-size: clamp(1.3rem, 1rem + 1.3vw, 1.85rem);
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  line-height: 1.28;
-}
-
 @media (max-width: 720px) {
   .also-row { grid-template-columns: 1fr; }
   .also-row .also-desc { grid-column: 1; grid-row: 2; }
@@ -2950,7 +2937,12 @@ body.home .about-lede {
    balanced columns, never one narrow column hugging the left edge.
    ========================================================================== */
 
-:root { --gutter: clamp(1.25rem, 4.5vw, 5rem); }
+/* 10% of the viewport on each side on desktop; a slim gutter on phones. */
+:root { --gutter: 10vw; }
+
+@media (max-width: 820px) {
+  :root { --gutter: 1.25rem; }
+}
 
 .container { max-width: none; padding-left: var(--gutter); padding-right: var(--gutter); }
 
@@ -2976,21 +2968,37 @@ body.home .entry-headline {
   align-items: start;
 }
 
-body.home .hero .statement {
-  max-width: 19ch;
+/* Lede and buttons read as one block under the headline: same left edge,
+   buttons directly below the text, nothing floating on its own. */
+body.home .hero-split { display: block; }
+
+body.home .hero p.hero-lede {
+  max-width: 44rem;
   margin: 0;
-  font-size: clamp(1.4rem, 0.9rem + 1.9vw, 2.6rem);
+  color: var(--text);
+  font-size: clamp(1.1rem, 0.85rem + 0.75vw, 1.5rem);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
 }
 
-body.home .hero-intro p { max-width: 36rem; margin-top: 0; font-size: 1.04rem; }
+body.home .hero-split .actions { margin: var(--s8) 0 0; }
 
-.flagship-grid {
+/* Flagships stack one below the other; each is a full-width row with the
+   title on the left and the evidence on the right. */
+.flagship-grid .flagship {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 var(--s11);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--s6) var(--s11);
+  align-items: start;
+  padding: var(--s2) 0 0;
+  border-top: 0;
 }
 
-.flagship-grid .flagship { padding: var(--s2) 0 0; border-top: 0; }
+.flagship-grid .flagship + .flagship { margin-top: var(--s10); padding-top: var(--s10); border-top: 1px solid var(--border); }
+.flagship-head .flagship-question { margin-bottom: 0; }
+.flagship-body { padding-top: calc(1rem + var(--s6)); }
+.flagship-body .flagship-figures { margin-top: var(--s7); }
+.flagship-body .project-links { margin-top: var(--s7); }
 
 body.home .also-list {
   display: grid;
@@ -3008,16 +3016,6 @@ body.home .also-row {
   padding: var(--s6) 0 0;
 }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--s6) var(--s11);
-  align-items: start;
-}
-
-.about-grid > p { margin: 0; }
-body.home .about-lede { max-width: 30ch; margin: 0; font-size: clamp(1.25rem, 0.9rem + 1.2vw, 1.85rem); }
-.about-grid > p:not(.about-lede) { max-width: 36rem; padding-top: 0.35rem; }
 body.home .skill-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6) var(--s9); }
 
 .contact-grid {
@@ -3031,12 +3029,11 @@ body.home .skill-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: v
 .contact-grid p { max-width: 34rem; margin-top: 0; }
 
 @media (max-width: 900px) {
-  .flagship-grid { grid-template-columns: 1fr; }
-  .flagship-grid .flagship + .flagship { margin-top: var(--s9); padding-top: var(--s9); border-top: 1px solid var(--border); }
+  .flagship-grid .flagship { grid-template-columns: 1fr; }
+  .flagship-body { padding-top: 0; }
   body.home .also-list { grid-template-columns: 1fr; }
   body.home .also-row { padding-bottom: var(--s6); }
   body.home .also-list > li:last-child { border-bottom: 1px solid var(--border); }
-  .about-grid { grid-template-columns: 1fr; }
   body.home .skill-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
