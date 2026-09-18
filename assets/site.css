@@ -1709,7 +1709,7 @@ main section { margin-bottom: var(--s12); padding-top: var(--s12); }
 .signal-rail a:hover::after, .signal-rail a:focus-visible::after { opacity: 1; }
 .signal-rail li.is-active a { background: var(--signal); transform: scale(1.5); }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .signal-rail { display: flex; }
 }
 
@@ -2926,8 +2926,6 @@ a.also-row:hover, a.also-row:focus-visible { color: inherit; }
 
 @media (max-width: 560px) {
   body.home .hero-role { font-size: 0.6rem; letter-spacing: 0.08em; white-space: nowrap; }
-  body.home .hero .actions { flex-wrap: nowrap; }
-  body.home .hero .actions .btn { flex: 1 1 0; justify-content: center; }
 }
 
 /* ==========================================================================
@@ -2953,35 +2951,14 @@ a.also-row:hover, a.also-row:focus-visible { color: inherit; }
 /* ---- Homepage ------------------------------------------------------------ */
 
 body.home main section { margin-bottom: var(--s11); padding-top: var(--s11); }
-body.home .hero { margin-bottom: var(--s11); }
-body.home .entry-tag { justify-content: flex-start; margin-bottom: var(--s8); }
+/* The editorial hero template: tag row across the top, name, role line, a
+   two-line display headline, then the lede and buttons; the live-signal band
+   follows directly underneath. */
+body.home .hero { margin-bottom: 0; }
+body.home .entry-headline { max-width: 9.5em; }
 
-body.home .entry-headline {
-  margin-bottom: var(--s9);
-  font-size: clamp(2.8rem, 0.8rem + 7.2vw, 9.5rem);
-}
-
-.hero-split {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--s7) var(--s11);
-  align-items: start;
-}
-
-/* Lede and buttons read as one block under the headline: same left edge,
-   buttons directly below the text, nothing floating on its own. */
-body.home .hero-split { display: block; }
-
-body.home .hero p.hero-lede {
-  max-width: 44rem;
-  margin: 0;
-  color: var(--text);
-  font-size: clamp(1.1rem, 0.85rem + 0.75vw, 1.5rem);
-  line-height: 1.55;
-  letter-spacing: -0.01em;
-}
-
-body.home .hero-split .actions { margin: var(--s8) 0 0; }
+.live-signal-head,
+.live-signal-foot { max-width: none; padding-left: var(--gutter); padding-right: var(--gutter); }
 
 /* Flagships stack one below the other; each is a full-width row with the
    title on the left and the evidence on the right. */
@@ -3038,7 +3015,7 @@ body.home .skill-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: v
 }
 
 @media (max-width: 820px) {
-  .hero-split, .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 560px) {
@@ -3080,3 +3057,10 @@ main > article { max-width: 48rem; margin-left: auto; margin-right: auto; }
 
 .world-head .world-title { max-width: 18ch; }
 .world-head .world-question { max-width: 30ch; }
+
+/* The sticky header's background runs edge to edge (its rule still aligns
+   with the content), so full-bleed bands never show beside it on scroll. */
+.site-header {
+  box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--bg) 94%, transparent);
+  clip-path: inset(0 -100vmax);
+}

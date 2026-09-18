@@ -62,6 +62,15 @@
   <body class="home">
     <a class="skip-link" href="#main">Skip to content</a>
 
+    <ul class="signal-rail" aria-hidden="true">
+      <li data-signal="entry"><a href="#main" data-label="01 — Entry"></a></li>
+      <li data-signal="coil"><a href="#coil" data-label="02 — Coil"></a></li>
+      <li data-signal="cover"><a href="#cover" data-label="03 — Cover song retrieval"></a></li>
+      <li data-signal="also"><a href="#also" data-label="04 — Also built"></a></li>
+      <li data-signal="toolkit"><a href="#about" data-label="05 — Toolkit"></a></li>
+      <li data-signal="end"><a href="#contact" data-label="06 — Contact"></a></li>
+    </ul>
+
     <div class="container">
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
@@ -80,8 +89,9 @@
 
       <main id="main">
         <!-- ===================== HERO ===================== -->
-        <section class="hero" aria-labelledby="who">
+        <section class="hero" data-signal="entry" aria-labelledby="who">
           <div class="entry-tag rise" style="--i:0">
+            <span>SIGNAL / 001</span>
             <span class="signal-live">Open to data &amp; AI/ML internships &middot; 2026</span>
           </div>
 
@@ -92,23 +102,42 @@
 
           <h1 class="entry-headline rise" id="who" style="--i:3">I find patterns in data.</h1>
 
-          <div class="hero-split">
-            <p class="hero-lede rise" style="--i:4">
-              Final-year CS (AI &amp; ML) at VIT-AP, working toward data analyst and AI/ML
-              engineering roles. Most of what I know came from building things end to end and
-              then measuring them honestly, including the times the answer was no.
-            </p>
+          <p class="rise" style="--i:4; max-width: 34rem;">
+            Final-year CS (AI &amp; ML) at VIT-AP, working toward data analyst and AI/ML
+            engineering roles. Most of what I know came from building things end to end and
+            then measuring them honestly, including the times the answer was no.
+          </p>
 
-            <div class="actions rise" style="--i:5">
-              <a class="btn btn-primary" href="#work">
-                Flagship work <span class="btn-arrow" aria-hidden="true">&darr;</span>
-              </a>
-              <a class="btn" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">
-                R&eacute;sum&eacute; <span class="btn-arrow" aria-hidden="true">&#8599;</span>
-              </a>
-            </div>
+          <div class="actions rise" style="--i:5">
+            <a class="btn btn-primary" href="#work">
+              Flagship work <span class="btn-arrow" aria-hidden="true">&darr;</span>
+            </a>
+            <a class="btn" href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">
+              GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="btn" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">
+              R&eacute;sum&eacute; <span class="btn-arrow" aria-hidden="true">&#8599;</span>
+            </a>
           </div>
         </section>
+
+        <!-- ===================== LIVE SIGNAL ===================== -->
+        <figure class="live-signal" data-field>
+          <div class="live-signal-head">
+            <span class="signal-marker">Live signal</span>
+            <span>Illustrative &mdash; generated in-browser, not model output</span>
+          </div>
+          <canvas
+            data-states="wave,embed,retrieve"
+            role="img"
+            aria-label="An animated waveform that leans toward the pointer and, as the page scrolls, resolves into clustered points with one query point linked to its nearest neighbours."
+          ></canvas>
+          <p class="live-signal-foot">
+            A waveform, breathing. It leans toward the pointer, and as you scroll it resolves into
+            points, then clusters, then a query finding its neighbours. Raw data becoming structure
+            becoming an answer.
+          </p>
+        </figure>
 
         <!-- ===================== FLAGSHIP WORK ===================== -->
         <section id="work" aria-labelledby="work-h">
@@ -120,7 +149,7 @@
           </div>
 
           <div class="flagship-grid">
-          <article class="flagship" aria-labelledby="coil-h">
+          <article class="flagship" id="coil" data-signal="coil" aria-labelledby="coil-h">
             <div class="flagship-head">
             <p class="flagship-kicker">
               <span class="state-glyph" data-state="built">Live &middot; negative result</span>
@@ -148,7 +177,7 @@
             </div>
           </article>
 
-          <article class="flagship" aria-labelledby="cover-h">
+          <article class="flagship" id="cover" data-signal="cover" aria-labelledby="cover-h">
             <div class="flagship-head">
             <p class="flagship-kicker">
               <span class="state-glyph" data-state="progress">Building</span>
@@ -180,7 +209,7 @@
         </section>
 
         <!-- ===================== ALSO BUILT ===================== -->
-        <section id="also" aria-labelledby="also-h">
+        <section id="also" data-signal="also" aria-labelledby="also-h">
           <div class="section-head">
             <div>
               <p class="signal-marker">02 &mdash; Also built</p>
@@ -214,7 +243,7 @@
         </section>
 
         <!-- ===================== ABOUT ===================== -->
-        <section id="about" aria-labelledby="about-h">
+        <section id="about" data-signal="toolkit" aria-labelledby="about-h">
           <div class="section-head">
             <div>
               <p class="signal-marker">03 &mdash; Toolkit</p>
@@ -244,7 +273,7 @@
         </section>
 
         <!-- ===================== CONTACT ===================== -->
-        <section class="contact" id="contact" aria-labelledby="contact-h">
+        <section class="contact" id="contact" data-signal="end" aria-labelledby="contact-h">
           <p class="signal-marker">04 &mdash; Contact</p>
           <div class="contact-grid">
           <h2 id="contact-h">Need someone who checks the numbers?</h2>
@@ -277,6 +306,7 @@
       </footer>
     </div>
 
+    <script src="assets/instrument.js" defer></script>
     <script src="assets/site.js" defer></script>
   </body>
 </html>
