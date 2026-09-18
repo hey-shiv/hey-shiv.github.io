@@ -5,29 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Shivashant Manohar is a final-year CS (AI &amp; ML) student building machine learning systems end to end — audio retrieval, signal processing, and evaluation you can actually trust."
+      content="Shivashant Manohar is a final-year CS (AI &amp; ML) student working toward data analyst and AI/ML engineering roles: a 2,300-stock screener whose own ten-year backtest found no edge, and a cover-song retrieval pipeline built one stage at a time."
     />
     <link rel="canonical" href="https://hey-shiv.github.io/" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hey-shiv.github.io/" />
-    <meta property="og:title" content="Shivashant Manohar — AI/ML Engineering" />
+    <meta property="og:title" content="Shivashant Manohar — Data Analysis &amp; AI/ML Engineering" />
     <meta
       property="og:description"
-      content="Building machine learning systems end to end, and measuring them honestly enough to know when they don't work."
+      content="Finding patterns in data, then trying hard to prove they aren't there."
     />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:creator" content="@hey_shivv" />
-    <meta name="twitter:title" content="Shivashant Manohar — AI/ML Engineering" />
+    <meta name="twitter:title" content="Shivashant Manohar — Data Analysis &amp; AI/ML Engineering" />
     <meta
       name="twitter:description"
-      content="Building machine learning systems end to end, and measuring them honestly enough to know when they don't work."
+      content="Finding patterns in data, then trying hard to prove they aren't there."
     />
-    <title>Shivashant Manohar — AI/ML Engineering</title>
+    <title>Shivashant Manohar — Data Analysis &amp; AI/ML Engineering</title>
     <script>
       (function () {
         try {
           var saved = localStorage.getItem("site-theme-v2");
-          var theme = saved || "dark";
+          var theme = saved || "light";
           document.documentElement.dataset.theme = theme;
           document.documentElement.style.colorScheme = theme;
         } catch (error) {}
@@ -47,9 +47,9 @@
         "@type": "Person",
         "name": "Shivashant Manohar",
         "url": "https://hey-shiv.github.io/",
-        "jobTitle": "AI/ML Engineering student",
+        "jobTitle": "Aspiring data analyst and AI/ML engineer",
         "alumniOf": "VIT-AP University",
-        "knowsAbout": ["Machine learning", "Audio signal processing", "Information retrieval", "Python"],
+        "knowsAbout": ["Data analysis", "Python", "SQL", "pandas", "Backtesting", "Machine learning", "Information retrieval", "Audio signal processing"],
         "sameAs": [
           "https://github.com/hey-shiv",
           "https://linkedin.com/in/shivashant",
@@ -59,709 +59,217 @@
       }
     </script>
   </head>
-  <body>
+  <body class="home">
     <a class="skip-link" href="#main">Skip to content</a>
-
-    <ul class="signal-rail" aria-hidden="true">
-      <li data-signal="entry"><a href="#main" data-label="01 — Entry"></a></li>
-      <li data-signal="explore"><a href="#explore" data-label="02 — Explore"></a></li>
-      <li data-signal="cover"><a href="#cover" data-label="03 — Cover song retrieval"></a></li>
-      <li data-signal="explorer"><a href="#explorer" data-label="04 — Audio explorer"></a></li>
-      <li data-signal="vcp"><a href="#vcp" data-label="05 — VCP screener"></a></li>
-      <li data-signal="failure"><a href="#failure" data-label="06 — Failure"></a></li>
-      <li data-signal="protocol"><a href="#protocol" data-label="07 — Protocol"></a></li>
-      <li data-signal="archive"><a href="#archive" data-label="08 — Archive"></a></li>
-      <li data-signal="notes"><a href="#notes" data-label="09 — Field notes"></a></li>
-      <li data-signal="state"><a href="#state" data-label="10 — Current state"></a></li>
-      <li data-signal="about"><a href="#about" data-label="11 — About"></a></li>
-      <li data-signal="end"><a href="#end" data-label="12 — End"></a></li>
-    </ul>
 
     <div class="container">
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
           <a href="index.html" class="nav-logo" aria-label="Home">Shivashant</a>
-          <a href="index.html" aria-current="page">Work</a>
-          <a href="blog.html">Field notes</a>
-          <a href="notes.html">Notes</a>
-          <a href="now.html">Now</a>
+          <a href="index.html" class="nav-work" aria-current="page">Work</a>
           <a href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">R&eacute;sum&eacute;</a>
         </nav>
+        <ul class="nav-social" aria-label="Social links">
+          <li><a href="https://github.com/hey-shiv" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
+          <li><a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S.02 4.88.02 3.5 1.13 1 2.5 1s2.48 1.12 2.48 2.5zM.4 8h4.2v14H.4V8zm7.2 0h4v1.9h.06c.56-1.06 1.93-2.18 3.97-2.18 4.25 0 5.03 2.8 5.03 6.43V22h-4.2v-6.93c0-1.65-.03-3.78-2.3-3.78-2.3 0-2.66 1.8-2.66 3.66V22H7.6V8z"/></svg></a></li>
+          <li><a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer" aria-label="X" title="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
+          <li><a href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer" aria-label="Medium" title="Medium"><svg viewBox="0 0 24 24" aria-hidden="true"><circle fill="currentColor" cx="6.8" cy="12" r="6.6"/><ellipse fill="currentColor" cx="17.4" cy="12" rx="3.3" ry="6.2"/><ellipse fill="currentColor" cx="22.6" cy="12" rx="1.2" ry="5.6"/></svg></a></li>
+          <li><a href="mailto:shivashant.work@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.6 6.4 8.4 6.4 8.4-6.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></a></li>
+        </ul>
       </header>
 
       <main id="main">
-        <!-- ===================== 01 — ENTRY ===================== -->
-        <section class="hero" data-signal="entry" aria-labelledby="who">
+        <!-- ===================== HERO ===================== -->
+        <section class="hero" aria-labelledby="who">
           <div class="entry-tag rise" style="--i:0">
-            <span>SIGNAL / 001</span>
-            <span class="signal-live">Open to AI/ML internships &middot; 2026</span>
+            <span class="signal-live">Open to data &amp; AI/ML internships &middot; 2026</span>
           </div>
 
           <p class="entry-identity rise" style="--i:1">Shivashant Manohar</p>
           <p class="hero-role rise" style="--i:2">
-            AI / ML Engineering <b>&middot;</b> Audio <b>&middot;</b> Retrieval <b>&middot;</b> Evaluation
+            Data analysis <b>&middot;</b> Machine learning <b>&middot;</b> Evaluation
           </p>
 
-          <h1 class="entry-headline rise" id="who" style="--i:3">I build machines that listen.</h1>
+          <h1 class="entry-headline rise" id="who" style="--i:3">I find patterns in data.</h1>
 
-          <p class="statement rise" style="--i:4; max-width: 34rem;">
-            Then I try hard to prove they don&rsquo;t work.
-          </p>
+          <div class="hero-split">
+            <p class="statement rise" style="--i:4">
+              Then I try hard to prove they aren&rsquo;t there.
+            </p>
 
-          <p class="rise" style="--i:5; max-width: 34rem;">
-            Final-year CS (AI &amp; ML) at VIT-AP. Most of what I know came from implementing
-            things rather than reading about them: a transformer written from scratch before I
-            read a reference implementation, an audio pipeline built one transform at a time, a
-            trading screener shipped alongside the study that tried to falsify it.
-          </p>
+            <div class="hero-intro">
+              <p class="rise" style="--i:5">
+                Final-year CS (AI &amp; ML) at VIT-AP, working toward data analyst and AI/ML
+                engineering roles. Most of what I know came from building things end to end and
+                then measuring them honestly, including the times the answer was no.
+              </p>
 
-          <div class="actions rise" style="--i:6">
-            <a class="btn btn-primary" href="#cover">
-              Strongest work <span class="btn-arrow" aria-hidden="true">&darr;</span>
-            </a>
-            <a class="btn" href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">
-              GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span>
+              <div class="actions rise" style="--i:6">
+            <a class="btn btn-primary" href="#work">
+              Flagship work <span class="btn-arrow" aria-hidden="true">&darr;</span>
             </a>
             <a class="btn" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">
               R&eacute;sum&eacute; <span class="btn-arrow" aria-hidden="true">&#8599;</span>
             </a>
+              </div>
+            </div>
           </div>
-
-          <p class="actions-quiet rise" style="--i:7">
-            <a href="mailto:shivashant.work@gmail.com">Email</a>
-            <a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer">X</a>
-            <a href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer">Medium</a>
-          </p>
         </section>
 
-        <!-- ===================== LIVE SIGNAL ===================== -->
-    <figure class="live-signal" data-field>
-      <div class="live-signal-head">
-        <span class="signal-marker">Live signal</span>
-        <span>Illustrative &mdash; generated in-browser, not model output</span>
-      </div>
-      <canvas
-        id="live-signal"
-        data-states="wave,embed,retrieve"
-        role="img"
-        aria-label="An animated waveform that leans toward the pointer and, as the page scrolls, resolves into clustered points with one query point linked to its nearest neighbours."
-      ></canvas>
-      <p class="live-signal-foot">
-        A waveform, breathing. It leans toward the pointer, and as you scroll it resolves into
-        points, then clusters, then a query finding its neighbours. Signal becoming
-        representation becoming retrieval &mdash; which is the shape of everything below.
-      </p>
-    </figure>
-
-    <!-- ===================== 02 — THE SYSTEM ===================== -->
-    <section class="system-transform" id="explore" data-signal="explore" aria-labelledby="explore-h">
-      <div class="system-transform-sticky">
-        <div class="system-transform-inner">
-          <div class="system-intro">
-            <p class="signal-marker">02 &mdash; The system</p>
-            <h2 id="explore-h">Everything here is one system, seen from different angles.</h2>
-          </div>
-
-          <div class="film-composition" aria-describedby="system-reading">
-            <div class="film-index" aria-hidden="true"><span>01</span><span>05</span></div>
-            <div class="film-words" aria-hidden="true">
-              <span class="film-word film-audio">audio</span>
-              <span class="film-word film-representation">representation</span>
-              <span class="film-word film-retrieval">retrieval</span>
-              <span class="film-word film-evaluation">evaluation</span>
-              <span class="film-word film-failure">failure</span>
-              <span class="film-word film-system">one<br />system</span>
-            </div>
-            <div class="film-question">
-              <span class="film-question-count" aria-hidden="true">/ 01</span>
-              <p class="film-question-audio">What survives when a signal changes shape?</p>
-              <p class="film-question-representation">Which details become structure&mdash;and which disappear?</p>
-              <p class="film-question-retrieval">Can the invariant be found again?</p>
-              <p class="film-question-evaluation">What would make that answer trustworthy?</p>
-              <p class="film-question-failure">Where does the method stop holding?</p>
-              <p class="film-question-system">The question is the object. Each project changes its angle.</p>
-            </div>
-            <p class="film-caption">signal / structure / search / measure / break</p>
-          </div>
-        </div>
-      </div>
-      <p class="sr-only" id="system-reading">Audio becomes representation, then retrieval, evaluation, failure, and one system. The visual treatment changes as this section is scrolled.</p>
-    </section>
-
-    <!-- ===================== 03 — COVER SONG RETRIEVAL ===================== -->
-    <section class="world" id="cover" data-signal="cover" data-world aria-labelledby="cover-h">
-      <div class="world-head">
-        <p class="signal-marker">03 &mdash; Cover song retrieval <span class="state-glyph" data-state="progress" style="margin-left:auto">Building</span></p>
-        <h2 id="cover-h" class="world-title">Cover Song Retrieval</h2>
-        <p class="world-question">Can a machine recognise a song it has never heard?</p>
-      </div>
-
-      <div class="world-inner">
-        <div class="world-visual">
-          <canvas
-            data-states="wave,chroma,oti,dtw,retrieve"
-            role="img"
-            aria-label="One field of points changing representation as you scroll: a waveform, then a twelve-row chroma grid, then a circular transposition ring, then two sequences joined by an alignment path, then a scatter in which a query point links to its nearest neighbours. Each stage is described in the text beside it."
-          ></canvas>
-          <p class="world-hud">
-            <span class="hud-stage">01 / 05</span>
-            <span class="hud-label">Input / audio</span>
-            <span>Illustrative</span>
-          </p>
-        </div>
-
-        <ol class="world-steps">
-          <li class="world-step" data-stage="Input / audio">
-            <p class="step-label"><span>Stage 01</span> &mdash; <span>Signal</span></p>
-            <h3>One recording, as numbers.</h3>
-            <p>
-              Nothing in the samples says which composition this is. Two recordings of the
-              same piece may share no surface audio properties at all.
-            </p>
-          </li>
-
-          <li class="world-step" data-stage="Representation / 12 pitch classes">
-            <p class="step-label"><span>Stage 02</span> &mdash; <span>Representation</span></p>
-            <h3>Twelve pitch classes per frame.</h3>
-            <p>
-              Chroma folds the spectrum onto twelve pitch classes. Timbre goes, on purpose:
-              a piano and a voice singing the same harmony should look alike.
-            </p>
-          </li>
-
-          <li class="world-step" data-stage="Alignment / OTI">
-            <p class="step-label"><span>Stage 03</span> &mdash; <span>Key invariance</span></p>
-            <h3>Twelve possible keys, one chosen.</h3>
-            <p>
-              The Optimal Transposition Index scores all twelve shifts and picks one. It also
-              assumes the key never changes mid-song &mdash; a failure I have not solved.
-            </p>
-          </li>
-
-          <li class="world-step" data-stage="Sequence alignment / DTW">
-            <p class="step-label"><span>Stage 04</span> &mdash; <span>Alignment</span></p>
-            <h3>Two performances, warped onto each other.</h3>
-            <p>
-              Covers stretch and compress time, so subsequence DTW finds an elastic path
-              between the two sequences instead of demanding they line up.
-            </p>
-          </li>
-
-          <li class="world-step" data-stage="Retrieval / ranking">
-            <p class="step-label"><span>Stage 05</span> &mdash; <span>Retrieval</span></p>
-            <h3>A ranked list, and a metric that can be trusted.</h3>
-            <p>
-              MAP, MRR and Recall@K are written from scratch and unit tested by hand &mdash;
-              so when a learned encoder arrives, it has something real to beat.
-            </p>
-            <p class="step-more"><a href="projects/cover-song-retrieval/">The full seven-stage system &rarr;</a></p>
-          </li>
-        </ol>
-      </div>
-
-      <div class="world-foot">
-        <ul class="readouts" aria-label="Dataset and build figures">
-          <li><b>1,000</b><span>Cover cliques</span></li>
-          <li><b>13,000</b><span>Cover tracks</span></li>
-          <li><b>2,000</b><span>Distractors</span></li>
-          <li><b>12</b><span>Transposition shifts</span></li>
-        </ul>
-
-        <div class="learned" style="margin-top: var(--s10)">
-          <p class="meta-label">What I learned</p>
-          <p>
-            The evaluation protocol decides more of the result than the model does. Splitting by
-            track instead of by work puts the same composition on both sides of the wall, and
-            every number after that is meaningless.
-          </p>
-        </div>
-
-        <ul class="stack" aria-label="Stack">
-          <li>Python</li><li>NumPy</li><li>librosa</li><li>Essentia</li>
-          <li>PyTorch</li><li>FAISS</li>
-        </ul>
-
-        <div class="project-links">
-          <a href="projects/cover-song-retrieval/">Full case study <span aria-hidden="true">&rarr;</span></a>
-          <a href="blogs/Cover%20Song%20Retrieval/">Build notes</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== 04 — AUDIO EXPLORER ===================== -->
-    <section class="world world--flat" id="explorer" data-signal="explorer" aria-labelledby="explorer-h">
-      <div class="world-head">
-        <p class="signal-marker">04 &mdash; Audio explorer <span class="state-glyph" data-state="built" style="margin-left:auto">Shipped</span></p>
-        <h2 id="explorer-h" class="world-title">Audio Explorer</h2>
-        <p class="world-question">What does a model actually see when it hears a song?</p>
-      </div>
-
-      <div class="world-foot" data-rep>
-        <p style="max-width: 38rem">
-          An interactive toolkit that makes the standard audio-AI front end inspectable:
-          waveform and signal health, STFT spectrograms, 128-band Mel spectrograms, MFCCs with
-          delta features, and beat tracking. Feature computation is kept separate from
-          visualisation so each stage can be read on its own.
-        </p>
-
-        <div class="rep">
-          <ul class="rep-switch" aria-label="Choose a representation">
-            <li><button type="button" aria-pressed="true" data-note="Amplitude over time. Loudness, silence, clipping — the questions you ask before anything else.">Waveform</button></li>
-            <li><button type="button" aria-pressed="false" data-note="Short-time Fourier transform: which frequencies are active, moment by moment.">STFT</button></li>
-            <li><button type="button" aria-pressed="false" data-note="The same spectrum warped to human hearing — resolution spent low, compressed high.">Mel</button></li>
-            <li><button type="button" aria-pressed="false" data-note="Thirteen coefficients summarising spectral shape, plus how that shape changes.">MFCC</button></li>
-            <li><button type="button" aria-pressed="false" data-note="Onsets and beats — a separate branch of the pipeline, on the time axis rather than the frequency axis.">Rhythm</button></li>
-          </ul>
-
-          <div class="rep-stage">
-            <canvas
-              data-states="wave,stft,mel,mfcc,rhythm"
-              role="img"
-              aria-label="A field of points that rearranges between five representations of the same audio: waveform, STFT grid, Mel-warped grid, MFCC coefficient bands, and rhythmic pulses. Each is described by the caption below."
-            ></canvas>
-          </div>
-
-          <p class="rep-caption">
-            <b>Representation</b>
-            <span data-rep-note>Amplitude over time. Loudness, silence, clipping — the questions you ask before anything else.</span>
-          </p>
-        </div>
-
-        <div class="learned" style="margin-top: var(--s9)">
-          <p class="meta-label">What I learned</p>
-          <p>
-            A representation is defined by what it throws away. Building each transform by hand
-            made it obvious how much of the signal is gone by the time a model sees an MFCC
-            &mdash; and why that is usually the point.
-          </p>
-        </div>
-
-        <ul class="stack" aria-label="Stack">
-          <li>Python</li><li>librosa</li><li>NumPy</li><li>SciPy</li>
-          <li>Plotly</li><li>Streamlit</li>
-        </ul>
-
-        <div class="project-links">
-          <a href="https://github.com/hey-shiv/Audio-Explorer" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">&#8599;</span></a>
-          <a href="blogs/Audio%20Explorer/">Write-up</a>
-        </div>
-      </div>
-    </section>
-
-        <!-- ===================== 05 — VCP SCREENER ===================== -->
-        <section id="vcp" data-signal="vcp" aria-labelledby="vcp-h">
+        <!-- ===================== FLAGSHIP WORK ===================== -->
+        <section id="work" aria-labelledby="work-h">
           <div class="section-head">
             <div>
-              <p class="signal-marker">05 &mdash; VCP screener <span class="state-glyph" data-state="planned" style="margin-left:auto">Negative result</span></p>
-              <h2 id="vcp-h">VCP Screener</h2>
+              <p class="signal-marker">01 &mdash; Flagship work</p>
+              <h2 id="work-h" class="sr-only">Flagship work</h2>
             </div>
           </div>
 
-          <p style="max-width: 36rem">
-            A screener that scans roughly 2,300 NSE equities for a volatility contraction
-            pattern, combining technical, fundamental and ownership evidence behind a FastAPI
-            service and a dependency-free frontend.
-          </p>
-          <p style="max-width: 36rem">
-            The screener is the smaller half. The larger half is the ten-year study that tried
-            to falsify it: point-in-time signal replay, one shared trade simulator, real
-            transaction costs, a portfolio-level constraint, and matched random entries as a
-            control.
-          </p>
-
-          <div class="graph-surface eval-room">
-            <p class="signal-marker">Study design</p>
-            <ul class="eval-bands">
-              <li>
-                <b>Strategy</b>
-                <svg viewBox="0 0 600 34" role="img" aria-label="A band of signal entries spread across the test window.">
-                  <line class="eval-axis" x1="0" y1="17" x2="600" y2="17" />
-                  <g class="eval-tick eval-tick-signal">
-                    <line x1="18" y1="6" x2="18" y2="28" /><line x1="62" y1="6" x2="62" y2="28" />
-                    <line x1="96" y1="6" x2="96" y2="28" /><line x1="147" y1="6" x2="147" y2="28" />
-                    <line x1="188" y1="6" x2="188" y2="28" /><line x1="223" y1="6" x2="223" y2="28" />
-                    <line x1="271" y1="6" x2="271" y2="28" /><line x1="309" y1="6" x2="309" y2="28" />
-                    <line x1="352" y1="6" x2="352" y2="28" /><line x1="398" y1="6" x2="398" y2="28" />
-                    <line x1="431" y1="6" x2="431" y2="28" /><line x1="478" y1="6" x2="478" y2="28" />
-                    <line x1="516" y1="6" x2="516" y2="28" /><line x1="563" y1="6" x2="563" y2="28" />
-                  </g>
-                </svg>
-              </li>
-              <li>
-                <b>Control</b>
-                <svg viewBox="0 0 600 34" role="img" aria-label="A band of matched random entries, aligned to the same symbols, risk and windows.">
-                  <line class="eval-axis" x1="0" y1="17" x2="600" y2="17" />
-                  <g class="eval-tick">
-                    <line x1="24" y1="8" x2="24" y2="26" /><line x1="58" y1="8" x2="58" y2="26" />
-                    <line x1="103" y1="8" x2="103" y2="26" /><line x1="141" y1="8" x2="141" y2="26" />
-                    <line x1="194" y1="8" x2="194" y2="26" /><line x1="229" y1="8" x2="229" y2="26" />
-                    <line x1="265" y1="8" x2="265" y2="26" /><line x1="315" y1="8" x2="315" y2="26" />
-                    <line x1="346" y1="8" x2="346" y2="26" /><line x1="392" y1="8" x2="392" y2="26" />
-                    <line x1="437" y1="8" x2="437" y2="26" /><line x1="472" y1="8" x2="472" y2="26" />
-                    <line x1="522" y1="8" x2="522" y2="26" /><line x1="557" y1="8" x2="557" y2="26" />
-                  </g>
-                </svg>
-              </li>
+          <div class="flagship-grid">
+          <article class="flagship" aria-labelledby="coil-h">
+            <p class="flagship-kicker">
+              <span class="state-glyph" data-state="built">Live &middot; negative result</span>
+              <span>Data analysis &middot; Backtesting</span>
+            </p>
+            <h3 class="flagship-title" id="coil-h"><a href="projects/vcp-screener/">Coil</a></h3>
+            <p class="flagship-question">Does a famous chart pattern beat buying on a random day?</p>
+            <p class="flagship-summary">
+              A screener that scans 2,300 NSE stocks for a Volatility Contraction Pattern, paired
+              with a ten-year backtest built to disprove it. Every past signal is replayed from
+              only what was known at the time, then compared with random entries in the same
+              stocks at the same risk. The random entries won.
+            </p>
+            <ul class="flagship-figures" aria-label="Coil figures">
+              <li><b>2,300</b><span>Stocks scanned</span></li>
+              <li><b>10&thinsp;yrs</b><span>Point-in-time backtest</span></li>
+              <li><b>11.0<small>%</small> <i>vs</i> 22.3<small>%</small></b><span>CAGR, pattern vs random</span></li>
             </ul>
-            <p class="live-signal-foot" style="padding: var(--s5) 0 0">
-              Schematic of the comparison, not a results chart. Controls are matched on symbol,
-              risk and window &mdash; the fix that made the apparent edge disappear.
+            <div class="project-links">
+              <a href="projects/vcp-screener/">Case study <span aria-hidden="true">&rarr;</span></a>
+              <a href="https://coil-vcp.vercel.app" target="_blank" rel="noreferrer">Live app <span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </article>
+
+          <article class="flagship" aria-labelledby="cover-h">
+            <p class="flagship-kicker">
+              <span class="state-glyph" data-state="progress">Building</span>
+              <span>Machine learning &middot; Retrieval</span>
             </p>
-
-            <div class="graph-result">
-              <p class="signal-marker">Result</p>
-              <strong>No demonstrable edge.</strong>
-            </div>
-          </div>
-
-          <ul class="readouts" style="margin-top: var(--s9)" aria-label="Build figures">
-            <li><b>2,300</b><span>Equities scanned</span></li>
-            <li><b>2,657</b><span>Replayed signals</span></li>
-            <li><b>227</b><span>Tests</span></li>
-            <li><b>10</b><span>Years of bars</span></li>
-          </ul>
-
-          <div class="learned" style="margin-top: var(--s9)">
-            <p class="meta-label">What I learned</p>
-            <p>
-              A control you forgot to match measures something else. Drawn from the wrong window,
-              my random entries were reporting the market regime rather than the pattern &mdash;
-              which is exactly how a result that looks good gets published.
+            <h3 class="flagship-title" id="cover-h"><a href="projects/cover-song-retrieval/">Cover Song Retrieval</a></h3>
+            <p class="flagship-question">Can a machine recognise a song it has never heard?</p>
+            <p class="flagship-summary">
+              Given one recording, find every other recording of the same composition across
+              changes of key, tempo and voice. The classical baseline comes first: chroma
+              features, key alignment and subsequence DTW, with MAP, MRR and Recall@K written
+              and unit tested before any learned model exists. No scores yet; the benchmark run
+              is next.
             </p>
-          </div>
-
-          <ul class="stack" aria-label="Stack">
-            <li>Python</li><li>pandas</li><li>FastAPI</li><li>JavaScript</li>
-          </ul>
-
-          <div class="project-links">
-            <a href="projects/vcp-screener/">Full case study <span aria-hidden="true">&rarr;</span></a>
+            <ul class="flagship-figures" aria-label="Cover Song Retrieval figures">
+              <li><b>13,000</b><span>Tracks in the benchmark</span></li>
+              <li><b>1,000</b><span>Cover cliques</span></li>
+              <li><b>20</b><span>Unit tests so far</span></li>
+            </ul>
+            <div class="project-links">
+              <a href="projects/cover-song-retrieval/">Case study <span aria-hidden="true">&rarr;</span></a>
+              <a href="blogs/Cover%20Song%20Retrieval/">Build notes</a>
+            </div>
+          </article>
           </div>
         </section>
 
-        <section class="anchor-statement rise" aria-label="Working principle">
-          <blockquote>The evaluation protocol is part of the result.</blockquote>
-          <footer>A split that leaks makes every number after it meaningless</footer>
-        </section>
-
-        <!-- ===================== 06 — FAILURE GRAPH ===================== -->
-        <section id="failure" data-signal="failure" aria-labelledby="failure-h">
+        <!-- ===================== ALSO BUILT ===================== -->
+        <section id="also" aria-labelledby="also-h">
           <div class="section-head">
             <div>
-              <p class="signal-marker">06 &mdash; Failure graph</p>
-              <h2 id="failure-h">Five things I got wrong. Two are still open.</h2>
+              <p class="signal-marker">02 &mdash; Also built</p>
+              <h2 id="also-h" class="sr-only">Also built</h2>
             </div>
           </div>
 
-          <div class="fgraph-layout">
-            <div>
-              <svg class="fgraph" viewBox="0 0 520 420" data-fgraph role="group" aria-label="A network of five failure cases around a central evaluation node. Select a node to read that case; every case is also listed beside the graph.">
-                <g aria-hidden="true">
-                  <line class="fedge" data-case="leakage" x1="260" y1="210" x2="95" y2="85" />
-                  <line class="fedge" data-case="key" x1="260" y1="210" x2="405" y2="90" />
-                  <line class="fedge" data-case="length" x1="260" y1="210" x2="455" y2="245" />
-                  <line class="fedge" data-case="noise" x1="260" y1="210" x2="300" y2="355" />
-                  <line class="fedge" data-case="control" x1="260" y1="210" x2="105" y2="300" />
-                </g>
-
-                <g aria-hidden="true">
-                  <circle cx="260" cy="210" r="7" fill="var(--signal)" />
-                  <text class="fgraph-spine" x="260" y="236" text-anchor="middle">EVALUATION</text>
-                </g>
-
-                <g class="fnode" data-case="leakage" data-status="fixed" tabindex="0" role="button" aria-pressed="false">
-                  <circle cx="95" cy="85" r="9" />
-                  <text x="95" y="62" text-anchor="middle">Leakage</text>
-                </g>
-                <g class="fnode" data-case="key" data-status="open" tabindex="0" role="button" aria-pressed="false">
-                  <circle cx="405" cy="90" r="9" />
-                  <text x="405" y="67" text-anchor="middle">Key shift</text>
-                </g>
-                <g class="fnode" data-case="length" data-status="open" tabindex="0" role="button" aria-pressed="false">
-                  <circle cx="455" cy="245" r="9" />
-                  <text x="455" y="272" text-anchor="middle">Length bias</text>
-                </g>
-                <g class="fnode" data-case="noise" data-status="fixed" tabindex="0" role="button" aria-pressed="false">
-                  <circle cx="300" cy="355" r="9" />
-                  <text x="300" y="382" text-anchor="middle">Noise</text>
-                </g>
-                <g class="fnode" data-case="control" data-status="fixed" tabindex="0" role="button" aria-pressed="false">
-                  <circle cx="105" cy="300" r="9" />
-                  <text x="105" y="327" text-anchor="middle">Control</text>
-                </g>
-              </svg>
-
-              <p class="rep-caption" style="margin-top: var(--s5)">
-                <b>Legend</b>
-                <span>Solid ring &mdash; corrected &nbsp;&middot;&nbsp; Dashed ring &mdash; still open</span>
-              </p>
-            </div>
-
-            <div class="fdetail">
-              <div class="fcase" data-case="leakage">
-                <h3>Clique leakage</h3>
-                <dl>
-                  <dt>Assumption</dt>
-                  <dd>Splitting the dataset by track would keep train and test properly separate.</dd>
-                  <dt>What broke</dt>
-                  <dd>The same composition sat on both sides of the boundary, so the metric was partly measuring memorisation.</dd>
-                  <dt>What changed</dt>
-                  <dd>Splits are made at the work level, before anything else runs.</dd>
-                  <dt>Status</dt>
-                  <dd>Corrected.</dd>
-                </dl>
-              </div>
-
-              <div class="fcase" data-case="key">
-                <h3>Key invariance is an assumption</h3>
-                <dl>
-                  <dt>Assumption</dt>
-                  <dd>One global transposition index per pair is enough to handle a change of key.</dd>
-                  <dt>What broke</dt>
-                  <dd>Covers that modulate partway through fall out of alignment; a single shift cannot describe them.</dd>
-                  <dt>What changed</dt>
-                  <dd>Nothing yet. Handling it properly means scoring more than one hypothesis per pair.</dd>
-                  <dt>Status</dt>
-                  <dd class="status-open">Open.</dd>
-                </dl>
-              </div>
-
-              <div class="fcase" data-case="length">
-                <h3>Alignment cost is length-biased</h3>
-                <dl>
-                  <dt>Assumption</dt>
-                  <dd>Accumulated DTW cost is a fair similarity score between two tracks.</dd>
-                  <dt>What broke</dt>
-                  <dd>Unnormalised cost quietly rewards short candidates over musically better matches.</dd>
-                  <dt>What changed</dt>
-                  <dd>Score normalisation is the current problem in the pipeline.</dd>
-                  <dt>Status</dt>
-                  <dd class="status-open">Open.</dd>
-                </dl>
-              </div>
-
-              <div class="fcase" data-case="noise">
-                <h3>Noise mistaken for progress</h3>
-                <dl>
-                  <dt>Assumption</dt>
-                  <dd>A higher average retrieval metric means a better system.</dd>
-                  <dt>What broke</dt>
-                  <dd>Deltas moved around inside the noise, so the ranking of two methods was not stable.</dd>
-                  <dt>What changed</dt>
-                  <dd>Work-level bootstrap intervals became part of the loop rather than an afterthought.</dd>
-                  <dt>Status</dt>
-                  <dd>Corrected.</dd>
-                </dl>
-              </div>
-
-              <div class="fcase" data-case="control">
-                <h3>A control I forgot to match</h3>
-                <dl>
-                  <dt>Assumption</dt>
-                  <dd>Comparing the screener&rsquo;s signals against random entries is a fair control.</dd>
-                  <dt>What broke</dt>
-                  <dd>Controls drawn from the wrong window measured the market regime rather than the pattern.</dd>
-                  <dt>What changed</dt>
-                  <dd>Matched on symbol, risk and window &mdash; and the apparent edge disappeared.</dd>
-                  <dt>Status</dt>
-                  <dd>Corrected.</dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="anchor-statement rise" aria-label="Working principle">
-          <blockquote>A representation is defined by what it throws away.</blockquote>
-          <footer>From building the audio pipeline one transform at a time</footer>
-        </section>
-
-        <!-- ===================== 07 — PROTOCOL ===================== -->
-        <section id="protocol" data-signal="protocol" aria-labelledby="how-h">
-          <div class="section-head">
-            <div>
-              <p class="signal-marker">07 &mdash; Build protocol</p>
-              <h2 id="how-h">Rules I earned the slow way.</h2>
-            </div>
-          </div>
-          <ol class="stance-list">
-            <li><b>01</b><span>Build the classical baseline first, or you will never know what the network actually bought you.</span></li>
-            <li><b>02</b><span>The evaluation protocol is part of the result. A split that leaks makes every number after it meaningless.</span></li>
-            <li><b>03</b><span>Write the metric yourself and unit test it against a ranking worked out by hand.</span></li>
-            <li><b>04</b><span>A representation is defined by what it discards, so be explicit about what you threw away.</span></li>
-            <li><b>05</b><span>Try to falsify your own result before someone else has to.</span></li>
-          </ol>
-        </section>
-
-        <!-- ===================== 08 — ARCHIVE ===================== -->
-        <section id="archive" data-signal="archive" aria-labelledby="archive-h">
-          <div class="section-head">
-            <div>
-              <p class="signal-marker">08 &mdash; Archive</p>
-              <h2 id="archive-h">Earlier builds.</h2>
-            </div>
-          </div>
-          <ul class="archive-list">
+          <ul class="also-list">
             <li>
-              <div>
-                <p class="archive-year" style="margin: 0 0 var(--s2)">2024</p>
-                <h3>Modern Mini LLM</h3>
-                <span class="archive-stack">Decoder-only transformer &middot; PyTorch</span>
-              </div>
-              <p>
-                A complete training pipeline: byte-level BPE tokenizer, offline token caching,
-                memmap TinyStories loading, and custom RMSNorm, RoPE, Grouped-Query Attention and
-                SwiGLU. Each component was built and tested from first principles before I looked
-                at a reference implementation, then wired to CLI inference and a Gradio interface.
-              </p>
-            </li>
-            <li>
-              <div>
-                <p class="archive-year" style="margin: 0 0 var(--s2)">2024</p>
-                <h3>Federated Intrusion Detection</h3>
-                <span class="archive-stack">Privacy-preserving ML</span>
-              </div>
-              <p>
-                A federated anomaly-detection pipeline for decentralised healthcare networks that
-                trains without centralising client data, using lightweight secure aggregation,
-                with a study of the tradeoff between aggregation efficiency and accuracy under
-                non-IID client distributions.
-              </p>
-            </li>
-          </ul>
-        </section>
-
-        <!-- ===================== 09 — FIELD NOTES ===================== -->
-        <section id="notes" data-signal="notes" aria-labelledby="writing-h">
-          <div class="section-head">
-            <div>
-              <p class="signal-marker">09 &mdash; Field notes</p>
-              <h2 id="writing-h">Notes written close to the work.</h2>
-            </div>
-            <a class="section-link" href="blog.html">All field notes &rarr;</a>
-          </div>
-
-          <ol class="writing-list">
-            <li>
-              <a class="w-row" href="blogs/Audio%20Explorer/">
-                <span class="w-num">001</span>
-                <span class="w-title">Building the audio-AI pipeline from first principles</span>
-                <span class="w-meta">Build log &middot; Aug 2026</span>
+              <a class="also-row" href="https://github.com/hey-shiv/mini-modern-llm" target="_blank" rel="noreferrer">
+                <span class="also-title">Modern Mini LLM <span aria-hidden="true">&#8599;</span></span>
+                <span class="also-desc">A small transformer trained on TinyStories, with RMSNorm, rotary embeddings, grouped-query attention and SwiGLU, and its own BPE tokenizer.</span>
+                <span class="also-meta">PyTorch</span>
               </a>
             </li>
             <li>
-              <span class="w-row" aria-disabled="true">
-                <span class="w-num">002</span>
-                <span class="w-title">Why chroma is the right representation for cover detection</span>
-                <span class="w-meta">In progress</span>
-              </span>
-            </li>
-          </ol>
-        </section>
-
-        <!-- ===================== CURRENT STATE ===================== -->
-        <section id="state" data-signal="state" aria-labelledby="skills-h">
-          <div class="section-head">
-            <div>
-              <p class="signal-marker">Current state</p>
-              <h2 id="skills-h">Honest about the gradient.</h2>
-            </div>
-            <a class="section-link" href="now.html">Full status board &rarr;</a>
-          </div>
-
-          <ul class="trajectory">
-            <li>
-              <h3>Strongest today</h3>
-              <p>Python, NumPy and pandas; audio signal processing with librosa; building a pipeline end to end and testing the parts that matter.</p>
+              <div class="also-row">
+                <span class="also-title">Neural Network from Scratch</span>
+                <span class="also-desc">Layers, softmax, cross-entropy and backpropagation by hand, then SGD with decay and momentum, reaching 95% training accuracy on a three-class spiral.</span>
+                <span class="also-meta">NumPy</span>
+              </div>
             </li>
             <li>
-              <h3>Building depth in</h3>
-              <p>PyTorch sequence models, metric learning with triplet objectives, retrieval evaluation, and FAISS indexing.</p>
-            </li>
-            <li>
-              <h3>Learning next</h3>
-              <p>Training at larger scale, serving models properly, and the cloud tooling around them &mdash; currently through GCP work with GDG.</p>
+              <a class="also-row" href="blogs/Audio%20Explorer/">
+                <span class="also-title">Audio Explorer <span aria-hidden="true">&rarr;</span></span>
+                <span class="also-desc">An app that makes the audio-AI front end inspectable: waveform, STFT, Mel spectrograms, MFCCs and beat tracking.</span>
+                <span class="also-meta">librosa &middot; Streamlit</span>
+              </a>
             </li>
           </ul>
+        </section>
+
+        <!-- ===================== ABOUT ===================== -->
+        <section id="about" aria-labelledby="about-h">
+          <div class="section-head">
+            <div>
+              <p class="signal-marker">03 &mdash; About</p>
+              <h2 id="about-h" class="sr-only">About</h2>
+            </div>
+          </div>
+
+          <div class="about-grid">
+          <p class="about-lede">
+            I care about how a system actually behaves, not whether a number went up. So my
+            projects come with the evaluation attached, and sometimes with the result that the
+            idea did not work.
+          </p>
+          <p>
+            Final year of a B.Tech in CS (AI &amp; ML) at VIT-AP University, 2023&ndash;2027,
+            CGPA 8.05&thinsp;/&thinsp;10. Cloud &amp; DevOps team at Google Developer Groups
+            VIT-AP since August 2024.
+          </p>
+          </div>
 
           <dl class="skill-cols skill-cols-spaced">
             <div>
               <dt>Languages</dt>
-              <dd>Python &middot; C++ &middot; SQL</dd>
+              <dd>Python &middot; SQL &middot; C++</dd>
             </div>
             <div>
-              <dt>ML</dt>
-              <dd>PyTorch &middot; scikit-learn &middot; Transformers &middot; Hugging Face</dd>
+              <dt>Data analysis</dt>
+              <dd>pandas &middot; NumPy &middot; SQLite &middot; Matplotlib &middot; Plotly</dd>
             </div>
             <div>
-              <dt>Data &amp; audio</dt>
-              <dd>NumPy &middot; pandas &middot; librosa &middot; Essentia &middot; FAISS</dd>
+              <dt>Machine learning</dt>
+              <dd>PyTorch &middot; scikit-learn &middot; Hugging Face &middot; librosa</dd>
             </div>
             <div>
               <dt>Engineering</dt>
-              <dd>Git &middot; Linux &middot; FastAPI &middot; Streamlit &middot; Gradio &middot; GCP</dd>
+              <dd>Git &middot; Linux &middot; FastAPI &middot; Streamlit &middot; GCP</dd>
             </div>
           </dl>
         </section>
 
-        <!-- ===================== ABOUT ===================== -->
-        <section id="about" data-signal="about" aria-labelledby="about-h">
-          <div class="section-head">
-            <div>
-              <p class="signal-marker">About</p>
-              <h2 id="about-h">I care about what survives the transformation.</h2>
-            </div>
-          </div>
-
+        <!-- ===================== CONTACT ===================== -->
+        <section class="contact" id="contact" aria-labelledby="contact-h">
+          <p class="signal-marker">04 &mdash; Contact</p>
+          <div class="contact-grid">
+          <h2 id="contact-h">Need someone who checks the numbers?</h2>
+          <div>
           <p>
-            I am in my final year of a CS degree in AI &amp; ML at VIT-AP, working toward
-            AI/ML engineering roles. The through-line in what I build is wanting to know how a
-            system actually behaves rather than whether a number went up &mdash; which is why
-            most of my projects come with the evaluation attached, and occasionally with the
-            result that the idea did not work.
-          </p>
-          <p>
-            Music is the reason I care about audio at all. Cover song identification is a small,
-            well-posed version of a question I find genuinely interesting: what survives when a
-            song is re-recorded, and can a system learn to hold onto it?
-          </p>
-
-          <dl class="skill-cols skill-cols-spaced">
-            <div>
-              <dt>Education</dt>
-              <dd>
-                B.Tech, Computer Science &mdash; AI &amp; ML, 2023&ndash;2027<br />
-                VIT-AP University, Amaravati &middot; CGPA 8.05&thinsp;/&thinsp;10
-              </dd>
-            </div>
-            <div>
-              <dt>Community</dt>
-              <dd>
-                Google Developer Groups VIT-AP &mdash; Cloud &amp; DevOps team, since August 2024.
-                Workshops and community sessions.
-              </dd>
-            </div>
-          </dl>
-        </section>
-
-        <!-- ===================== 10 — END OF SIGNAL ===================== -->
-        <section class="contact end-signal" id="end" data-signal="end" aria-labelledby="contact-h">
-          <p class="signal-marker">10 &mdash; End of signal</p>
-          <h2 id="contact-h">Building something difficult?</h2>
-          <p>
-            I&rsquo;m looking for internships and early engineering roles where I can build
-            systems end to end and be held to a real bar. The fastest way to reach me is email.
+            I&rsquo;m looking for data analyst and AI/ML engineering internships, and early roles
+            where I can work with real data end to end. Email is the fastest way to reach me.
           </p>
           <div class="actions">
             <a class="btn btn-primary" href="mailto:shivashant.work@gmail.com">
               shivashant.work@gmail.com <span class="btn-arrow" aria-hidden="true">&#8599;</span>
             </a>
-            <a class="btn" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">
-              R&eacute;sum&eacute; <span class="btn-arrow" aria-hidden="true">&#8599;</span>
-            </a>
           </div>
-          <div class="signal-fade" aria-hidden="true"></div>
+          </div>
+          </div>
         </section>
       </main>
 
@@ -779,7 +287,6 @@
       </footer>
     </div>
 
-    <script src="assets/instrument.js" defer></script>
     <script src="assets/site.js" defer></script>
   </body>
 </html>

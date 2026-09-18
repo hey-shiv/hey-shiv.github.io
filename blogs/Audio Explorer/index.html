@@ -9,7 +9,7 @@
       (function () {
         try {
           var saved = localStorage.getItem("site-theme-v2");
-          var theme = saved || "dark";
+          var theme = saved || "light";
           document.documentElement.dataset.theme = theme;
           document.documentElement.style.colorScheme = theme;
         } catch (error) {}
@@ -24,11 +24,16 @@
       <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
           <a href="../../index.html" class="nav-logo" aria-label="Home">Shivashant</a>
-          <a href="../../index.html">Work</a>
-          <a href="../../blog.html" aria-current="page">Field notes</a>
-          <a href="../../notes.html">Notes</a>
-          <a href="../../now.html">Now</a>
+          <a href="../../index.html" class="nav-work">Work</a>
+          <a href="../../resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">R&eacute;sum&eacute;</a>
         </nav>
+        <ul class="nav-social" aria-label="Social links">
+          <li><a href="https://github.com/hey-shiv" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
+          <li><a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S.02 4.88.02 3.5 1.13 1 2.5 1s2.48 1.12 2.48 2.5zM.4 8h4.2v14H.4V8zm7.2 0h4v1.9h.06c.56-1.06 1.93-2.18 3.97-2.18 4.25 0 5.03 2.8 5.03 6.43V22h-4.2v-6.93c0-1.65-.03-3.78-2.3-3.78-2.3 0-2.66 1.8-2.66 3.66V22H7.6V8z"/></svg></a></li>
+          <li><a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer" aria-label="X" title="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
+          <li><a href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer" aria-label="Medium" title="Medium"><svg viewBox="0 0 24 24" aria-hidden="true"><circle fill="currentColor" cx="6.8" cy="12" r="6.6"/><ellipse fill="currentColor" cx="17.4" cy="12" rx="3.3" ry="6.2"/><ellipse fill="currentColor" cx="22.6" cy="12" rx="1.2" ry="5.6"/></svg></a></li>
+          <li><a href="mailto:shivashant.work@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.6 6.4 8.4 6.4 8.4-6.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></a></li>
+        </ul>
       </header>
 
       <main>

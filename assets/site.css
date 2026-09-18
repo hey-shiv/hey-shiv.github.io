@@ -175,6 +175,18 @@ hr { border: 0; border-top: 1px solid var(--border); margin: var(--s10) 0 0; }
 
 .skip-link:focus { left: var(--s5); top: var(--s3); color: var(--on-accent); }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* --------------------------------------------------------------------------
    3. Typography
    -------------------------------------------------------------------------- */
@@ -2148,6 +2160,86 @@ main section { margin-bottom: var(--s12); padding-top: var(--s12); }
   text-transform: uppercase;
 }
 
+.world-foot > .meta-label { margin: 0 0 var(--s6); color: var(--text-muted); }
+
+.world-status {
+  max-width: 40rem;
+  margin: var(--s9) 0 0;
+  padding-top: var(--s5);
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+/* ---- Compare: one result, two columns, the winner lit ------------------ */
+
+.compare { max-width: 44rem; }
+
+.compare-table {
+  width: 100%;
+  margin-top: var(--s5);
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.compare-table caption {
+  caption-side: bottom;
+  padding-top: var(--s4);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: var(--s4) var(--s3) var(--s4) 0;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.compare-table thead th {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.compare-table tbody th {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.compare-table td {
+  color: var(--heading);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 0.95rem + 1.4vw, 1.9rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.compare-table .is-winner { color: var(--signal); }
+
+.compare-verdict {
+  margin: var(--s6) 0 0;
+  color: var(--heading);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.archive-list .project-links { margin-top: var(--s4); }
+
 /* ---- The system: one question, changing material ----------------------- */
 
 .system-transform {
@@ -2637,3 +2729,357 @@ article p, article ul, article ol, .article-figure figcaption { max-width: 40rem
   border-bottom: 1px solid var(--signal);
   padding-bottom: 2px;
 }
+
+/* ==========================================================================
+   29. Minimal homepage
+   --------------------------------------------------------------------------
+   The homepage is deliberately quiet: typography, rules and a few numbers.
+   Canvases, step-by-step illustrations and the failure graph live on the
+   project pages.
+   ========================================================================== */
+
+.flagship {
+  padding: var(--s9) 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-head + .flagship { padding-top: var(--s4); border-top: 0; }
+.flagship:last-child { padding-bottom: 0; }
+
+article .flagship-kicker {
+  display: flex;
+  max-width: none;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: var(--s3) var(--s6);
+  margin: 0 0 var(--s6);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.flagship-title {
+  margin: 0 0 var(--s4);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 1.2rem + 4.6vw, 4.4rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+.flagship-title a { color: var(--heading); transition: color 0.2s var(--ease); }
+.flagship-title a:hover, .flagship-title a:focus-visible { color: var(--signal); }
+
+.flagship-question {
+  max-width: 30ch;
+  margin: 0 0 var(--s6);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 0.95rem + 0.9vw, 1.55rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+article .flagship-summary {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+article .flagship-figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s7) var(--s10);
+  max-width: none;
+  margin: var(--s8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flagship-figures li { margin: 0; }
+
+.flagship-figures b {
+  display: block;
+  color: var(--heading);
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.6rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.flagship-figures b small { font-size: 0.6em; letter-spacing: -0.02em; }
+
+.flagship-figures b i {
+  margin: 0 0.25em;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.42em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: 0.35em;
+}
+
+.flagship-figures span {
+  display: block;
+  margin-top: var(--s3);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.flagship .project-links { margin-top: var(--s8); }
+
+/* ---- Also built: one row each, no cards ------------------------------- */
+
+.also-list { margin: 0; padding: 0; list-style: none; }
+.also-list > li { margin: 0; border-top: 1px solid var(--border); }
+.also-list > li:last-child { border-bottom: 1px solid var(--border); }
+
+.also-row {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.8fr) minmax(0, 2fr);
+  gap: var(--s2) var(--s7);
+  align-items: baseline;
+  padding: var(--s6) 0;
+  color: inherit;
+}
+
+.also-row .also-title { grid-column: 1; grid-row: 1; }
+.also-row .also-meta { grid-column: 1; grid-row: 2; }
+.also-row .also-desc { grid-column: 2; grid-row: 1 / span 2; }
+
+.also-title { color: var(--heading-soft); font-size: 1rem; font-weight: 600; transition: color 0.2s var(--ease); }
+.also-desc { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; }
+
+.also-meta {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+a.also-row:hover .also-title, a.also-row:focus-visible .also-title { color: var(--signal); }
+a.also-row:hover, a.also-row:focus-visible { color: inherit; }
+
+/* ---- About --------------------------------------------------------------- */
+
+body.home .about-lede {
+  max-width: 32ch;
+  margin: 0 0 var(--s6);
+  color: var(--heading);
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1rem + 1.3vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.28;
+}
+
+@media (max-width: 720px) {
+  .also-row { grid-template-columns: 1fr; }
+  .also-row .also-desc { grid-column: 1; grid-row: 2; }
+  .also-row .also-meta { grid-row: 3; margin-top: var(--s2); }
+  article .flagship-figures { gap: var(--s6) var(--s8); }
+}
+
+/* ==========================================================================
+   30. Header socials + a single centred homepage column
+   ========================================================================== */
+
+/* Identity on the left, the ways to reach me on the right. The header is
+   sticky, so these stay on screen the whole way down every page. */
+.nav-social {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  margin: 0 0 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-social li { margin: 0; }
+
+.nav-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  color: var(--text-muted);
+  transition: color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+
+.nav-social a:hover, .nav-social a:focus-visible { color: var(--text); background: var(--bg-sunk); outline: none; }
+.nav-social svg { display: block; width: 1rem; height: 1rem; }
+.nav-social + .theme-toggle { margin-left: var(--s2); }
+
+@media (max-width: 560px) {
+  .site-nav .nav-work { display: none; }
+  .site-header { gap: var(--s3); }
+  .nav-social { gap: 0; }
+  .nav-social a { width: 1.75rem; height: 1.75rem; }
+  .nav-social svg { width: 0.95rem; height: 0.95rem; }
+  .nav-social + .theme-toggle { margin-left: 0; }
+}
+
+@media print { .nav-social { display: none; } }
+
+
+@media (max-width: 560px) {
+  body.home .hero-role { font-size: 0.6rem; letter-spacing: 0.08em; white-space: nowrap; }
+  body.home .hero .actions { flex-wrap: nowrap; }
+  body.home .hero .actions .btn { flex: 1 1 0; justify-content: center; }
+}
+
+/* ==========================================================================
+   31. Full width
+   --------------------------------------------------------------------------
+   The site runs edge to edge with generous gutters. Width is filled with
+   balanced columns, never one narrow column hugging the left edge.
+   ========================================================================== */
+
+:root { --gutter: clamp(1.25rem, 4.5vw, 5rem); }
+
+.container { max-width: none; padding-left: var(--gutter); padding-right: var(--gutter); }
+
+.world-head,
+.world-inner,
+.world-foot { max-width: none; padding-left: var(--gutter); padding-right: var(--gutter); }
+
+/* ---- Homepage ------------------------------------------------------------ */
+
+body.home main section { margin-bottom: var(--s11); padding-top: var(--s11); }
+body.home .hero { margin-bottom: var(--s11); }
+body.home .entry-tag { justify-content: flex-start; margin-bottom: var(--s8); }
+
+body.home .entry-headline {
+  margin-bottom: var(--s9);
+  font-size: clamp(2.8rem, 0.8rem + 7.2vw, 9.5rem);
+}
+
+.hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--s7) var(--s11);
+  align-items: start;
+}
+
+body.home .hero .statement {
+  max-width: 19ch;
+  margin: 0;
+  font-size: clamp(1.4rem, 0.9rem + 1.9vw, 2.6rem);
+}
+
+body.home .hero-intro p { max-width: 36rem; margin-top: 0; font-size: 1.04rem; }
+
+.flagship-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--s11);
+}
+
+.flagship-grid .flagship { padding: var(--s2) 0 0; border-top: 0; }
+
+body.home .also-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 var(--s9);
+}
+
+body.home .also-list > li,
+body.home .also-list > li:last-child { border-top: 1px solid var(--border); border-bottom: 0; }
+
+body.home .also-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  padding: var(--s6) 0 0;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--s6) var(--s11);
+  align-items: start;
+}
+
+.about-grid > p { margin: 0; }
+body.home .about-lede { max-width: 30ch; margin: 0; font-size: clamp(1.25rem, 0.9rem + 1.2vw, 1.85rem); }
+.about-grid > p:not(.about-lede) { max-width: 36rem; padding-top: 0.35rem; }
+body.home .skill-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6) var(--s9); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--s6) var(--s11);
+  align-items: end;
+}
+
+.contact-grid h2 { max-width: 17ch; margin: 0; font-size: clamp(1.9rem, 1.1rem + 2.3vw, 3.2rem); }
+.contact-grid p { max-width: 34rem; margin-top: 0; }
+
+@media (max-width: 900px) {
+  .flagship-grid { grid-template-columns: 1fr; }
+  .flagship-grid .flagship + .flagship { margin-top: var(--s9); padding-top: var(--s9); border-top: 1px solid var(--border); }
+  body.home .also-list { grid-template-columns: 1fr; }
+  body.home .also-row { padding-bottom: var(--s6); }
+  body.home .also-list > li:last-child { border-bottom: 1px solid var(--border); }
+  .about-grid { grid-template-columns: 1fr; }
+  body.home .skill-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 820px) {
+  .hero-split, .contact-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  body.home .skill-cols { grid-template-columns: 1fr; }
+}
+
+/* ---- Inner pages: label on the left, content on the right --------------- */
+
+@media (min-width: 1024px) {
+  main > section:has(> .section-label:first-child) {
+    display: grid;
+    grid-template-columns: minmax(12rem, 1fr) minmax(0, 3fr);
+    column-gap: var(--s11);
+    align-items: start;
+  }
+
+  main > section:has(> .section-label:first-child) > * { grid-column: 2; }
+
+  main > section:has(> .section-label:first-child) > .section-label {
+    position: sticky;
+    top: calc(var(--nav-h) + var(--s6));
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 0.3rem;
+  }
+
+  main > section:has(> .section-label:first-child) > p { max-width: 44rem; }
+}
+
+/* Long-form posts keep a centred reading column inside the full-width site. */
+main:has(> article) > .back-links,
+main:has(> article) > .article-header,
+main > article { max-width: 48rem; margin-left: auto; margin-right: auto; }
+
+/* Case-study heroes: the links sit with the tags in the right-hand column. */
+@media (min-width: 1024px) {
+  .detail-hero .project-links { grid-column: 2; }
+}
+
+.world-head .world-title { max-width: 18ch; }
+.world-head .world-question { max-width: 30ch; }

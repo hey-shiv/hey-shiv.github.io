@@ -4,8 +4,10 @@
    A single particle field that can arrange itself into any of the
    representations this site talks about: a waveform, a chroma grid, a
    circular transposition ring, two sequences under alignment, an embedding
-   scatter, a retrieval result, a ranked list — and, for Audio Explorer, an
-   STFT / Mel / MFCC / rhythm view.
+   scatter, a retrieval result, a ranked list — for Audio Explorer, an
+   STFT / Mel / MFCC / rhythm view — and, for Coil, a contracting price
+   base, a tiered scan, point-in-time replay, a matched control and the
+   portfolio result.
 
    Everything on the site that moves is the SAME field changing state. That
    is the whole idea: signal becoming representation becoming retrieval.
@@ -194,6 +196,144 @@
     out.r = strong ? 1.9 : 1.2;
   };
 
+  /* ---- Coil representations ----
+     Schematic except for the last state, whose bar lengths are drawn to the
+     portfolio CAGRs reported in Coil's study (11.0% against 22.3%). */
+
+  var BASE_START = 0.14, BASE_END = 0.84, SWINGS = 4;
+
+  /* A base whose pullbacks shrink: highs hold near the pivot while the lows
+     rise, then price breaks out. Returns screen y for k in [0, 1]. */
+  function coilY(k, S) {
+    var top = S.P + S.ih * 0.30;
+    var wobble = Math.sin(k * 90 + S.t * 1.2) * S.ih * 0.006;
+    if (k < BASE_START) {
+      return lerp(S.P + S.ih * 0.92, top, easeInOut(k / BASE_START)) + wobble;
+    }
+    if (k > BASE_END) {
+      return lerp(top, S.P + S.ih * 0.04, (k - BASE_END) / (1 - BASE_END)) + wobble;
+    }
+    var u = (k - BASE_START) / (BASE_END - BASE_START);
+    var depth = S.ih * 0.5 * Math.pow(1 - u, 1.15) + S.ih * 0.02;
+    return top + depth * (1 - Math.cos(u * SWINGS * Math.PI * 2)) / 2 + wobble;
+  }
+
+  states.coil = function (i, S, out) {
+    var k = i / (S.N - 1);
+    var u = (k - BASE_START) / (BASE_END - BASE_START);
+    var trough = u > 0 && u < 1 && (1 - Math.cos(u * SWINGS * Math.PI * 2)) / 2 > 0.96;
+    out.x = S.P + k * S.iw;
+    out.y = coilY(k, S);
+    out.role = trough || k > BASE_END + 0.02 ? 1 : 0;
+    out.r = out.role ? 2.1 : 1.4;
+  };
+
+  /* A typical full run: 2,301 stocks, 30 pass the technical tier, 20 the
+     fundamental tier, 7 the ownership tier. Point counts are not to scale. */
+  var FUNNEL = [
+    { n: 236, label: "UNIVERSE", count: "2,301" },
+    { n: 28, label: "TECHNICAL", count: "30" },
+    { n: 17, label: "FUNDAMENTAL", count: "20" },
+    { n: 7, label: "OWNERSHIP", count: "7" }
+  ];
+
+  function funnelGeometry(tier, S) {
+    var colW = S.iw / FUNNEL.length;
+    var R0 = Math.min(colW * 0.42, S.ih * 0.3);
+    return {
+      cx: S.P + (tier + 0.5) * colW,
+      cy: S.P + S.ih * 0.42,
+      R: Math.max(R0 * Math.sqrt(FUNNEL[tier].n / FUNNEL[0].n), 9),
+      R0: R0
+    };
+  }
+
+  states.funnel = function (i, S, out) {
+    var tier = 0, j = i;
+    while (tier < FUNNEL.length - 1 && j >= FUNNEL[tier].n) { j -= FUNNEL[tier].n; tier++; }
+    var g = funnelGeometry(tier, S);
+    var n = FUNNEL[tier].n;
+    /* Sunflower packing: an even disc whatever the count. */
+    var rad = g.R * Math.sqrt((Math.min(j, n - 1) + 0.5) / n);
+    var ang = j * 2.39996 + tier;
+    out.x = g.cx + Math.cos(ang) * rad;
+    out.y = g.cy + Math.sin(ang) * rad;
+    out.role = tier === FUNNEL.length - 1 ? 1 : 0;
+    out.r = out.role ? 2.4 : tier ? 1.6 : 1.3;
+  };
+
+  /* Replay: stocks down, ten years across. A sweeping date reveals signals
+     using only what was known up to it. */
+  var REPLAY_ROWS = 12;
+
+  function replayNow(S) {
+    return reduced ? 1 : clamp((S.t * 0.07) % 1.25, 0, 1);
+  }
+
+  function replayRowY(row, S) {
+    return S.P + S.ih * 0.1 + (row + 0.5) * (S.ih * 0.74 / REPLAY_ROWS);
+  }
+
+  states.replay = function (i, S, out) {
+    var cols = Math.floor(S.N / REPLAY_ROWS);
+    var row = i % REPLAY_ROWS, col = Math.floor(i / REPLAY_ROWS);
+    var k = (col + 0.5) / cols;
+    var known = k <= replayNow(S);
+    var signal = hash(i * 4.1 + 2) < 0.09;
+    out.x = S.P + k * S.iw;
+    out.y = replayRowY(row, S);
+    out.role = known && signal ? 1 : 0;
+    out.r = known ? (signal ? 2.4 : 1.4) : 0.7;
+  };
+
+  /* Control: signals on top, matched random entries below. Each pair shares
+     a stock, a stop distance and a window; only the date differs. */
+  var CONTROL_WINDOW = 12, CONTROL_SIGNAL_SLOT = 3;
+
+  function controlSlot(pair) {
+    var s = Math.floor(hash(pair * 7.7 + 1) * CONTROL_WINDOW);
+    return s === CONTROL_SIGNAL_SLOT ? 8 : s;
+  }
+
+  function controlBandY(band, S) {
+    return band ? S.P + S.ih * 0.72 : S.P + S.ih * 0.32;
+  }
+
+  states.control = function (i, S, out) {
+    var half = Math.floor(S.N / 2);
+    var band = i < half ? 0 : 1;
+    var j = i % half;
+    var pair = Math.floor(j / CONTROL_WINDOW), slot = j % CONTROL_WINDOW;
+    out.x = S.P + ((j + 0.5) / half) * S.iw;
+    out.y = controlBandY(band, S) + (hash(i * 5.7) - 0.5) * S.ih * 0.05;
+    out.role = slot === (band ? controlSlot(pair) : CONTROL_SIGNAL_SLOT) ? 1 : 0;
+    out.r = out.role ? 2.4 : 1.3;
+  };
+
+  /* Result: bar lengths proportional to the reported portfolio CAGRs. */
+  var RESULT = [
+    { label: "VCP SIGNALS", value: 11.0, text: "+11.0% CAGR" },
+    { label: "RANDOM ENTRIES", value: 22.3, text: "+22.3% CAGR" }
+  ];
+  var RESULT_THICK = 4;
+
+  function resultBarY(bar, S) {
+    return bar ? S.P + S.ih * 0.66 : S.P + S.ih * 0.3;
+  }
+
+  states.result = function (i, S, out) {
+    var half = Math.floor(S.N / 2);
+    var bar = i < half ? 0 : 1;
+    var j = i % half;
+    var per = Math.ceil(half / RESULT_THICK);
+    var row = j % RESULT_THICK, col = Math.floor(j / RESULT_THICK);
+    var len = S.iw * 0.94 * RESULT[bar].value / RESULT[1].value;
+    out.x = S.P + (col + 0.5) * (len / per);
+    out.y = resultBarY(bar, S) + (row - (RESULT_THICK - 1) / 2) * Math.max(4, S.ih * 0.018);
+    out.role = bar === 1 ? 1 : 0;
+    out.r = 1.7;
+  };
+
   /* ----------------------------------------------------------------- decor */
   /* Structure drawn behind or through the points: the line the waveform
      traces, chroma lanes, the transposition ring, the alignment path,
@@ -348,6 +488,139 @@
     ctx.lineTo(S.P + S.iw, S.H * 0.5);
     ctx.stroke();
     ctx.restore();
+  };
+
+  /* ---- Coil decor ---- */
+
+  function label(ctx, S, text, x, y, align, color, a) {
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.fillStyle = color;
+    ctx.font = Math.round(clamp(S.W / 52, 9, 11.5)) + "px 'JetBrains Mono', ui-monospace, monospace";
+    ctx.textAlign = align;
+    ctx.fillText(text, x, y);
+    ctx.restore();
+  }
+
+  decor.coil = function (ctx, S, a, C) {
+    var top = coilY(BASE_START, S);
+    var half = (BASE_END - BASE_START) / (SWINGS * 2);
+    var firstLow = BASE_START + half, lastLow = BASE_END - half;
+    var xEnd = S.P + BASE_END * S.iw;
+
+    ctx.save();
+    ctx.globalAlpha = a * 0.7;
+    ctx.strokeStyle = C.quiet;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    for (var i = 0; i <= 240; i++) {
+      var k = i / 240, x = S.P + k * S.iw, y = coilY(k, S);
+      i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    }
+    ctx.stroke();
+
+    /* The cone: resistance across the highs, support rising through the lows. */
+    ctx.globalAlpha = a * 0.45;
+    ctx.setLineDash([4, 5]);
+    ctx.beginPath();
+    ctx.moveTo(S.P + BASE_START * S.iw, top);
+    ctx.lineTo(xEnd, top);
+    ctx.moveTo(S.P + firstLow * S.iw, coilY(firstLow, S));
+    ctx.lineTo(S.P + lastLow * S.iw, coilY(lastLow, S));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.globalAlpha = a * 0.85;
+    ctx.strokeStyle = C.signal;
+    ctx.beginPath();
+    ctx.moveTo(xEnd, top);
+    ctx.lineTo(S.P + S.iw, top);
+    ctx.stroke();
+    ctx.restore();
+
+    label(ctx, S, "PIVOT", S.P + S.iw, top + 16, "right", C.signal, a * 0.9);
+  };
+
+  decor.funnel = function (ctx, S, a, C) {
+    var base = S.P + S.ih * 0.42 + funnelGeometry(0, S).R0;
+    for (var t = 0; t < FUNNEL.length; t++) {
+      var g = funnelGeometry(t, S);
+      var last = t === FUNNEL.length - 1;
+      label(ctx, S, FUNNEL[t].count, g.cx, base + 26, "center", last ? C.signal : C.text, a * 0.95);
+      label(ctx, S, FUNNEL[t].label, g.cx, base + 42, "center", C.quiet, a * 0.85);
+      if (last) continue;
+      var next = funnelGeometry(t + 1, S);
+      ctx.save();
+      ctx.globalAlpha = a * 0.5;
+      ctx.strokeStyle = C.quiet;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(g.cx + g.R + 6, g.cy);
+      ctx.lineTo(next.cx - next.R - 6, g.cy);
+      ctx.stroke();
+      ctx.restore();
+    }
+  };
+
+  decor.replay = function (ctx, S, a, C) {
+    var x = S.P + replayNow(S) * S.iw;
+    var y0 = replayRowY(0, S) - 14, y1 = replayRowY(REPLAY_ROWS - 1, S) + 10;
+    ctx.save();
+    ctx.globalAlpha = a * 0.75;
+    ctx.strokeStyle = C.signal;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(x, y0);
+    ctx.lineTo(x, y1);
+    ctx.stroke();
+    ctx.restore();
+    var right = x > S.P + S.iw * 0.6;
+    label(ctx, S, "REPLAY DATE", right ? x - 6 : x + 6, y0 + 8, right ? "right" : "left", C.signal, a * 0.9);
+    label(ctx, S, "2016", S.P, y1 + 20, "left", C.quiet, a * 0.85);
+    label(ctx, S, "2026", S.P + S.iw, y1 + 20, "right", C.quiet, a * 0.85);
+  };
+
+  decor.control = function (ctx, S, a, C) {
+    var half = Math.floor(S.N / 2);
+    var pairs = Math.floor(half / CONTROL_WINDOW);
+    var yTop = controlBandY(0, S), yBottom = controlBandY(1, S);
+    ctx.save();
+    ctx.strokeStyle = C.signal;
+    ctx.lineWidth = 1;
+    ctx.globalAlpha = a * 0.35;
+    for (var p = 0; p < pairs; p++) {
+      var xa = S.P + ((p * CONTROL_WINDOW + CONTROL_SIGNAL_SLOT + 0.5) / half) * S.iw;
+      var xb = S.P + ((p * CONTROL_WINDOW + controlSlot(p) + 0.5) / half) * S.iw;
+      ctx.beginPath();
+      ctx.moveTo(xa, yTop + 6);
+      ctx.lineTo(xb, yBottom - 6);
+      ctx.stroke();
+    }
+    ctx.restore();
+    label(ctx, S, "VCP SIGNAL", S.P, yTop - 20, "left", C.text, a * 0.9);
+    label(ctx, S, "RANDOM DATE · SAME STOCK, SAME RISK", S.P, yBottom + 30, "left", C.quiet, a * 0.9);
+  };
+
+  decor.result = function (ctx, S, a, C) {
+    var lift = Math.max(4, S.ih * 0.018) * (RESULT_THICK / 2) + 12;
+    ctx.save();
+    ctx.globalAlpha = a * 0.6;
+    ctx.strokeStyle = C.quiet;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(S.P - 4, resultBarY(0, S) - lift - 14);
+    ctx.lineTo(S.P - 4, resultBarY(1, S) + lift);
+    ctx.stroke();
+    ctx.restore();
+    for (var b = 0; b < RESULT.length; b++) {
+      var colour = b ? C.signal : C.text;
+      var len = S.iw * 0.94 * RESULT[b].value / RESULT[1].value;
+      label(ctx, S, RESULT[b].label, S.P, resultBarY(b, S) - lift, "left", colour, a * 0.95);
+      /* The value sits at the end of its own bar, so the gap reads as the result. */
+      var shortBar = len < S.iw * 0.7;
+      label(ctx, S, RESULT[b].text, shortBar ? S.P + len + 10 : S.P + len, shortBar ? resultBarY(b, S) + 4 : resultBarY(b, S) - lift, shortBar ? "left" : "right", colour, a * 0.95);
+    }
+    label(ctx, S, "8 POSITIONS · COSTS ON · 2016–2026", S.P, S.P + S.ih, "left", C.quiet, a * 0.8);
   };
 
   /* ----------------------------------------------------------------- field */

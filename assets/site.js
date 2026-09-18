@@ -16,7 +16,7 @@
       var saved = localStorage.getItem(storageKey);
       if (saved === "light" || saved === "dark") return saved;
     } catch (error) {}
-    return "dark";
+    return "light";
   }
 
   var toggle = document.createElement("button");
