@@ -3096,52 +3096,12 @@ main > article { max-width: 48rem; margin-left: auto; margin-right: auto; }
 /* The name, a step larger on the homepage. */
 body.home .hero p.entry-identity { font-size: clamp(1.3rem, 1.05rem + 0.7vw, 1.8rem); letter-spacing: -0.015em; }
 
-/* ---- Currently working on (homepage hero) ---- */
-.current {
-  max-width: 34rem;
+.flagship-note {
   margin: var(--s7) 0 0;
-  padding: var(--s5) 0 var(--s5) var(--s6);
-  border-left: 2px solid var(--signal);
-}
-.hero .current p.current-label {
-  display: flex;
-  align-items: center;
-  gap: var(--s3);
-  margin: 0;
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.current-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--signal);
-  animation: current-pulse 2.4s ease-in-out infinite;
-}
-@keyframes current-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-@media (prefers-reduced-motion: reduce) { .current-dot { animation: none; } }
-.current-title {
-  margin: var(--s3) 0 var(--s2);
-  color: var(--heading-soft);
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-.hero .current p.current-brief {
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-.hero .current p.current-meta {
-  margin: var(--s4) 0 0;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
   line-height: 1.7;
   text-transform: uppercase;
 }
