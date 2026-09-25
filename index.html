@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Shivashant Manohar is a final-year CS (AI &amp; ML) student working toward data analyst and AI/ML engineering roles: a 2,300-stock screener whose own ten-year backtest found no edge, and a cover-song retrieval pipeline built one stage at a time."
+      content="Shivashant Manohar is a final-year CS (AI &amp; ML) student working toward data analyst and AI/ML engineering roles: a 2,300-stock screener whose own ten-year backtest found no edge, and a two-stage cover-song retrieval system that started as a negative result and closed the gap in three more runs."
     />
     <link rel="canonical" href="https://hey-shiv.github.io/" />
     <meta property="og:type" content="website" />
@@ -179,7 +179,7 @@
           <article class="flagship" id="cover" data-signal="cover" aria-labelledby="cover-h">
             <div class="flagship-head">
             <p class="flagship-kicker">
-              <span class="state-glyph" data-state="progress">Building</span>
+              <span class="state-glyph" data-state="built">Complete &middot; below published systems</span>
               <span>Machine learning &middot; Retrieval</span>
             </p>
             <h3 class="flagship-title" id="cover-h"><a href="projects/cover-song-retrieval/">Cover Song Retrieval</a></h3>
@@ -188,15 +188,16 @@
             <div class="flagship-body">
             <p class="flagship-summary">
               Given one recording, find every other recording of the same composition across
-              changes of key, tempo and voice. The classical baseline comes first: chroma
-              features, key alignment and subsequence DTW, with MAP, MRR and Recall@K written
-              and unit tested before any learned model exists. No scores yet; the benchmark run
-              is next.
+              changes of key, tempo and voice. A small learned encoder shortlists 30 of 15,000
+              candidates and subsequence DTW reranks them. The first full-benchmark run lost to
+              plain classical alignment by 4.5&times;; error analysis found why, and three more
+              runs closed the gap to 1.11&times;. Still well below published systems, and the
+              write-up says so.
             </p>
             <ul class="flagship-figures" aria-label="Cover Song Retrieval figures">
-              <li><b>13,000</b><span>Tracks in the benchmark</span></li>
-              <li><b>1,000</b><span>Cover cliques</span></li>
-              <li><b>20</b><span>Unit tests so far</span></li>
+              <li><b>13,000</b><span>Benchmark queries</span></li>
+              <li><b>4.5&times; <i>&rarr;</i> 1.11&times;</b><span>Behind best system, run 1 to 4</span></li>
+              <li><b>142</b><span>Tests</span></li>
             </ul>
             <div class="project-links">
               <a href="projects/cover-song-retrieval/">Case study <span aria-hidden="true">&rarr;</span></a>

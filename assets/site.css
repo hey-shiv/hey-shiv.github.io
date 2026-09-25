@@ -2229,6 +2229,12 @@ main section { margin-bottom: var(--s12); padding-top: var(--s12); }
 
 .compare-table .is-winner { color: var(--signal); }
 
+/* Five-column variant: the value font steps down so four runs fit a phone. */
+.compare-table-wide td { font-size: clamp(0.95rem, 0.7rem + 1.1vw, 1.5rem); }
+.compare-table-wide th,
+.compare-table-wide td { padding-right: var(--s2); }
+.compare-table-wide tbody th { white-space: normal; letter-spacing: 0.04em; }
+
 .compare-verdict {
   margin: var(--s6) 0 0;
   color: var(--heading);

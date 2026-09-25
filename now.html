@@ -59,16 +59,16 @@
               <span class="st-num">01</span>
               <div>
                 <h3>Cover song identification on Da-TACOS</h3>
-                <p>The classical chroma, transposition and alignment chain is implemented and unit tested. Next is scoring it across the benchmark subset rather than a handful of hand-picked cliques.</p>
-                <span class="status-state" data-state="active">In progress</span>
+                <p>Complete. Four full-benchmark evaluations: the first lost to classical alignment by 4.5&times;, and the error analysis behind runs 2 to 4 closed the gap to 1.11&times;. Accuracy is still well below published systems.</p>
+                <span class="status-state" data-state="done">Complete</span>
               </div>
             </li>
             <li>
               <span class="st-num">02</span>
               <div>
                 <h3>Sequence encoders and metric learning</h3>
-                <p>Training a small dilated temporal convolution with a triplet objective on work-disjoint splits, to see whether a learned embedding beats key-aligned subsequence DTW.</p>
-                <span class="status-state" data-state="active">Next up</span>
+                <p>Why a small learned encoder caps the shortlist, and whether a stronger baseline (MOVE, Re-MOVE) changes the picture. The current encoder has flattened out; more epochs alone are unlikely to help.</p>
+                <span class="status-state">Next</span>
               </div>
             </li>
             <li>
@@ -83,8 +83,8 @@
               <span class="st-num">04</span>
               <div>
                 <h3>Vector search at a useful scale</h3>
-                <p>Indexing track-level embeddings with exact inner product in FAISS, and finding the candidate-pool size where approximate search starts to be necessary.</p>
-                <span class="status-state">Planned</span>
+                <p>Exact cosine search over 15,000 candidates was enough here. The open question is the shortlist size: a 500-item shortlist lifts MAP from 0.122 to 0.212 at 362&nbsp;ms per query.</p>
+                <span class="status-state">Studied</span>
               </div>
             </li>
             <li>
@@ -104,10 +104,10 @@
             <div class="now-block">
               <h3>Cover Song Retrieval</h3>
               <p>
-                The classical half of the pipeline is implemented and tested: Da-TACOS metadata
-                loading, Optimal Transposition Index key alignment, subsequence DTW scoring,
-                candidate ranking, and MAP/MRR/Recall@K written from scratch. The learned encoder
-                is next.
+                Complete. A two-stage system (learned encoder, then subsequence DTW reranking with
+                hubness correction) evaluated four times on the full Da-TACOS benchmark, with a
+                shortlist-size study and a draft write-up. Best locked system: 0.136 MAP; published
+                systems score higher.
               </p>
             </div>
             <div class="now-block">
@@ -131,10 +131,10 @@
         <section aria-labelledby="bottlenecks">
           <p class="section-label" id="bottlenecks">Current Bottlenecks</p>
           <ul class="now-list">
-            <li>Full benchmark run: scoring the baseline across Da-TACOS instead of a handful of hand-picked cliques.</li>
-            <li>Score normalisation: DTW cost is divided by query length, but whether candidate length still biases the ranking has not been measured.</li>
-            <li>Modulating covers: a single global transposition index breaks when the key changes mid-song.</li>
-            <li>Pairwise cost: DTW against every candidate is quadratic, which is what the embedding index is meant to fix.</li>
+            <li>Shortlist recall: only 13.6% of true covers reach the top 30, and that caps the whole hybrid.</li>
+            <li>Rerankers at large K: from a shortlist of about 200, most failures are covers outranked inside the list.</li>
+            <li>Structure changes: whole-query subsequence DTW penalises covers that drop or reorder sections.</li>
+            <li>Cost: the strongest untested configuration, 384-frame alignment over all pairs, is about 42 hours of CPU.</li>
             <li>Statistical honesty: no retrieval delta means anything until it clears a work-level bootstrap interval.</li>
           </ul>
         </section>
@@ -144,18 +144,18 @@
           <ul class="pipeline-grid">
             <li>
               <span>01</span>
-              <strong>Baseline numbers</strong>
-              <small>Run the classical chroma + OTI + DTW chain over the benchmark subset and record MAP, MRR, and Recall@K.</small>
+              <strong>A stronger baseline</strong>
+              <small>Run MOVE or Re-MOVE on the CREMA-PCP features Da-TACOS ships, through the same error analysis.</small>
             </li>
             <li>
               <span>02</span>
-              <strong>TCN encoder</strong>
-              <small>Train a small dilated temporal convolution with triplet loss on WID-disjoint splits.</small>
+              <strong>Fused Stage 1</strong>
+              <small>Tune window count, length and fusion weight on calibration works; only one setting has been tried.</small>
             </li>
             <li>
               <span>03</span>
-              <strong>FAISS retrieval</strong>
-              <small>Index track-level embeddings with exact inner product and compare recall against the DTW baseline.</small>
+              <strong>Local alignment</strong>
+              <small>Try Qmax-style local alignment against subsequence DTW for covers with changed structure.</small>
             </li>
           </ul>
         </section>
@@ -176,13 +176,13 @@
           <ul class="roadmap-list">
             <li>
               <span>Cover Song Retrieval</span>
-              <strong>Classical baseline implemented</strong>
-              <small>Done: transposition, subsequence DTW, ranking, and retrieval metrics, each with unit tests.</small>
+              <strong>Four benchmark runs and error analysis</strong>
+              <small>Done: classical baseline, learned encoder, hybrid reranking, hubness correction, and bootstrap intervals on the full benchmark.</small>
             </li>
             <li>
               <span>Cover Song Retrieval</span>
-              <strong>Learned sequence encoder</strong>
-              <small>Next: TCN embeddings with triplet loss, indexed with FAISS and compared on the same split.</small>
+              <strong>Stronger baseline comparison</strong>
+              <small>Next: MOVE or Re-MOVE on CREMA-PCP features, compared on the same protocol.</small>
             </li>
             <li>
               <span>Audio Explorer</span>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Structure-Aware Hybrid Retrieval for Cover Song Identification: a Da-TACOS retrieval pipeline built from chroma features, transposition handling, subsequence DTW, and learned sequence embeddings."
+      content="Cover Song Retrieval: a two-stage cover song identification system on Da-TACOS, evaluated four times on the full benchmark. Its first run was a negative result, and the error analysis behind the later runs is the point."
     />
     <title>Cover Song Retrieval — Shivashant Manohar</title>
     <script>
@@ -49,11 +49,11 @@
 
         <section class="hero detail-hero">
           <p class="eyebrow">Project / Cover Song Retrieval</p>
-          <h1>Structure-aware hybrid retrieval for cover song identification.</h1>
+          <h1>Can a machine recognise the same song when almost everything about the recording has changed?</h1>
           <p class="statement">
-            Given one recording, find every other recording of the same composition—across
-            changes of key, tempo, arrangement, language, and voice—and be honest about how well
-            it actually worked.
+            A two-stage cover song identification system on Da-TACOS, built from HPCP features
+            only and evaluated four times on the full benchmark. The first evaluation was a
+            negative result, and most of this page is about what that result taught.
           </p>
           <ul class="detail-meta" aria-label="Project metadata">
             <li>Music information retrieval</li>
@@ -91,35 +91,34 @@
             <ol class="world-steps">
               <li class="world-step" data-stage="Input / audio">
                 <p class="step-label"><span>Stage 01</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
-                <h3>Input / audio</h3>
+                <h3>Input / features</h3>
                 <p>
-                  Da-TACOS ships precomputed MIR features rather than raw audio, which keeps the
-                  work on retrieval instead of hundreds of gigabytes of downloads. Every track
-                  carries a work ID and a performance ID; two tracks are a cover pair when they
-                  share a work ID.
+                  Da-TACOS ships precomputed features rather than raw audio, so this project works
+                  from HPCP only. Every track carries a work ID and a performance ID; two tracks
+                  are a cover pair when they share a work ID, and every split is made at the work
+                  level so no composition sits on both sides of it.
                 </p>
               </li>
 
               <li class="world-step" data-stage="Representation / HPCP">
-                <p class="step-label"><span>Stage 02</span> &mdash; <span class="state-glyph" data-state="progress">Next</span></p>
+                <p class="step-label"><span>Stage 02</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
                 <h3>Representation / 12 pitch classes</h3>
                 <p>
-                  Chroma / HPCP reduces each frame to twelve pitch classes. Timbre and octave are
-                  discarded on purpose, because they are exactly what a cover changes. What is
-                  left is harmonic movement over time &mdash; the thing that tends to survive
-                  re-recording. Da-TACOS ships these features precomputed; loading them is the
-                  next step, so the alignment code has so far been tested on synthetic chroma.
+                  Each recording is a T&times;12 HPCP matrix. Timbre and octave are discarded on
+                  purpose, because they are exactly what a cover changes. Frames are L2
+                  normalised, area-resampled to a fixed length (96 for the classical view, 384 for
+                  reranking, 512 for the encoder) and normalised again.
                 </p>
               </li>
 
               <li class="world-step" data-stage="Alignment / OTI">
                 <p class="step-label"><span>Stage 03</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
-                <h3>Alignment / OTI</h3>
+                <h3>Alignment / key rotation</h3>
                 <p>
-                  The Optimal Transposition Index is estimated from global mean chroma vectors and
-                  the candidate is rotated onto the query&rsquo;s key, across twelve circular
-                  shifts. It buys key invariance and quietly assumes the key never changes
-                  mid-song &mdash; an assumption that does break.
+                  Key invariance comes from the features, never from key labels: the candidate is
+                  rotated through all twelve circular shifts and the best one is kept. It buys
+                  key invariance and quietly assumes the key never changes mid-song &mdash; an
+                  assumption that does break.
                 </p>
               </li>
 
@@ -127,40 +126,42 @@
                 <p class="step-label"><span>Stage 04</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
                 <h3>Sequence alignment / DTW</h3>
                 <p>
-                  A cosine cost matrix is built between the two chroma sequences, and subsequence
-                  DTW finds a tempo-elastic path through it, so a short query can match anywhere
-                  inside a longer candidate. The accumulated cost becomes the similarity score.
+                  A cosine cross-similarity matrix between the two sequences, then subsequence DTW
+                  with steps (1,1), (2,1) and (1,2), written from the textbook recurrence with a
+                  batched PyTorch version checked against the reference. The accumulated cost is
+                  the alignment score.
                 </p>
               </li>
 
               <li class="world-step" data-stage="Learned representation">
-                <p class="step-label"><span>Stage 05</span> &mdash; <span class="state-glyph" data-state="planned">Planned</span></p>
+                <p class="step-label"><span>Stage 05</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
                 <h3>Learned representation</h3>
                 <p>
-                  A dilated temporal convolution trained with a triplet objective, producing one
-                  track-level vector per recording. This is designed but not built: it is the
-                  current work, and nothing on this page reports a number from it.
+                  A small temporal convolutional encoder (six dilated residual blocks, 645,504
+                  parameters) trained with a supervised contrastive loss, producing one 128-d
+                  vector per recording. Training is deterministic on CPU: a test checks that two
+                  runs give bit-identical weights.
                 </p>
               </li>
 
-              <li class="world-step" data-stage="Vector search / FAISS">
-                <p class="step-label"><span>Stage 06</span> &mdash; <span class="state-glyph" data-state="planned">Planned</span></p>
-                <h3>Vector search / FAISS</h3>
+              <li class="world-step" data-stage="Vector search">
+                <p class="step-label"><span>Stage 06</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
+                <h3>Exact search / shortlist</h3>
                 <p>
-                  Exact inner product first, because approximate search is an optimisation rather
-                  than a result. The point of the index is to replace pairwise DTW, which is
-                  quadratic in the number of candidates.
+                  Exact cosine search over all 15,000 candidates keeps the 30 nearest. Exact rather
+                  than approximate, because approximate search is an optimisation and not a
+                  result. Whatever is not in this shortlist can never be found by Stage 2.
                 </p>
               </li>
 
-              <li class="world-step" data-stage="Evaluation / MAP · MRR · R@K">
+              <li class="world-step" data-stage="Rerank / evaluation">
                 <p class="step-label"><span>Stage 07</span> &mdash; <span class="state-glyph" data-state="built">Built</span></p>
-                <h3>Evaluation / MAP &middot; MRR &middot; Recall@K</h3>
+                <h3>Rerank &middot; hub correction &middot; evaluation</h3>
                 <p>
-                  Candidates are sorted, the self-match dropped, and the ranking scored with MAP,
-                  MRR and Recall@K &mdash; written from scratch and unit tested against rankings
-                  worked out by hand. The metrics exist before the model does, which is the only
-                  order that keeps them honest.
+                  The 30 candidates are aligned frame by frame and the alignment decides the final
+                  order, with a hubness correction subtracted and a calibrated blend with the
+                  global score. MAP, MRR and Hit@K are written from scratch, with work-level
+                  bootstrap intervals.
                 </p>
               </li>
             </ol>
@@ -168,34 +169,34 @@
 
           <p class="world-foot live-signal-foot">
             Illustrative visualisation, generated in-browser from deterministic functions. It
-            shows the shape of each representation, not measured output. No retrieval scores are
-            published on this page because the benchmark run has not been completed.
+            shows the shape of each representation, not measured output. The measured results are
+            in the table below.
           </p>
         </section>
 
         <section aria-labelledby="overview">
           <p class="section-label" id="overview">Overview</p>
           <p>
-            Cover song identification is a retrieval problem, not a classification problem. The
-            set of works is open, most works have only a handful of versions, and two recordings
-            of the same piece may share no surface audio properties at all. So the system is
-            built as a ranking pipeline: represent each track as a sequence, score every
-            candidate against the query, sort, and measure the ranking.
+            A cover changes the key, the tempo, the instruments, the singer, sometimes the
+            structure. What stays is the composition, a sequence of harmony. The system tries to
+            find it in two steps. Stage 1 turns a whole recording into one vector and keeps the 30
+            nearest of 15,000 candidates. Stage 2 aligns each of those 30 with the query, frame
+            by frame, and lets the alignment decide the final order.
           </p>
           <p>
-            The project deliberately starts classical. A chroma-plus-alignment baseline in the
-            tradition of Serr&agrave; et al. 2008 is implemented and tested first, so that any
-            later neural result has something real to be compared against. The learned half is
-            built on top of it, not instead of it.
+            The project deliberately started classical: a chroma-plus-alignment baseline in the
+            tradition of Serr&agrave; et al. 2008, so any learned result had something real to be
+            compared against. It is deterministic from a single seed, covered by 142 tests, and
+            every evaluation setting was locked before any benchmark query was scored.
           </p>
           <div class="summary-grid">
             <div class="summary-block">
               <h3>Core question</h3>
-              <p>What survives when a song is re-recorded, and can a sequence encoder learn to hold onto it?</p>
+              <p>What survives when a song is re-recorded, and can a small learned encoder plus alignment find it faster than aligning everything?</p>
             </div>
             <div class="summary-block">
-              <h3>Current build</h3>
-              <p>Classical baseline implemented and unit tested on synthetic chroma: OTI key alignment, subsequence DTW, ranking, MAP/MRR/Recall@K. The benchmark run is next.</p>
+              <h3>Status</h3>
+              <p>Complete: four full-benchmark evaluations, error analysis, a follow-up shortlist study and a draft write-up. Accuracy is still well below published systems.</p>
             </div>
           </div>
         </section>
@@ -203,123 +204,163 @@
         <section aria-labelledby="dataset">
           <p class="section-label" id="dataset">Dataset</p>
           <p>
-            Da-TACOS (Yesiler et al., ISMIR 2019) ships precomputed MIR features rather than raw
-            audio, which keeps the work on retrieval and learning instead of hundreds of
-            gigabytes of downloads. Its benchmark subset holds 13,000 cover tracks organised into
-            1,000 cliques, plus 2,000 distractors that belong to no clique and exist purely to
-            punish a system that ranks by loose similarity.
+            Da-TACOS (Yesiler et al., ISMIR 2019). The benchmark subset holds 13,000 cover tracks
+            in 1,000 cliques, plus 2,000 distractors that belong to no clique and exist purely to
+            punish a system that ranks by loose similarity. Each of the 13,000 queries is ranked
+            against all 15,000 recordings and has 12 true covers to find; a random ranking scores
+            about 0.0008 MAP.
           </p>
           <div class="metric-strip metric-strip-large" aria-label="Da-TACOS benchmark composition">
-            <span><strong>1000</strong> cover cliques</span>
-            <span><strong>13000</strong> cover tracks</span>
-            <span><strong>2000</strong> distractors</span>
-            <span><strong>12</strong> chroma bins</span>
-            <span><strong>4</strong> retrieval metrics</span>
+            <span><strong>13000</strong> queries</span>
+            <span><strong>15000</strong> candidates</span>
+            <span><strong>12</strong> covers per query</span>
+            <span><strong>142</strong> tests</span>
           </div>
           <p>
-            Every track carries a work ID (WID) and a performance ID (PID). Two tracks are a
-            cover pair when they share a WID. That distinction is the whole evaluation: splits
-            will be made at the work level, never the track level, so no composition can appear
-            on both sides of the train/test boundary.
+            The encoder is trained on works kept entirely separate from the benchmark, and every
+            setting (encoder checkpoint, blend weight, hub-correction strength, resolution) was
+            chosen on held-out validation and calibration works. No benchmark result selected
+            anything, and no run was repeated after its result was seen.
           </p>
+        </section>
+
+        <section aria-labelledby="results">
+          <p class="section-label" id="results">Results</p>
+          <h2>Four runs, and a 4.5&times; deficit that closed to 1.11&times;.</h2>
+          <div class="compare">
+            <table class="compare-table compare-table-wide">
+              <caption>
+                Full Da-TACOS benchmark, 13,000 queries against 15,000 recordings. &ldquo;Behind
+                best&rdquo; compares the hybrid with the strongest system available in that run
+                (exhaustive classical alignment, with hubness correction from run 2). Every number
+                is copied from the result files in the repository; ratios use unrounded MAPs.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col"><span class="sr-only">Measure</span></th>
+                  <th scope="col">Run 1</th>
+                  <th scope="col">Run 2</th>
+                  <th scope="col">Run 3</th>
+                  <th scope="col" class="is-winner">Run 4</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Stage-1 MAP</th><td>0.010</td><td>0.034</td><td>0.034</td><td class="is-winner">0.076</td></tr>
+                <tr><th scope="row">Hybrid MAP</th><td>0.018</td><td>0.062</td><td>0.068</td><td class="is-winner">0.122</td></tr>
+                <tr><th scope="row">Shortlist recall</th><td>0.021</td><td>0.072</td><td>0.072</td><td class="is-winner">0.136</td></tr>
+                <tr><th scope="row">Behind best by</th><td>4.5&times;</td><td>2.2&times;</td><td>2.0&times;</td><td class="is-winner">1.11&times;</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="detail-list">
+            <li><strong>Run 1</strong>, the original system: on 20 development queries the hybrid had looked best, but on the benchmark exhaustive classical alignment (MAP 0.084) beat it by 4.5&times;. That was reported as the headline and not tuned away.</li>
+            <li><strong>Run 2</strong>: encoder trained on all 4,780 usable works, plus hubness correction. Classical alignment rose to 0.136 and the hybrid to 0.062.</li>
+            <li><strong>Run 3</strong>: reranking at 384 frames instead of 96.</li>
+            <li><strong>Run 4</strong>: the encoder trained to convergence (150 epochs). The hybrid now reranks a query in 38&nbsp;ms; exhaustive alignment of the whole benchmark took 2.63&nbsp;h at 96 frames.</li>
+          </ul>
+          <p>
+            Work-level bootstrap over the 1,000 cliques, change in AP against the matching Stage 1:
+            hybrid with hub correction +0.0457 [+0.0426, +0.0487], classical with hub correction
+            +0.1013 [+0.0936, +0.1090]. Every interval excludes zero. Exhaustive corrected
+            alignment (MAP 0.136) is still the most accurate system built here.
+          </p>
+          <p>
+            <strong>In context.</strong> On the same benchmark and HPCP input, Qmax scores 0.333
+            and ByteCover (CQT) 0.714 (Yesiler et al. 2019). This project&rsquo;s systems are well
+            below published cover-identification systems, so the value of the work is in
+            <em>why</em> they behave as they do, not in the score.
+          </p>
+        </section>
+
+        <section aria-labelledby="learned">
+          <p class="section-label" id="learned">What the experiments taught</p>
+          <ul class="lab-note-list">
+            <li>
+              <strong>The shortlist is the ceiling</strong>
+              <span>If a cover is not in Stage 1&rsquo;s top 30, nothing downstream can find it. Only 2.1% of true covers reached the shortlist in run 1; 13.6% do in run 4.</span>
+            </li>
+            <li>
+              <strong>Hubs are real, and one scalar tames them</strong>
+              <span>Tonally static recordings match everything cheaply. Subtracting a calibrated multiple of each candidate&rsquo;s mean score against 200 fixed probe tracks lifted classical alignment from 0.084 to 0.136 MAP and cut the median first-cover rank from 77 to 14.</span>
+            </li>
+            <li>
+              <strong>Resolution mattered more than the algorithm</strong>
+              <span>Averaging a recording down to 96 frames blurs its harmonic rhythm. At 384 frames, development MAP for classical alignment rose from 0.248 to 0.384, affordable only inside a 30-item shortlist.</span>
+            </li>
+            <li>
+              <strong>Data beat architecture</strong>
+              <span>The same encoder trained on 4,780 works instead of 1,500 went from 0.181 to 0.319 validation MAP; training to 150 epochs reached 0.431, then went flat.</span>
+            </li>
+            <li>
+              <strong>A small test set lied twice</strong>
+              <span>The 20-query development protocol preferred the hybrid (reversed at scale), then said reranking hurts a strong Stage 1 while the benchmark showed it helps. It is now treated as a plumbing check.</span>
+            </li>
+            <li>
+              <strong>A bigger shortlist keeps paying, until the reranker becomes the problem</strong>
+              <span>Aligning the top 500 instead of the top 30 lifts hub-corrected MAP from 0.122 to 0.212, at about 362&nbsp;ms per query instead of 22. From K&nbsp;=&nbsp;200 most failures are covers that are present but ranked below a non-cover.</span>
+            </li>
+          </ul>
+          <p>
+            Hubness correction for cover identification is prior art (Seo 2022; Li &amp; Chen
+            2018). What this project adds is a held-out-calibrated measurement of it at Da-TACOS
+            scale, on a baseline about four times weaker than Qmax.
+          </p>
+
+          <figure class="project-figure">
+            <img
+              src="../../assets/cover-song/error_success_P_797406.png"
+              alt="Two cost matrices with DTW paths. Left: query P_797406 against its true cover P_797408, a clean diagonal path with cost 0.021. Right: the same query against non-cover P_31055, a striped matrix with cost 0.036."
+              loading="lazy"
+            />
+            <figcaption>
+              One real query. The embedding ranked the true cover 15th; alignment ranked it 1st.
+              Left: a clean diagonal groove (path cost 0.021). Right: a tonally static hub that
+              is a top-10 false positive for 10 of 20 development queries under classical
+              alignment (stripes, cost 0.036).
+            </figcaption>
+          </figure>
         </section>
 
         <section class="architecture-panel" aria-labelledby="architecture">
           <p class="section-label" id="architecture">Architecture</p>
-          <h2>Audio to a ranked list, one stage at a time.</h2>
-          <ol class="pipeline-v">
-            <li data-built="yes">
-              <span class="pv-dot" aria-hidden="true"></span>
-              <div class="pv-body">
-                <strong>Audio</strong>
-                <small>Da-TACOS ships precomputed MIR features rather than raw audio, which keeps the work on retrieval instead of hundreds of gigabytes of downloads.</small>
-                <span class="pv-tag">Built</span>
-              </div>
-            </li>
-            <li data-built="next">
-              <span class="pv-dot" aria-hidden="true"></span>
-              <div class="pv-body">
-                <strong>Representation</strong>
-                <small>Chroma / HPCP: twelve pitch classes per frame. Timbre and octave are discarded on purpose, because they are exactly what a cover changes. Loading Da-TACOS&rsquo;s precomputed features is next.</small>
-                <span class="pv-tag">Next</span>
-              </div>
-            </li>
-            <li data-built="yes">
-              <span class="pv-dot" aria-hidden="true"></span>
-              <div class="pv-body">
-                <strong>Alignment</strong>
-                <small>Key invariance through the Optimal Transposition Index over twelve circular shifts, then subsequence DTW over a cosine cost, so tempo drift does not break the match.</small>
-                <span class="pv-tag">Built</span>
-              </div>
-            </li>
-            <li data-built="next">
-              <span class="pv-dot" aria-hidden="true"></span>
-              <div class="pv-body">
-                <strong>Embedding</strong>
-                <small>A dilated temporal convolution trained with a triplet objective, producing one track-level vector. This replaces the pairwise alignment cost, which is quadratic.</small>
-                <span class="pv-tag">Next</span>
-              </div>
-            </li>
-            <li data-built="next">
-              <span class="pv-dot" aria-hidden="true"></span>
-              <div class="pv-body">
-                <strong>Vector search</strong>
-                <small>FAISS with exact inner product first. Approximate search is an optimisation, not a result.</small>
-                <span class="pv-tag">Next</span>
-              </div>
-            </li>
-            <li data-built="yes">
-              <span class="pv-dot" aria-hidden="true"></span>
-              <div class="pv-body">
-                <strong>Retrieval</strong>
-                <small>A ranked candidate list scored with MAP, MRR and Recall@{1,10,100}, written from scratch and tested against rankings worked out by hand. Work-disjoint splits arrive with the benchmark run.</small>
-                <span class="pv-tag">Built</span>
-              </div>
-            </li>
-          </ol>
-          <p>
-            The pipeline separates representation, similarity, and evaluation so that each can be
-            swapped or debugged without disturbing the others. The classical and learned branches
-            share the same evaluation lane, which is what makes them comparable at all.
-          </p>
-
+          <h2>Audio features to a ranked list, in two stages.</h2>
           <figure class="system-map" aria-label="Cover song retrieval architecture diagram">
             <div class="system-map-title">
               <strong>Retrieval Architecture</strong>
-              <span>representation -&gt; similarity -&gt; evaluation</span>
+              <span>HPCP -&gt; shortlist -&gt; alignment -&gt; ranking</span>
             </div>
             <div class="diagram-lanes">
               <div class="diagram-lane">
-                <p class="diagram-lane-label">Representation</p>
+                <p class="diagram-lane-label">Stage 1 &mdash; look</p>
                 <ol class="diagram-flow">
                   <li>
-                    <strong>Da-TACOS loader</strong>
-                    <small>WID / PID metadata, clique iterator</small>
+                    <strong>HPCP preprocessing</strong>
+                    <small>frame L2, area-resample to 512</small>
                   </li>
                   <li>
-                    <strong>Chroma / HPCP</strong>
-                    <small>12 pitch classes, timbre discarded</small>
+                    <strong>TCN encoder</strong>
+                    <small>6 dilated residual blocks, 128-d</small>
                   </li>
                   <li>
-                    <strong>Sequence encoder</strong>
-                    <small>dilated TCN, track-level embedding</small>
+                    <strong>Exact cosine search</strong>
+                    <small>keep top 30 of 15,000</small>
                   </li>
                 </ol>
               </div>
               <div class="diagram-lane">
-                <p class="diagram-lane-label">Similarity</p>
+                <p class="diagram-lane-label">Stage 2 &mdash; listen closely</p>
                 <ol class="diagram-flow">
                   <li>
-                    <strong>Transposition</strong>
-                    <small>OTI over 12 circular shifts</small>
+                    <strong>Key rotation</strong>
+                    <small>best of 12 circular shifts</small>
                   </li>
                   <li>
                     <strong>Subsequence DTW</strong>
-                    <small>cosine cost, tempo-elastic path</small>
+                    <small>384 frames, cosine cost</small>
                   </li>
                   <li>
-                    <strong>FAISS index</strong>
-                    <small>exact inner product over embeddings</small>
+                    <strong>Hub correction + blend</strong>
+                    <small>&minus;&lambda; hub score, &alpha; blend</small>
                   </li>
                 </ol>
               </div>
@@ -332,7 +373,7 @@
                   </li>
                   <li>
                     <strong>Ranking metrics</strong>
-                    <small>MAP, MRR, Recall@1/10/100</small>
+                    <small>MAP, MRR, Hit@K</small>
                   </li>
                   <li>
                     <strong>Significance</strong>
@@ -344,198 +385,89 @@
           </figure>
         </section>
 
-        <section aria-labelledby="pipeline">
-          <p class="section-label" id="pipeline">Pipeline</p>
-          <ul class="pipeline-grid">
-            <li>
-              <span>01</span>
-              <strong>Load and split</strong>
-              <small>Parse Da-TACOS metadata into WID-keyed cliques and build work-disjoint splits before anything else runs.</small>
-            </li>
-            <li>
-              <span>02</span>
-              <strong>Tonal features</strong>
-              <small>Reduce each track to a 12-bin chroma sequence, keeping harmony and deliberately throwing away octave and timbre.</small>
-            </li>
-            <li>
-              <span>03</span>
-              <strong>Key alignment</strong>
-              <small>Estimate the Optimal Transposition Index from global mean chroma and rotate the candidate onto the query's key.</small>
-            </li>
-            <li>
-              <span>04</span>
-              <strong>Alignment score</strong>
-              <small>Build a cosine cost matrix and run subsequence DTW so a short query can match anywhere inside a longer candidate.</small>
-            </li>
-            <li>
-              <span>05</span>
-              <strong>Rank and measure</strong>
-              <small>Sort candidates by alignment score, drop the self-match, and score the ranking with MAP, MRR, and Recall@K.</small>
-            </li>
-            <li>
-              <span>06</span>
-              <strong>Learned embeddings</strong>
-              <small>Train a TCN sequence encoder with triplet loss, index with FAISS, and rerank the top candidates with DTW.</small>
-            </li>
-          </ul>
-        </section>
-
-        <section aria-labelledby="build-status">
-          <p class="section-label" id="build-status">Build Status</p>
-          <p>
-            Of the six pipeline steps above, the metadata loader (part of step 01), key alignment
-            (03), alignment scoring (04) and ranking with metrics (05) exist as tested Python
-            modules, exercised on synthetic chroma. Work-disjoint splits, loading the features
-            (02) and the learned encoder (06) are next. The line between built and planned is
-            stated plainly because a project page that blurs the two is not worth reading.
-          </p>
-          <ul class="lab-note-list">
-            <li>
-              <strong>Built &mdash; data</strong>
-              <span>Da-TACOS metadata loader and two-track clique iterator over the WID/PID structure.</span>
-            </li>
-            <li>
-              <strong>Built &mdash; transposition</strong>
-              <span>Circular chroma rotation and Optimal Transposition Index from global mean chroma vectors.</span>
-            </li>
-            <li>
-              <strong>Built &mdash; alignment</strong>
-              <span>Cosine cost matrix and subsequence DTW returning the accumulated cost and best end position.</span>
-            </li>
-            <li>
-              <strong>Built &mdash; ranking and metrics</strong>
-              <span>Key-aligned candidate ranking, plus average precision, MAP, MRR, and Recall@K written from scratch.</span>
-            </li>
-            <li>
-              <strong>Built &mdash; tests</strong>
-              <span>20 unit tests for DTW, transposition, and metrics, validated against examples computed by hand.</span>
-            </li>
-            <li>
-              <strong>Next &mdash; features and splits</strong>
-              <span>Load Da-TACOS&rsquo;s precomputed HPCP features, build work-disjoint splits, and run the baseline across the benchmark subset.</span>
-            </li>
-            <li>
-              <strong>Next &mdash; learned retrieval</strong>
-              <span>TCN encoder, triplet-loss training, FAISS index, hybrid reranking, ablations, and bootstrap intervals.</span>
-            </li>
-          </ul>
-        </section>
-
         <section aria-labelledby="decisions">
           <p class="section-label" id="decisions">Design Decisions</p>
           <ul class="detail-list">
             <li>Implement the classical baseline first, so a neural improvement has to prove itself against something real.</li>
-            <li>Write DTW and the retrieval metrics by hand once, before reaching for librosa or a metric-learning library.</li>
+            <li>Write DTW and the retrieval metrics from the textbook recurrence, with no cover-song library imported.</li>
             <li>Split at the work level, never the track level, because two versions of one song are not independent samples.</li>
-            <li>Use chroma rather than a richer spectral feature, since timbre is exactly what a cover version changes.</li>
-            <li>Handle key with an explicit transposition search instead of hoping the model learns invariance from data.</li>
-            <li>Report MAP, MRR, and Recall at three depths, because a single number hides where the ranking actually fails.</li>
-            <li>Start with an exact FAISS index; approximate search is an optimisation, not a result.</li>
+            <li>Handle key with an explicit twelve-rotation search on the features, never from key labels.</li>
+            <li>Lock every setting on held-out works before scoring any benchmark query, and report the first result even when it is unflattering.</li>
+            <li>Keep exact search; approximate search is an optimisation, not a result.</li>
+            <li>Keep a numbered decision log (D-001 to D-022) so each change has a recorded reason.</li>
           </ul>
         </section>
 
         <section aria-labelledby="failures">
-          <p class="section-label" id="failures">Open Problems</p>
+          <p class="section-label" id="failures">Limitations</p>
           <ul class="lab-note-list">
             <li>
-              <strong>Global OTI is too coarse</strong>
-              <span>One transposition per track pair breaks on covers that modulate, and a per-segment index is not free.</span>
+              <strong>Accuracy is below published systems</strong>
+              <span>The best locked system scores 0.136 MAP. The same pipeline with a 500-item shortlist reaches 0.212; Qmax on the same input scores 0.333.</span>
             </li>
             <li>
-              <strong>DTW does not scale</strong>
-              <span>Pairwise alignment against every candidate is quadratic, which is the whole argument for an embedding index.</span>
+              <strong>Stage 1 still limits the hybrid at small K</strong>
+              <span>Shortlist recall is 0.136 at K&nbsp;=&nbsp;30, and encoder validation MAP was flat over the last 30 of 150 epochs.</span>
             </li>
             <li>
-              <strong>Distractors are the real test</strong>
-              <span>Precision on the 2,000 no-clique tracks matters more than recall inside a friendly candidate pool.</span>
+              <strong>The likely strongest configuration was never run</strong>
+              <span>Classical alignment at 384 frames with hub correction over all pairs would take about 42 hours of CPU.</span>
             </li>
             <li>
-              <strong>Length normalisation</strong>
-              <span>Accumulated DTW cost is divided by query length, which makes scores comparable across queries. Whether candidate length still biases the ranking has not been measured yet.</span>
+              <strong>Whole-query alignment</strong>
+              <span>Subsequence DTW aligns the entire query in order, so covers that drop or reorder sections are penalised. Qmax-style local alignment is not implemented.</span>
+            </li>
+            <li>
+              <strong>Dataset scope</strong>
+              <span>Da-TACOS is feature-only, from 2019 and Western-pop-centric. Nothing here shows robustness to short, live, noisy or partial queries, or to production-scale catalogues.</span>
             </li>
           </ul>
-        </section>
-
-        <section aria-labelledby="artifacts">
-          <p class="section-label" id="artifacts">Output Format</p>
-          <p>
-            What the pipeline&rsquo;s output looks like. The IDs and scores below are
-            placeholders, not measured results; no scores are reported until the benchmark run
-            exists.
-          </p>
-          <div class="artifact-grid">
-            <div class="artifact-panel">
-              <h3>Key alignment</h3>
-              <p>Optimal Transposition Index for one candidate pair. Placeholder values.</p>
-              <pre><code>query_pid:     P_22
-candidate_pid: P_1174
-wid:           W_163
-oti:           7 semitones
-method:        global mean chroma</code></pre>
-            </div>
-            <div class="artifact-panel">
-              <h3>Ranked result</h3>
-              <p>Subsequence DTW scores over a candidate pool. Placeholder values, not a result.</p>
-              <pre><code>rank  pid      wid     score
-1     P_1174   W_163   0.912
-2     P_9081   W_163   0.874
-3     P_4402   W_508   0.611
-metrics: MAP MRR R@1 R@10</code></pre>
-            </div>
-          </div>
         </section>
 
         <section aria-labelledby="lessons">
           <p class="section-label" id="lessons">Lessons Learned</p>
           <p>
-            The hardest part of this project so far has not been the model. It has been the
-            discipline around it: deciding what counts as a correct retrieval, planning a split
-            that cannot leak, and writing the metric carefully enough that a good number will
-            actually be good news. That is why average precision is implemented by hand and
-            tested against a ranking worked out on paper before any model exists.
-          </p>
-        </section>
-
-        <section aria-labelledby="eval-philosophy">
-          <p class="section-label" id="eval-philosophy">Evaluation Philosophy</p>
-          <p>
-            The evaluation protocol is part of the contribution. Da-TACOS and the MIREX cover
-            song task both define what a credible comparison looks like, and following them
-            costs less than defending a homemade benchmark later.
+            The hardest part was never the model. It was the discipline around it: deciding what
+            counts as a correct retrieval, splitting so nothing can leak, and locking settings
+            before looking. The 20-query development set said the opposite of the benchmark
+            twice, so the project now treats small protocols as plumbing checks and lets the
+            full benchmark, with intervals, decide.
           </p>
           <p>
-            The minimum credible claim is staged. First the classical baseline runs end to end
-            on a fixed split and produces numbers. Then the learned encoder is measured on the
-            same split with the same metrics. Only then does a hybrid system mean anything, and
-            any difference between systems has to clear a work-level bootstrap confidence
-            interval before I describe it as an improvement.
+            The other lesson is about negative results. Run 1 lost to a classical baseline by
+            4.5&times;. Reporting that plainly is what made the error analysis possible, and the
+            error analysis is where every later improvement came from.
           </p>
         </section>
 
         <section aria-labelledby="roadmap">
-          <p class="section-label" id="roadmap">Roadmap / Future Work</p>
+          <p class="section-label" id="roadmap">What&rsquo;s next</p>
           <ul class="roadmap-list">
             <li>
               <span>Done</span>
-              <strong>Classical retrieval baseline</strong>
-              <small>OTI transposition, subsequence DTW, candidate ranking, and hand-written retrieval metrics with unit tests.</small>
+              <strong>Two-stage system, four benchmark runs</strong>
+              <small>Classical baseline, learned encoder, hybrid reranking, hubness correction, bootstrap intervals, and a numbered decision log.</small>
             </li>
             <li>
-              <span>Now</span>
-              <strong>Full benchmark run</strong>
-              <small>Score the baseline across the Da-TACOS benchmark subset and record MAP, MRR, and Recall@K per work-level split.</small>
+              <span>Done</span>
+              <strong>Shortlist study and draft write-up</strong>
+              <small>K sweep, failure-by-K analysis, adaptive K and a fused Stage 1, written up as a draft with audits of its own numbers.</small>
             </li>
             <li>
               <span>Next</span>
-              <strong>TCN encoder + triplet loss</strong>
-              <small>Learn track-level embeddings, retrieve with an exact FAISS index, and compare against the classical baseline.</small>
+              <strong>A strong baseline through the same analysis</strong>
+              <small>MOVE or Re-MOVE on the CREMA-PCP features Da-TACOS ships.</small>
             </li>
             <li>
               <span>Later</span>
-              <strong>Hybrid reranking and ablations</strong>
-              <small>Embedding recall followed by DTW reranking, with controlled ablations and bootstrap confidence intervals.</small>
+              <strong>A reranker that holds up at large K, and local alignment</strong>
+              <small>From K&nbsp;&asymp;&nbsp;200 most failures are covers outranked inside the list.</small>
             </li>
           </ul>
+          <p>
+            Code, decision log and reports:
+            <a href="https://github.com/hey-shiv/cover-version-retrieval" target="_blank" rel="noreferrer">github.com/hey-shiv/cover-version-retrieval</a>.
+          </p>
         </section>
 
         <section aria-labelledby="reading">
@@ -543,8 +475,9 @@ metrics: MAP MRR R@1 R@10</code></pre>
           <ul class="now-list">
             <li>Serr&agrave;, G&oacute;mez, Herrera &amp; Serra (2008) &mdash; chroma binary similarity and local alignment for cover song identification.</li>
             <li>Yesiler et al. (2019) &mdash; Da-TACOS, the dataset and benchmarking protocol this project follows.</li>
-            <li>Doras &amp; Peeters (2020) &mdash; the argument for treating cover detection as metric learning rather than classification.</li>
+            <li>Khosla et al. (2020) &mdash; supervised contrastive learning, the encoder&rsquo;s training loss.</li>
             <li>Bai, Kolter &amp; Koltun (2018) &mdash; why a dilated temporal convolution is a reasonable first sequence encoder.</li>
+            <li>Seo (2022) &mdash; pairwise similarity normalisation based on a hubness score.</li>
             <li>M&uuml;ller, <em>Fundamentals of Music Processing</em> (2021), Ch. 3 &mdash; chroma, synchronisation, and DTW.</li>
           </ul>
         </section>
