@@ -64,11 +64,12 @@
 
     <ul class="signal-rail" aria-hidden="true">
       <li data-signal="entry"><a href="#main" data-label="01 — Entry"></a></li>
-      <li data-signal="coil"><a href="#coil" data-label="02 — Coil"></a></li>
+      <li data-signal="song"><a href="#first-song" data-label="02 — The First Song"></a></li>
       <li data-signal="cover"><a href="#cover" data-label="03 — Cover song retrieval"></a></li>
-      <li data-signal="also"><a href="#also" data-label="04 — Also built"></a></li>
-      <li data-signal="toolkit"><a href="#about" data-label="05 — Toolkit"></a></li>
-      <li data-signal="end"><a href="#contact" data-label="06 — Contact"></a></li>
+      <li data-signal="coil"><a href="#coil" data-label="04 — Coil"></a></li>
+      <li data-signal="also"><a href="#also" data-label="05 — Also built"></a></li>
+      <li data-signal="toolkit"><a href="#about" data-label="06 — Toolkit"></a></li>
+      <li data-signal="end"><a href="#contact" data-label="07 — Contact"></a></li>
     </ul>
 
     <div class="container">
@@ -148,34 +149,26 @@
           </div>
 
           <div class="flagship-grid">
-          <article class="flagship" id="coil" data-signal="coil" aria-labelledby="coil-h">
+          <article class="flagship" id="first-song" data-signal="song" aria-labelledby="song-h">
             <div class="flagship-head">
             <p class="flagship-kicker">
-              <span class="state-glyph" data-state="built">Live &middot; negative result</span>
-              <span>Data analysis &middot; Backtesting</span>
+              <span class="state-glyph" data-state="progress">Currently working on</span>
+              <span>Reinforcement learning &middot; Audio</span>
             </p>
-            <h3 class="flagship-title" id="coil-h"><a href="projects/vcp-screener/">Coil</a></h3>
-            <p class="flagship-question">Does a famous chart pattern beat buying on a random day?</p>
+            <h3 class="flagship-title" id="song-h">The First Song</h3>
+            <p class="flagship-question">When agents share one channel, do they divide it up or just learn to decode the mix?</p>
             </div>
             <div class="flagship-body">
             <p class="flagship-summary">
-              A screener that scans 2,300 NSE stocks for a Volatility Contraction Pattern, paired
-              with a ten-year backtest built to disprove it. Every past signal is replayed from
-              only what was known at the time, then compared with random entries in the same
-              stocks at the same risk. The random entries won.
+              Pairs of reinforcement-learning agents learning to communicate through sound. A
+              sender turns what it sees into short synthesised calls; a listener hears only the
+              noisy audio and has to act on it. Nothing rewards sounding musical. The main
+              experiment puts several pairs on one shared channel: do their calls spread apart in
+              pitch and timing, or do listeners just learn to untangle the mix?
             </p>
-            <ul class="flagship-figures" aria-label="Coil figures">
-              <li><b>2,300</b><span>Stocks scanned</span></li>
-              <li><b>10&thinsp;yrs</b><span>Point-in-time backtest</span></li>
-              <li><b>11.0<small>%</small> <i>vs</i> 22.3<small>%</small></b><span>CAGR, pattern vs random</span></li>
-            </ul>
-            <div class="project-links">
-              <a href="projects/vcp-screener/">Case study <span aria-hidden="true">&rarr;</span></a>
-              <a href="https://coil-vcp.vercel.app" target="_blank" rel="noreferrer">Live app <span aria-hidden="true">&#8599;</span></a>
-            </div>
+            <p class="flagship-note">Just started &middot; RL, PyTorch and DSP from scratch &middot; hypotheses and controls written before any runs</p>
             </div>
           </article>
-
           <article class="flagship" id="cover" data-signal="cover" aria-labelledby="cover-h">
             <div class="flagship-head">
             <p class="flagship-kicker">
@@ -206,26 +199,34 @@
             </div>
             </div>
           </article>
-          <article class="flagship" id="first-song" aria-labelledby="song-h">
+          <article class="flagship" id="coil" data-signal="coil" aria-labelledby="coil-h">
             <div class="flagship-head">
             <p class="flagship-kicker">
-              <span class="state-glyph" data-state="progress">Currently working on</span>
-              <span>Reinforcement learning &middot; Audio</span>
+              <span class="state-glyph" data-state="built">Live &middot; negative result</span>
+              <span>Data analysis &middot; Backtesting</span>
             </p>
-            <h3 class="flagship-title" id="song-h">The First Song</h3>
-            <p class="flagship-question">When agents share one channel, do they divide it up or just learn to decode the mix?</p>
+            <h3 class="flagship-title" id="coil-h"><a href="projects/vcp-screener/">Coil</a></h3>
+            <p class="flagship-question">Does a famous chart pattern beat buying on a random day?</p>
             </div>
             <div class="flagship-body">
             <p class="flagship-summary">
-              Pairs of reinforcement-learning agents learning to communicate through sound. A
-              sender turns what it sees into short synthesised calls; a listener hears only the
-              noisy audio and has to act on it. Nothing rewards sounding musical. The main
-              experiment puts several pairs on one shared channel: do their calls spread apart in
-              pitch and timing, or do listeners just learn to untangle the mix?
+              A screener that scans 2,300 NSE stocks for a Volatility Contraction Pattern, paired
+              with a ten-year backtest built to disprove it. Every past signal is replayed from
+              only what was known at the time, then compared with random entries in the same
+              stocks at the same risk. The random entries won.
             </p>
-            <p class="flagship-note">Just started &middot; RL, PyTorch and DSP from scratch &middot; hypotheses and controls written before any runs</p>
+            <ul class="flagship-figures" aria-label="Coil figures">
+              <li><b>2,300</b><span>Stocks scanned</span></li>
+              <li><b>10&thinsp;yrs</b><span>Point-in-time backtest</span></li>
+              <li><b>11.0<small>%</small> <i>vs</i> 22.3<small>%</small></b><span>CAGR, pattern vs random</span></li>
+            </ul>
+            <div class="project-links">
+              <a href="projects/vcp-screener/">Case study <span aria-hidden="true">&rarr;</span></a>
+              <a href="https://coil-vcp.vercel.app" target="_blank" rel="noreferrer">Live app <span aria-hidden="true">&#8599;</span></a>
+            </div>
             </div>
           </article>
+
           </div>
         </section>
 
