@@ -671,11 +671,11 @@ button { font: inherit; color: inherit; }
 .about-body > p:not([class]) { color: var(--ink-soft); font-size: 1.1rem; line-height: 1.6; }
 
 /* ------------------------------------------------------------- contact --- */
-/* The closing band: soft blue light behind frosted glass, navy type. */
+/* The closing band: soft blue light behind frosted glass, black type. */
 .contact {
   --sky: #eaf2ff;
-  --navy: #1b2a4a;
-  --navy-soft: rgba(27, 42, 74, 0.62);
+  --navy: #111111;
+  --navy-soft: rgba(17, 17, 17, 0.62);
   --glass-t: rgba(255, 255, 255, 0.38);
   --glass-line: rgba(27, 42, 74, 0.1);
   position: relative;
