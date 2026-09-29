@@ -16,26 +16,40 @@
   var loaderCount = document.querySelector("[data-count]");
   if (!reduced) {
     root.classList.add("js-motion");
-    var imgs = Array.prototype.slice.call(document.images).filter(function (im) { return im.loading !== "lazy"; });
+    // The counter reaches 100 only when everything is in: every image
+    // (including ones that would normally wait for scroll), the fonts, and
+    // the window load event, which covers scripts and stylesheets.
+    var imgs = Array.prototype.slice.call(document.images).filter(function (im) { return im.getAttribute("src"); });
+    imgs.forEach(function (im) { if (im.loading === "lazy") im.loading = "eager"; });
+    var fontsDone = !(document.fonts && document.fonts.ready);
+    if (!fontsDone) document.fonts.ready.then(function () { fontsDone = true; });
+    var pageDone = document.readyState === "complete";
+    window.addEventListener("load", function () { pageDone = true; });
     var shown = 0, t0 = performance.now(), done = false;
     var finish = function () {
       if (root.classList.contains("is-ready")) return;
       root.classList.add("is-ready");
       document.dispatchEvent(new CustomEvent("site:ready"));
     };
-    var tick = function () {
+    var progress = function () {
+      // A broken image still counts as settled, so one failure cannot hang the page.
       var loaded = imgs.filter(function (im) { return im.complete; }).length;
-      var real = imgs.length ? loaded / imgs.length : 1;
+      return (loaded + (fontsDone ? 1 : 0) + (pageDone ? 1 : 0)) / (imgs.length + 2);
+    };
+    var tick = function () {
+      var real = progress();
       var timeCap = Math.min(1, (performance.now() - t0) / 3000);   // long enough to see the notes written
       var target = Math.min(real, timeCap);
       shown += (target - shown) * 0.12;
-      if (target >= 1 && shown > 0.995) shown = 1;
+      if (real < 1) shown = Math.min(shown, 0.99);                  // 100 means everything is loaded
+      else if (target >= 1 && shown > 0.995) shown = 1;
       if (loaderCount) loaderCount.textContent = String(Math.round(shown * 100));
       if (shown >= 1 && !done) { done = true; setTimeout(finish, 400); return; }
-      if (!done) requestAnimationFrame(tick);
+      if (!done) setTimeout(tick, 16);   // a timer, not animation frames, so background tabs progress too
     };
-    requestAnimationFrame(tick);
-    setTimeout(function () { done = true; finish(); }, 5000);   // never hold the page longer
+    tick();
+    // Safety net for a very slow or stalled connection: show the page anyway.
+    setTimeout(function () { if (!done) { done = true; finish(); } }, 20000);
   }
 
   var mouse = { x: -9999, y: -9999 };
