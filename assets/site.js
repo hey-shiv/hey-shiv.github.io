@@ -27,14 +27,16 @@
   function applyTheme(theme) {
     root.dataset.theme = theme;
     root.style.colorScheme = theme;
-    toggle.textContent = theme === "light" ? "◐" : "◑";
-    toggle.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
-    var label = theme === "light" ? "Switch to instrument mode" : "Switch to paper mode";
+    toggle.innerHTML = theme === "light"
+      ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>'
+      : '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>';
+    toggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+    var label = theme === "light" ? "Switch to dark theme" : "Switch to light theme";
     toggle.setAttribute("aria-label", label);
     toggle.setAttribute("title", label);
   }
 
-  (document.querySelector(".site-header") || document.body).appendChild(toggle);
+  (document.querySelector(".header-inner") || document.querySelector(".site-header") || document.body).appendChild(toggle);
   applyTheme(root.dataset.theme || getTheme());
 
   toggle.addEventListener("click", function () {

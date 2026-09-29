@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Shivashant Manohar is a final-year CS (AI &amp; ML) student working toward data analyst and AI/ML engineering roles: a 2,300-stock screener whose own ten-year backtest found no edge, and a two-stage cover-song retrieval system that started as a negative result and closed the gap in three more runs."
+      content="Shivashant Manohar is a final-year CS (AI &amp; ML) student working toward data analyst and AI/ML engineering roles: a screener whose own ten-year backtest found no edge, a cover-song retrieval system that started as a negative result and closed the gap, and RL agents learning to communicate through sound."
     />
     <link rel="canonical" href="https://hey-shiv.github.io/" />
     <meta property="og:type" content="website" />
@@ -22,6 +22,7 @@
       name="twitter:description"
       content="Finding patterns in data, then trying hard to prove they aren't there."
     />
+    <meta name="theme-color" content="#fff5ef" />
     <title>Shivashant Manohar — Data Analysis &amp; AI/ML Engineering</title>
     <script>
       (function () {
@@ -31,16 +32,19 @@
           document.documentElement.dataset.theme = theme;
           document.documentElement.style.colorScheme = theme;
         } catch (error) {}
+        try {
+          document.documentElement.classList.add("js");
+        } catch (error) {}
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=Geist+Mono:wght@400;500&amp;family=Caveat:wght@400;500&amp;display=swap"
       rel="stylesheet"
     />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link rel="stylesheet" href="assets/site.css" />
+    <link rel="stylesheet" href="assets/home.css" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -62,23 +66,63 @@
   <body class="home">
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <ul class="signal-rail" aria-hidden="true">
-      <li data-signal="entry"><a href="#main" data-label="01 — Entry"></a></li>
-      <li data-signal="song"><a href="#first-song" data-label="02 — The First Song"></a></li>
-      <li data-signal="cover"><a href="#cover" data-label="03 — Cover song retrieval"></a></li>
-      <li data-signal="coil"><a href="#coil" data-label="04 — Coil"></a></li>
-      <li data-signal="also"><a href="#also" data-label="05 — Also built"></a></li>
-      <li data-signal="toolkit"><a href="#about" data-label="06 — Toolkit"></a></li>
-      <li data-signal="end"><a href="#contact" data-label="07 — Contact"></a></li>
-    </ul>
+    <!-- Loader: graph paper, a figure drawn in ink, and working notes
+         written around him while the page loads. -->
+    <div class="loader" aria-hidden="true">
+      <svg class="loader-figure" viewBox="0 0 140 280">
+        <g class="ink">
+          <path pathLength="1" d="M52 30 C50 18 60 10 72 12 C84 13 92 22 90 36 C89 48 82 56 71 57 C60 57 53 49 52 38" />
+          <path pathLength="1" d="M50 30 C54 20 58 24 60 16 C64 22 68 12 72 18 C76 10 80 20 84 14 C86 22 92 18 92 28 C88 26 86 30 82 26" />
+          <circle pathLength="1" cx="64" cy="37" r="5" /><circle pathLength="1" cx="79" cy="37" r="5" /><path pathLength="1" d="M69 37 H74 M59 36 L53 34" />
+          <path pathLength="1" d="M66 49 C69 51 73 51 76 49" />
+          <path pathLength="1" d="M66 57 L65 66 M77 56 L78 66" />
+          <path pathLength="1" class="shirt" d="M40 72 C48 66 58 64 65 66 L78 66 C86 64 96 67 104 73 L112 96 L100 100 L96 88 L96 140 L46 140 L46 88 L42 100 L30 96 Z" />
+          <path pathLength="1" d="M31 97 L28 142 C28 147 33 148 35 144 L41 100" />
+          <path pathLength="1" class="laptop" d="M84 104 L122 116 L112 156 L74 144 Z" />
+          <path pathLength="1" class="wave" d="M86 124 C90 118 92 132 96 126 C99 120 101 134 105 128 C108 123 110 134 113 130" />
+          <path pathLength="1" d="M101 99 L108 118 C109 122 104 124 102 120" />
+          <path pathLength="1" class="pants" d="M47 140 L96 140 L98 214 L77 214 L72 162 L69 214 L46 214 Z" />
+          <path pathLength="1" class="shoe" d="M44 214 L69 214 L70 226 C62 229 50 229 42 226 C40 221 41 217 44 214 Z" />
+          <path pathLength="1" class="shoe" d="M77 214 L98 214 L102 224 C94 229 82 229 76 226 Z" />
+        </g>
+      </svg>
+      <p class="loader-note" style="--x: -16vw; --y: -22vh; --d: 0.5s; --r: -4deg">r = 0.03</p>
+      <p class="loader-note" style="--x: 6vw; --y: -28vh; --d: 0.9s; --r: 3deg">&nabla;L</p>
+      <p class="loader-note" style="--x: -14vw; --y: 2vh; --d: 1.3s; --r: 2deg">p &gt; 0.05</p>
+      <p class="loader-note" style="--x: 13vw; --y: -6vh; --d: 1.7s; --r: -3deg">argmax</p>
+      <p class="loader-note" style="--x: -7vw; --y: 24vh; --d: 2.1s; --r: -2deg">4.5&times; &rarr; 1.11&times;</p>
+      <p class="loader-note" style="--x: 11vw; --y: 17vh; --d: 2.5s; --r: 4deg">n = 13,000</p>
+      <p class="loader-pct"><span data-count>0</span>%</p>
+    </div>
 
-    <div class="container">
-      <header class="site-header">
-        <nav class="site-nav" aria-label="Primary">
-          <a href="index.html" class="nav-logo" aria-label="Home">Shivashant</a>
-          <a href="index.html" class="nav-work" aria-current="page">Work</a>
-          <a href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">R&eacute;sum&eacute;</a>
-        </nav>
+    <!-- Hand-drawn notes and instruments that float and fall behind the page. -->
+    <svg class="sprite" aria-hidden="true" focusable="false">
+      <symbol id="m-eighth" viewBox="0 0 64 64"><ellipse class="f" cx="24" cy="48" rx="9" ry="6.5" transform="rotate(-20 24 48)"/><path d="M32 46 V10 C38 16 46 18 46 30"/></symbol>
+      <symbol id="m-beamed" viewBox="0 0 64 64"><ellipse class="f" cx="16" cy="50" rx="8" ry="5.8" transform="rotate(-20 16 50)"/><ellipse class="f" cx="44" cy="44" rx="8" ry="5.8" transform="rotate(-20 44 44)"/><path d="M23 48 V14 L51 8 V42 M23 22 L51 16"/></symbol>
+      <symbol id="m-quarter" viewBox="0 0 64 64"><ellipse class="f" cx="26" cy="48" rx="9" ry="6.5" transform="rotate(-20 26 48)"/><path d="M34 46 V8"/></symbol>
+      <symbol id="m-clef" viewBox="0 0 64 64"><path d="M34 58 C26 60 24 50 32 50 C38 50 36 58 32 58 M32 58 L30 6 C38 8 40 18 30 26 C20 34 16 42 24 48 C32 54 44 48 40 38 C36 30 24 34 28 42"/></symbol>
+      <symbol id="m-lute" viewBox="0 0 64 64"><path class="f2" d="M20 30 C8 36 8 54 20 58 C32 62 42 54 40 42 C38 34 30 26 20 30 Z"/><circle cx="26" cy="46" r="4"/><path d="M34 32 L52 10 M50 8 L56 14 M38 36 L22 54"/></symbol>
+      <symbol id="m-violin" viewBox="0 0 64 64"><path class="f2" d="M32 20 C24 20 22 26 25 30 C20 32 20 40 25 44 C22 50 24 58 32 58 C40 58 42 50 39 44 C44 40 44 32 39 30 C42 26 40 20 32 20 Z"/><path d="M32 20 V6 M30 4 C34 2 36 6 32 6 M28 38 C27 36 27 34 28 32 M36 38 C37 36 37 34 36 32 M32 24 V54"/></symbol>
+      <symbol id="m-trumpet" viewBox="0 0 64 64"><path d="M8 34 H40 M8 30 V38 M40 34 L56 22 V46 Z M18 34 V26 M24 34 V26 M30 34 V26 M16 24 H32 M12 34 C12 42 36 42 38 36"/></symbol>
+      <symbol id="m-drum" viewBox="0 0 64 64"><ellipse cx="32" cy="30" rx="20" ry="7"/><path class="f2" d="M12 30 V48 C12 56 52 56 52 48 V30 C52 38 12 38 12 30 Z"/><path d="M14 34 L24 48 L34 36 L44 50 L50 36 M20 8 L30 24 M46 6 L36 24"/></symbol>
+      <symbol id="m-fork" viewBox="0 0 64 64"><path d="M24 6 V30 C24 40 40 40 40 30 V6 M32 38 V60"/></symbol>
+      <symbol id="m-vinyl" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24"/><circle cx="32" cy="32" r="17"/><circle class="f" cx="32" cy="32" r="7"/><circle cx="32" cy="32" r="1.5"/></symbol>
+    </svg>
+    <div class="music" aria-hidden="true"></div>
+
+    <div class="cursor" aria-hidden="true"><span class="cursor-label">View</span></div>
+    <div class="peek" aria-hidden="true"><img alt="" /></div>
+
+    <header class="site-header">
+      <a href="index.html" class="brand" aria-label="Shivashant Manohar, home">Shivashant<sup>*</sup></a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <p class="status"><span class="status-dot" aria-hidden="true"></span>Open to internships, 2026</p>
+      <div class="header-inner">
         <ul class="nav-social" aria-label="Social links">
           <li><a href="https://github.com/hey-shiv" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
           <li><a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S.02 4.88.02 3.5 1.13 1 2.5 1s2.48 1.12 2.48 2.5zM.4 8h4.2v14H.4V8zm7.2 0h4v1.9h.06c.56-1.06 1.93-2.18 3.97-2.18 4.25 0 5.03 2.8 5.03 6.43V22h-4.2v-6.93c0-1.65-.03-3.78-2.3-3.78-2.3 0-2.66 1.8-2.66 3.66V22H7.6V8z"/></svg></a></li>
@@ -86,249 +130,346 @@
           <li><a href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer" aria-label="Medium" title="Medium"><svg viewBox="0 0 24 24" aria-hidden="true"><circle fill="currentColor" cx="6.8" cy="12" r="6.6"/><ellipse fill="currentColor" cx="17.4" cy="12" rx="3.3" ry="6.2"/><ellipse fill="currentColor" cx="22.6" cy="12" rx="1.2" ry="5.6"/></svg></a></li>
           <li><a href="mailto:shivashant.work@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.6 6.4 8.4 6.4 8.4-6.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></a></li>
         </ul>
-      </header>
+        <a class="btn-resume" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">R&eacute;sum&eacute;</a>
+      </div>
+    </header>
 
-      <main id="main">
-        <!-- ===================== HERO ===================== -->
-        <section class="hero" data-signal="entry" aria-labelledby="who">
-          <div class="entry-tag rise" style="--i:0">
-            <span class="signal-live">Open to data &amp; AI/ML internships &middot; 2026</span>
-          </div>
-
-          <p class="entry-identity rise" style="--i:1">Shivashant Manohar</p>
-          <p class="hero-role rise" style="--i:2">
-            Data analysis <b>&middot;</b> Machine learning <b>&middot;</b> Evaluation
+    <main id="main">
+      <!-- ===================== HERO ===================== -->
+      <section class="hero" aria-labelledby="who">
+        <div class="hero-copy">
+          <p class="bracket">[ data analyst &amp; ai/ml engineer, in the making ]</p>
+          <h1 class="name" id="who"><span class="line"><span>Shivashant</span></span><span class="line"><span>Manohar</span></span></h1>
+          <p class="claim"><mark>I find patterns in data.</mark></p>
+          <p class="hero-intro">Final-year CS (AI &amp; ML) at VIT-AP. I build things end to end, then test them against a baseline designed to beat them.</p>
+          <p class="hero-actions">
+            <a class="btn-pill" href="#work" data-cursor="Go">See the work</a>
+            <a class="btn-ghost" href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">GitHub <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></a>
           </p>
-
-          <h1 class="entry-headline rise" id="who" style="--i:3">I find patterns in data.</h1>
-
-          <p class="rise" style="--i:4; max-width: 34rem;">
-            Final-year CS (AI &amp; ML) at VIT-AP, working toward data analyst and AI/ML
-            engineering roles. Most of what I know came from building things end to end and
-            then measuring them honestly, including the times the answer was no.
-          </p>
-
-          <div class="actions rise" style="--i:5">
-            <a class="btn btn-primary" href="#work">
-              Flagship work <span class="btn-arrow" aria-hidden="true">&darr;</span>
-            </a>
-            <a class="btn" href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">
-              GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span>
-            </a>
-            <a class="btn" href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">
-              R&eacute;sum&eacute; <span class="btn-arrow" aria-hidden="true">&#8599;</span>
-            </a>
-          </div>
-        </section>
-
-        <!-- ===================== LIVE SIGNAL ===================== -->
-        <figure class="live-signal" data-field>
-          <div class="live-signal-head">
-            <span class="signal-marker">Live signal</span>
-            <span>Illustrative &mdash; generated in-browser, not model output</span>
-          </div>
-          <canvas
-            data-states="wave,embed,retrieve"
-            role="img"
-            aria-label="An animated waveform that leans toward the pointer and, as the page scrolls, resolves into clustered points with one query point linked to its nearest neighbours."
-          ></canvas>
-          <p class="live-signal-foot">
-            A waveform, breathing. It leans toward the pointer, and as you scroll it resolves into
-            points, then clusters, then a query finding its neighbours. Raw data becoming structure
-            becoming an answer.
-          </p>
-        </figure>
-
-        <!-- ===================== FLAGSHIP WORK ===================== -->
-        <section id="work" aria-labelledby="work-h">
-          <div class="section-head">
-            <div>
-              <p class="signal-marker">01 &mdash; Flagship work</p>
-              <h2 id="work-h" class="sr-only">Flagship work</h2>
-            </div>
-          </div>
-
-          <div class="flagship-grid">
-          <article class="flagship" id="first-song" data-signal="song" aria-labelledby="song-h">
-            <div class="flagship-head">
-            <p class="flagship-kicker">
-              <span class="state-glyph" data-state="progress">Currently working on</span>
-              <span>Reinforcement learning &middot; Audio</span>
-            </p>
-            <h3 class="flagship-title" id="song-h">The First Song</h3>
-            <p class="flagship-question">When agents share one channel, do they divide it up or just learn to decode the mix?</p>
-            </div>
-            <div class="flagship-body">
-            <p class="flagship-summary">
-              Pairs of reinforcement-learning agents learning to communicate through sound. A
-              sender turns what it sees into short synthesised calls; a listener hears only the
-              noisy audio and has to act on it. Nothing rewards sounding musical. The main
-              experiment puts several pairs on one shared channel: do their calls spread apart in
-              pitch and timing, or do listeners just learn to untangle the mix?
-            </p>
-            <p class="flagship-note">Just started &middot; RL, PyTorch and DSP from scratch &middot; hypotheses and controls written before any runs</p>
-            </div>
-          </article>
-          <article class="flagship" id="cover" data-signal="cover" aria-labelledby="cover-h">
-            <div class="flagship-head">
-            <p class="flagship-kicker">
-              <span class="state-glyph" data-state="built">Complete &middot; below published systems</span>
-              <span>Machine learning &middot; Retrieval</span>
-            </p>
-            <h3 class="flagship-title" id="cover-h"><a href="projects/cover-song-retrieval/">Cover Song Retrieval</a></h3>
-            <p class="flagship-question">Can a machine recognise a song it has never heard?</p>
-            </div>
-            <div class="flagship-body">
-            <p class="flagship-summary">
-              Given one recording, find every other recording of the same composition across
-              changes of key, tempo and voice. A small learned encoder shortlists 30 of 15,000
-              candidates and subsequence DTW reranks them. The first full-benchmark run lost to
-              plain classical alignment by 4.5&times;; error analysis found why, and three more
-              runs closed the gap to 1.11&times;. Still well below published systems, and the
-              write-up says so.
-            </p>
-            <ul class="flagship-figures" aria-label="Cover Song Retrieval figures">
-              <li><b>13,000</b><span>Benchmark queries</span></li>
-              <li><b>4.5&times; <i>&rarr;</i> 1.11&times;</b><span>Behind best system, run 1 to 4</span></li>
-              <li><b>142</b><span>Tests</span></li>
-            </ul>
-            <div class="project-links">
-              <a href="projects/cover-song-retrieval/">Case study <span aria-hidden="true">&rarr;</span></a>
-              <a href="blogs/Cover%20Song%20Retrieval/">Build notes</a>
-              <a href="https://cover-version-retrieval.vercel.app/" target="_blank" rel="noreferrer">Live site <span aria-hidden="true">&#8599;</span></a>
-            </div>
-            </div>
-          </article>
-          <article class="flagship" id="coil" data-signal="coil" aria-labelledby="coil-h">
-            <div class="flagship-head">
-            <p class="flagship-kicker">
-              <span class="state-glyph" data-state="built">Live &middot; negative result</span>
-              <span>Data analysis &middot; Backtesting</span>
-            </p>
-            <h3 class="flagship-title" id="coil-h"><a href="projects/vcp-screener/">Coil</a></h3>
-            <p class="flagship-question">Does a famous chart pattern beat buying on a random day?</p>
-            </div>
-            <div class="flagship-body">
-            <p class="flagship-summary">
-              A screener that scans 2,300 NSE stocks for a Volatility Contraction Pattern, paired
-              with a ten-year backtest built to disprove it. Every past signal is replayed from
-              only what was known at the time, then compared with random entries in the same
-              stocks at the same risk. The random entries won.
-            </p>
-            <ul class="flagship-figures" aria-label="Coil figures">
-              <li><b>2,300</b><span>Stocks scanned</span></li>
-              <li><b>10&thinsp;yrs</b><span>Point-in-time backtest</span></li>
-              <li><b>11.0<small>%</small> <i>vs</i> 22.3<small>%</small></b><span>CAGR, pattern vs random</span></li>
-            </ul>
-            <div class="project-links">
-              <a href="projects/vcp-screener/">Case study <span aria-hidden="true">&rarr;</span></a>
-              <a href="https://coil-vcp.vercel.app" target="_blank" rel="noreferrer">Live app <span aria-hidden="true">&#8599;</span></a>
-            </div>
-            </div>
-          </article>
-
-          </div>
-        </section>
-
-        <!-- ===================== ALSO BUILT ===================== -->
-        <section id="also" data-signal="also" aria-labelledby="also-h">
-          <div class="section-head">
-            <div>
-              <p class="signal-marker">02 &mdash; Also built</p>
-              <h2 id="also-h" class="sr-only">Also built</h2>
-            </div>
-          </div>
-
-          <ul class="also-list">
-            <li>
-              <a class="also-row" href="https://github.com/hey-shiv/mini-modern-llm" target="_blank" rel="noreferrer">
-                <span class="also-title">Modern Mini LLM <span aria-hidden="true">&#8599;</span></span>
-                <span class="also-desc">A small transformer trained on TinyStories, with RMSNorm, rotary embeddings, grouped-query attention and SwiGLU, and its own BPE tokenizer.</span>
-                <span class="also-meta">PyTorch</span>
-              </a>
-            </li>
-            <li>
-              <div class="also-row">
-                <span class="also-title">Neural Network from Scratch</span>
-                <span class="also-desc">Layers, softmax, cross-entropy and backpropagation by hand, then SGD with decay and momentum, reaching 95% training accuracy on a three-class spiral.</span>
-                <span class="also-meta">NumPy</span>
-              </div>
-            </li>
-            <li>
-              <a class="also-row" href="blogs/Audio%20Explorer/">
-                <span class="also-title">Audio Explorer <span aria-hidden="true">&rarr;</span></span>
-                <span class="also-desc">An app that makes the audio-AI front end inspectable: waveform, STFT, Mel spectrograms, MFCCs and beat tracking.</span>
-                <span class="also-meta">librosa &middot; Streamlit</span>
-              </a>
-            </li>
-          </ul>
-        </section>
-
-        <!-- ===================== ABOUT ===================== -->
-        <section id="about" data-signal="toolkit" aria-labelledby="about-h">
-          <div class="section-head">
-            <div>
-              <p class="signal-marker">03 &mdash; Toolkit</p>
-              <h2 id="about-h" class="sr-only">Toolkit</h2>
-            </div>
-          </div>
-
-
-          <dl class="skill-cols">
-            <div>
-              <dt>Languages</dt>
-              <dd>Python &middot; SQL &middot; C++</dd>
-            </div>
-            <div>
-              <dt>Data analysis</dt>
-              <dd>pandas &middot; NumPy &middot; SQLite &middot; Matplotlib &middot; Plotly</dd>
-            </div>
-            <div>
-              <dt>Machine learning</dt>
-              <dd>PyTorch &middot; scikit-learn &middot; Hugging Face &middot; librosa</dd>
-            </div>
-            <div>
-              <dt>Engineering</dt>
-              <dd>Git &middot; Linux &middot; FastAPI &middot; Streamlit &middot; GCP</dd>
-            </div>
-          </dl>
-        </section>
-
-        <!-- ===================== CONTACT ===================== -->
-        <section class="contact" id="contact" data-signal="end" aria-labelledby="contact-h">
-          <p class="signal-marker">04 &mdash; Contact</p>
-          <div class="contact-grid">
-          <h2 id="contact-h">Need someone who checks the numbers?</h2>
-          <div>
-          <p>
-            I&rsquo;m looking for data analyst and AI/ML engineering internships, and early roles
-            where I can work with real data end to end. Email is the fastest way to reach me.
-          </p>
-          <div class="actions">
-            <a class="btn btn-primary" href="mailto:shivashant.work@gmail.com">
-              shivashant.work@gmail.com <span class="btn-arrow" aria-hidden="true">&#8599;</span>
-            </a>
-          </div>
-          </div>
-          </div>
-        </section>
-      </main>
-
-      <footer>
-        <div class="footer-grid">
-          <ul class="footer-links">
-            <li><a href="https://github.com/hey-shiv" target="_blank" rel="noreferrer">GitHub</a></li>
-            <li><a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer">LinkedIn</a></li>
-            <li><a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer">X</a></li>
-            <li><a href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer">Medium</a></li>
-            <li><a href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer">R&eacute;sum&eacute;</a></li>
-          </ul>
-          <p>Bengaluru, India</p>
         </div>
-      </footer>
-    </div>
 
-    <script src="assets/instrument.js" defer></script>
+        <!-- A fanned deck: one duotone painting per chapter. -->
+        <ul class="deck" aria-label="Chapters">
+          <li class="card" style="--i: 0"><a href="#first-song" data-cursor="01"><span class="duo"><img src="assets/art/birds.jpg" alt="" style="object-position: 50% 40%" /></span><span class="card-tag">01 &middot; The First Song</span></a></li>
+          <li class="card" style="--i: 1"><a href="#cover" data-cursor="02"><span class="duo"><img src="assets/art/musicians.jpg" alt="" style="object-position: 50% 30%" /></span><span class="card-tag">02 &middot; Cover Song</span></a></li>
+          <li class="card" style="--i: 2"><a href="#coil" data-cursor="03"><span class="duo"><img src="assets/art/moneylender.jpg" alt="" style="object-position: 50% 40%" /></span><span class="card-tag">03 &middot; Coil</span></a></li>
+          <li class="card" style="--i: 3"><a href="#skills" data-cursor="Skills"><span class="duo"><img src="assets/art/ambassadors.jpg" alt="" style="object-position: 50% 55%" /></span><span class="card-tag">04 &middot; Skills</span></a></li>
+        </ul>
+
+        <div class="hero-doodle" aria-hidden="true">
+          <svg class="ink-figure" viewBox="0 0 140 280">
+        <g class="ink">
+          <path pathLength="1" d="M52 30 C50 18 60 10 72 12 C84 13 92 22 90 36 C89 48 82 56 71 57 C60 57 53 49 52 38" />
+          <path pathLength="1" d="M50 30 C54 20 58 24 60 16 C64 22 68 12 72 18 C76 10 80 20 84 14 C86 22 92 18 92 28 C88 26 86 30 82 26" />
+          <circle pathLength="1" cx="64" cy="37" r="5" /><circle pathLength="1" cx="79" cy="37" r="5" /><path pathLength="1" d="M69 37 H74 M59 36 L53 34" />
+          <path pathLength="1" d="M66 49 C69 51 73 51 76 49" />
+          <path pathLength="1" d="M66 57 L65 66 M77 56 L78 66" />
+          <path pathLength="1" class="shirt" d="M40 72 C48 66 58 64 65 66 L78 66 C86 64 96 67 104 73 L112 96 L100 100 L96 88 L96 140 L46 140 L46 88 L42 100 L30 96 Z" />
+          <path pathLength="1" d="M31 97 L28 142 C28 147 33 148 35 144 L41 100" />
+          <path pathLength="1" class="laptop" d="M84 104 L122 116 L112 156 L74 144 Z" />
+          <path pathLength="1" class="wave" d="M86 124 C90 118 92 132 96 126 C99 120 101 134 105 128 C108 123 110 134 113 130" />
+          <path pathLength="1" d="M101 99 L108 118 C109 122 104 124 102 120" />
+          <path pathLength="1" class="pants" d="M47 140 L96 140 L98 214 L77 214 L72 162 L69 214 L46 214 Z" />
+          <path pathLength="1" class="shoe" d="M44 214 L69 214 L70 226 C62 229 50 229 42 226 C40 221 41 217 44 214 Z" />
+          <path pathLength="1" class="shoe" d="M77 214 L98 214 L102 224 C94 229 82 229 76 226 Z" />
+        </g>
+      </svg>
+          <p class="hand">scroll &darr;</p>
+        </div>
+      </section>
+
+      <!-- ===================== MANIFESTO ===================== -->
+      <section class="manifesto" aria-label="How I work">
+        <p class="bracket bracket-dark">[ how i work ]</p>
+        <p class="fill-text">
+          Most of what I know came from building things end to end, then trying to prove they
+          don&rsquo;t work. When the answer is no, that becomes the headline, not a footnote.
+        </p>
+      </section>
+
+      <!-- ===================== WORK INDEX ===================== -->
+      <section class="work" id="work" aria-labelledby="work-h">
+        <header class="work-head">
+          <h2 id="work-h">Selected work</h2>
+          <p class="bracket bracket-dark">[ three projects &middot; each checked against something built to beat it ]</p>
+        </header>
+        <ol class="index">
+          <li><a href="#first-song" data-peek="assets/art/birds.jpg" data-cursor="Open">
+            <span class="ix-num">01</span><span class="ix-name">The First Song</span><span class="ix-field">Reinforcement learning, audio</span><span class="ix-status"><i class="dot dot-progress"></i>Just started</span>
+          </a></li>
+          <li><a href="#cover" data-peek="assets/art/musicians.jpg" data-cursor="Open">
+            <span class="ix-num">02</span><span class="ix-name">Cover Song Retrieval</span><span class="ix-field">Machine learning, retrieval</span><span class="ix-status"><i class="dot dot-done"></i>Complete</span>
+          </a></li>
+          <li><a href="#coil" data-peek="assets/art/moneylender.jpg" data-cursor="Open">
+            <span class="ix-num">03</span><span class="ix-name">Coil</span><span class="ix-field">Data analysis, backtesting</span><span class="ix-status"><i class="dot dot-done"></i>Live, negative result</span>
+          </a></li>
+        </ol>
+
+        <!-- Project cards stack on top of each other as you scroll. -->
+        <div class="stack">
+          <article class="case case-dark" id="first-song" style="--n: 0" aria-labelledby="song-h">
+            <div class="wall">
+              <p class="wall-note">birds calling, 1630 &rarr; agents calling, 2026</p>
+              <svg class="wall-arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 44 C30 8 78 6 108 30" /><path d="M96 22 L109 31 L94 36" /></svg>
+              <figure class="plate plate-art">
+                <span class="frame"><img src="assets/art/birds.jpg" alt="" style="object-position: 30% 45%" loading="lazy" /></span>
+                <figcaption><b>Concert of Birds</b><span>Frans Snyders, c. 1630 &middot; oil on canvas</span></figcaption>
+              </figure>
+              <figure class="plate plate-data">
+                <span class="frame"><img src="assets/scraps/ch15-calls-spectrogram.svg" alt="Spectrograms of two short synthesised calls, from The First Song's build guide." loading="lazy" /></span>
+                <figcaption><b>Two synthesised calls</b><span>The First Song, 2026 &middot; mel spectrogram</span></figcaption>
+              </figure>
+            </div>
+            <div class="case-side">
+            <div class="case-body">
+              <p class="bracket"><span class="dot dot-progress" aria-hidden="true"></span>[ 01 &middot; currently working on, just started ]</p>
+              <h3 class="case-title" id="song-h">The First Song</h3>
+              <p class="case-q">When agents share one channel, do they divide it up, or learn to decode the mix?</p>
+              <p>Reinforcement-learning agents learning to communicate through sound. A sender answers with a few notes; a listener that hears only noisy audio has to act on it. Nothing rewards sounding musical. The Chorus puts two, then three, then four pairs on one channel against matched private channels, and &ldquo;no change&rdquo; is a valid outcome.</p>
+            </div>
+            <div class="case-data">
+              <div class="dash" data-dash>
+                <p class="dash-head"><span>chorus &middot; results</span><span>just started</span></p>
+                <div class="dash-bars dash-empty"><span></span><span></span><span></span><span></span><span></span><p>no runs yet</p></div>
+                <p class="dash-foot"><span>tests written before runs</span><span>2 &rarr; 3 &rarr; 4 pairs</span></p>
+              </div>
+            </div>
+            </div>
+          </article>
+
+          <article class="case case-flip" id="cover" style="--n: 1" aria-labelledby="cover-h">
+            <div class="wall">
+              <p class="wall-note">one song, many players &rarr; one song, two recordings</p>
+              <svg class="wall-arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 44 C30 8 78 6 108 30" /><path d="M96 22 L109 31 L94 36" /></svg>
+              <figure class="plate plate-art">
+                <span class="frame"><img src="assets/art/musicians.jpg" alt="" style="object-position: 40% 35%" loading="lazy" /></span>
+                <figcaption><b>The Musicians</b><span>Caravaggio, c. 1595 &middot; oil on canvas</span></figcaption>
+              </figure>
+              <figure class="plate plate-data">
+                <span class="frame"><img src="assets/scraps/cover-og.jpg" alt="Chroma of two recordings of the same song with lines joining the frames that dynamic time warping matched." loading="lazy" /></span>
+                <figcaption><b>One song, two recordings</b><span>Cover Song Retrieval &middot; chroma, aligned by DTW</span></figcaption>
+              </figure>
+            </div>
+            <div class="case-side">
+            <div class="case-body">
+              <p class="bracket bracket-dark"><span class="dot dot-done" aria-hidden="true"></span>[ 02 &middot; complete, below published systems ]</p>
+              <h3 class="case-title" id="cover-h"><a href="projects/cover-song-retrieval/" data-cursor="Read">Cover Song Retrieval</a></h3>
+              <p class="case-q">Can a machine recognise a song it has never heard?</p>
+              <p>A small encoder shortlists 30 of 15,000 candidates; subsequence DTW aligns each one frame by frame. The first full-benchmark run lost to classical alignment by 4.5&times;. Error analysis found why, and three more runs closed the gap to 1.11&times;. Still below published systems, and the write-up says so.</p>
+              <p class="actions">
+                <a class="btn-pill" href="projects/cover-song-retrieval/" data-cursor="Read">Case study</a>
+                <a class="btn-ghost" href="blogs/Cover%20Song%20Retrieval/">Build notes</a>
+                <a class="btn-ghost" href="https://cover-version-retrieval.vercel.app/" target="_blank" rel="noreferrer">Live <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></a>
+              </p>
+            </div>
+            <div class="case-data">
+              <div class="dash" data-dash>
+                <p class="dash-head"><span>gap to best system &middot; lower is better</span><span>4 runs</span></p>
+                <div class="dash-bars" style="--max: 4.5">
+                  <div class="bar" style="--v: 4.5"><b>4.5&times;</b><i></i><span>run 1</span></div>
+                  <div class="bar" style="--v: 2.2"><b>2.2&times;</b><i></i><span>run 2</span></div>
+                  <div class="bar" style="--v: 2.0"><b>2.0&times;</b><i></i><span>run 3</span></div>
+                  <div class="bar bar-hi" style="--v: 1.11"><b>1.11&times;</b><i></i><span>run 4</span></div>
+                  <em class="parity" style="--at: 1">parity</em>
+                </div>
+                <p class="dash-foot"><span>13,000 queries &middot; 142 tests</span><span>38 ms / query</span></p>
+              </div>
+            </div>
+            </div>
+          </article>
+
+          <article class="case case-green" id="coil" style="--n: 2" aria-labelledby="coil-h">
+            <div class="wall">
+              <p class="wall-note">weighing coins, 1514 &rarr; weighing a pattern, 2026</p>
+              <svg class="wall-arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 44 C30 8 78 6 108 30" /><path d="M96 22 L109 31 L94 36" /></svg>
+              <figure class="plate plate-art">
+                <span class="frame"><img src="assets/art/moneylender.jpg" alt="" style="object-position: 55% 50%" loading="lazy" /></span>
+                <figcaption><b>The Moneylender and His Wife</b><span>Quentin Massys, 1514 &middot; oil on panel</span></figcaption>
+              </figure>
+              <figure class="plate plate-data">
+                <span class="frame"><img src="assets/scraps/coil-banner.jpg" alt="Coil's banner: a stock chart with pullbacks of 24, 13, 6 and 3 percent under a pivot line." loading="lazy" /></span>
+                <figcaption><b>The pattern Coil looks for</b><span>Coil &middot; volatility contraction, NSE</span></figcaption>
+              </figure>
+            </div>
+            <div class="case-side">
+            <div class="case-body">
+              <p class="bracket bracket-dark"><span class="dot dot-done" aria-hidden="true"></span>[ 03 &middot; live, negative result ]</p>
+              <h3 class="case-title" id="coil-h"><a href="projects/vcp-screener/" data-cursor="Read">Coil</a></h3>
+              <p class="case-q">Does a famous chart pattern beat buying on a random day?</p>
+              <p>A screener for Mark Minervini&rsquo;s Volatility Contraction Pattern across about 2,300 NSE stocks, beside a ten-year backtest built to disprove it: every signal rebuilt from only what was known on that date, then compared with random entries at the same risk. The random entries won, and the app says so on its front page.</p>
+              <p class="actions">
+                <a class="btn-pill" href="projects/vcp-screener/" data-cursor="Read">Case study</a>
+                <a class="btn-ghost" href="https://coil-vcp.vercel.app" target="_blank" rel="noreferrer">Live app <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></a>
+              </p>
+            </div>
+            <div class="case-data">
+              <div class="dash" data-dash>
+                <p class="dash-head"><span>ten-year backtest &middot; 8 positions</span><span>same risk</span></p>
+                <div class="dash-pairs">
+                  <p class="pair-label">CAGR</p>
+                  <div class="hbar" style="--v: 11.0; --max: 22.3"><span>pattern</span><i></i><b>11.0%</b></div>
+                  <div class="hbar hbar-hi" style="--v: 22.3; --max: 22.3"><span>random</span><i></i><b>22.3%</b></div>
+                  <p class="pair-label">worst drawdown</p>
+                  <div class="hbar" style="--v: 74; --max: 74"><span>pattern</span><i></i><b>74%</b></div>
+                  <div class="hbar hbar-hi" style="--v: 55; --max: 74"><span>random</span><i></i><b>55%</b></div>
+                </div>
+                <p class="dash-foot"><span>2,300 stocks &middot; 402 tests</span><span>random won</span></p>
+              </div>
+            </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================== ALSO BUILT ===================== -->
+      <section class="also" id="also" aria-labelledby="also-h">
+        <header class="work-head">
+          <h2 id="also-h">Also built</h2>
+          <p class="bracket bracket-dark">[ smaller builds, written from scratch ]</p>
+        </header>
+        <ul class="cells">
+          <li class="cell">
+            <span class="duo cell-art"><img src="assets/art/jerome.jpg" alt="" style="object-position: 50% 45%" loading="lazy" /></span>
+            <h3><a href="https://github.com/hey-shiv/mini-modern-llm" target="_blank" rel="noreferrer" data-cursor="Code">Modern Mini LLM <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></a></h3>
+            <p>A small decoder-only transformer with RMSNorm, rotary embeddings, grouped-query attention and SwiGLU, trained on TinyStories with its own BPE tokenizer.</p>
+            <p class="cell-meta">[ pytorch ]</p>
+          </li>
+          <li class="cell">
+            <span class="duo cell-art"><img src="assets/art/haeckel.jpg" alt="" style="object-position: 50% 38%" loading="lazy" /></span>
+            <h3>Neural Network from Scratch</h3>
+            <p>Layers, softmax, cross-entropy and backpropagation by hand, then SGD with decay and momentum, reaching 95% training accuracy on a three-class spiral.</p>
+            <p class="cell-meta">[ numpy ]</p>
+          </li>
+          <li class="cell">
+            <span class="duo cell-art"><img src="assets/art/hearing.jpg" alt="" style="object-position: 8% 80%" loading="lazy" /></span>
+            <h3><a href="blogs/Audio%20Explorer/" data-cursor="Read">Audio Explorer</a></h3>
+            <p>An app that makes the audio-AI front end inspectable: waveform, STFT, Mel spectrograms, MFCCs and beat tracking.</p>
+            <p class="cell-meta">[ librosa &middot; streamlit ]</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===================== SKILLS CONSTELLATION ===================== -->
+      <section class="skills" id="skills" aria-labelledby="skills-h">
+        <header class="skills-head">
+          <p class="bracket bracket-dark">[ skills &middot; hover or tab through them ]</p>
+          <h2 id="skills-h">Tools and ideas, joined by where I used them.</h2>
+        </header>
+        <div class="constellation" data-constellation>
+          <svg class="links" aria-hidden="true"></svg>
+          <ul class="skill-list">
+            <li style="--x: 50%; --y: 47%; --w: 6"><button type="button" class="skill" data-projects="song cover coil llm nn audio">/python</button></li>
+            <li style="--x: 31%; --y: 27%; --w: 5"><button type="button" class="skill" data-projects="song cover coil llm nn">/numpy</button></li>
+            <li style="--x: 69%; --y: 24%; --w: 2"><button type="button" class="skill" data-projects="coil cover">/pandas</button></li>
+            <li style="--x: 41%; --y: 68%; --w: 2"><button type="button" class="skill" data-projects="cover llm">/pytorch</button></li>
+            <li style="--x: 20%; --y: 50%; --w: 3"><button type="button" class="skill" data-projects="song cover audio">/signal-processing</button></li>
+            <li style="--x: 33%; --y: 86%; --w: 1"><button type="button" class="skill" data-projects="cover">/scipy</button></li>
+            <li style="--x: 79%; --y: 56%; --w: 2"><button type="button" class="skill" data-projects="cover llm">/matplotlib</button></li>
+            <li style="--x: 88%; --y: 35%; --w: 1"><button type="button" class="skill" data-projects="coil">/fastapi</button></li>
+            <li style="--x: 90%; --y: 13%; --w: 1"><button type="button" class="skill" data-projects="coil">/yfinance</button></li>
+            <li style="--x: 61%; --y: 82%; --w: 2"><button type="button" class="skill" data-projects="cover coil">/pytest</button></li>
+            <li style="--x: 20%; --y: 74%; --w: 1"><button type="button" class="skill" data-projects="llm">/hugging-face</button></li>
+            <li style="--x: 9%; --y: 31%; --w: 1"><button type="button" class="skill" data-projects="audio">/librosa</button></li>
+            <li style="--x: 7%; --y: 64%; --w: 1"><button type="button" class="skill" data-projects="audio">/streamlit</button></li>
+            <li style="--x: 53%; --y: 12%; --w: 1"><button type="button" class="skill" data-projects="cover">/dtw</button></li>
+            <li style="--x: 75%; --y: 90%; --w: 1"><button type="button" class="skill" data-projects="coil">/backtesting</button></li>
+            <li style="--x: 21%; --y: 11%; --w: 1"><button type="button" class="skill" data-projects="song">/reinforcement-learning</button></li>
+            <li style="--x: 45%; --y: 93%; --w: 1"><button type="button" class="skill" data-projects="llm">/transformers</button></li>
+            <li style="--x: 68%; --y: 43%; --w: 1"><button type="button" class="skill" data-projects="nn">/backprop</button></li>
+            <li style="--x: 60%; --y: 63%; --w: 1"><button type="button" class="skill" data-projects="cover">/typescript</button></li>
+            <li style="--x: 92%; --y: 74%; --w: 0"><button type="button" class="skill" data-projects="">/sql</button></li>
+            <li style="--x: 84%; --y: 5%; --w: 0"><button type="button" class="skill" data-projects="">/scikit-learn</button></li>
+            <li style="--x: 6%; --y: 90%; --w: 0"><button type="button" class="skill" data-projects="">/git</button></li>
+          </ul>
+          <p class="skill-readout" aria-live="polite"><span data-skill-name>/python</span> <span data-skill-used>Used across every project here.</span></p>
+        </div>
+      </section>
+
+      <!-- ===================== ABOUT ===================== -->
+      <section class="about" id="about" aria-labelledby="about-h">
+        <div class="wall wall-solo">
+          <p class="wall-note">patterns, 1923 &rarr; patterns in data, 2026</p>
+          <figure class="plate plate-art">
+            <span class="frame"><img src="assets/art/kandinsky.jpg" alt="" loading="lazy" /></span>
+            <figcaption><b>Composition VIII</b><span>Wassily Kandinsky, 1923 &middot; oil on canvas</span></figcaption>
+          </figure>
+        </div>
+        <div class="about-body">
+          <p class="bracket bracket-dark">[ about ]</p>
+          <h2 id="about-h">A classical musician becoming an engineer.</h2>
+          <p>Final-year CS (AI &amp; ML) at VIT-AP, working toward data analyst and AI/ML engineering roles. I write the model, the pipeline and the evaluation myself, then check the numbers until they hold up or fall apart.</p>
+          <p>The projects here are not finished products. Each one taught me something measurable, including two that said no.</p>
+        </div>
+      </section>
+
+      <!-- ===================== CONTACT ===================== -->
+      <section class="contact" id="contact" aria-labelledby="contact-h">
+        <div class="contact-head">
+          <h2 class="ping" id="contact-h" aria-label="Ping me.."><span class="ping-text" data-type="Ping me..">Ping me..</span><span class="caret" aria-hidden="true"></span></h2>
+          <div class="contact-doodle" aria-hidden="true"><svg class="ink-figure" viewBox="0 0 140 280">
+        <g class="ink">
+          <path pathLength="1" d="M52 30 C50 18 60 10 72 12 C84 13 92 22 90 36 C89 48 82 56 71 57 C60 57 53 49 52 38" />
+          <path pathLength="1" d="M50 30 C54 20 58 24 60 16 C64 22 68 12 72 18 C76 10 80 20 84 14 C86 22 92 18 92 28 C88 26 86 30 82 26" />
+          <circle pathLength="1" cx="64" cy="37" r="5" /><circle pathLength="1" cx="79" cy="37" r="5" /><path pathLength="1" d="M69 37 H74 M59 36 L53 34" />
+          <path pathLength="1" d="M66 49 C69 51 73 51 76 49" />
+          <path pathLength="1" d="M66 57 L65 66 M77 56 L78 66" />
+          <path pathLength="1" class="shirt" d="M40 72 C48 66 58 64 65 66 L78 66 C86 64 96 67 104 73 L112 96 L100 100 L96 88 L96 140 L46 140 L46 88 L42 100 L30 96 Z" />
+          <path pathLength="1" d="M31 97 L28 142 C28 147 33 148 35 144 L41 100" />
+          <path pathLength="1" class="laptop" d="M84 104 L122 116 L112 156 L74 144 Z" />
+          <path pathLength="1" class="wave" d="M86 124 C90 118 92 132 96 126 C99 120 101 134 105 128 C108 123 110 134 113 130" />
+          <path pathLength="1" d="M101 99 L108 118 C109 122 104 124 102 120" />
+          <path pathLength="1" class="pants" d="M47 140 L96 140 L98 214 L77 214 L72 162 L69 214 L46 214 Z" />
+          <path pathLength="1" class="shoe" d="M44 214 L69 214 L70 226 C62 229 50 229 42 226 C40 221 41 217 44 214 Z" />
+          <path pathLength="1" class="shoe" d="M77 214 L98 214 L102 224 C94 229 82 229 76 226 Z" />
+        </g>
+      </svg><p class="hand">thanks for reading</p></div>
+        </div>
+
+        <!-- The ways to reach me, written as notes on a staff. -->
+        <div class="staff-wrap">
+          <button type="button" class="sound-toggle" aria-pressed="false" data-sound>[ sound: off ]</button>
+          <div class="staff">
+            <svg class="staff-lines" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100"><path d="M0 0 H100 M0 25 H100 M0 50 H100 M0 75 H100 M0 100 H100" /></svg>
+            <svg class="staff-clef" viewBox="14 2 34 60" aria-hidden="true"><path d="M34 58 C26 60 24 50 32 50 C38 50 36 58 32 58 M32 58 L30 6 C38 8 40 18 30 26 C20 34 16 42 24 48 C32 54 44 48 40 38 C36 30 24 34 28 42" /></svg>
+            <ul class="notes">
+              <li class="note note-mail" style="--x: 6%; --step: 0" data-freq="329.63">
+                <a href="mailto:shivashant.work@gmail.com" class="note-hit" data-cursor="Email"><span class="head" aria-hidden="true"></span><span class="stem" aria-hidden="true"></span><span class="note-label"><small>[ email, fastest reply ]</small><span class="note-big">shivashant.work@gmail.com</span></span></a>
+                <button type="button" class="copy" data-copy="shivashant.work@gmail.com"><span data-copy-label>Copy address</span></button>
+              </li>
+              <li class="note" style="--x: 45%; --step: 1" data-freq="349.23">
+                <a href="https://linkedin.com/in/shivashant" target="_blank" rel="noreferrer" class="note-hit"><span class="head" aria-hidden="true"></span><span class="stem" aria-hidden="true"></span><span class="note-label"><small>[ linkedin ]</small><span class="note-txt">Connect <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></span></span></a>
+              </li>
+              <li class="note" style="--x: 54%; --step: 2" data-freq="392.00">
+                <a href="https://github.com/hey-shiv" target="_blank" rel="noreferrer" class="note-hit"><span class="head" aria-hidden="true"></span><span class="stem" aria-hidden="true"></span><span class="note-label"><small>[ github ]</small><span class="note-txt">Code <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></span></span></a>
+              </li>
+              <li class="note" style="--x: 63%; --step: 3" data-freq="440.00">
+                <a href="resume/shivashant_resume.pdf" target="_blank" rel="noreferrer" class="note-hit"><span class="head" aria-hidden="true"></span><span class="stem" aria-hidden="true"></span><span class="note-label"><small>[ r&eacute;sum&eacute; ]</small><span class="note-txt">One page <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></span></span></a>
+              </li>
+              <li class="note" style="--x: 72%; --step: 4" data-freq="493.88">
+                <a href="https://x.com/hey_shivv" target="_blank" rel="noreferrer" class="note-hit"><span class="head" aria-hidden="true"></span><span class="stem" aria-hidden="true"></span><span class="note-label"><small>[ x ]</small><span class="note-txt">Posts <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></span></span></a>
+              </li>
+              <li class="note" style="--x: 81%; --step: 5" data-freq="523.25">
+                <a href="https://medium.com/@shivashant.personal" target="_blank" rel="noreferrer" class="note-hit"><span class="head" aria-hidden="true"></span><span class="stem" aria-hidden="true"></span><span class="note-label"><small>[ medium ]</small><span class="note-txt">Essays <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></span></span></a>
+              </li>
+              <li class="note" style="--x: 90%; --step: 6" data-freq="587.33">
+                <a href="blogs/all/" class="note-hit"><span class="head" aria-hidden="true"></span><span class="stem" aria-hidden="true"></span><span class="note-label"><small>[ blog ]</small><span class="note-txt">Build notes</span></span></a>
+              </li>
+
+          </div>
+        </div>
+
+        <footer class="site-footer">
+          <p class="clock"><span class="status-dot" aria-hidden="true"></span>Bengaluru, <time data-clock>IST</time></p>
+          <p class="credit-line">[ paintings: public domain, via wikimedia commons ]</p>
+          <a class="to-top" href="#main">Back to top &uarr;</a>
+        </footer>
+      </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
     <script src="assets/site.js" defer></script>
+    <script src="assets/home.js" defer></script>
   </body>
 </html>
