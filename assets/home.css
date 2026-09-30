@@ -434,10 +434,12 @@ button { font: inherit; color: inherit; }
   transform: translate(-50%, -50%) translateX(calc(var(--off) * 2.6vw)) rotate(calc(var(--off) * 7deg));
   transition: transform 0.8s var(--ease);
 }
-.deck:hover .card, .deck:focus-within .card {
-  transform: translate(-50%, -50%) translateX(calc(var(--off) * 8.6vw)) translateY(calc(var(--off) * var(--off) * 1.2vw)) rotate(calc(var(--off) * 5deg));
+@media (hover: hover) and (min-width: 1101px) {
+  .deck:hover .card, .deck:focus-within .card {
+    transform: translate(-50%, -50%) translateX(calc(var(--off) * 8.6vw)) translateY(calc(var(--off) * var(--off) * 1.2vw)) rotate(calc(var(--off) * 5deg));
+  }
+  .deck .card:hover { z-index: 5; }
 }
-.deck .card:hover { z-index: 5; }
 .card a { display: block; width: 100%; height: 100%; }
 .card .duo { width: 100%; height: 100%; border-radius: 14px; background: none; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), 0 24px 50px -18px rgba(0, 0, 0, 0.45); }
 .card-tag {
@@ -858,10 +860,20 @@ button { font: inherit; color: inherit; }
 @media (max-width: 1100px) {
   .status { display: none; }
   .site-nav { margin-right: auto; }
-  .hero { grid-template-columns: minmax(0, 1fr); }
-  .deck { height: 22rem; }
+  .hero { grid-template-columns: minmax(0, 1fr); align-content: start; min-height: 0; padding-bottom: 3rem; }
+  /* Touch and narrow screens: the deck fans out as you scroll (--spread 0 to 1, set by home.js). */
+  .deck { height: 26rem; margin-top: 1rem; }
+  .card {
+    transition: none;
+    transform: translate(-50%, -50%)
+      translateX(calc(var(--off) * (3vw + var(--spread, 0) * 13vw)))
+      translateY(calc(var(--off) * var(--off) * var(--spread, 0) * 2.2vw - var(--spread, 0) * 1.5rem))
+      rotate(calc(var(--off) * (6deg - var(--spread, 0) * 1deg)))
+      scale(calc(0.94 + var(--spread, 0) * 0.08));
+  }
   .case { grid-template-columns: minmax(0, 1fr); }
   .case-flip .wall { order: 0; }
+  .plate { transition: none; }
   .case-flip .case-side { padding: 1rem 0; }
   .cells { grid-template-columns: minmax(0, 1fr); }
   .about { grid-template-columns: minmax(0, 1fr); }
@@ -879,16 +891,36 @@ button { font: inherit; color: inherit; }
   .brand { font-size: 1.1rem; }
   .btn-resume { padding: 0.4rem 0.7rem; font-size: 0.9rem; }
   .name { font-size: clamp(3.2rem, 17vw, 6rem); }
-  .card { width: 34vw; }
-  .deck:hover .card, .deck:focus-within .card { transform: translate(-50%, -50%) translateX(calc(var(--off) * 16vw)) rotate(calc(var(--off) * 5deg)); }
+  .hero { padding-top: calc(var(--nav-h) + 2rem); gap: 1.6rem; }
+  .card { width: 36vw; }
+  .manifesto { padding: 8vh var(--pad) 12vh; }
+  /* Walls hang the two plates one above the other, so the figure stays legible. */
+  .wall:not(.wall-solo) { flex-wrap: wrap; row-gap: 1.8rem; padding: 5.4rem 7% 2.2rem; }
+  .wall:not(.wall-solo) .plate-art { width: 72%; margin-right: 18%; }
+  .wall:not(.wall-solo) .plate-data { width: 82%; margin: 0 0 0 16%; }
+  .wall-arrow { display: none; }
+  .wall.wall-solo { min-height: 0; padding: 3rem 7% 2rem; }
+  .deck { height: 21rem; margin-top: 0.5rem; }
   .hero-doodle { display: none; }
   /* The constellation becomes a wrapped list on phones. */
   .constellation { height: auto; }
   .links { display: none; }
   .skill-list { display: flex; flex-wrap: wrap; gap: 0.3rem 0.5rem; }
   .skill-list li { position: static; transform: none; }
-  .skill-readout { position: static; margin-top: 1.5rem; }
+  /* The readout rides along at the bottom of the screen while you tap through skills. */
+  .skill-readout {
+    position: sticky; bottom: 1rem; z-index: 2; margin-top: 1.5rem;
+    padding: 0.7rem 0.9rem; border: 1px solid var(--line); border-radius: 14px;
+    background: rgba(255, 245, 239, 0.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    box-shadow: 0 14px 30px -18px rgba(42, 26, 23, 0.35);
+  }
   .contact-head { flex-wrap: wrap; }
+  .contact::before { top: 18%; right: 12%; bottom: 18%; left: 12%; }
+  /* One thin staff line threads the note heads together. */
+  .notes { position: relative; }
+  .notes::before { content: ""; position: absolute; left: 0.72rem; top: 1.4rem; bottom: 1.4rem; width: 1px; background: rgba(17, 17, 17, 0.18); }
+  .note-hit { position: relative; }
+  .note-label b, .note-label strong { overflow-wrap: anywhere; }
   .staff { height: auto; margin: 0 0 2.5rem; }
   .staff-lines, .staff-clef, .stem { display: none; }
   .notes { display: grid; gap: 1.4rem; }
@@ -916,3 +948,11 @@ button { font: inherit; color: inherit; }
 
 /* The hero deck shows its paintings in full colour. */
 .card .duo > img { filter: none; mix-blend-mode: normal; }
+
+/* Touch: no grey tap flash, a small press instead. */
+a, button { -webkit-tap-highlight-color: transparent; }
+@media (hover: none) {
+  .btn-pill:active, .btn-ghost:active, .btn-resume:active, .copy:active { transform: scale(0.96); transition-duration: 0.1s; }
+  .card a:active .duo { transform: scale(0.97); }
+  .card .duo { transition: transform 0.2s var(--ease); }
+}

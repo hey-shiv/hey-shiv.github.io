@@ -319,7 +319,8 @@
       it.btn.addEventListener("focus", function () { activate(it); });
       it.btn.addEventListener("click", function () { activate(it); });
     });
-    sky.addEventListener("pointerleave", reset);
+    // Touch fires pointerleave right after a tap; only a mouse leaving clears it.
+    sky.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") reset(); });
     sky.addEventListener("focusout", function (e) { if (!sky.contains(e.relatedTarget)) reset(); });
 
     // Gentle depth: heavier skills drift less than light ones as the cursor moves.
@@ -507,6 +508,41 @@
       gsap.fromTo(c, { scale: 1, filter: "brightness(1)" }, {
         scale: 0.93, filter: "brightness(0.82)", ease: "none",
         scrollTrigger: { trigger: next, start: "top bottom", end: "top 20%", scrub: true }
+      });
+    });
+  });
+
+  /* ---- touch and narrow screens: the deck fans out as you scroll ---------- */
+  mm.add("(max-width: 1100px), (hover: none)", function () {
+    var deck = document.querySelector(".deck");
+    if (deck) {
+      gsap.fromTo(deck, { "--spread": 0 }, {
+        "--spread": 1, ease: "power1.inOut",
+        scrollTrigger: {
+          start: 0,
+          // Fully fanned once the deck's centre reaches the middle of the screen.
+          end: function () {
+            var r = deck.getBoundingClientRect();
+            return Math.max(220, window.scrollY + r.top + r.height / 2 - window.innerHeight * 0.5);
+          },
+          scrub: 0.6, invalidateOnRefresh: true
+        }
+      });
+    }
+  });
+
+  /* ---- below the desktop stack: cases rise into place, paintings drift ---- */
+  mm.add("(max-width: 1099px), (max-height: 699px)", function () {
+    gsap.utils.toArray(".case").forEach(function (c) {
+      gsap.fromTo(c, { y: 70, scale: 0.94, opacity: 0.5 }, {
+        y: 0, scale: 1, opacity: 1, ease: "none",
+        scrollTrigger: { trigger: c, start: "top bottom", end: "top 55%", scrub: 0.5 }
+      });
+    });
+    gsap.utils.toArray(".wall .plate").forEach(function (f, i) {
+      gsap.fromTo(f, { yPercent: i % 2 ? 14 : 8 }, {
+        yPercent: i % 2 ? -8 : -4, ease: "none",
+        scrollTrigger: { trigger: f, start: "top bottom", end: "bottom top", scrub: true }
       });
     });
   });
