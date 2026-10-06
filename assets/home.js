@@ -502,7 +502,7 @@
 
   /* ---- stacked cases: each card recedes as the next one arrives ----------- */
   var mm = gsap.matchMedia();
-  mm.add("(min-width: 1100px) and (min-height: 700px)", function () {
+  mm.add("(min-width: 1100px) and (min-height: 860px)", function () {
     var cases = gsap.utils.toArray(".case");
     cases.forEach(function (c, i) {
       var next = cases[i + 1];
@@ -535,7 +535,7 @@
   });
 
   /* ---- below the desktop stack: cases rise into place, paintings drift ---- */
-  mm.add("(max-width: 1099px), (max-height: 699px)", function () {
+  mm.add("(max-width: 1099px), (max-height: 859px)", function () {
     gsap.utils.toArray(".case").forEach(function (c) {
       gsap.fromTo(c, { y: 70, scale: 0.94, opacity: 0.5 }, {
         y: 0, scale: 1, opacity: 1, ease: "none",

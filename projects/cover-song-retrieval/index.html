@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Cover Song Retrieval: a two-stage cover song identification system on Da-TACOS, evaluated four times on the full benchmark. Its first run was a negative result, and the error analysis behind the later runs is the point."
+      content="Cover Song Retrieval: a two-stage cover song identification system on Da-TACOS, run four times on the full benchmark. The first run lost by 4.5×, and the error analysis that brought it to 1.11× is most of the story."
     />
     <title>Cover Song Retrieval — Shivashant Manohar</title>
     <script>
@@ -44,16 +44,18 @@
 
       <main>
         <div class="back-links">
-          <a href="../../index.html">Work</a> / <a href="../../blogs/Cover%20Song%20Retrieval/">Field notes</a>
+          <a href="../../index.html">Work</a> / <a href="../../blogs/Cover%20Song%20Retrieval/">Build notes</a>
         </div>
 
         <section class="hero detail-hero">
           <p class="eyebrow">Project / Cover Song Retrieval</p>
-          <h1>Can a machine recognise the same song when almost everything about the recording has changed?</h1>
+          <h1>Change the singer, the key and the tempo. Can a machine still tell it&rsquo;s the same song?</h1>
           <p class="statement">
-            A two-stage cover song identification system on Da-TACOS, built from HPCP features
-            only and evaluated four times on the full benchmark. The first evaluation was a
-            negative result, and most of this page is about what that result taught.
+            Two musicians can play one song in different keys, at different speeds, on different
+            instruments, and a listener still hears that it&rsquo;s the same song. This project
+            asks how much of that a machine can learn. It is a two-stage system on Da-TACOS, built
+            from HPCP features only and run four times on the full benchmark. The first run lost by
+            4.5&times;, and most of this page is about how I got it to 1.11&times;.
           </p>
           <ul class="detail-meta" aria-label="Project metadata">
             <li>Music information retrieval</li>
@@ -69,7 +71,7 @@
             <p class="signal-marker">The system</p>
             <h2 id="system-h" class="world-title">One track, seven representations.</h2>
             <p class="world-question">
-              The same information, rewritten at every stage &mdash; until two recordings of one
+              The same information, rewritten at every stage, until two recordings of one
               composition can be scored against each other.
             </p>
           </div>
@@ -117,8 +119,8 @@
                 <p>
                   Key invariance comes from the features, never from key labels: the candidate is
                   rotated through all twelve circular shifts and the best one is kept. It buys
-                  key invariance and quietly assumes the key never changes mid-song &mdash; an
-                  assumption that does break.
+                  key invariance and assumes the key never changes mid-song, which isn&rsquo;t always
+                  true.
                 </p>
               </li>
 
@@ -184,10 +186,10 @@
             by frame, and lets the alignment decide the final order.
           </p>
           <p>
-            The project deliberately started classical: a chroma-plus-alignment baseline in the
-            tradition of Serr&agrave; et al. 2008, so any learned result had something real to be
-            compared against. It is deterministic from a single seed, covered by 142 tests, and
-            every evaluation setting was locked before any benchmark query was scored.
+            I started with the classical method on purpose: a chroma-plus-alignment baseline in
+            the tradition of Serr&agrave; et al. 2008, so anything learned later had something real
+            to stand against. The code is deterministic from a single seed and covered by 142
+            tests, and I locked every evaluation setting before scoring a single benchmark query.
           </p>
           <div class="summary-grid">
             <div class="summary-block">
@@ -331,7 +333,7 @@
             </div>
             <div class="diagram-lanes">
               <div class="diagram-lane">
-                <p class="diagram-lane-label">Stage 1 &mdash; look</p>
+                <p class="diagram-lane-label">Stage 1: look</p>
                 <ol class="diagram-flow">
                   <li>
                     <strong>HPCP preprocessing</strong>
@@ -348,7 +350,7 @@
                 </ol>
               </div>
               <div class="diagram-lane">
-                <p class="diagram-lane-label">Stage 2 &mdash; listen closely</p>
+                <p class="diagram-lane-label">Stage 2: listen closely</p>
                 <ol class="diagram-flow">
                   <li>
                     <strong>Key rotation</strong>
@@ -386,7 +388,7 @@
         </section>
 
         <section aria-labelledby="decisions">
-          <p class="section-label" id="decisions">Design Decisions</p>
+          <p class="section-label" id="decisions">Design decisions</p>
           <ul class="detail-list">
             <li>Implement the classical baseline first, so a neural improvement has to prove itself against something real.</li>
             <li>Write DTW and the retrieval metrics from the textbook recurrence, with no cover-song library imported.</li>
@@ -425,7 +427,7 @@
         </section>
 
         <section aria-labelledby="lessons">
-          <p class="section-label" id="lessons">Lessons Learned</p>
+          <p class="section-label" id="lessons">What it taught me</p>
           <p>
             The hardest part was never the model. It was the discipline around it: deciding what
             counts as a correct retrieval, splitting so nothing can leak, and locking settings
@@ -434,9 +436,9 @@
             full benchmark, with intervals, decide.
           </p>
           <p>
-            The other lesson is about negative results. Run 1 lost to a classical baseline by
-            4.5&times;. Reporting that plainly is what made the error analysis possible, and the
-            error analysis is where every later improvement came from.
+            The other lesson is about the first result. Run 1 lost to a classical baseline by
+            4.5&times;. I wrote that down as the headline and went looking for why, and every later
+            improvement came out of that search.
           </p>
         </section>
 
@@ -473,7 +475,7 @@
         </section>
 
         <section aria-labelledby="reading">
-          <p class="section-label" id="reading">Grounding Work</p>
+          <p class="section-label" id="reading">Reading it stands on</p>
           <ul class="now-list">
             <li>Serr&agrave;, G&oacute;mez, Herrera &amp; Serra (2008) &mdash; chroma binary similarity and local alignment for cover song identification.</li>
             <li>Yesiler et al. (2019) &mdash; Da-TACOS, the dataset and benchmarking protocol this project follows.</li>
