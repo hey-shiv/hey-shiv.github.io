@@ -191,8 +191,8 @@
       <!-- ===================== WORK INDEX ===================== -->
       <section class="work" id="work" aria-labelledby="work-h">
         <header class="work-head">
-          <h2 id="work-h">Three things I can&rsquo;t put down</h2>
-          <p class="bracket bracket-dark">[ one just begun, one finished, one i open every night ]</p>
+          <h2 id="work-h">Four things I can&rsquo;t put down</h2>
+          <p class="bracket bracket-dark">[ one just begun, two finished, one i open every night ]</p>
         </header>
         <ol class="index">
           <li><a href="#first-song" data-peek="assets/art/birds.jpg" data-cursor="Open">
@@ -203,6 +203,9 @@
           </a></li>
           <li><a href="#coil" data-peek="assets/art/moneylender.jpg" data-cursor="Open">
             <span class="ix-num">03</span><span class="ix-name">Coil</span><span class="ix-field">Data analysis, swing trading</span><span class="ix-status"><i class="dot dot-done"></i>Live, in daily use</span>
+          </a></li>
+          <li><a href="#agentalign" data-peek="assets/art/ambassadors.jpg" data-cursor="Open">
+            <span class="ix-num">04</span><span class="ix-name">AgentAlign</span><span class="ix-field">Preference learning, LLM agents</span><span class="ix-status"><i class="dot dot-done"></i>Complete</span>
           </a></li>
         </ol>
 
@@ -318,6 +321,43 @@
             </div>
             </div>
           </article>
+          <article class="case" id="agentalign" style="--n: 3" aria-labelledby="align-h">
+            <div class="wall">
+              <p class="wall-note">a lute with one broken string, 1533 &rarr; an agent with one bad step, 2026</p>
+              <svg class="wall-arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 44 C30 8 78 6 108 30" /><path d="M96 22 L109 31 L94 36" /></svg>
+              <figure class="plate plate-art">
+                <span class="frame"><img src="assets/art/ambassadors.jpg" alt="" style="object-position: 50% 78%" loading="lazy" /></span>
+                <figcaption><b>The Ambassadors</b><span>Hans Holbein the Younger, 1533 &middot; oil on oak</span></figcaption>
+              </figure>
+              <figure class="plate plate-data">
+                <span class="frame"><img src="assets/scraps/agentalign-unsafe.svg" alt="Share of held-out runs that tried a disallowed command: 41% for the base model, 30% after SFT, 27% after SFT and DPO." loading="lazy" /></span>
+                <figcaption><b>Fewer unsafe runs</b><span>AgentAlign &middot; 168 held-out runs per model</span></figcaption>
+              </figure>
+            </div>
+            <div class="case-side">
+            <div class="case-body">
+              <p class="bracket bracket-dark"><span class="dot dot-done" aria-hidden="true"></span>[ 04 &middot; complete ]</p>
+              <h3 class="case-title" id="align-h"><a href="https://github.com/hey-shiv/AgentAlign-Lab" target="_blank" rel="noreferrer" data-cursor="Code">AgentAlign</a></h3>
+              <p class="case-q">Can an agent learn from its own attempts, with no human telling it which ones were good?</p>
+              <p>A small coding model works through sandboxed terminal tasks: fix a bug, repair a config, pull lines from a log. Tests and rule checks grade every step, so nobody has to label anything. My first run trained on text the agent never actually sees and found nothing. I matched the training to what the agent reads, kept the steps that led to a pass, and paired each with a step the checks proved wrong. On tasks it had never seen, the pass rate went from 7.1% to 11.3%, and runs that tried a forbidden command fell from 41% to 27%.</p>
+              <p class="actions">
+                <a class="btn-pill" href="https://github.com/hey-shiv/AgentAlign-Lab/blob/main/report/paper.md" target="_blank" rel="noreferrer" data-cursor="Read">Write-up</a>
+                <a class="btn-ghost" href="https://github.com/hey-shiv/AgentAlign-Lab" target="_blank" rel="noreferrer">Code <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></a>
+              </p>
+            </div>
+            <div class="case-data">
+              <div class="dash" data-dash>
+                <p class="dash-head"><span>pass rate on unseen tasks &middot; higher is better</span><span>168 runs each</span></p>
+                <div class="dash-bars" style="--max: 12">
+                  <div class="bar" style="--v: 7.1"><b>7.1%</b><i></i><span>base</span></div>
+                  <div class="bar" style="--v: 9.5"><b>9.5%</b><i></i><span>+ SFT</span></div>
+                  <div class="bar bar-hi" style="--v: 11.3"><b>11.3%</b><i></i><span>+ DPO</span></div>
+                </div>
+                <p class="dash-foot"><span>Qwen2.5-Coder-1.5B &middot; one free T4</span><span>+4.2 pts, 95% CI +1.2 to +7.7</span></p>
+              </div>
+            </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -358,23 +398,23 @@
         <div class="constellation" data-constellation>
           <svg class="links" aria-hidden="true"></svg>
           <ul class="skill-list">
-            <li style="--x: 50%; --y: 47%; --w: 6"><button type="button" class="skill" data-projects="song cover coil llm nn audio">/python</button></li>
+            <li style="--x: 50%; --y: 47%; --w: 7"><button type="button" class="skill" data-projects="song cover coil llm nn audio align">/python</button></li>
             <li style="--x: 31%; --y: 27%; --w: 5"><button type="button" class="skill" data-projects="song cover coil llm nn">/numpy</button></li>
             <li style="--x: 69%; --y: 24%; --w: 2"><button type="button" class="skill" data-projects="coil cover">/pandas</button></li>
-            <li style="--x: 41%; --y: 68%; --w: 2"><button type="button" class="skill" data-projects="cover llm">/pytorch</button></li>
+            <li style="--x: 41%; --y: 68%; --w: 3"><button type="button" class="skill" data-projects="cover llm align">/pytorch</button></li>
             <li style="--x: 20%; --y: 50%; --w: 3"><button type="button" class="skill" data-projects="song cover audio">/signal-processing</button></li>
             <li style="--x: 33%; --y: 86%; --w: 1"><button type="button" class="skill" data-projects="cover">/scipy</button></li>
             <li style="--x: 79%; --y: 56%; --w: 2"><button type="button" class="skill" data-projects="cover llm">/matplotlib</button></li>
             <li style="--x: 88%; --y: 35%; --w: 1"><button type="button" class="skill" data-projects="coil">/fastapi</button></li>
             <li style="--x: 90%; --y: 13%; --w: 1"><button type="button" class="skill" data-projects="coil">/yfinance</button></li>
-            <li style="--x: 61%; --y: 82%; --w: 2"><button type="button" class="skill" data-projects="cover coil">/pytest</button></li>
-            <li style="--x: 20%; --y: 74%; --w: 1"><button type="button" class="skill" data-projects="llm">/hugging-face</button></li>
+            <li style="--x: 61%; --y: 82%; --w: 3"><button type="button" class="skill" data-projects="cover coil align">/pytest</button></li>
+            <li style="--x: 20%; --y: 74%; --w: 2"><button type="button" class="skill" data-projects="llm align">/hugging-face</button></li>
             <li style="--x: 9%; --y: 31%; --w: 1"><button type="button" class="skill" data-projects="audio">/librosa</button></li>
             <li style="--x: 7%; --y: 64%; --w: 1"><button type="button" class="skill" data-projects="audio">/streamlit</button></li>
             <li style="--x: 53%; --y: 12%; --w: 1"><button type="button" class="skill" data-projects="cover">/dtw</button></li>
             <li style="--x: 75%; --y: 90%; --w: 1"><button type="button" class="skill" data-projects="coil">/backtesting</button></li>
             <li style="--x: 21%; --y: 11%; --w: 1"><button type="button" class="skill" data-projects="song">/reinforcement-learning</button></li>
-            <li style="--x: 45%; --y: 93%; --w: 1"><button type="button" class="skill" data-projects="llm">/transformers</button></li>
+            <li style="--x: 45%; --y: 93%; --w: 2"><button type="button" class="skill" data-projects="llm align">/transformers</button></li>
             <li style="--x: 68%; --y: 43%; --w: 1"><button type="button" class="skill" data-projects="nn">/backprop</button></li>
             <li style="--x: 60%; --y: 63%; --w: 1"><button type="button" class="skill" data-projects="cover">/typescript</button></li>
             <li style="--x: 92%; --y: 74%; --w: 0"><button type="button" class="skill" data-projects="">/sql</button></li>
