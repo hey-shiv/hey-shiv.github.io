@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Shivashant Manohar is a final-year CS (AI &amp; ML) student working toward data analyst and AI/ML engineering roles: a screener whose own ten-year backtest found no edge, a cover-song retrieval system that started as a negative result and closed the gap, and RL agents learning to communicate through sound."
+      content="Shivashant Manohar is a final-year CS (AI &amp; ML) student working toward data analyst and AI/ML engineering roles: Coil, the NSE screener I built for my own swing-trade analysis, a cover-song retrieval system that started as a negative result and closed the gap, and RL agents learning to communicate through sound."
     />
     <link rel="canonical" href="https://hey-shiv.github.io/" />
     <meta property="og:type" content="website" />
@@ -201,7 +201,7 @@
             <span class="ix-num">02</span><span class="ix-name">Cover Song Retrieval</span><span class="ix-field">Machine learning, retrieval</span><span class="ix-status"><i class="dot dot-done"></i>Complete</span>
           </a></li>
           <li><a href="#coil" data-peek="assets/art/moneylender.jpg" data-cursor="Open">
-            <span class="ix-num">03</span><span class="ix-name">Coil</span><span class="ix-field">Data analysis, backtesting</span><span class="ix-status"><i class="dot dot-done"></i>Live, negative result</span>
+            <span class="ix-num">03</span><span class="ix-name">Coil</span><span class="ix-field">Data analysis, swing trading</span><span class="ix-status"><i class="dot dot-done"></i>Live, in daily use</span>
           </a></li>
         </ol>
 
@@ -280,7 +280,7 @@
 
           <article class="case case-green" id="coil" style="--n: 2" aria-labelledby="coil-h">
             <div class="wall">
-              <p class="wall-note">weighing coins, 1514 &rarr; weighing a pattern, 2026</p>
+              <p class="wall-note">weighing coins, 1514 &rarr; weighing stocks, 2026</p>
               <svg class="wall-arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 44 C30 8 78 6 108 30" /><path d="M96 22 L109 31 L94 36" /></svg>
               <figure class="plate plate-art">
                 <span class="frame"><img src="assets/art/moneylender.jpg" alt="" style="object-position: 55% 50%" loading="lazy" /></span>
@@ -293,10 +293,10 @@
             </div>
             <div class="case-side">
             <div class="case-body">
-              <p class="bracket bracket-dark"><span class="dot dot-done" aria-hidden="true"></span>[ 03 &middot; live, negative result ]</p>
+              <p class="bracket bracket-dark"><span class="dot dot-done" aria-hidden="true"></span>[ 03 &middot; live, in daily use ]</p>
               <h3 class="case-title" id="coil-h"><a href="projects/vcp-screener/" data-cursor="Read">Coil</a></h3>
-              <p class="case-q">Does a famous chart pattern beat buying on a random day?</p>
-              <p>A screener for Mark Minervini&rsquo;s Volatility Contraction Pattern across about 2,300 NSE stocks, beside a ten-year backtest built to disprove it: every signal rebuilt from only what was known on that date, then compared with random entries at the same risk. The random entries won, and the app says so on its front page.</p>
+              <p class="case-q">Which of 2,300 NSE stocks are worth a swing trader&rsquo;s attention tonight?</p>
+              <p>The analysis tool I built for my own swing trades. Every night it scans all ~2,300 listed NSE stocks for Volatility Contraction Patterns, runs my EMA breakout-and-retest scan, and answers typed screens like <code>Return 1M &gt; 10 AND Volume &gt; 1L</code>. Each shortlisted stock opens with its charts, financials, ownership and a ready trade plan: pivot, stop and position size.</p>
               <p class="actions">
                 <a class="btn-pill" href="projects/vcp-screener/" data-cursor="Read">Case study</a>
                 <a class="btn-ghost" href="https://coil-vcp.vercel.app" target="_blank" rel="noreferrer">Live app <svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4"/></svg></a>
@@ -304,16 +304,15 @@
             </div>
             <div class="case-data">
               <div class="dash" data-dash>
-                <p class="dash-head"><span>ten-year backtest &middot; 8 positions</span><span>same risk</span></p>
+                <p class="dash-head"><span>one nightly scan</span><span>stocks left</span></p>
                 <div class="dash-pairs">
-                  <p class="pair-label">CAGR</p>
-                  <div class="hbar" style="--v: 11.0; --max: 22.3"><span>pattern</span><i></i><b>11.0%</b></div>
-                  <div class="hbar hbar-hi" style="--v: 22.3; --max: 22.3"><span>random</span><i></i><b>22.3%</b></div>
-                  <p class="pair-label">worst drawdown</p>
-                  <div class="hbar" style="--v: 74; --max: 74"><span>pattern</span><i></i><b>74%</b></div>
-                  <div class="hbar hbar-hi" style="--v: 55; --max: 74"><span>random</span><i></i><b>55%</b></div>
+                  <p class="pair-label">listed NSE &rarr; shortlist</p>
+                  <div class="hbar" style="--v: 100; --max: 100"><span>listed</span><i></i><b>2,301</b></div>
+                  <div class="hbar" style="--v: 44; --max: 100"><span>technical</span><i></i><b>30</b></div>
+                  <div class="hbar" style="--v: 39; --max: 100"><span>fundam.</span><i></i><b>20</b></div>
+                  <div class="hbar hbar-hi" style="--v: 25; --max: 100"><span>owners</span><i></i><b>7</b></div>
                 </div>
-                <p class="dash-foot"><span>2,300 stocks &middot; 402 tests</span><span>random won</span></p>
+                <p class="dash-foot"><span>22 ready screens &middot; 428 tests</span><span>bars on log scale</span></p>
               </div>
             </div>
             </div>
