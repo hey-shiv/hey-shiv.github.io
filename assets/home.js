@@ -458,13 +458,16 @@
   if (mark) mark.style.setProperty("--mark", "0%");
   gsap.set(".name .line > span", { yPercent: 110 });
   gsap.set(".hero .bracket, .hero-intro, .hero-actions, .hero-doodle", { y: 20, opacity: 0 });
-  gsap.set(".deck .card", { y: 140, opacity: 0 });
+  // The cards' fan lives in CSS on .card, so the entrance moves the link
+  // inside each card. Tweening .card itself would overwrite the fan and the
+  // cards would jump into place when the tween ends.
+  gsap.set(".deck .card > a", { y: 120, opacity: 0 });
 
   function heroIn() {
     var tl = gsap.timeline({ defaults: { ease: "expo.out" } });
     tl.to(".name .line > span", { yPercent: 0, duration: 1.4, stagger: 0.1 })
       .to(".hero .bracket, .hero-intro, .hero-actions, .hero-doodle", { y: 0, opacity: 1, duration: 1.1, stagger: 0.08 }, 0.3)
-      .to(".deck .card", { y: 0, opacity: 1, duration: 1.3, stagger: 0.09, clearProps: "transform,opacity" }, 0.2)
+      .to(".deck .card > a", { y: 0, opacity: 1, duration: 1.3, stagger: 0.09, clearProps: "transform,opacity" }, 0.2)
       .add(function () { if (mark) mark.style.setProperty("--mark", "100%"); }, 0.7);
   }
   if (root.classList.contains("is-ready")) heroIn();

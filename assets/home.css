@@ -429,30 +429,56 @@ button { font: inherit; color: inherit; }
   position: absolute;
   top: 50%;
   left: 50%;
-  width: clamp(150px, 16vw, 250px);
+  width: clamp(150px, 15vw, 240px);
   aspect-ratio: 3 / 4;
-  transform: translate(-50%, -50%) translateX(calc(var(--off) * 2.6vw)) rotate(calc(var(--off) * 7deg));
+  /* At rest the fan is already open enough to show all four paintings. */
+  transform: translate(-50%, -50%) translateX(calc(var(--off) * 5.4vw)) translateY(calc(var(--off) * var(--off) * 0.9vw)) rotate(calc(var(--off) * 6deg));
   transition: transform 0.8s var(--ease);
 }
 @media (hover: hover) and (min-width: 1101px) {
   .deck:hover .card, .deck:focus-within .card {
-    transform: translate(-50%, -50%) translateX(calc(var(--off) * 8.6vw)) translateY(calc(var(--off) * var(--off) * 1.2vw)) rotate(calc(var(--off) * 5deg));
+    transform: translate(-50%, -50%) translateX(calc(var(--off) * 8vw)) translateY(calc(var(--off) * var(--off) * 1.4vw)) rotate(calc(var(--off) * 4.5deg));
   }
   .deck .card:hover { z-index: 5; }
 }
-.card a { display: block; width: 100%; height: 100%; }
-.card .duo { width: 100%; height: 100%; border-radius: 14px; background: none; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), 0 24px 50px -18px rgba(0, 0, 0, 0.45); }
+/* Each card is a small print: the painting sits in a white mount. */
+.card a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 7px;
+  border-radius: 16px;
+  background: var(--paper-2);
+  box-shadow:
+    0 0 0 1px var(--glass-edge),
+    0 2px 4px rgba(42, 26, 23, 0.06),
+    0 28px 48px -22px rgba(42, 26, 23, 0.5);
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+}
+.card .duo { width: 100%; height: 100%; border-radius: 10px; background: var(--stone-2); }
 .card-tag {
   position: absolute;
-  left: 0.6rem;
-  bottom: 0.6rem;
-  padding: 0.25rem 0.55rem;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  background: var(--paper-2);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 12px -6px rgba(42, 26, 23, 0.4);
+  color: var(--ink);
   font-family: var(--mono);
   font-size: 0.64rem;
   white-space: nowrap;
 }
+@media (hover: hover) {
+  .deck .card:hover > a, .deck .card > a:focus-visible {
+    transform: translateY(-12px);
+    box-shadow:
+      0 0 0 1px var(--glass-edge),
+      0 4px 8px rgba(42, 26, 23, 0.08),
+      0 40px 60px -24px rgba(42, 26, 23, 0.55);
+  }
+}
+.card > a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .hero-doodle { position: absolute; left: var(--pad); bottom: 1.6rem; display: flex; align-items: flex-end; gap: 0.6rem; }
 
 /* ----------------------------------------------------------- manifesto --- */
@@ -953,6 +979,5 @@ button { font: inherit; color: inherit; }
 a, button { -webkit-tap-highlight-color: transparent; }
 @media (hover: none) {
   .btn-pill:active, .btn-ghost:active, .btn-resume:active, .copy:active { transform: scale(0.96); transition-duration: 0.1s; }
-  .card a:active .duo { transform: scale(0.97); }
-  .card .duo { transition: transform 0.2s var(--ease); }
+  .card > a:active { transform: scale(0.97); transition-duration: 0.2s; }
 }
