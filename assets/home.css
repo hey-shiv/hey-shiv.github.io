@@ -981,3 +981,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .btn-pill:active, .btn-ghost:active, .btn-resume:active, .copy:active { transform: scale(0.96); transition-duration: 0.1s; }
   .card > a:active { transform: scale(0.97); transition-duration: 0.2s; }
 }
+
+/* A project name kept under wraps: a blurred stand-in, not the real word. */
+.redacted { filter: blur(0.32em); user-select: none; -webkit-user-select: none; display: inline-block; }

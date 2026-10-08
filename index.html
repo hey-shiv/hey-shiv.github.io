@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Shivashant Manohar plays sitar and tabla and is becoming a data analyst and AI/ML engineer. He builds machines that listen: a cover-song retrieval system and Coil, the NSE stock screener he opens every evening. He is now building Nodus, a graph-native company-brain agent on FalkorDB."
+      content="Shivashant Manohar plays sitar and tabla and is becoming a data analyst and AI/ML engineer. He builds machines that listen: a cover-song retrieval system and Coil, the NSE stock screener he opens every evening. He is now building a company brain: an agent that works from a knowledge graph of how a company fits together."
     />
     <link rel="canonical" href="https://hey-shiv.github.io/" />
     <meta property="og:type" content="website" />
@@ -44,7 +44,7 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link rel="stylesheet" href="assets/home.css?v=6" />
+    <link rel="stylesheet" href="assets/home.css?v=7" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -150,7 +150,7 @@
 
         <!-- A fanned deck: one duotone painting per chapter. -->
         <ul class="deck" aria-label="Chapters">
-          <li class="card" style="--i: 0"><a href="#nodus" data-cursor="01"><span class="duo"><img src="assets/scraps/nodus-card.svg" alt="" style="object-position: 50% 50%" /></span><span class="card-tag">01 &middot; Nodus</span></a></li>
+          <li class="card" style="--i: 0"><a href="#brain" data-cursor="01"><span class="duo"><img src="assets/scraps/brain-card.svg" alt="" style="object-position: 50% 50%" /></span><span class="card-tag">01 &middot; <span class="redacted" role="img" aria-label="Project name, under wraps" title="Name under wraps">Qeltra</span></span></a></li>
           <li class="card" style="--i: 1"><a href="#cover" data-cursor="02"><span class="duo"><img src="assets/art/musicians.jpg" alt="" style="object-position: 50% 30%" /></span><span class="card-tag">02 &middot; Cover Song</span></a></li>
           <li class="card" style="--i: 2"><a href="#coil" data-cursor="03"><span class="duo"><img src="assets/art/moneylender.jpg" alt="" style="object-position: 50% 40%" /></span><span class="card-tag">03 &middot; Coil</span></a></li>
           <li class="card" style="--i: 3"><a href="#skills" data-cursor="Skills"><span class="duo"><img src="assets/art/ambassadors.jpg" alt="" style="object-position: 50% 55%" /></span><span class="card-tag">04 &middot; Skills</span></a></li>
@@ -195,8 +195,8 @@
           <p class="bracket bracket-dark">[ one just begun, two finished, one i open every night ]</p>
         </header>
         <ol class="index">
-          <li><a href="#nodus" data-peek="assets/scraps/nodus-card.svg" data-cursor="Open">
-            <span class="ix-num">01</span><span class="ix-name">Nodus</span><span class="ix-field">Knowledge graphs, AI agents</span><span class="ix-status"><i class="dot dot-progress"></i>Building</span>
+          <li><a href="#brain" data-peek="assets/scraps/brain-card.svg" data-cursor="Open">
+            <span class="ix-num">01</span><span class="ix-name"><span class="redacted" role="img" aria-label="Project name, under wraps" title="Name under wraps">Qeltra</span></span><span class="ix-field">Knowledge graphs, AI agents</span><span class="ix-status"><i class="dot dot-progress"></i>Building</span>
           </a></li>
           <li><a href="#cover" data-peek="assets/art/musicians.jpg" data-cursor="Open">
             <span class="ix-num">02</span><span class="ix-name">Cover Song Retrieval</span><span class="ix-field">Machine learning, retrieval</span><span class="ix-status"><i class="dot dot-done"></i>Complete</span>
@@ -211,27 +211,27 @@
 
         <!-- Project cards stack on top of each other as you scroll. -->
         <div class="stack">
-          <article class="case case-dark" id="nodus" style="--n: 0" aria-labelledby="nodus-h">
+          <article class="case case-dark" id="brain" style="--n: 0" aria-labelledby="brain-h">
             <div class="wall">
               <p class="wall-note">people, projects, decisions &rarr; one graph</p>
               <svg class="wall-arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 44 C30 8 78 6 108 30" /><path d="M96 22 L109 31 L94 36" /></svg>
               <figure class="plate plate-art">
-                <span class="frame"><img src="assets/scraps/nodus-sketch.svg" alt="A rough sketch of a small graph: circles joined by lines, with one path drawn in red." loading="lazy" /></span>
-                <figcaption><b>A first sketch</b><span>Nodus, 2026 &middot; not the design yet</span></figcaption>
+                <span class="frame"><img src="assets/scraps/brain-sketch.svg" alt="A rough sketch of a small graph: circles joined by lines, with one path drawn in red." loading="lazy" /></span>
+                <figcaption><b>A first sketch</b><span>Company brain, 2026 &middot; not the design yet</span></figcaption>
               </figure>
             </div>
             <div class="case-side">
             <div class="case-body">
               <p class="bracket"><span class="dot dot-progress" aria-hidden="true"></span>[ 01 &middot; building ]</p>
-              <h3 class="case-title" id="nodus-h">Nodus</h3>
+              <h3 class="case-title" id="brain-h"><span class="redacted" role="img" aria-label="Project name, under wraps" title="Name under wraps">Qeltra</span></h3>
               <p class="case-q">What can an agent understand about a company once its people, projects and decisions live in one graph?</p>
-              <p>I&rsquo;m building Nodus for Graph Hacks (Track 3: Company Brain), a hackathon run by WeMakeDevs and FalkorDB from 15 to 18 October 2026. It&rsquo;s a company-brain agent built on FalkorDB, where the graph has to do the real work, not just decorate it. The build starts when the hackathon opens, so there is nothing to show yet.</p>
+              <p>A company&rsquo;s knowledge is scattered across documents, tickets and chats, and the part that matters most is how it connects: who owns what, which decision led to which, and where each fact came from. I&rsquo;m building an agent that works from that web of connections, kept in a graph database, and shows the path behind every answer. The graph does the real work here; it isn&rsquo;t a picture laid over a chatbot. It&rsquo;s early, and there is nothing to show yet.</p>
             </div>
             <div class="case-data">
               <div class="dash" data-dash>
-                <p class="dash-head"><span>nodus &middot; status</span><span>building</span></p>
-                <div class="dash-bars dash-empty"><span></span><span></span><span></span><span></span><span></span><p>build starts 15 oct</p></div>
-                <p class="dash-foot"><span>falkordb &middot; cypher &middot; python</span><span>graph hacks, track 3</span></p>
+                <p class="dash-head"><span>company brain &middot; status</span><span>building</span></p>
+                <div class="dash-bars dash-empty"><span></span><span></span><span></span><span></span><span></span><p>early days</p></div>
+                <p class="dash-foot"><span>falkordb &middot; cypher &middot; python</span><span>knowledge graph + agent</span></p>
               </div>
             </div>
             </div>

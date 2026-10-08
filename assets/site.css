@@ -3116,3 +3116,6 @@ body.home .hero p.entry-identity { font-size: clamp(1.3rem, 1.05rem + 0.7vw, 1.8
   line-height: 1.7;
   text-transform: uppercase;
 }
+
+/* A project name kept under wraps: a blurred stand-in, not the real word. */
+.redacted { filter: blur(0.32em); user-select: none; -webkit-user-select: none; display: inline-block; }
