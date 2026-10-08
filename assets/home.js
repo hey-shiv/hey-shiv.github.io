@@ -252,7 +252,7 @@
   var sky = document.querySelector("[data-constellation]");
   if (sky) {
     var names = {
-      song: "The First Song", cover: "Cover Song Retrieval", coil: "Coil",
+      cover: "Cover Song Retrieval", coil: "Coil",
       llm: "Modern Mini LLM", nn: "Neural Network from Scratch", audio: "Audio Explorer", align: "AgentAlign"
     };
     var svg = sky.querySelector(".links");
