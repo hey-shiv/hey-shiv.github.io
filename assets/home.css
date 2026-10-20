@@ -112,6 +112,7 @@ button { font: inherit; color: inherit; }
   font-size: 0.74rem;
   letter-spacing: 0.02em;
 }
+.bracket.hero-role { color: var(--ink); font-size: clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem); }
 .case-dark .bracket { color: var(--on-dark-soft); }
 .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
 .dot-done { background: var(--done); }
