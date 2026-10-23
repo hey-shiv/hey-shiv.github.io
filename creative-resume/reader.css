@@ -1,0 +1,24 @@
+/* The book is a dark, full-bleed A4 document; give it room and let it breathe against the page. */
+.reader-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s5); margin-top: var(--s7); }
+.reader-btn {
+  display: inline-flex; align-items: center; gap: var(--s3);
+  padding: 0.7rem 1.15rem; border-radius: 999px;
+  background: var(--accent); color: var(--on-accent);
+  font-weight: 600; font-size: 0.92rem; text-decoration: none;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.reader-btn:hover, .reader-btn:focus-visible { background: var(--accent-hover); transform: translateY(-1px); }
+.reader-btn.is-quiet { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1px var(--border-strong); }
+.reader-btn.is-quiet:hover, .reader-btn.is-quiet:focus-visible { background: var(--surface); }
+.reader-btn span { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 400; color: var(--text-muted); }
+.reader-link { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.04em; color: var(--text-muted); }
+.reader-link:hover { color: var(--text); }
+
+.book { display: grid; justify-items: center; gap: clamp(1.25rem, 3vw, 2.25rem); margin: var(--s9) auto 0; max-width: 56rem; }
+.sheet { margin: 0; width: 100%; }
+.sheet img {
+  display: block; width: 100%; height: auto; aspect-ratio: 1200 / 1698;
+  background: #14121b; border-radius: var(--radius);
+  box-shadow: var(--shadow-md), 0 0 0 1px var(--border);
+}
+.sheet figcaption { margin-top: var(--s3); text-align: right; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; color: var(--text-muted); }
