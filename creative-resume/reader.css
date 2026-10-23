@@ -22,3 +22,6 @@
   box-shadow: var(--shadow-md), 0 0 0 1px var(--border);
 }
 .sheet figcaption { margin-top: var(--s3); text-align: right; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; color: var(--text-muted); }
+
+/* A white one-page résumé: no dark backing while the image loads. */
+.sheet-paper img { background: #fff; aspect-ratio: 1200 / 1697; }
