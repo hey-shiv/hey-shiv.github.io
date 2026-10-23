@@ -3119,3 +3119,13 @@ body.home .hero p.entry-identity { font-size: clamp(1.3rem, 1.05rem + 0.7vw, 1.8
 
 /* A project name kept under wraps: a blurred stand-in, not the real word. */
 .redacted { filter: blur(0.32em); user-select: none; -webkit-user-select: none; display: inline-block; }
+
+/* Creative résumé: the highlighted twin of the professional one. */
+.site-nav a.nav-creative {
+  padding: var(--s2) var(--s4);
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent, #fff);
+}
+.site-nav a.nav-creative::after { display: none; }
+.site-nav a.nav-creative:hover, .site-nav a.nav-creative:focus-visible { background: var(--accent-hover, var(--accent)); color: var(--on-accent, #fff); }
