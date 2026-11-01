@@ -101,7 +101,6 @@ button { font: inherit; color: inherit; }
 .skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 300; padding: 0.5rem 1rem; background: var(--ink); color: var(--paper); }
 .skip-link:focus { top: 1rem; }
 .ext { width: 0.65em; height: 0.65em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
-.home .theme-toggle { display: none; }
 
 .bracket {
   display: inline-flex;

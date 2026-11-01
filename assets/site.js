@@ -10,6 +10,7 @@
 (function () {
   var storageKey = "site-theme-v2";
   var root = document.documentElement;
+  var lock = root.getAttribute("data-theme-lock");
 
   function getTheme() {
     try {
@@ -17,6 +18,14 @@
       if (saved === "light" || saved === "dark") return saved;
     } catch (error) {}
     return "light";
+  }
+
+  // A page that ships only one palette opts out with data-theme-lock, so a
+  // stored preference can't point color-scheme at a theme it has no styles for.
+  if (lock === "light" || lock === "dark") {
+    root.dataset.theme = lock;
+    root.style.colorScheme = lock;
+    return;
   }
 
   var toggle = document.createElement("button");
