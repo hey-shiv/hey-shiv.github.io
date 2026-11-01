@@ -1,3 +1,5 @@
+.lock-icon { width: 0.78em; height: 0.78em; vertical-align: -0.05em; margin-right: 0.15em; opacity: 0.75; }
+
 /* The book is a dark, full-bleed A4 document; give it room and let it breathe against the page. */
 .reader-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s5); margin-top: var(--s7); }
 .reader-btn {
