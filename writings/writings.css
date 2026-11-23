@@ -1,0 +1,21 @@
+/* Section pages and below: Satoshi only. The landing page keeps the site font. */
+.w:not(.landing), .w:not(.landing) * { font-family: "Satoshi", sans-serif !important; }
+.w.landing, .w.landing * { font-family: var(--font-display); }
+.w.landing h1 { font-weight: 700; letter-spacing: -0.04em; }
+.w { padding: 72px 0 120px; }
+.w h1 { font-size: 40px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 48px; }
+.w .back { display: inline-block; margin-bottom: 40px; color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; }
+.w .back:hover { color: var(--text); }
+.w .list { list-style: none; margin: 0; padding: 0; }
+.w .list li { margin: 0; padding: 0; }
+.w .list li::before { content: none; }
+.w .sections { display: flex; flex-direction: column; max-width: 640px; }
+.w .sections a, .w .list a {
+  display: flex; justify-content: space-between; gap: 24px; padding: 20px 0;
+  border-top: 1px solid var(--border); color: var(--text); text-decoration: none;
+  font-size: 22px; font-weight: 500; letter-spacing: -0.01em;
+}
+.w .sections a:last-child, .w .list li:last-child a { border-bottom: 1px solid var(--border); }
+.w .sections a:hover, .w .list a:hover { opacity: .6; }
+.w .list time { color: var(--text-muted); font-size: 15px; font-weight: 400; }
+.w .list { max-width: 640px; }
